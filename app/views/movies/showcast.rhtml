@@ -1,0 +1,60 @@
+<!-- Content Menu -->
+<%= render(:partial => "contentMenu" , :object => @movie, :locals => { :tab => "cast"} )%>
+
+<div id="yui-main" style="">
+ <div id="person_header_container" class="yui-b container_green">
+
+	<div class="ylwBGULFT"> </div>
+	<div class="ylwBGURt"> </div>
+	<div class="persHeaderULFT"> </div>
+	<div class="persHeaderURt"> </div>
+	<div id="movie_cast" class="">
+		<h2>Cast details for <%=h @movie.name%></h2><br>
+		<div id="editCast" style="float:right; posiiton:relative;">
+		<img src="/images/edit.gif"></img>
+	 	<a id="editProfileLink" href="/movies/<%= @movie.id%>/editartists" title="Edit Cast">Edit Cast</a>
+        </div>
+		
+		<table><tbody>
+		  <% for artist in @movie.artists.heroes %>
+			<tr><td>
+			<a id="addMainPhotoLnk">
+			<img width="60" height="60" id="profile_picture" style="border-width: 0px;" src="<%=h artist.image.url %>"/>
+			</a>
+		</td><td>
+	   <h3><a href="/artists/<%= artist.id%>" class="show-link"><%=h artist.name %></a></h3>
+		</td></tr>
+		  <% end%>
+	</tbody></table>
+
+<!-- Cast details -->
+
+	<table><tbody>
+	  <% for cast in @movie.cast.cast_list(@movie.id) %>
+		<tr>
+		 <td><h3><a href="/artists/<%= cast.id%>" class="show-link" ><%=h cast.name %></a></h3></td>
+		 <td><h3>:</h3></td>
+		 <td aligh="left"><h3><a href="/role/<%= cast.role_id%>" class="show-link"><%=h cast.role_name %></a></h3></td>
+		 <% link = '/movies/'+ @movie.id.to_s + '/deleteCastDetail?mar_id='+ cast.mar_id %>
+		 <td><%= link_to 'Delete', link , :confirm => 'Are you sure?', :method => :delete %></td>		
+		</tr>
+	  <% end%>
+</tbody></table>
+	
+	<br/>
+	
+	</div>
+	
+	
+	
+	<div class="clearDiv"></div>
+	<div class="persHeaderLLFT"> </div>
+	<div class="persHeaderLRT"> </div>
+	<div class="ylwBGLLFT"> </div>
+	<div class="ylwBGLRT"> </div> 
+  </div> 
+</div>
+  
+
+<!-- Side Bar --> 
+<%= render(:partial => "sidebar", :object => @movie )%>

@@ -1,0 +1,13 @@
+<h1><i>Genres</i> :&nbsp; <%=h @genre.name%></h1>
+<br/>
+<b>Description:</b><br/> <%=h @genre.description %>
+
+<br/><br/>
+<b>Movies belonging to this Genre:</b><br/>
+<% for movie in @genre.movies %>
+	  <li><a href="/movies/<%= movie.id%>" class="show-link"><%= movie.name %></a></li>
+ <% end %>
+
+<br/><br/>
+<%= link_to 'Edit', edit_genre_path(@genre) %> |
+<%= link_to 'Back', genres_path %>

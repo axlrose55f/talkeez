@@ -1,0 +1,23 @@
+<div id="movies-details">
+<table class="table-class"  cellspacing="2" >
+
+<tr>
+	<td ><b>Id </b></td>
+	<td ><b>Name</b></td>
+	<td ><b>Description</b></td>
+	<td ><b>Operations</b></td>
+</tr>
+<% for genre in @genres %>  
+<tr>
+   <td><%=h  genre.id %></td> 
+   <td><a href="/genres/<%= genre.id%>" ><%=h  genre.name %></a></td>
+   <td><%=h  genre.description %></td>
+   <td>
+    <%= link_to 'Delete', genre, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New genre', new_genre_path %>

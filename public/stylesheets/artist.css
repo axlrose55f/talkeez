@@ -1,0 +1,432 @@
+/* Global styles */
+
+/* START:notice */
+#notice {
+  border: 2px solid red;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #f0f0f0;
+  font: bold smaller sans-serif;
+}
+/* END:notice */
+/* Banner */
+
+
+#header {
+	background-image:url(/images/red_right.png);
+	background-position:right top;
+	background-repeat:no-repeat;
+	color:#FFFFFF;
+	height:67px;
+	line-height:1;
+	margin-left:180px;
+	margin-right:100px;
+	z-index:99;
+	
+}
+
+#header span {
+	color:#FFFFFF;
+	font-family:Tahoma,Arial,Helvetica;
+	font-size:24px;
+	font-weight:bold;
+	text-decoration:none;
+	padding-left:50px;
+
+}
+
+#header ol, ul {
+	padding-left:122px;
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+
+}
+
+
+
+#header a {
+	color:#FFFFFF;
+	outline-color:-moz-use-text-color;
+	font-family:"Lucida Grande",Arial,Helvetica,Verdana,sans-serif;
+	outline-style:none;
+	outline-width:medium;
+	text-decoration:none;
+	font-size:14px;
+	font-weight:bold;
+	float:left;
+ 	height:24px;
+ 	padding:9px 9px 0;
+}
+
+#header a:hover {
+ background:transparent;	
+ outline-color:-moz-use-text-color;
+ text-decoration: underline;
+}
+
+
+#headerWrapper {
+	background-image:url(/images/red_left.png);
+	background-position:left top;
+	background-repeat:no-repeat;
+	height:52px;
+	margin-left:-30px;
+	padding:10px 5px 5px;
+	position:relative;
+}
+
+#idBadger {
+	color:#EA9C94;
+	line-height:1.36364;
+	max-width:300px;
+	font-size:11px;
+	height:22px;
+	overflow:visible;
+	position:absolute;
+	right:15px;
+	text-align:right;
+	top:12px;
+	margin:0;
+	padding:0;
+	vertical-align:top;
+}
+
+#idBadger a{
+	color:#FFFFFF;
+	font-size:11px;
+	outline-color:-moz-use-text-color;
+	outline-style:none;
+	outline-width:medium;
+	text-decoration:none;
+	font-family:"Lucida Grande",Arial,Helvetica,Verdana,sans-serif;	
+	float:none;
+
+}
+/* end banner */
+
+
+
+.pageFooter_copyright {
+color:#333333;
+display:block;
+float:center;
+padding:4px 9px 0 0;
+}
+
+#movies-list .table-class {
+	border:0px solid #CCCCCC;
+	margin:10px 10px 10px 10px;
+}
+
+#movies-list a{
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+#movies-list a:hover{
+    
+	text-decoration:none;
+	outline:#EEEEEE solid thick
+}
+
+#movies-list  tr {
+	padding:0 0 150 150px;
+}
+#movies-list .movie-list-image {
+	width: 100px; 
+	height: 140px;
+}
+
+#movies-list .movie-list-image {
+	width: 150px; 
+	height: 150px;
+}
+
+#movies-list .artist-list-image {
+	width: 100px; 
+	height: 100px;
+}
+
+#movies-list .heading-title {
+	color: dark grey;
+	font-size:13px;
+	font-weight:bold;
+
+	font-family:Tahoma,Verdana,Arial,Helvetica;
+
+}
+
+#movies-details .heading-title-all {
+	color:        white;
+	font-size:11px;
+	font-weight:bold;
+	
+	background:   #8C5256;
+	display:block;
+	font-family:Tahoma,Verdana,Arial,Helvetica;
+}
+#movie-details div, table {
+	border-top:0px solid #666666;
+
+}
+
+#movie-details div, td {
+	border:1px solid #CCCCCC;
+
+}
+
+#movie-details .rating {
+  border: 0px solid black;
+/*  position: relative;*/ 
+  margin: 0;
+  padding-top: 8px;
+  padding-bottom: 0px;
+  padding-left: 20px;
+ /* background-color:#EEE;*/
+
+}
+
+#movies-details .heading-title {
+	color:        dark grey;
+	font-size:11px;
+	font-weight:bold;
+	display:block;
+	font-family:Tahoma,Verdana,Arial,Helvetica;
+	/*background: lightgrey;*/
+	background:transparent url(/images/horiznav_bg.gif) repeat-x scroll 0 0; 
+	border-left:0px solid #CCCCCC;
+	border-right:0px solid #CCCCCC;
+	border-top:0px solid #FFFFFF;
+	height:20px;
+	padding:0 0 0 0px;
+}
+
+#movies-details .heading-plot {
+	color:        dark grey;
+	font-size:11px;
+	font-weight:bold;
+	display:block;
+	font-family:Tahoma,Verdana,Arial,Helvetica;
+	background:transparent url(/images/homeTBOhdrBg.GIF) repeat-x scroll 0 0;
+	border-left:0px solid #CCCCCC;
+	border-right:0px solid #CCCCCC;
+	border-top:10px solid #FFFFFF;
+	height:40px;
+	padding:0 0 0 0px;
+}
+/* Styles for admin/list */
+
+#product-list .list-title {
+	color:        #244;
+	font-weight:  bold;
+	font-size:    larger;
+}
+
+#product-list .list-image {
+  width:        100px;
+  height:       100px;
+}
+
+
+#product-list .list-actions {
+  font-size:    x-small;
+  text-align:   right;
+  padding-left: 1em;
+}
+
+#product-list .list-line-even {
+  background:   #e0f8f8;
+}
+
+#product-list .list-line-odd {
+  background:   #e0d9f4;
+}
+
+
+/* Styles for main page */
+
+#banner {
+  background: #9c9;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid;
+  font: small-caps 40px/40px "Times New Roman", serif;
+  color: #282;
+  text-align: center;
+}
+
+#banner img {
+  float: left;
+}
+
+#columns {
+  background: #141;
+}
+
+#main {
+  margin-left: 15em;
+  padding-top: 4ex;
+  padding-left: 2em;
+  background: white;
+}
+
+#side {
+  float: left;
+  padding-top: 1em;
+  padding-left: 1em;
+  padding-bottom: 1em;
+  width: 14em;
+  background: #141;
+}
+
+#side a {
+  color: #bfb;
+  font-size: small;
+}
+
+h1 {
+  font:  150% sans-serif;
+  color: #226;
+ 
+}
+
+/* An entry in the store catalog */
+
+#store  .entry {
+  border-bottom: 1px dotted #77d;
+}
+
+#store  .title {
+  font-size: 120%;
+  font-family: sans-serif;
+}
+
+#store .entry img {
+  width: 75px;
+  float: left;
+}
+
+
+#store .entry h3 {
+ margin-bottom: 2px;
+ color: #227;
+}
+
+#store .entry p {
+ margin-top: 0px; 
+ margin-bottom: 0.8em; 
+}
+
+#store .entry .price-line {
+}
+
+#store .entry .add-to-cart {
+  position: relative;
+}
+
+#store .entry  .price {
+  color: #44a;
+  font-weight: bold;
+  margin-right: 2em;
+}
+
+/* START:inline */
+#store .entry form, #store .entry form div {
+  display: inline;
+}
+/* END:inline */
+
+/* START:cart */
+/* Styles for the cart in the main page and the sidebar */
+
+.cart-title {
+  font: 120% bold; 
+}
+
+.item-price, .total-line {
+  text-align: right;	
+}
+
+.total-line .total-cell {
+  font-weight: bold;
+  border-top: 1px solid #595;
+}
+
+
+/* Styles for the cart in the sidebar */
+
+#cart, #cart table {
+  font-size: smaller;	
+  color:     white;
+}
+
+#cart table {
+  border-top:    1px dotted #595;
+  border-bottom: 1px dotted #595;
+  margin-bottom: 10px;
+}
+/* END:cart */
+
+/* Styles for order form */
+
+.depot-form fieldset {
+  background: #efe;
+}
+
+.depot-form legend {
+  color: #dfd;
+  background: #141;
+  font-family: sans-serif;
+  padding: 0.2em 1em;
+}
+
+.depot-form label {
+  width: 5em;
+  float: left;
+  text-align: right;
+  margin-right: 0.5em;
+  display: block;
+}
+
+.depot-form .submit {
+  margin-left: 5.5em;
+}
+
+/* The error box */
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}

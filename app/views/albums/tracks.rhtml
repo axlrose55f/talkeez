@@ -1,0 +1,46 @@
+<!-- Content Menu -->
+<%= render(:partial => "contentMenu" , :object => @album, :locals => { :tab => "tracks"} )%>
+
+<div id="yui-main" style="">
+ <div id="person_header_container" class="yui-b container_green">
+
+	<div class="ylwBGULFT"> </div>
+	<div class="ylwBGURt"> </div>
+	<div class="persHeaderULFT"> </div>
+	<div class="persHeaderURt"> </div>
+	<div id="movie_cast" class="">
+		<h2>Track details for <%=h @album.name%></h2><br>
+		<div id="editCast" style="float:right; posiiton:relative;">
+		<img src="/images/edit.gif"></img>
+	 	<a id="editProfileLink" href="/tracks/new?album_id=<%= @album.id%>" title="Add new track">Add Tracks</a>
+        </div>
+		<table ><tbody>
+		  <% for track in @album.tracks %>
+		  <tr>
+			<td><h3><%=h track.track_number %>.</h3></td>	
+		  <td><h3>
+		  <a href="/tracks/<%= track.id%>?album_id=<%=@album.id%>" class="show-link"><%=h track.title %></a>
+		</h3></td>
+		<td><h3><%=h sprintf("%0.02f" , track.lenght/60) if track.lenght && track.lenght > 0  %></h3></td>
+		<td><h3><%=h track.lyricist.name  if track.lyricist%></h3></td>
+		<td><h3><%=h track.raga.name  if track.raga%></h3></td>
+		<td><h3><%=h track.mood.name  if track.mood%></h3></td>
+		<td>
+		<a href="/tracks/<%= track.id%>/edit?album_id=<%=@album.id%>" class="show-link">Edit</a>
+		</td>		
+		</tr>
+		  <% end%>
+	</tbody></table>
+	<br/>
+	</div>
+	<div class="clearDiv"></div>
+	<div class="persHeaderLLFT"> </div>
+	<div class="persHeaderLRT"> </div>
+	<div class="ylwBGLLFT"> </div>
+	<div class="ylwBGLRT"> </div> 
+  </div> 
+</div>
+  
+
+<!-- Side Bar --> 
+<%= render(:partial => "sidebar", :object => @album )%>

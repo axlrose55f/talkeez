@@ -1,0 +1,68 @@
+<div id="body_sidebar" class="yui-b">
+  	<div id="records" class="sidebardiv">
+		<div class="sidebarDivULFT sidebarDivULFTIE8"> </div>
+		<div class="sidebarDivURt"> </div>
+  	    <div class="moviePictureBox">
+	  		<img width="145" height="175" id="movie_picture" src="<%=h @movie.image.url %>" alt="<%=h @movie.image %>"/>
+			<div class="rating">			
+				<% i = 0 %> 
+				<% while i < @movie.rating  %>
+				  <img src="/images/star.gif" > 
+				<% i += 1 %> 
+				<% end%>
+			 </div>
+		</div>
+		<br/>	
+  		    <div class="clearDiv"></div>
+	<!--	<h2>Basic Info</h2> -->
+			<div class="innerBox">
+				<div id="minitree">				  
+			      <div id="details_heading">Year</div>
+			      <div id="details_value"><%=  @movie.year.year %></div>			     
+			      <div id="details_heading">Runtime</div>			      
+			      <div id="details_value"><%= @movie.run_time %> min.</div>		
+			 <!--      
+			<div id="details_heading">Rating</div>
+			      <div id="details_value">
+					<div class="rating">			
+						<% i = 0 %> 
+						<% while i < @movie.rating  %>
+						  <img src="/images/star.gif" > 
+						<% i += 1 %> 
+						<% end%>
+					 </div> 	
+			       </div>  
+			-->
+			      <div id="details_heading">Language</div>
+			      <div id="details_value"><%= @movie.language %></div>
+			      <div id="details_heading">Genre 
+				   <a href="/movies/<%= @movie.id%>/editgenres" class="nav-edit-link">Edit</a>
+				  </div>
+			      <div id="details_value">	
+			          <% for genre in @movie.genres %>
+					  <a href="/genres/<%= genre.id%>" class="show-link"><%= genre.name %></a>
+					  <% end %>
+				  </div>
+			      <div id="details_end"></div> 
+				</div>
+		    </div>
+			<br/>
+			<h2>Additional Info</h2>
+			<div class="innerBox">
+				<div id="minitree">
+			      <div id="details_heading">Color</div>
+			      <div id="details_value"><%=  @movie.color  %></div>
+			      <div id="details_heading">Studio</div>
+			      <div id="details_value"><%= @movie.studio %></div>
+			      <div id="details_heading">Country</div>
+			      <div id="details_value"><%= @movie.country %></div>
+			      <div id="details_heading">Certification</div>
+			      <div id="details_value"><%= @movie.certification %></div>
+			
+			      <div id="details_end"></div> 
+				</div>
+		    </div>
+		<div class="sidebarDivLLFT sidebarDivLLFTFix sidebarDivLLFTIE82"> </div>
+		<div class="sidebarDivLRT sidebarDivLRTFix"> </div>
+	</div>
+ </div>

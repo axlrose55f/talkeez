@@ -1,0 +1,11 @@
+<h1><i>Ragas</i> :&nbsp; <%=h @raga.name%></h1>
+<br/>
+<b>Description:</b><br/> <%=h @raga.description %>
+
+<br/><br/>
+<b>Songs belonging to this Raga:</b><br/>
+
+
+<br/><br/>
+<%= link_to 'Edit', edit_raga_path(@raga) %> |
+<%= link_to 'Back', ragas_path %>

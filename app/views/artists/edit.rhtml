@@ -1,0 +1,67 @@
+<h1>Editing artist</h1>
+
+<% form_for @artist, :html => { :multipart => true }  do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :biography %><br />
+    <%= f.text_area :biography %>
+  </p>
+  <p>
+    <%= f.file_field :image%>
+  </p> 
+
+  <p>
+    <%= f.label :dob %><br />
+   <%= f.calendar_date_select :dob  %>
+  </p>
+ 
+
+  <p>
+    <%= f.label :birth_name %><br />
+    <%= f.text_field :birth_name %>
+  </p>
+  <p>
+    <%= f.label :birth_place %><br />
+    <%= f.text_field :birth_place %>
+  </p>
+  <p>
+    <%= f.label :country %><br />
+    <%= f.text_field :country %>
+  </p>
+  <p>
+    <%= f.label :height %><br />
+    <%= f.text_field :height %>
+  </p>
+  <p>
+    <%= f.label :weight %><br />
+    <%= f.text_field :weight %>
+  </p>
+  <p>
+    <%= f.label :education %><br />
+    <%= f.text_field :education %>
+  </p>
+  <p>
+    <%= f.label :religion %><br />
+    <%= f.text_field :religion %>
+  </p>
+  <p>
+    <%= f.label :star_sign %><br />
+    <%= f.text_field :star_sign %>
+  </p>
+  <p>
+    <%= f.label :marital_status %><br />
+    <%= f.text_field :marital_status %>
+  </p>
+ 
+<p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @artist %> |
+<%= link_to 'Back', artists_path %>

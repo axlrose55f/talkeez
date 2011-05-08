@@ -1,0 +1,111 @@
+<!-- Content Menu -->
+<%= render(:partial => "contentMenu", :object => @artist, :locals => { :tab => "overview"} )%>
+
+<div id="yui-main" style="">
+ <div id="person_header_container" class="yui-b container_green">
+	<div class="ylwBGULFT"> </div>
+	<div class="ylwBGURt"> </div>
+	<div class="persHeaderULFT"> </div>
+	<div class="persHeaderURt"> </div>
+	<div id="person_header" class="">
+
+		<h1><%=h @artist.name%></h1>
+
+		<h3>Plot Summary:</h3>
+		<div id="album_description" style="height:40%;">
+		<%=h @artist.biography %> 
+		</div>
+		<div id="album_desc_readMore"><% if @artist.biography.length > 900 %>
+		<a href="#" onclick="Effect.BlindDown('album_description', { scaleFrom: 50 });return false;">Read More</a> 
+		<% end  %>
+		</div>
+		<br/><br/>
+		
+	</div>
+	<div class="clearDiv"></div>
+	<div class="persHeaderLLFT"> </div>
+	<div class="persHeaderLRT"> </div>
+	<div class="ylwBGLLFT"> </div>
+	<div class="ylwBGLRT"> </div> 
+  </div> 
+
+  <div id="body_main" class="yui-b sectioncontainer_brown">
+	<div class="sectionCntrULFT"> </div>
+	<div class="sectionCntrURt"> </div>
+		<div class="clearDiv"></div>		
+	    <div id="Cast" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+			<div class="rndSecULFT"> </div>
+			<div class="rndSecURt"> </div>  
+			<div class="sectionBG">
+				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Cast</h2>
+				<div style="border-bottom: 1px dotted rgb(187, 178, 164);"></div>
+			</div>
+			<div class="sectionContainer">
+			   <div id="cast1" class="">
+				<em class="noItemAdded">No cast info has been added.</em>
+			   </div>
+			</div>
+			<div class="rndSecLLFT"> </div>
+			<div class="rndSecLRT"> </div>
+		</div>
+		<div class="clearDiv"></div>		
+	    <div id="Reviews" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+			<div class="rndSecULFT"> </div>
+			<div class="rndSecURt"> </div>  
+			<div class="sectionBG">
+				<h2 style="display: inline-block; margin-bottom: 5px;">Reviews</h2>
+				<div style="border-bottom: 1px dotted rgb(187, 178, 164);"></div>
+			</div>
+			<div class="sectionContainer">
+			   <div id="reviews1" class="">
+				<em class="noItemAdded">No Reviews has been added.</em>
+			   </div>
+			</div>
+			<div class="rndSecLLFT"> </div>
+			<div class="rndSecLRT"> </div>
+		</div>
+		<div class="clearDiv"></div>		
+	    <div id="Awards" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+			<div class="rndSecULFT"> </div>
+			<div class="rndSecURt"> </div>  
+			<div class="sectionBG">
+				<h2 style="display: inline-block; margin-bottom: 5px;">Awards</h2>
+				<div style="border-bottom: 1px dotted rgb(187, 178, 164);"></div>
+			</div>
+			<div class="sectionContainer">
+			   <div id="Awards1" class="">
+				<em class="noItemAdded">No Awards has been added.</em>
+			   </div>
+			</div>
+			<div class="rndSecLLFT"> </div>
+			<div class="rndSecLRT"> </div>
+		</div>
+		<div class="clearDiv"></div>		
+	    <div id="Videos" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+			<div class="rndSecULFT"> </div>
+			<div class="rndSecURt"> </div>  
+			<div class="sectionBG">
+				<h2 style="display: inline-block; margin-bottom: 5px;">Videos</h2>
+				<div style="border-bottom: 1px dotted rgb(187, 178, 164);"></div>
+			</div>
+			<div class="sectionContainer">
+			   <div id="Videos1" class="">
+				<em class="noItemAdded">No Videos has been added.</em>
+			   </div>
+			</div>
+			<div class="rndSecLLFT"> </div>
+			<div class="rndSecLRT"> </div>
+		</div>
+	    <div class="clearDiv"></div>
+	<div class="sectionCntrLLFT"> </div>
+	<div class="sectionCntrLRT"> </div>	
+  </div>
+ </div>
+
+<!-- Side Bar --> 
+<%= render(:partial => "sidebar", :object => @artist )%>
+
+
+
+
+

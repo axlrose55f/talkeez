@@ -1,0 +1,12 @@
+<h1>Editing trivia</h1>
+
+<% form_for(@trivia) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @trivia %> |
+<%= link_to 'Back', trivias_path %>

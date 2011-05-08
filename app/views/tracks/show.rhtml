@@ -1,0 +1,20 @@
+<p>
+<div id="movies-details">
+<table border="1" class="table">	
+	<tr><td><span class="heading-title">Track No</span></td><td><%=h @track.track_number %></td></tr> 
+	<tr><td><span class="heading-title">Track Title</span></td><td><%=h @track.title %></td></tr>
+ 	 <tr><td><span class="heading-title">Runt Time</span></td><td><%=h @track.lenght %></td></tr>
+  	 <tr><td><span class="heading-title">Genre</span></td><td><%=h @track.genre.name if @track.genre %></td></tr> 
+	<tr><td><span class="heading-title">Mood</span></td><td><%=h @track.mood.name if @track.mood %></td></tr> 
+	<tr><td><span class="heading-title">Raga</span></td><td><%=h @track.raga.name  if @track.raga%></td></tr> 
+	<tr><td><span class="heading-title">Lyricist</span></td><td><%=h @track.lyricist.name  if @track.lyricist%></td></tr>
+     <tr><td><span class="heading-title">Lyrics</span></td><td><%=h  @track.lyrics %></td></tr>
+	 <tr><td><span class="heading-title">Chords</span></td><td><%=h @track.chords %></td></tr>
+</table>
+</div>
+</p>
+
+<br/><br/>
+<%= link_to 'Edit', url_for(:action=>"edit", :controller=>"tracks", :album_id => @album.id , :id => @track.id) %> |
+<%= link_to 'Delete', url_for(:controller=>"tracks", :id => @track.id,  :album_id => @album.id , :action =>'delete_track'), :confirm => 'Are you sure?'  %> | 
+<%= link_to 'Back', url_for(:action=>"tracks", :controller=>"albums", :id => @album.id ) %>

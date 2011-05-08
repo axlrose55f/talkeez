@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Artists: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'scaffold', 'artist' %>
+
+</head>
+<body>
+	<div id="header" >
+		<div id="headerWrapper" >
+
+			 <ul id="primaryNav" >
+	              <li id="musicNav">
+	                  <a href="/movies">Movies</a>
+	              </li>
+	              <li id="videosNav">
+	                  <a href="/albums">Albums</a>
+	              </li>
+				     <li id="videosNav">
+			                  <a href="/genres">Genres</a>
+			              </li>
+									      <li id="videosNav">
+							                 <a href="/moods">Moods</a>
+									      </li>
+										  <li id="videosNav">
+										      <a href="/ragas">Ragas</a>
+										  </li>            
+						<li id="listenNav">
+	                  <a href="/artists">Artists</a>
+	              </li>
+				<li id="eventsNav">
+	                  <a href="/awards">Awards</a>
+	              </li>              
+				<li id="eventsNav">
+	                  <a href="/profile">Profile</a>
+	              </li>
+	              <li id="chartsNav">
+	                  <a href="/charts">Charts</a>
+	              </li>               
+	          </ul>        
+	          <div id="idBadger">
+					<a href="/login">Log in</a>|<a href="/join">Sign up</a>
+				</div>
+		</div>
+	</div>
+
+<p style="color: green"><%= flash[:notice] %></p>
+
+<%= yield :layout %>
+<div align="center"class="pageFooter_copyright"><span>© 2008 Talkeez</span></div>
+</body>
+</html>
+

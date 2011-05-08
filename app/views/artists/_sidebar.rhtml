@@ -1,0 +1,54 @@
+<artistdiv id="body_sidebar" class="yui-b">
+  	<div id="records" class="sidebardiv">
+		<div class="sidebarDivULFT sidebarDivULFTIE8"> </div>
+		<div class="sidebarDivURt"> </div>
+  	    <div class="artistPictureBox">
+	  		<img width="150" height="150" id="artist_picture" src="<%=h @artist.image.url %>"/>
+			<div id="star-ratings-block">
+			    <%= render :partial => "rating/rating", :locals => { :artist => @artist } %>
+			</div>
+		</div>
+		<br/>	
+  		    <div class="clearDiv"></div>
+	<!--	<h2>Basic Info</h2> -->
+			<div class="innerBox">
+				<div id="minitree">				  
+			      <div id="details_heading">Date of birth</div>
+			      <div id="details_value"><%=  @artist.dob %></div>			     
+		
+			      <div id="details_heading">Birthplace</div>
+			      <div id="details_value"><%=  @artist.birth_place %></div>
+			      <div id="details_heading">Birth Name</div>
+			      <div id="details_value"><%=  @artist.birth_name %></div>
+			      <div id="details_heading">Country</div>
+			      <div id="details_value"><%=  @artist.country %></div>
+			      <div id="details_end"></div> 
+				</div>
+		    </div>
+			<br/>
+			<h2>Additional Info</h2>
+			<div class="innerBox">
+				<div id="minitree">
+			      <div id="details_heading">Height</div>			     
+			      <div id="details_value"><%=h @artist.height %></div>
+			      <div id="details_heading">Weight</div>				  
+				  <div id="details_value"><%=h @artist.weight %></div>
+			      <div id="details_heading">Eyes</div>				  
+				  <div id="details_value"><%=h @artist.eyes %></div>
+						
+				  <div id="details_heading">Education</div>			     
+			      <div id="details_value"><%=h @artist.education %></div>
+			      <div id="details_heading">Star Sign</div>				  
+				  <div id="details_value"><%=h @artist.star_sign %></div>
+				  <div id="details_heading">Religion</div>			     
+			      <div id="details_value"><%=h @artist.religion %></div>
+			      <div id="details_heading">Marital Status</div>				  
+				  <div id="details_value"><%=h @artist.marital_status %></div>
+				
+			      <div id="details_end"></div> 
+				</div>
+		    </div>
+		<div class="sidebarDivLLFT sidebarDivLLFTFix sidebarDivLLFTIE82"> </div>
+		<div class="sidebarDivLRT sidebarDivLRTFix"> </div>
+	</div>
+ </div>

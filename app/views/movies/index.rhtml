@@ -1,0 +1,74 @@
+<div id="yui-main" style="">
+	<div style="margin:0px 0px 0px -180px;">
+	<div id="body_main" class="yui-b sectioncontainer_brown" >
+		<div class="sectionCntrULFT"> </div>
+		<div class="sectionCntrURt"> </div>	
+		<div id="MovieList" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+			<div class="rndSecULFT"> </div>
+			<div class="rndSecURt"> </div>
+					<% for movie in @top_movies -%>					
+							<div style="float: left; font-size: 10px; font-weight: bold;padding-bottom:10px;">								
+								<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
+								<img width="64" height="80" id="profile_picture" style="border-width: 0px;" src="<%=h movie.image.url %>"/>
+								</a>					
+							</div>
+					<% end %>
+				<div class="clearDiv"></div>		
+  		    <div class="rndSecLLFT"> </div>
+		    <div class="rndSecLRT"> </div>				
+		</div>
+		 <div class="sectionCntrLLFT"> </div>
+		 <div class="sectionCntrLRT"> </div>	
+    </div>						
+	<br/>
+	<div class="clearDiv"></div>	
+	<div id="body_main" class="yui-b sectioncontainer_brown" >
+		<div class="sectionCntrULFT"> </div>
+		<div class="sectionCntrURt"> </div>
+			<div class="clearDiv"></div>		
+		    <div id="MovieList" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+				<div class="rndSecULFT"> </div>
+				<div class="rndSecURt"> </div>  
+				<div class="sectionBG">
+					<h2 style="display: inline-block; margin-bottom: 5px;">Movies</h2>
+					<div style="border-bottom: 1px dotted rgb(187, 178, 164);"></div>
+				</div>
+			<% for movie in @movies -%>
+				<div class="sectionContainer">
+				  <div class="event_container" style="clear: both;">
+					<div style="float: left; font-size: 10px; font-weight: bold;">
+						<table><tbody><tr><td>
+						<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
+						<img width="64" height="80" id="profile_picture" style="border-width: 0px;" src="<%=h movie.image.url %>"/>
+						</a>
+						</td></tr>
+						<tr><td>
+					    <div class="list_rating">			
+							<% i = 0 %> 
+							<% while i < movie.rating  %>
+							  <img src="/images/star.gif" > 
+							<% i += 1 %> 
+							<% end%>
+						 </div>	
+						</td></tr>
+						</tbody></table>
+					</div>			
+				 <div id="eventDetails">
+				 	<h3><a href="/movies/<%= movie.id%>"><%=h movie.name %></a></h3><p/> 	
+					<h3><a><%=h movie.year.year%></a></h3><br/>
+				 </div>
+				<div class="eventBottom"> </div>
+				</div>
+			 </div>	<!-- end event_container -->
+			<% end %>	
+			
+				<div class="rndSecLLFT"> </div>
+				<div class="rndSecLRT"> </div>				
+	        </div>
+		 <div class="sectionCntrLLFT"> </div>
+		 <div class="sectionCntrLRT"> </div>	
+	</div>
+</div> 	
+ </div>	
+</div>
+		

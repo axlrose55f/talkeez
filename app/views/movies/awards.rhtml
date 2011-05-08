@@ -1,0 +1,38 @@
+<!-- Content Menu -->
+<%= render(:partial => "contentMenu" , :object => @movie, :locals => { :tab => "awards"} )%>
+
+<div id="yui-main" style="">
+ <div id="person_header_container" class="yui-b container_green">
+
+	<div class="ylwBGULFT"> </div>
+	<div class="ylwBGURt"> </div>
+	<div class="persHeaderULFT"> </div>
+	<div class="persHeaderURt"> </div>
+	<div id="movie_cast" class="">
+		<h2>Awards for  <%=h @movie.name%></h2><br>
+	    
+		<div id="editCast" style="float:right; posiiton:relative;">
+		<img src="/images/edit.gif"></img>
+	 	<a id="editProfileLink" href="/movies/<%= @movie.id%>/editawards" title="Edit Awards">Edit Awards</a>
+        </div>
+		<table><tbody>
+		  <% for award in @movie.awards %>
+			<tr><td>
+	   <h3><a href="/awards/<%= award.id%>" class="show-link"><%=h award.name %></a></h3>
+		</td></tr>
+		  <% end%>
+	</tbody></table>
+
+	<br/>
+	</div>
+	<div class="clearDiv"></div>
+	<div class="persHeaderLLFT"> </div>
+	<div class="persHeaderLRT"> </div>
+	<div class="ylwBGLLFT"> </div>
+	<div class="ylwBGLRT"> </div> 
+  </div> 
+</div>
+  
+
+<!-- Side Bar --> 
+<%= render(:partial => "sidebar", :object => @movie )%>

@@ -1,0 +1,23 @@
+<h1>Listing Artists</h1>
+
+<div id="movies-list">
+<table class="table-class"  cellspacing="10" >	
+	
+<% for artist in @artists -%>
+   <tr valign="top" >	 
+     <td width="10%" align="center" class="table-class"><a href="/artists/<%= artist.id%>" class="show-link">
+	
+	<img width="80" height="80" id="profile_picture"class="artist-list-image" src="<%=h artist.image.url %>"	</a></td> 
+     <td width="70%" class="table-class">		
+		<span class="heading-title">Name:</span>
+		<span class="list-title"><%=h artist.name %> </span><br>
+
+		<span class="heading-title">Biography:</span>	<%=h artist.biography %><br/>		
+ 	 </td>   
+   </tr>
+<% end %>
+</table>
+</div>
+<br />
+
+<%= link_to "New Artists" , :action => :new %>

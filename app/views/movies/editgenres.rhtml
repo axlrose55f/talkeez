@@ -1,0 +1,23 @@
+<h1>Select Movie Genres</h1>
+
+<% form_for(@movie, :url => updategenres_movie_path(:id => @movie.id)) do |f| %>
+  <%= f.error_messages %>
+<p>
+<% selected_genres = @movie.genres.map {|u|  u.id } %>
+<%= select_tag "movies[genre_ids][]", options_from_collection_for_select(@genres, "id", "name", selected_genres), :multiple=>true %>
+
+<!-- <select id="movie_genres" name="movies[genres]" size="<%= @genres.length + 3%>" multiple>
+<%
+ selected_genres = @movie.genres.map {|u|  u.id }
+%>
+<%=
+options_for_select( @genres, selected_genres)
+%>
+</select> -->
+
+<p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+<%= link_to 'Show', @movie %> |
+<%= link_to 'Back', movies_path %>

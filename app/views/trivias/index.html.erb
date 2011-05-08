@@ -1,0 +1,18 @@
+<h1>Listing trivias</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% for trivia in @trivias %>
+  <tr>
+    <td><%= link_to 'Show', trivia %></td>
+    <td><%= link_to 'Edit', edit_trivia_path(trivia) %></td>
+    <td><%= link_to 'Destroy', trivia, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New trivia', new_trivia_path %>

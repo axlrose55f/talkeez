@@ -1,0 +1,72 @@
+<div id="yui-main" style="">
+	<div style="margin:0px 0px 0px -180px;">
+	<div id="body_main" class="yui-b sectioncontainer_brown" >
+		<div class="sectionCntrULFT"> </div>
+		<div class="sectionCntrURt"> </div>	
+		<div id="MovieList" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+			<div class="rndSecULFT"> </div>
+			<div class="rndSecURt"> </div>
+					<% for album in @albums -%>					
+							<div style="float: left; font-size: 10px; font-weight: bold;padding-bottom:10px;">								
+								<a href="/albums/<%= album.id%>" id="addMainPhotoLnk">
+								<img width="64" height="64" id="profile_picture" style="border-width: 0px;" src="<%=h album.image_url %>"/>
+								</a>					
+							</div>
+					<% end %>
+				<div class="clearDiv"></div>		
+  		    <div class="rndSecLLFT"> </div>
+		    <div class="rndSecLRT"> </div>				
+		</div>
+		 <div class="sectionCntrLLFT"> </div>
+		 <div class="sectionCntrLRT"> </div>	
+    </div>						
+	<br/>
+	<div class="clearDiv"></div>	
+	<div id="body_main" class="yui-b sectioncontainer_brown" >
+		<div class="sectionCntrULFT"> </div>
+		<div class="sectionCntrURt"> </div>
+			<div class="clearDiv"></div>		
+		    <div id="MovieList" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+				<div class="rndSecULFT"> </div>
+				<div class="rndSecURt"> </div>  
+				<div class="sectionBG">
+					<h2 style="display: inline-block; margin-bottom: 5px;">Albums</h2>
+					<div style="border-bottom: 1px dotted rgb(187, 178, 164);"></div>
+				</div>
+			<% for album in @albums -%>
+				<div class="sectionContainer">
+				  <div class="event_container" style="clear: both;">
+					<div style="float: left; font-size: 10px; font-weight: bold;">
+						<table><tbody><tr>						
+						<td>
+						<a href="/albums/<%= album.id%>" id="addMainPhotoLnk">
+						<img width="64" height="64" id="profile_picture" style="border-width: 0px;" src="<%=h album.image_url %>"/>
+						</a>
+						</td></tr>
+					    </tbody></table>
+					</div>			
+				 <div id="eventDetails">
+				 	<h3><a href="/albums/<%= album.id%>"><%=h album.name %></a></h3><p/> 	
+					<h3><% if album.year %> 
+						<a> <%=h album.year.year %></a>
+						<% else %>
+						<a> N/A</a>						
+						<% end%>
+					</h3><br/>
+				 </div>
+				<div class="eventBottom"> </div>
+				</div>
+			 </div>	<!-- end event_container -->
+			<% end %>	
+			
+				<div class="rndSecLLFT"> </div>
+				<div class="rndSecLRT"> </div>				
+	        </div>
+		 <div class="sectionCntrLLFT"> </div>
+		 <div class="sectionCntrLRT"> </div>	
+	</div>
+</div> 	
+ </div>	
+</div>
+
+<%= link_to 'New album', new_album_path %>

@@ -1,0 +1,45 @@
+<div id="body_sidebar" class="yui-b">
+  	<div id="records" class="sidebardiv">
+		<div class="sidebarDivULFT sidebarDivULFTIE8"> </div>
+		<div class="sidebarDivURt"> </div>
+  	    <div class="moviePictureBox">
+	  		<img width="145" height="175" id="album_picture" src="<%=h @album.image_url %>"/>
+
+		</div>
+		<br/>	
+  		    <div class="clearDiv"></div>
+	<!--	<h2>Basic Info</h2> -->
+			<div class="innerBox">
+				<div id="minitree">				  
+			      <div id="details_heading">Year</div>
+			      <div id="details_value"><% if @album.year %> <%=  @album.year.year %><% end%></div>			     
+		
+			      <div id="details_heading">Genre</div>
+			      <div id="details_value">	
+			          <% for genre in @album.genres %>
+					  <a href="/genres/<%= genre.id%>" class="show-link"><%= genre.name %></a>
+					  <% end %>
+				  </div>
+			      <div id="details_end"></div> 
+				</div>
+		    </div>
+			<br/>
+			<h2>Additional Info</h2>
+			<div class="innerBox">
+				<div id="minitree">
+			      <div id="details_heading">Music Director</div>
+			      <% if @album.music_director_id %>
+			       <% musicdir = Artist.find(@album.music_director_id)%>
+			       <div id="details_value"><%=  musicdir.name  %></div>
+				  <%end%>
+	
+			      <div id="details_heading">Lyricist</div>
+				  <% lyricist = Artist.find(@album.lyricist_id)%>      
+				  <div id="details_value"><%= lyricist.name %></div>
+			      <div id="details_end"></div> 
+				</div>
+		    </div>
+		<div class="sidebarDivLLFT sidebarDivLLFTFix sidebarDivLLFTIE82"> </div>
+		<div class="sidebarDivLRT sidebarDivLRTFix"> </div>
+	</div>
+ </div>

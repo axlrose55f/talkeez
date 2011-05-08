@@ -1,0 +1,31 @@
+<div class="clearDiv"/>
+<br/>
+<div id="siteHeader" class="clearfix">
+		<div id="siteMenu">
+		<div id="content_nav">
+			<ul id="contentNav">
+			<li <% if tab == "overview" %> class="activeTab" <% end %> >
+				<a href="/users/<%= @user.id%>">Overview</a>
+			</li>
+			<li <% if tab == "filmography" %> class="activeTab" <% end %> >
+				<a href="/users/<%= @user.id%>/favMovies">Fav Movies</a>
+			</li>
+			<li <% if tab == "videos" %> class="activeTab" <% end %> >
+			   <a href="/users/<%= @user.id%>/favMusic">Fav Music</a>
+		    </li>
+			<li <% if tab == "reviews" %> class="activeTab" <% end %> >
+				<a href="/users/<%= @user.id%>/reviews">Reviews</a>
+			</li>
+			<li <% if tab == "awards" %> class="activeTab" <% end %> >
+				<a href="/users/<%= @user.id%>/friends">Friends</a>
+			</li>
+	
+	    </ul>
+		</div> <!-- end content_nav -->
+		</div>
+		<div id="editDetails">
+			<img src="/images/edit.gif"></img>
+		 	<a id="editProfileLink" href="/users/<%= @user.id%>/edit" title="Edit Details">Edit details</a>
+		</div>		
+	</div>	
+</div>

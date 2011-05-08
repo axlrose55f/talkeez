@@ -1,0 +1,15 @@
+<h1><i>Awards</i> :&nbsp; <%=h @award.name%></h1>
+<br/><%= image_tag(@award.image.url, :size => "150x150", :alt => @award.name) %>
+
+<br/>
+<b>Description:</b><br/> <%=h @award.description %>
+<br/>
+<br/>
+<b>Movies with this Award:</b><br/>
+ <% for movie in @award.movies %>
+  <a href="/movies/<%= movie.id%>" class="show-link"><%= movie.name %></a>
+  <% end %>
+
+<br/><br/>
+<%= link_to 'Edit', edit_award_path(@award) %> |
+<%= link_to 'Back', awards_path %>

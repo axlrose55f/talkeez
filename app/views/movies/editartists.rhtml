@@ -1,0 +1,22 @@
+<h1>Select Movie Artists</h1>
+
+<% form_for(@movie, :url => addCastDetail_movie_path(:id => @movie.id)) do |f| %>
+  <%= f.error_messages %>
+
+ <p>
+	<%= f.label :artist %>:<br/>
+	<%=f.collection_select(:artists, @artists, :id, :name) 	%>
+ </p>
+ <p>
+	<%= f.label :role_id %>:<br/>
+	<%=f.collection_select(:roles, @roles, :id, :name) 	%>
+ </p>
+<br/>
+
+
+<p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+<%= link_to 'Show', @movie %> |
+<%= link_to 'Back', movies_path %>

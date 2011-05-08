@@ -1,0 +1,11 @@
+<h1><i>Moods</i> :&nbsp; <%=h @mood.name%></h1>
+<br/>
+<b>Description:</b><br/> <%=h @mood.description %>
+
+<br/><br/>
+<b>Movies/Songs belonging to this Mood:</b><br/>
+
+
+<br/><br/>
+<%= link_to 'Edit', edit_mood_path(@mood) %> |
+<%= link_to 'Back', moods_path %>
