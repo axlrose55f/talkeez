@@ -17,7 +17,8 @@
 
   <p>
     <%= f.label :dob %><br />
-   <%= f.calendar_date_select :dob  %>
+    <%= date_select("artist", "dob",:start_year => 1900, :end_year => Date.current.year ) %>
+
   </p>
  
 
@@ -35,7 +36,11 @@
   </p>
   <p>
     <%= f.label :height %><br />
-    <%= f.text_field :height %>
+        
+    <%=  
+      @heightList = 36.upto(84).map {|i| ["#{i/12}\' #{i% 12}", i]} 
+      f.select(:height, @heightList) %>   
+   
   </p>
   <p>
     <%= f.label :weight %><br />

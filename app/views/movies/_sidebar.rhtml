@@ -19,7 +19,7 @@
 			<div class="innerBox">
 				<div id="minitree">				  
 			      <div id="details_heading">Year</div>
-			      <div id="details_value"><%=  @movie.year.year %></div>			     
+			      <div id="details_value"><%= @movie.year.to_formatted_s(:long) %></div>			     
 			      <div id="details_heading">Runtime</div>			      
 			      <div id="details_value"><%= @movie.run_time %> min.</div>		
 			 <!--      

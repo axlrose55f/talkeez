@@ -11,12 +11,19 @@
     <%= f.label :biography %><br />
     <%= f.text_area :biography %>
   </p>
+<%
+=begin 
+%>
  <p>
   <%= f.file_field :image%>
  </p>
+<%
+=end
+%>
  <p>
     <%= f.label :dob %><br />
-    <%= f.text_field :dob %>
+    <%= date_select("artist", "dob",:start_year => 1900, :end_year => Date.current.year ) %>
+  
   </p>
   <p>
     <%= f.label :birth_name %><br />
@@ -32,7 +39,11 @@
   </p>
   <p>
   <%= f.label :height %><br />
-    <%= f.text_field :height %>
+    
+    <%=  
+      @heightList = 36.upto(84).map {|i| ["#{i/12}\' #{i% 12}", "#{i}"]} 
+      f.select(:height, @heightList) %>   
+
   </p>
   <p>
     <%= f.label :weight %><br />

@@ -12,9 +12,9 @@ class Artist < ActiveRecord::Base
                           :join_table => "movies_artists_roles"
   validates_presence_of :name, :biography
   validates_uniqueness_of :name
-  validates_format_of :image_url,
-                      :with  => %r{\.(gif|png|jpg)$}i,
-                      :message => "must be a url for a GID, PNG or JPG image"
+ # validates_format_of :image_url,
+ #                     :with  => %r{\.(gif|png|jpg)$}i,
+ #                     :message => "must be a url for a GID, PNG or JPG image"
                       
 has_many :movie_roles, :class_name => "MovieRole"
 
@@ -32,7 +32,7 @@ has_attached_file :image,
                     :url => "/images/:class/:id/:style_:basename.:extension",
                     :path => ":rails_root/public/images/:class/:id/:style_:basename.:extension"
                     
-validates_attachment_presence :image
+#validates_attachment_presence :image
  
 validates_attachment_content_type :image, 
                                    :content_type => ['image/jpeg','image/gif','image/png'],

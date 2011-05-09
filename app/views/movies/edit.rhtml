@@ -26,8 +26,7 @@
   
  <p>
 	<%= f.label :year %><br />	
-	<%= date_select("movie", "year",:start_year => 1900, :discard_month => true,
-	                                    :discard_day => true) %>
+	<%= date_select("movie", "year",:start_year => 1900, :end_year => Date.current.year ) %>
 	  
 </p>
   <p>

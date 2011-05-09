@@ -30,12 +30,10 @@
 			<div class="innerBox">
 				<div id="minitree">
 			      <div id="details_heading">Height</div>			     
-			      <div id="details_value"><%=h @artist.height %></div>
+			      <div id="details_value"><%=h "#{(@artist.height)/12}\' #{(@artist.height)% 12}\" " %></div>
 			      <div id="details_heading">Weight</div>				  
 				  <div id="details_value"><%=h @artist.weight %></div>
-			      <div id="details_heading">Eyes</div>				  
-				  <div id="details_value"><%=h @artist.eyes %></div>
-						
+			    		
 				  <div id="details_heading">Education</div>			     
 			      <div id="details_value"><%=h @artist.education %></div>
 			      <div id="details_heading">Star Sign</div>				  
