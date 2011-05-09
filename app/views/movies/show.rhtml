@@ -8,7 +8,9 @@
 	<div class="persHeaderULFT"> </div>
 	<div class="persHeaderURt"> </div>
 	<div id="person_header" class="">
-<!--
+<%
+=begin 
+%>
 	<div style="float: left; font-size: 10px; font-weight: bold;">
 
 	<table><tbody><tr><td>
@@ -18,7 +20,7 @@
 	</td></tr>
 	<tr><td>
     <div class="rating">			
-		<% i = 0 %> 
+		<% i = 0 %> 		
 		<% while i < @movie.rating  %>
 		  <img src="/images/star.gif" > 
 		<% i += 1 %> 
@@ -28,7 +30,9 @@
 	</tbody></table>
 	
 	</div>
--->	
+<%
+=end 
+%>
 		<h1><%=h @movie.name%></h1>
 		<h3>Plot Summary:</h3>
 		<div id="movie_description" style="height:40%;">

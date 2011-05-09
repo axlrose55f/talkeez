@@ -11,9 +11,9 @@ class CreateMovies < ActiveRecord::Migration
       t.column :keywords,          :text
       t.column :description,       :text
       t.column :aspect_ratio,      :string
-      t.column :year,              :date
-      t.column :run_time,          :int
-      t.column :rating,          :int      
+      t.column :year,              :date ,:default => '1900-01-01'
+      t.column :run_time,          :int ,:default => 0   
+      t.column :rating,          :int ,:default => 0     
     end
 
   end

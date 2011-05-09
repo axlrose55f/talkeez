@@ -15,18 +15,27 @@
     <%= f.label :studio %><br />
     <%= f.text_field :studio %>
   </p>
-  <p>
+<%
+=begin %>
+<p>
 	<%= f.label :genre %>:<br/>
 	<%=f.collection_select(:genre_id, @genres, :id, :name) 	%>
     
   </p>
+<%
+=end
+%>  
   <p>
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </p>
+<%
+=begin %>
  <p>
   <%= f.file_field :image%>
  </p>
+<%
+=end %>
   <p>
     <%= f.submit "Create" %>
   </p>

@@ -6,7 +6,8 @@
 	  		<img width="145" height="175" id="movie_picture" src="<%=h @movie.image.url %>" alt="<%=h @movie.image %>"/>
 			<div class="rating">			
 				<% i = 0 %> 
-				<% while i < @movie.rating  %>
+				<% num = (@movie.rating == nil)?0:@movie.rating %> 
+				<% while i < num   %>
 				  <img src="/images/star.gif" > 
 				<% i += 1 %> 
 				<% end%>
