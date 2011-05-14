@@ -1,4 +1,8 @@
 class AlbumsController < ApplicationController
+    # select the lay out to use for this controller
+  layout :determine_layout
+  
+  
   # GET /albums
   # GET /albums.xml
   def index
@@ -200,4 +204,11 @@ class AlbumsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+    # Get the layout to use 
+  private   
+  def determine_layout
+	"common"
+  end
+  
 end

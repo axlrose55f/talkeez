@@ -1,4 +1,8 @@
 class MoviesController < ApplicationController
+  # select the lay out to use for this controller
+  layout :determine_layout
+  
+  
   # GET /movies
   # GET /movies.xml
   def index
@@ -226,4 +230,9 @@ class MoviesController < ApplicationController
     end
   end
 
+  # Get the layout to use 
+  private   
+  def determine_layout
+	"common"
+  end
 end
