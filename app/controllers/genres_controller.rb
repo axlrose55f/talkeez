@@ -1,4 +1,7 @@
 class GenresController < ApplicationController
+  # select the lay out to use for this controller
+  layout :determine_layout
+
   # GET /genres
   # GET /genres.xml
   def index
@@ -83,5 +86,11 @@ class GenresController < ApplicationController
       format.html { redirect_to(genres_url) }
       format.xml  { head :ok }
     end
+  end
+  
+      # Get the layout to use 
+  private   
+  def determine_layout
+	"common"
   end
 end

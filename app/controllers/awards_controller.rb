@@ -1,4 +1,7 @@
 class AwardsController < ApplicationController
+  # select the lay out to use for this controller
+  layout :determine_layout
+  
   # GET /awards
   # GET /awards.xml
   def index
@@ -81,5 +84,11 @@ class AwardsController < ApplicationController
       format.html { redirect_to(awards_url) }
       format.xml  { head :ok }
     end
+  end
+  
+      # Get the layout to use 
+  private   
+  def determine_layout
+	"common"
   end
 end
