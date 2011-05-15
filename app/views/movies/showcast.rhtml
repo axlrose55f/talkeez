@@ -34,9 +34,7 @@
 		<tr>
 		 <td><h3><a href="/artists/<%= cast.id%>" class="show-link" ><%=h cast.name %></a></h3></td>
 		 <td><h3>:</h3></td>
-		 <td aligh="left"><h3><a href="/role/<%= cast.role_id%>" class="show-link"><%=h cast.role_name %></a></h3></td>
-		 <% link = '/movies/'+ @movie.id.to_s + '/deleteCastDetail?mar_id='+ cast.mar_id %>
-		 <td><%= link_to 'Delete', link , :confirm => 'Are you sure?', :method => :delete %></td>		
+		 <td aligh="left"><h3><a href="/role/<%= cast.role_id%>" class="show-link"><%=h cast.role_name %></a></h3></td>		
 		</tr>
 	  <% end%>
 </tbody></table>
