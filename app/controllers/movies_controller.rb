@@ -191,6 +191,7 @@ class MoviesController < ApplicationController
     end     
   end
   
+ 
   # DELETE /movies/1/deleteCastDetail
   # DELETE /movies/1.xml
   def deleteCastDetail
@@ -200,7 +201,31 @@ class MoviesController < ApplicationController
     redirect_to(:action => :showcast)
         
   end
+
+  #### Handle Genres  #####
   
+  # PUT /movies/1/addGenre
+  # PUT /movies/1.xml
+  def addGenre
+    @movie = Movie.find(params[:id])
+    @genre = Genre.find(params[:movie][:genres])
+    @movie.genres << @genre
+    respond_to do |format|
+     format.html { redirect_to(@movie) }
+     format.xml  { head :ok }
+    end     
+  end
+  
+  # DELETE /movies/1/deleteGenre
+  # DELETE /movies/1.xml
+  def deleteGenre
+    @movie = Movie.find(params[:id])
+    @movie.genres.delete(Genre.find(params[:genre_id]))
+    respond_to do |format|
+     format.html { redirect_to(@movie) }
+     format.xml  { head :ok }
+    end         
+  end
   
   # PUT /movies/1/updateawards
   # PUT /movies/1.xml

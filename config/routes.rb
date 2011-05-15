@@ -54,6 +54,8 @@ ActionController::Routing::Routes.draw do |map|
                                       :videos => :get,
                                       :updategenres => :put,
                                       :addCastDetail => :put,
+                                      :addGenre => :put,
+                                      :deleteGenre => :delete,
                                       :deleteCastDetail => :delete,
                                       :updateawards => :put,
                                       :updateartists => :put} 
