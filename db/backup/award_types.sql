@@ -20,6 +20,10 @@ CREATE TABLE `award_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `description` text,
+  `image_updated_at` datetime DEFAULT NULL,
+  `image_file_name` varchar(255) DEFAULT NULL,
+  `image_content_type` varchar(255) DEFAULT NULL,
+  `image_file_size` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
