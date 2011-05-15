@@ -31,7 +31,7 @@ has_many :roles, :through => :movie_roles
 
 has_many :cast, :class_name  => "MovieRole" do
   def cast_list(movie_id)
-     find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.role_id as mar_id " + 
+     find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
                    "from artists as a, roles as r, movies_artists_roles as mr " +
                    " where mr.artist_id = a.id and mr.role_id = r.id and mr.movie_id = ?",
                    movie_id])

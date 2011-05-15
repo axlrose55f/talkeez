@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.41, for debian-linux-gnu (i486)
+-- MySQL dump 10.13  Distrib 5.1.56, for apple-darwin10.3.0 (i386)
 --
 -- Host: localhost    Database: talkeez
 -- ------------------------------------------------------
--- Server version	5.1.41-3ubuntu12.10
+-- Server version	5.1.56
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -114,7 +114,7 @@ CREATE TABLE `artists` (
 
 LOCK TABLES `artists` WRITE;
 /*!40000 ALTER TABLE `artists` DISABLE KEYS */;
-INSERT INTO `artists` VALUES (1,'Amitabh Bachchan','Amitabh Bachchan , born Amitabh Harivansh Bachchan on 11 October 1942), is an Indian film actor and producer. He first gained popularity in the early 1970s as the \"angry young man\" of Hindi cinema, and has since become one of the most prominent figures in the history of Indian cinema.[1][2]\r\nBachchan has won numerous major awards in his career, including four National Film Awards, three of which are in the Best Actor category, and fourteen Filmfare Awards. He is the most-nominated performer in any major acting category at Filmfare, with 36 nominations overall. In addition to acting, Bachchan has worked as a playback singer, film producer and television presenter, and was an elected member of the Indian Parliament from 1984 to 1987.',NULL,'1942-10-11','Allahabad','India','Amitabh Harivansh Bachchan',74,NULL,'','','','',NULL,NULL,NULL,NULL),(2,'Tusshar Kapoor','Tusshar Kapoor is the son of Veteran Bollywood actor, Jeetendra and Shobha Kapoor. He is the brother of Indian Soap Opera Queen, Ekta Kapoor. He studied at the University of Michigan and graduated with a MBA from the Stephen M. Ross School of Business.\r\n\r\n',NULL,'1976-11-20','Mumbai','India','',65,0,'Single','MBA','Scorpio','',NULL,NULL,NULL,NULL);
+INSERT INTO `artists` VALUES (1,'Amitabh Bachchan','Amitabh Bachchan , born Amitabh Harivansh Bachchan on 11 October 1942), is an Indian film actor and producer. He first gained popularity in the early 1970s as the \"angry young man\" of Hindi cinema, and has since become one of the most prominent figures in the history of Indian cinema.[1][2]\r\nBachchan has won numerous major awards in his career, including four National Film Awards, three of which are in the Best Actor category, and fourteen Filmfare Awards. He is the most-nominated performer in any major acting category at Filmfare, with 36 nominations overall. In addition to acting, Bachchan has worked as a playback singer, film producer and television presenter, and was an elected member of the Indian Parliament from 1984 to 1987.',NULL,'1942-10-11','Allahabad','India','Amitabh Harivansh Bachchan',74,NULL,'','','','','amitab.jpg','image/jpeg',8226,'2011-05-14 22:37:43'),(2,'Tusshar Kapoor','Tusshar Kapoor is the son of Veteran Bollywood actor, Jeetendra and Shobha Kapoor. He is the brother of Indian Soap Opera Queen, Ekta Kapoor. He studied at the University of Michigan and graduated with a MBA from the Stephen M. Ross School of Business.\r\n\r\n',NULL,'1976-11-20','Mumbai','India','',65,0,'Single','MBA','Scorpio','',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `artists` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +159,7 @@ CREATE TABLE `genres` (
   `name` varchar(255) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `genres` (
 
 LOCK TABLES `genres` WRITE;
 /*!40000 ALTER TABLE `genres` DISABLE KEYS */;
-INSERT INTO `genres` VALUES (1,'Rock','Rock'),(2,'Action','This is the description for the \"Drama\" Genre. Write something that explains this genre.'),(3,'Horror','This is the description for the \"Drama\" Genre. Write something that explains this genre.'),(4,'Comedy','This is the description for the \"Drama\" Genre. Write something that explains this genre.'),(5,'Romance','This is the description for the \"Drama\" Genre. Write something that explains this genre.'),(6,'Family','This is the Family Genre'),(7,'Thriller','This is a thriller genre'),(8,'Multiplex','These movies cater to the urban audiences');
+INSERT INTO `genres` VALUES (1,'Action','This is Action'),(2,'Adult','This is Adult'),(3,'Adventure','This is Adventure'),(4,'Animation','This is Animation'),(5,'Biography','This is Biography'),(6,'Children','This is Children'),(7,'Comedy','This is Comedy'),(8,'Crime','This is Crime'),(9,'Documentary','This is Documentary'),(10,'Drama','This is Drama'),(11,'Family','This is Family'),(12,'Fantasy','This is Fantasy'),(13,'Film-Noir','This is Film-Noir'),(14,'Foreign','This is Foreign'),(15,'Game','This is Game'),(16,'Health','This is Health'),(17,'History','This is History'),(18,'Horror','This is Horror'),(19,'Music','This is Music'),(20,'Musical','This is Musical'),(21,'Mystery','This is Mystery'),(22,'Mythological','This is Mythological'),(23,'News','This is News'),(24,'Patriotic','This is Patriotic'),(25,'Period','This is Period'),(26,'Reality-TV','This is Reality-TV'),(27,'Romance','This is Romance'),(28,'Sci-Fi','This is Sci-Fi'),(29,'Social','This is Social'),(30,'Special','This is Special'),(31,'Sports','This is Sports'),(32,'Sports','This is Sports'),(33,'Talk','This is Talk'),(34,'Thriller','This is Thriller'),(35,'War','This is War'),(36,'Western','This is Western');
 /*!40000 ALTER TABLE `genres` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,7 +232,7 @@ CREATE TABLE `movies` (
 
 LOCK TABLES `movies` WRITE;
 /*!40000 ALTER TABLE `movies` DISABLE KEYS */;
-INSERT INTO `movies` VALUES (1,'Don','us','Hindi','fox','bw','pg','/images/Data/Movies/Don_28Cover29.jpg',NULL,'Don - The Chase Begins Again, directed by Farhan Akhtar, is a remake of the blockbuster 1978 film, Don. The film was released in India on October 20, 2006 and it was also simultaneously released internationally. It received a very good response worldwide, and collected over Rs. 30 crores in India in its first week itself. The script of the previous film was written by Akhtar\'s father, Javed Akhtar and Salim Khan (father of Salman Khan).\r\n\r\nThe film stars Shahrukh Khan, Priyanka Chopra, Arjun Rampal, Ishaa Koppikar and Kareena Kapoor in a guest appearance. Eighty percent of the movie was shot in Malaysia, and was filmed around the tropical Langkawi island as well as the Petronas Twin Towers and the Jalan Masjid India area, which is the \'little India\' of Kuala Lumpur. Akshay Kumar was offered for the role of Jasjit but he rejected saying he might have accepted if he was offered the part of Don.[1] Shahrukh Khan and Priyanka Chopra underwent special martial arts training for their roles in the movie.\r\n\r\nThe film was selected to be screened at the Berlin Film Festival.[2] Critical reaction was mixed, with Variety stating that the film \"could have been much better.\"[3]','2:3','2002-01-01',2,2,'Don_28Cover29.jpg','image/jpeg',24965,'2011-01-28 09:17:08'),(2,'Paheli','India','Hindi','UTV','Color','pg','/images/Data/Movies/Paheli.jpg',NULL,'Paheli (English: Riddle) is a Bollywood movie, released in India on June 24, 2005, directed by Amol Palekar and produced by Gauri Khan, Sanjiv Chawla and Shahrukh Khan, who also plays the male lead. Paheli is based on the short story written by Vijayadan Detha and tells the story of a wife (Rani Mukerji) who is left by her husband (Shahrukh Khan) and visited by a ghost, disguised as her husband, who is in love with her and takes her husband\'s place.','2:3','2007-10-10',120,4,'Paheli.jpg','image/jpeg',49385,'2011-01-28 09:18:10'),(3,'Rock On','India','Hindi','UTV','Color',NULL,'/images/Data/Movies/RockOn.png',NULL,'This is a decent movie. Has lot of interesting aspect. I don\'t have much to write about.',NULL,'2008-01-10',126,2,'RockOn.png',NULL,NULL,NULL),(4,'Sholay','India','','NR','',NULL,NULL,NULL,'This is Sholay',NULL,'1976-01-01',0,4,NULL,NULL,NULL,NULL),(5,'Shor in the City','India','Hindi','Balaji Motion Pictures','Color',NULL,NULL,NULL,'SHOR IN THE CITY is a thriller which revolves around three stories in the midst of the noise and grunge of Mumbai. The three stories run concurrently - the characters are not connected with each other and don\'t cross paths. It has the gangster backdrop and the thriller quotient that keeps audiences on the edge. ',NULL,'2011-04-28',108,4,NULL,NULL,NULL,NULL);
+INSERT INTO `movies` VALUES (1,'Don','us','Hindi','fox','bw','pg','/images/Data/Movies/Don_28Cover29.jpg',NULL,'Don - The Chase Begins Again, directed by Farhan Akhtar, is a remake of the blockbuster 1978 film, Don. The film was released in India on October 20, 2006 and it was also simultaneously released internationally. It received a very good response worldwide, and collected over Rs. 30 crores in India in its first week itself. The script of the previous film was written by Akhtar\'s father, Javed Akhtar and Salim Khan (father of Salman Khan).\r\n\r\nThe film stars Shahrukh Khan, Priyanka Chopra, Arjun Rampal, Ishaa Koppikar and Kareena Kapoor in a guest appearance. Eighty percent of the movie was shot in Malaysia, and was filmed around the tropical Langkawi island as well as the Petronas Twin Towers and the Jalan Masjid India area, which is the \'little India\' of Kuala Lumpur. Akshay Kumar was offered for the role of Jasjit but he rejected saying he might have accepted if he was offered the part of Don.[1] Shahrukh Khan and Priyanka Chopra underwent special martial arts training for their roles in the movie.\r\n\r\nThe film was selected to be screened at the Berlin Film Festival.[2] Critical reaction was mixed, with Variety stating that the film \"could have been much better.\"[3]','2:3','2002-01-01',2,2,'Don_28Cover29.jpg','image/jpeg',24965,'2011-01-28 09:17:08'),(2,'Paheli','India','Hindi','UTV','Color','pg','/images/Data/Movies/Paheli.jpg',NULL,'Paheli (English: Riddle) is a Bollywood movie, released in India on June 24, 2005, directed by Amol Palekar and produced by Gauri Khan, Sanjiv Chawla and Shahrukh Khan, who also plays the male lead. Paheli is based on the short story written by Vijayadan Detha and tells the story of a wife (Rani Mukerji) who is left by her husband (Shahrukh Khan) and visited by a ghost, disguised as her husband, who is in love with her and takes her husband\'s place.','2:3','2007-10-10',120,4,'Paheli.jpg','image/jpeg',49385,'2011-01-28 09:18:10'),(3,'Rock On','India','Hindi','UTV','Color',NULL,'/images/Data/Movies/RockOn.png',NULL,'This is a decent movie. Has lot of interesting aspect. I don\'t have much to write about.',NULL,'2008-01-10',126,2,'RockOn.png',NULL,NULL,NULL),(4,'Sholay','India','','NR','',NULL,NULL,NULL,'This is Sholay',NULL,'1976-01-01',0,4,'sholay.jpg','image/jpeg',7275,'2011-05-14 22:34:12'),(5,'Shor in the City','India','Hindi','Balaji Motion Pictures','Color',NULL,NULL,NULL,'SHOR IN THE CITY is a thriller which revolves around three stories in the midst of the noise and grunge of Mumbai. The three stories run concurrently - the characters are not connected with each other and don\'t cross paths. It has the gangster backdrop and the thriller quotient that keeps audiences on the edge. ',NULL,'2011-04-28',108,4,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `movies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,13 +244,15 @@ DROP TABLE IF EXISTS `movies_artists_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `movies_artists_roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `movie_id` int(11) NOT NULL,
   `artist_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `index_movies_artists_roles_on_movie_id_and_artist_id_and_role_id` (`movie_id`,`artist_id`,`role_id`),
   KEY `index_movies_artists_roles_on_artist_id_and_role_id` (`artist_id`,`role_id`),
   KEY `index_movies_artists_roles_on_role_id` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,7 +261,7 @@ CREATE TABLE `movies_artists_roles` (
 
 LOCK TABLES `movies_artists_roles` WRITE;
 /*!40000 ALTER TABLE `movies_artists_roles` DISABLE KEYS */;
-INSERT INTO `movies_artists_roles` VALUES (1,3,1),(2,1,1),(2,1,2),(2,4,3),(4,1,1),(5,2,3);
+INSERT INTO `movies_artists_roles` VALUES (1,1,1,1),(3,2,1,1),(5,2,2,3),(6,2,4,3),(7,4,1,1),(8,5,2,3);
 /*!40000 ALTER TABLE `movies_artists_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,7 +311,7 @@ CREATE TABLE `movies_genres` (
 
 LOCK TABLES `movies_genres` WRITE;
 /*!40000 ALTER TABLE `movies_genres` DISABLE KEYS */;
-INSERT INTO `movies_genres` VALUES (1,1),(1,1),(1,6),(1,7),(2,5),(3,1),(5,7);
+INSERT INTO `movies_genres` VALUES (1,1),(1,34),(2,5),(3,5),(5,7);
 /*!40000 ALTER TABLE `movies_genres` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -453,6 +455,7 @@ DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
+  `cast_type` varchar(60) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -464,7 +467,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'Hero','Hero'),(2,'Heroien','Heroien'),(3,'Director',NULL);
+INSERT INTO `roles` VALUES (1,'Hero','cast','Hero'),(2,'Heroien','cast','Heroien'),(3,'Director','cast',NULL);
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -631,4 +634,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-05-14 21:40:19
+-- Dump completed on 2011-05-15  9:47:44

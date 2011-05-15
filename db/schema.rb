@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090607012650) do
+ActiveRecord::Schema.define(:version => 20081123050129) do
 
   create_table "albums", :force => true do |t|
     t.string  "name"
@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(:version => 20090607012650) do
   create_table "awards", :force => true do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "image_updated_at"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
-    t.datetime "image_updated_at"
   end
 
   create_table "genres", :force => true do |t|
@@ -85,9 +85,9 @@ ActiveRecord::Schema.define(:version => 20090607012650) do
     t.text     "keywords"
     t.text     "description"
     t.string   "aspect_ratio"
-    t.date     "year"
-    t.integer  "run_time"
-    t.integer  "rating"
+    t.date     "year",               :default => '1900-01-01'
+    t.integer  "run_time",           :default => 0
+    t.integer  "rating",             :default => 1
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20090607012650) do
 
   create_table "roles", :force => true do |t|
     t.string "name"
+    t.string "cast_type",   :limit => 60
     t.text   "description"
   end
 

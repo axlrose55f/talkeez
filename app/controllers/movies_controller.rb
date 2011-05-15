@@ -89,16 +89,7 @@ class MoviesController < ApplicationController
     @genres = Genre.find(:all, :order => "name" )
   end
 
-  # GET /movies/1/edit
-  def editartists       
-    @movie = Movie.find(params[:id])   
-    @artists = Artist.find(:all, :order => "name" )
-    @roles = Role.find(:all, :order => "name")
-    # @artists = Hash.new 
-    # @roles = Hash.new   
-    # Artist.find(:all, :order => "name" ).map {|u|  @artists[u.name] = u.id }
-    # Role.find(:all, :order => "name").map {|u| @roles[u.name] = u.id}
-  end
+
 
   # GET /movies/1/edit
   def editawards       
@@ -156,6 +147,17 @@ class MoviesController < ApplicationController
      format.html { redirect_to(@movie) }
      format.xml  { head :ok }
     end    
+  end
+  
+    # GET /movies/1/edit
+  def editartists       
+    @movie = Movie.find(params[:id])   
+    @artists = Artist.find(:all, :order => "name" )
+    @roles = Role.find(:all, :order => "name")
+    # @artists = Hash.new 
+    # @roles = Hash.new   
+    # Artist.find(:all, :order => "name" ).map {|u|  @artists[u.name] = u.id }
+    # Role.find(:all, :order => "name").map {|u| @roles[u.name] = u.id}
   end
   
   # PUT /movies/1/updategenres
