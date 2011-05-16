@@ -74,6 +74,18 @@ class AwardTypesController < ApplicationController
     end
   end
 
+  # GET /awards/1
+  # GET /awards/1.xml
+  def showCategories
+    @award = AwardType.find(params[:id])
+    @award_cat = AwardCategories.find(params[:cat_id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @award }
+    end
+  end
+
   # DELETE /awards/1
   # DELETE /awards/1.xml
   def destroy

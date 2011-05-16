@@ -1,4 +1,4 @@
-<h1><i>Award Type</i> :&nbsp; <b><%=h @award.name%></b></h1>
+<h1><i>Award Type</i> :&nbsp; <b><a href="/award_types/<%= @award.id %>" ><%=h @award.name%></a></b></h1>
 <br/><%= image_tag(@award.image.url, :size => "150x150", :alt => @award.name) %>
 
 <br/>
@@ -7,7 +7,7 @@
 <br/>
 
 
-<b>Categories under :<i> <%=h @award.name %></i></b>
+<b>Categories under :<i> <a href="/award_types/<%= @award.id %>" ><%=h @award.name %></a></i></b>
 <br>
 <br>
 <div id="award-type-details">
@@ -15,7 +15,7 @@
  <% for category in @award.categories %> 
 <tr>
    <td>&nbsp;<%=h  category.id %></td> 
-   <td>&nbsp;&nbsp;<a href="/award_types/<%= @award.id %>/<%= category.id %>" ><%=h  category.name %></a></td>
+   <td>&nbsp;&nbsp;<a href="/award_types/<%= @award.id %>/showCategories?cat_id=<%= category.id %>" ><%=h  category.name %></a></td>
    <td>&nbsp;&nbsp;<%=h  category.description %></td>
    <td>&nbsp;&nbsp;EDIT</td>
 </tr>

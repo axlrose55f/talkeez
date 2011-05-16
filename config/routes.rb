@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
 
  # map.resources :awards 
   
-  map.resources :award_types
+  map.resources :award_types ,:member => {:showCategories => :get }
  
   map.resources :albums , :member => {:edittracks => :get,
                                       :editgenres => :get,

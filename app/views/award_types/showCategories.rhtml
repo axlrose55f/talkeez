@@ -1,0 +1,12 @@
+<h1><i>Award Type</i> :&nbsp; <b><a href="/award_types/<%= @award.id %>" ><%=h @award.name%></a></b></h1>
+<br/><%= image_tag(@award.image.url, :size => "150x150", :alt => @award.name) %>
+<br>
+<br>
+<h1><i>Award Category Name</i> :&nbsp; <b><%=h @award_cat.name%></b></h1>
+<br>
+<b>Description:</b><br/> <%=h @award_cat.description %>
+<br/>
+<br/>
+
+<br/><br/>
+<a href="/award_types/<%= @award.id %>" >Back To <%=h @award.name%></a>
