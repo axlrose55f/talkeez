@@ -4,8 +4,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :trivias
 
-  map.resources :awards
-
+ # map.resources :awards 
+  
+  map.resources :award_types
+ 
   map.resources :albums , :member => {:edittracks => :get,
                                       :editgenres => :get,
                                       :editartists => :get,

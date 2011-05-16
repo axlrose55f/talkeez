@@ -1,0 +1,25 @@
+<h1><i>Award Type</i> :&nbsp; <b><%=h @award.name%></b></h1>
+<br/><%= image_tag(@award.image.url, :size => "150x150", :alt => @award.name) %>
+
+<br/>
+<b>Description:</b><br/> <%=h @award.description %>
+<br/>
+<br/>
+
+
+<b>Categories under :<i> <%=h @award.name %></i></b>
+<br>
+<br>
+<div id="award-type-details">
+<table class="table-class"  cellspacing="2" cellpadding="5" >
+ <% for category in @award.categories %> 
+<tr>
+   <td>&nbsp;<%=h  category.id %></td> 
+   <td>&nbsp;&nbsp;<a href="/award_types/<%= @award.id %>/<%= category.id %>" ><%=h  category.name %></a></td>
+   <td>&nbsp;&nbsp;<%=h  category.description %></td>
+   <td>&nbsp;&nbsp;EDIT</td>
+</tr>
+<% end %>
+</table>
+<br/><br/>
+<%= link_to 'Back', award_types_path %>

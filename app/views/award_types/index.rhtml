@@ -1,0 +1,21 @@
+<div id="movies-details">
+<table class="table-class"  cellspacing="2" cellpadding="5" >
+
+
+<% for award in @awards %>  
+<tr>
+
+   <td><%=h  award.id %></td> 
+   <td><%= image_tag (award.image.url, :size => "50x50", :alt => award.name)  %></td> 
+   <td><a href="/award_types/<%= award.id%>" ><%=h  award.name %></a></td>
+   <td><%=h  award.description %></td>
+   <td>
+    <%= link_to 'Delete', award, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Award', new_award_type_path %>
+
