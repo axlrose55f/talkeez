@@ -105,7 +105,23 @@
 			</div>
 			<div class="sectionContainer">
 			   <div id="Awards1" class="">
+			   <% @awards = @movie.awards %>
+			   <% if ! @awards.empty? %>
+			   <table><tbody>			     			     
+			     <% for award in @awards %>
+				 <tr>
+				  <td>
+				   <h3><% if award.year %> <%= award.year.year %> <% end %> - </h3>
+				  </td>
+				  <td>
+				   <em class="noItemAdded"><a href="/award_types/<%= award.categories.award_type_id%>/showCategories?cat_id=<%= award.categories.id%>" class="show-link"><%=h award.name %></a></em>
+		          </td>
+		          </tr>
+				  <% end %>				
+				</tbody></table>
+				<% else %>
 				<em class="noItemAdded">No Awards has been added.</em>
+				<% end %>
 			   </div>
 			</div>
 			<div class="rndSecLLFT"> </div>

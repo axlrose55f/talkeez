@@ -19,6 +19,9 @@
 		  <% @awards = @movie.awards %>
 		  <% for award in @awards %>
 			<tr>
+			<td>
+			<img width="30" height="40" id="profile_picture" style="border-width: 0px;" src="<%=h award.categories.award_type.image.url %>"/>
+			</td>
 			<td><h3><% if award.year %> <%= award.year.year %> <% end %>:</h3></td>
 			<td>
 	   		 <h3><a href="/award_types/<%= award.categories.award_type_id%>/showCategories?cat_id=<%= award.categories.id%>" class="show-link"><%=h award.name %></a></h3>

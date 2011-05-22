@@ -37,12 +37,27 @@
 			<div class="rndSecULFT"> </div>
 			<div class="rndSecURt"> </div>  
 			<div class="sectionBG">
-				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Cast</h2>
+				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Filmography</h2>
 				<div style="border-bottom: 1px dotted rgb(187, 178, 164);"></div>
 			</div>
 			<div class="sectionContainer">
 			   <div id="cast1" class="">
-				<em class="noItemAdded">No cast info has been added.</em>
+			   <% @movies = @artist.movies %>
+			   <% if ! @movies.empty? %>
+			   <table><tbody>
+			     <tr>
+			     <% for movie in @movies %>
+				  <td><a id="addMainPhotoLnk">
+				  <img width="60" height="60" id="profile_picture" style="border-width: 0px;" 
+				       src="<%=h movie.image.url %>"/></a>
+				   <br/><center><em class="noItemAdded"><a href="/movies/<%= movie.id%>" class="show-link"><%=h movie.name %></a></em></center>
+				   </td>
+			      <% end%>
+				</tr>
+				</tbody></table>	
+			   <% else %>			   
+				<em class="noItemAdded">No moive info has been added.</em>
+			   <% end %>	
 			   </div>
 			</div>
 			<div class="rndSecLLFT"> </div>
@@ -74,7 +89,23 @@
 			</div>
 			<div class="sectionContainer">
 			   <div id="Awards1" class="">
-				<em class="noItemAdded">No Awards has been added.</em>
+			   <% @awards = @artist.awards %>
+			   <% if ! @awards.empty? %>
+			   <table><tbody>
+			     <% for award in @awards %>
+				  <tr>
+				  <td>
+				   <h3><% if award.year %> <%= award.year.year %> <% end %> - </h3>
+				  </td>
+				  <td>
+				   <em class="noItemAdded"><a href="/award_types/<%= award.categories.award_type_id%>/showCategories?cat_id=<%= award.categories.id%>" class="show-link"><%=h award.name %></a></em>
+		          </td>
+		          </tr>
+			      <% end%>
+				</tbody></table>	
+			   <% else %>			   
+				<em class="noItemAdded">No Award info has been added.</em>
+			   <% end %>
 			   </div>
 			</div>
 			<div class="rndSecLLFT"> </div>

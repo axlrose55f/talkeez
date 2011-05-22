@@ -10,7 +10,25 @@
 	<div class="persHeaderURt"> </div>
 	<div id="movie_cast" class="">
 		<h2>Awards for  <%=h @artist.name%></h2><br>
+		 <% @awards = @artist.awards %>
+		 <% if !@awards.empty? %>	    
+		<div id="editCast" style="float:right; posiiton:relative;">
+		<img src="/images/edit.gif"></img>
+	 	<a id="editProfileLink" href="/artists/<%= @artist.id%>/editawards" title="Edit Awards">Edit Awards</a>
+        </div>
+		<table><tbody>		 
+		  <% for award in @awards %>
+			<tr>
+			<td><h3><% if award.year %> <%= award.year.year %> <% end %>:</h3></td>
+			<td>
+	   		 <h3><a href="/award_types/<%= award.categories.award_type_id%>/showCategories?cat_id=<%= award.categories.id%>" class="show-link"><%=h award.name %></a></h3>
+		    </td>
+		    </tr>
+		  <% end%>
+	</tbody></table>
+		<% else %>		 
 	     <h3> No awards yet </h3>
+	     <% end %>
 	<br/>
 	</div>
 	<div class="clearDiv"></div>

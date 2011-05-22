@@ -1,6 +1,8 @@
 class Artist < ActiveRecord::Base
   acts_as_rateable 
-  
+  has_many :awards,
+           :class_name => "MovieAward"
+         
   has_many :music_director,
            :class_name => "Album",
            :foreign_key => "music_director_id"
