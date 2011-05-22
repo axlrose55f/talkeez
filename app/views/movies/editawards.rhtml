@@ -30,7 +30,7 @@
     </p>
 	<p>
      <%= f.label :awards %><br /> 	
-  	 <%=f.collection_select(:id, AwardCategories.all, :id, :full_name) 	%>
+  	 <%=f.collection_select(:id, AwardCategories.all(:include => :award_type), :id, :full_name) 	%>
 	</p>
 	<p>
      <%= f.label :artist %><br /> 

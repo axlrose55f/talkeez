@@ -1,15 +1,26 @@
-<h1><i>Awards</i> :&nbsp; <%=h @award.name%></h1>
-<br/><%= image_tag(@award.image.url, :size => "150x150", :alt => @award.name) %>
+<h1><i>Award :</i>&nbsp; <%=h @category.full_name %></h1>
 
-<br/>
-<b>Description:</b><br/> <%=h @award.description %>
-<br/>
-<br/>
-<b>Movies with this Award:</b><br/>
- <% for movie in @award.movies %>
-  <a href="/movies/<%= movie.id%>" class="show-link"><%= movie.name %></a>
-  <% end %>
-
-<br/><br/>
-<%= link_to 'Edit', edit_award_path(@award) %> |
+<div id="award-list">
+<table class="table-class"  cellspacing="2" cellpadding="5" >
+<tr>
+ <th>ID</th>
+ <th>Year</th>
+ <th>Award</th>
+ <th>Movie</th>
+ <th>Artist</th>
+</tr>
+<% for award in @awards %>  
+<tr>
+   <td><%=h  award.id %></td> 
+   <td><a href="/awards/<%= award.categories.award_type.id %>/awards" ><%=h  award.year.year %></a></td>
+   <td><a href="/awards/<%= award.categories.id %>" > <%=h  award.categories.full_name %></a></td>
+   <td><a href="/movies/<%= award.movie.id %>/awards" ><%=h  award.movie.name %></a></td>
+   <td><a href="/artists/<%= award.artist.id %>/awards" ><%=h  award.artist.name %></a></td>
+   <td>
+    <%= link_to 'Delete', :controller => "awards", :action => "show", :id => award.id, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br>
+<br>
 <%= link_to 'Back', awards_path %>

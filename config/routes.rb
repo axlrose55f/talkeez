@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :trivias
 
- # map.resources :awards 
+  map.resources :awards
   
   map.resources :award_types ,:member => {:showCategories => :get }
  
@@ -45,6 +45,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :artists, :member => { :filmography => :get,
                                        :reviews => :get,
                                        :awards => :get,
+                                       :editawards => :get,
+                                       :addAward => :put,
                                        :videos => :get,}
   
   map.resources :movies, :member => { :editartists => :get,

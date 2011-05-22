@@ -6,9 +6,9 @@
 <tr>
 
    <td><%=h  award.id %></td> 
-   <td><%= image_tag (award.image.url, :size => "50x50", :alt => award.name)  %></td> 
-   <td><a href="/awards/<%= award.id%>" ><%=h  award.name %></a></td>
-   <td><%=h  award.description %></td>
+   <td><a href="/awards/<%= award.categories.id %>" > <%=h  award.categories.full_name %></a></td>
+   <td><a href="/movies/<%= award.movie.id %>/awards" ><%=h  award.movie.name %></a></td>
+   <td><a href="/artists/<%= award.artist.id %>/awards" ><%=h  award.artist.name %></a></td>
    <td>
     <%= link_to 'Delete', :controller => "awards", :action => "show", :id => award.id, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

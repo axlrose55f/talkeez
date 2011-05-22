@@ -250,7 +250,7 @@ class MoviesController < ApplicationController
   # GET /movies/1/edit
   def editawards       
     @movie = Movie.find(params[:id])      
-    @awardsCategories = AwardCategories.find(:all, :order => "name" )
+   # @awardsCategories = AwardCategories.find(:all, :order => "name" , :include => :award_type )
   end
 
   # GET /movies/1/edit

@@ -5,7 +5,7 @@ class AwardsController < ApplicationController
   # GET /awards
   # GET /awards.xml
   def index
-    @awards = AwardType.find(:all)
+    @awards = MovieAward.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,9 +15,9 @@ class AwardsController < ApplicationController
 
   # GET /awards/1
   # GET /awards/1.xml
-  def show
-    @award = AwardType.find(params[:id])
-
+  def show   
+    @category = AwardCategories.find(params[:id])
+    @awards = MovieAward.find(:all, :conditions => [ "award_id = ?", params[:id]])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @award }
@@ -26,9 +26,14 @@ class AwardsController < ApplicationController
 
   # GET /awards/new
   # GET /awards/new.xml
-  def new
-    @award = Award.new
+  def new	
+	@award = MovieAward.new()
+    @movie_id = params[:movie]
+    @artist_id = params[:artist]
+    @award_cat_id = params[:award_cat]
+    @year = params[:year] ?params[:year] : "1900"  
 
+    logger.info 'FINDME message'
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @award }
@@ -43,13 +48,17 @@ class AwardsController < ApplicationController
   # POST /awards
   # POST /awards.xml
   def create
-    @award = Award.new(params[:award])
-
+    @movie = Movie.find(params[:movie_award][:movie])
+    @award = MovieAward.new(:movie => @movie,
+    	                   :artist => Artist.find(params[:movie_award][:artist]),
+    	                   :categories => AwardCategories.find(params[:movie_award][:id]),
+    	                   :year => Date.strptime(params[:movie_award]['year(1i)'],'%Y'))
+    
     respond_to do |format|
       if @award.save
         flash[:notice] = 'Award was successfully created.'
-        format.html { redirect_to(@award) }
-        format.xml  { render :xml => @award, :status => :created, :location => @award }
+        format.html { redirect_to(@movie) }
+        format.xml  { render :xml => @movie, :status => :created, :location => @movie }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @award.errors, :status => :unprocessable_entity }

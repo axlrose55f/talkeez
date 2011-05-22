@@ -132,6 +132,32 @@ class ArtistsController < ApplicationController
     end
   end
   
+  
+  ########### Awards ###########
+    # GET /movies/1/edit
+  def editawards       
+    @artist = Artist.find(params[:id])
+    
+  end
+  
+   # PUT /movies/1/addAward
+  def addAward
+    award_cat = AwardCategories.find(params[:movie_award][:id])
+    artist = Artist.find(params[:movie_award][:artist])
+    movie = Movie.find(params[:movie_award][:movie])    
+    award = MovieAward.new(:movie => movie,
+    	                   :artist => artist,
+    	                   :categories => award_cat,
+    	                   :year => Date.strptime(params[:movie_award]['year(1i)'],'%Y'),
+    	                   :location => params[:movie_award][:location] )
+    award.save
+    respond_to do |format|
+     format.html { redirect_to(movie) }
+     format.xml  { head :ok }
+    end     
+  end
+  
+  
     # Get the layout to use 
   private   
   def determine_layout

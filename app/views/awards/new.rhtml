@@ -1,20 +1,39 @@
-<h1>New award</h1>
+<h1>Add a New award</h1>
 
-<% form_for @award, :html => { :multipart => true } do |f| %>
+<% form_for(:movie_award, :url => {:action => :create } ) do |f| %>
   <%= f.error_messages %>
+	<p>
+     <%= f.label :awards %><br /> 	
+  	 <%=f.collection_select(:id, AwardCategories.all(:include => :award_type), :id, :full_name) 	%>
+	</p>
+	<p>
+     <%= f.label :movie %><br /> 
+     <% if @movie_id %>
+      <%=  Movie.find(@movie.id)  %>
+      <%= f.hidden_field :movie , :value => @movie.id  %>
+     <% else %> 
+	 <%=f.collection_select(:movie , Movie.find(:all) , :id, :name) 	%>	
+	 <% end %>
+    </p>
+    <p>
+     <%= f.label :artist %><br /> 
+      <% if @artist_id %>
+      <%=  Artist.find(@artist_id).name  %>
+      <%= f.hidden_field :artist , :value => @artist_id  %>       
+     <% else %> 
+	 <%=f.collection_select(:artist , Artist.find(:all), :id, :name) 	%>	
+	 <% end %>
+    </p>
+   <p>
+    <%= f.label :year %><br /> 
+	<%= f.date_select("year", :start_year => 1900,
+	                           :end_year => Date.current.year ,
+	                           :default =>  Date.strptime(@year,'%Y'),
+	                           :discard_day => true, 
+	                           :discard_month => true  ) %>
+   </p>
   <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </p>
-<p>
-  <%= f.file_field :image%>
-</p>  
-<p>
-    <%= f.submit "Create" %>
+    <%= f.submit "Add" %>
   </p>
 <% end %>
 <%= link_to 'Back', awards_path %>
