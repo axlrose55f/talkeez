@@ -22,7 +22,7 @@
 <br>
 <hr>
 <h1>Add new Award Movie </h1>
-<% form_for( award, :url => {:action => :addAward, :id => @movie.id}, 
+<% form_for( :movie_award, :url => {:action => :addAward, :id => @movie.id}, 
 							 :html => { :method => :put, :class => "add_movie_award", :id => "add_movie_award_1" } ) do |f| %>
   <%= f.error_messages %>
 	<p>

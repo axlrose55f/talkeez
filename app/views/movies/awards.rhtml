@@ -16,10 +16,14 @@
 	 	<a id="editProfileLink" href="/movies/<%= @movie.id%>/editawards" title="Edit Awards">Edit Awards</a>
         </div>
 		<table><tbody>
-		  <% for award in @movie.awards %>
-			<tr><td>
-	   <h3><a href="/awards/<%= award.id%>" class="show-link"><%=h award.name %></a></h3>
-		</td></tr>
+		  <% @awards = @movie.awards %>
+		  <% for award in @awards %>
+			<tr>
+			<td><h3><% if award.year %> <%= award.year.year %> <% end %>:</h3></td>
+			<td>
+	   		 <h3><a href="/award_types/<%= award.categories.award_type_id%>/showCategories?cat_id=<%= award.categories.id%>" class="show-link"><%=h award.name %></a></h3>
+		    </td>
+		    </tr>
 		  <% end%>
 	</tbody></table>
 
