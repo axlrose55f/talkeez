@@ -16,13 +16,23 @@
 		<img src="/images/edit.gif"></img>
 	 	<a id="editProfileLink" href="/artists/<%= @artist.id%>/editawards" title="Edit Awards">Edit Awards</a>
         </div>
-		<table><tbody>		 
+		<table><tbody>	
+<tr>
+		<td><h3>Year</h3></td>
+		<td><h3>Award</h3></td>
+		<td><h3>Movie</h3></td>
+</tr>
+
 		  <% for award in @awards %>
 			<tr>
-			<td><h3><% if award.year %> <%= award.year.year %> <% end %>:</h3></td>
-			<td>
+			<td><h3><% if award.year %><%= award.year.year %> <% end %></h3></td>
+		    <td>
 	   		 <h3><a href="/award_types/<%= award.categories.award_type_id%>/showCategories?cat_id=<%= award.categories.id%>" class="show-link"><%=h award.name %></a></h3>
 		    </td>
+			<td>
+	   		 <h3><a href="/movies/<%= award.movie.id %>" class="show-link"><%=h award.movie.name %></a></h3>
+		    </td>
+			
 		    </tr>
 		  <% end%>
 	</tbody></table>

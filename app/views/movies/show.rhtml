@@ -114,7 +114,10 @@
 				   <h3><% if award.year %> <%= award.year.year %> <% end %> - </h3>
 				  </td>
 				  <td>
-				   <em class="noItemAdded"><a href="/award_types/<%= award.categories.award_type_id%>/showCategories?cat_id=<%= award.categories.id%>" class="show-link"><%=h award.name %></a></em>
+				   &nbsp;<em class="noItemAdded"><a href="/award_types/<%= award.categories.award_type_id%>/showCategories?cat_id=<%= award.categories.id%>" class="show-link"><%=h award.name %></a></em>
+		          </td>
+		           <td>
+				   &nbsp;- &nbsp;<em class="noItemAdded"><a href="/artist/<%= award.artist.id%>" class="show-link"><%=h award.artist.name %></a></em>
 		          </td>
 		          </tr>
 				  <% end %>				
