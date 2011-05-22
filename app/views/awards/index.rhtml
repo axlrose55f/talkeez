@@ -10,7 +10,7 @@
    <td><a href="/awards/<%= award.id%>" ><%=h  award.name %></a></td>
    <td><%=h  award.description %></td>
    <td>
-    <%= link_to 'Delete', award, :confirm => 'Are you sure?', :method => :delete %></td>
+    <%= link_to 'Delete', :controller => "awards", :action => "show", :id => award.id, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

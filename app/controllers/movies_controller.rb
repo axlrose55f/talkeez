@@ -81,21 +81,6 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])   
   end
 
-  # GET /movies/1/edit
-  def editgenres
-    @movie = Movie.find(params[:id])
-    # @genres = Hash.new 
-    #    Genre.find(:all, :order => "name" ).map {|u|  @genres[u.name] = u.id }
-    @genres = Genre.find(:all, :order => "name" )
-  end
-
-
-
-  # GET /movies/1/edit
-  def editawards       
-    @movie = Movie.find(params[:id])    
-    @awards = Award.find(:all, :order => "name" )
-  end
   
   # POST /movies
   # POST /movies.xml
@@ -113,6 +98,9 @@ class MoviesController < ApplicationController
       end
     end
   end
+
+
+
   
   # PUT /movies/1
   # PUT /movies/1.xml
@@ -132,22 +120,7 @@ class MoviesController < ApplicationController
     end
   end
   
-  # PUT /movies/1/updategenres
-  # PUT /movies/1.xml
-  def updategenres
-    @movie = Movie.find(params[:id])    
-    @selected_genres = Array.new   
-    movie_param = params[:movies]  
-    # logger.debug ("FindMe I'm in genre update #{movie_param[:genre_ids].length}")
-    movie_param[:genre_ids].each do |genre_id|       
-        @selected_genres << Genre.find(genre_id)
-    end    
-    @movie.genres = @selected_genres    
-    respond_to do |format|
-     format.html { redirect_to(@movie) }
-     format.xml  { head :ok }
-    end    
-  end
+
   
     # GET /movies/1/edit
   def editartists       
@@ -218,6 +191,31 @@ class MoviesController < ApplicationController
     end     
   end
   
+    # GET /movies/1/edit
+  def editgenres
+    @movie = Movie.find(params[:id])
+    # @genres = Hash.new 
+    #    Genre.find(:all, :order => "name" ).map {|u|  @genres[u.name] = u.id }
+    @genres = Genre.find(:all, :order => "name" )
+  end
+  
+    # PUT /movies/1/updategenres
+  # PUT /movies/1.xml
+  def updategenres
+    @movie = Movie.find(params[:id])    
+    @selected_genres = Array.new   
+    movie_param = params[:movies]  
+    # logger.debug ("FindMe I'm in genre update #{movie_param[:genre_ids].length}")
+    movie_param[:genre_ids].each do |genre_id|       
+        @selected_genres << Genre.find(genre_id)
+    end    
+    @movie.genres = @selected_genres    
+    respond_to do |format|
+     format.html { redirect_to(@movie) }
+     format.xml  { head :ok }
+    end    
+  end
+  
   # DELETE /movies/1/deleteGenre
   # DELETE /movies/1.xml
   def deleteGenre
@@ -227,6 +225,43 @@ class MoviesController < ApplicationController
      format.html { redirect_to(@movie) }
      format.xml  { head :ok }
     end         
+  end
+  
+  #### Handle Awards ####
+  
+ # PUT /movies/1/addAward
+  def addAward
+    award_cat = AwardCategories.find(params[:movie_award][:id])
+    artist = Artist.find(params[:movie_award][:artist])
+    movie = Movie.find(params[:movie_award][:movie])    
+    award = MovieAward.new(:movie => movie,
+    	                   :artist => artist,
+    	                   :categories => award_cat,
+    	                   :year => Date.strptime(params[:movie_award]['year(1i)'],'%Y'),
+    	                   :location => params[:movie_award][:location] )
+    award.save
+    respond_to do |format|
+     format.html { redirect_to(movie) }
+     format.xml  { head :ok }
+    end     
+  end
+  
+  
+  # GET /movies/1/edit
+  def editawards       
+    @movie = Movie.find(params[:id])      
+    @awardsCategories = AwardCategories.find(:all, :order => "name" )
+  end
+
+  # GET /movies/1/edit
+  def deleteAward       
+    @movie = Movie.find(params[:id])      
+    @award = MovieAward.find(params[:award_id] )
+    @award.destroy
+    respond_to do |format|
+     format.html { redirect_to(@movie) }
+     format.xml  { head :ok }
+    end 
   end
   
   # PUT /movies/1/updateawards

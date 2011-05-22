@@ -5,7 +5,7 @@ class AwardsController < ApplicationController
   # GET /awards
   # GET /awards.xml
   def index
-    @awards = Award.find(:all)
+    @awards = AwardType.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,7 @@ class AwardsController < ApplicationController
   # GET /awards/1
   # GET /awards/1.xml
   def show
-    @award = Award.find(params[:id])
+    @award = AwardType.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,3 +1,69 @@
+<h1><b>Awards for this Movie</b></h1>
+
+<div id="movies-details">
+<table class="table-class"  cellspacing="6" cellpadding="6" border="1">
+<tr><th>Year</th><th>Award Type</th><th>Award Name</th><th>Edit</th></tr>
+<% @awards = @movie.awards %>
+<% for award in @awards %>  
+<tr>
+   <td><%= award.year ? award.year.year : 'N/A' %></td> 
+   <td><a href="/award_types/<%= award.categories.award_type_id%>" ><%=h  award.categories.type_name %></a> </td>
+   <td><a href="/award_types/<%=award.categories.award_type_id%>/showCategories?cat_id=<%=award.categories.id%>" ><%=h  award.categories.name %></a></td>   
+    <% link = '/movies/'+ @movie.id.to_s + '/deleteAward?award_id='+ award.id.to_s %>
+    <td>[ <%= link_to 'Delete', link , :confirm => 'Are you sure?', :method => :delete %> ]</td>	
+  
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+
+<br>
+<hr>
+<h1>Add new Award Movie </h1>
+<% form_for( award, :url => {:action => :addAward, :id => @movie.id}, 
+							 :html => { :method => :put, :class => "add_movie_award", :id => "add_movie_award_1" } ) do |f| %>
+  <%= f.error_messages %>
+	<p>
+	 <%=f.hidden_field (:movie , :value => @movie.id )%>	
+    </p>
+	<p>
+     <%= f.label :awards %><br /> 	
+  	 <%=f.collection_select(:id, AwardCategories.all, :id, :full_name) 	%>
+	</p>
+	<p>
+     <%= f.label :artist %><br /> 
+	 <%=f.collection_select(:artist , @movie.artists, :id, :name) 	%>	
+    </p>
+	
+   <p>
+     <%= f.label :year %><br /> 
+
+	<%= f.date_select("year", :start_year => 1900,
+	                           :end_year => Date.current.year ,
+	                           :default => @movie.year ? @movie.year : Date.current.year,
+	                           :discard_day => true, 
+	                           :discard_month => true  ) %>
+   </p>
+
+   <p>
+    <%= f.label :location %><br />
+  
+   <%= f.text_field :location %>
+  </p>
+<br/>
+
+
+<p>
+    <%= f.submit "Add" %>
+  </p>
+<% end %>
+
+<%
+=begin %>
+
+
 <h1>Select Movie Awards</h1>
 
 <% form_for(@movie, :url => updateawards_movie_path(:id => @movie.id)) do |f| %>
@@ -21,5 +87,9 @@ options_for_select( @awards, selected_awards)
     <%= f.submit "Update" %>
   </p>
 <% end %>
+
+<%
+=end
+%>
 <%= link_to 'Show', @movie %> |
 <%= link_to 'Back', movies_path %>

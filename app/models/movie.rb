@@ -1,7 +1,7 @@
 class Movie < ActiveRecord::Base
 has_many   :trivia
-has_and_belongs_to_many :awards,
-                        :join_table => "movies_awards"
+has_many :awards,
+         :class_name => "MovieAward"
 has_and_belongs_to_many :genres,
                         :join_table => "movies_genres"
 has_and_belongs_to_many :themes,
