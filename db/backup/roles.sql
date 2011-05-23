@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `type` varchar(60) DEFAULT NULL,
+  `role_type` varchar(60) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -37,7 +37,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` (`id`, `name`, `type`, `description`) VALUES 
+INSERT INTO `roles` (`id`, `name`, `role_type`, `description`) VALUES 
 (1,'Hero','cast','This is Hero'),
 (2,'Heroine','cast','This is Heroine'),
 (3,'Villain','cast','This is Villain'),
@@ -45,45 +45,45 @@ INSERT INTO `roles` (`id`, `name`, `type`, `description`) VALUES
 (5,'Comedian','cast','This is Comedian'),
 (6,'Supporting Actor','cast','This is Supporting Actor'),
 (7,'Guest Appearance','cast','This is Guest Appearance'),
-
 (8,'Producer','crew', 'This is Producer'),
 (9,'Director','crew', 'This is Director'),
 (10,'Writer','crew', 'This is Writer'),
-(11,'Screenplay ','crew', 'This is Screenplay '),
+(11,'Screenplay         ','crew', 'This is Screenplay   '),
 (12,'Cinematographer','crew', 'This is Cinematographer'),
-(13,'Director','crew', 'This is Director'),
-(14,'Production','crew', 'This is Production'),
-(15,'Art','crew', 'This is Art'),
-(16,'Action','crew', 'This is Action'),
+(13,'Director of Photography','crew', 'This is Director of Photography'),
+(14,'Production Designer','crew', 'This is Production Designer'),
+(15,'Art Director','crew', 'This is Art Director'),
+(16,'Action Director','crew', 'This is Action Director'),
 (17,'Editor','crew', 'This is Editor'),
-(18,'Sound','crew', 'This is Sound'),
+(18,'Sound Designer','crew', 'This is Sound Designer'),
 (19,'Costumes','crew', 'This is Costumes'),
-(20,'Music','crew', 'This is Music'),
+(20,'Music Director','crew', 'This is Music Director'),
 (21,'Lyricist','crew', 'This is Lyricist'),
 (22,'Singer','crew', 'This is Singer'),
 (23,'Choreographer','crew', 'This is Choreographer'),
 (24,'Co-producer','crew', 'This is Co-producer'),
-(25,'Associate','crew', 'This is Associate'),
-(26,'Executive','crew', 'This is Executive'),
-(27,'Associate','crew', 'This is Associate'),
-(28,'Assistant','crew', 'This is Assistant'),
+(25,'Associate Producer','crew', 'This is Associate Producer'),
+(26,'Executive Producer','crew', 'This is Executive Producer'),
+(27,'Associate Director','crew', 'This is Associate Director'),
+(28,'Assistant Director','crew', 'This is Assistant Director'),
 (29,'Story','crew', 'This is Story'),
 (30,'Dialogues','crew', 'This is Dialogues'),
-(31,'Chief','crew', 'This is Chief'),
-(32,'Creative','crew', 'This is Creative'),
-(33,'Line','crew', 'This is Line'),
+(31,'Chief Assistant Director','crew', 'This is Chief Assistant Director'),
+(32,'Creative Producer','crew', 'This is Creative Producer'),
+(33,'Line Producer','crew', 'This is Line Producer'),
 (34,'Make-up','crew', 'This is Make-up'),
 (35,'Thrills','crew', 'This is Thrills'),
-(36,'Song','crew', 'This is Song'),
-(37,'Visual','crew', 'This is Visual'),
-(38,'Mixing','crew', 'This is Mixing'),
-(39,'Production','crew', 'This is Production'),
-(40,'Production','crew', 'This is Production'),
-(41,'Production','crew', 'This is Production'),
-(42,'Production','crew', 'This is Production'),
-(43,'Costume','crew', 'This is Costume'),
+(36,'Song Direction','crew', 'This is Song Direction'),
+(37,'Visual Effects','crew', 'This is Visual Effects'),
+(38,'Mixing Engineer','crew', 'This is Mixing Engineer'),
+(39,'Production Co-Ordinator','crew', 'This is Production Co-Ordinator'),
+(40,'Production Executive','crew', 'This is Production Executive'),
+(41,'Production Manager','crew', 'This is Production Manager'),
+(42,'Production Controller','crew', 'This is Production Controller'),
+(43,'Costume Coordinator','crew', 'This is Costume Coordinator'),
 (44,'Marketing','crew', 'This is Marketing'),
-(45,'Publicity','crew', 'This is Publicity');
+(45,'Publicity Campaign','crew', 'This is Publicity Campaign'),
+(46,'Supporting Actress','cast','This is Supporting Actress');
 
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;

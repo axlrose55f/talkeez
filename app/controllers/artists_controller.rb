@@ -132,6 +132,17 @@ class ArtistsController < ApplicationController
     end
   end
   
+  ######## Artists ##############
+   
+  def editmovies       
+    @artist = Artist.find(params[:id])   
+    @movies = Movie.find(:all, :order => "name" )
+    @roles = Role.find(:all, :order => "name")
+    # @artists = Hash.new 
+    # @roles = Hash.new   
+    # Artist.find(:all, :order => "name" ).map {|u|  @artists[u.name] = u.id }
+    # Role.find(:all, :order => "name").map {|u| @roles[u.name] = u.id}
+  end
   
   ########### Awards ###########
     # GET /movies/1/edit

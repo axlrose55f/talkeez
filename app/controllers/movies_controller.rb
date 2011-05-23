@@ -121,12 +121,14 @@ class MoviesController < ApplicationController
   end
   
 
+  #### Handle Artists  #####
   
     # GET /movies/1/edit
   def editartists       
     @movie = Movie.find(params[:id])   
     @artists = Artist.find(:all, :order => "name" )
-    @roles = Role.find(:all, :order => "name")
+    type = params[:type]
+    @roles = Role.find(:all, :conditions => ['role_type = ?', type], :order => "name")
     # @artists = Hash.new 
     # @roles = Hash.new   
     # Artist.find(:all, :order => "name" ).map {|u|  @artists[u.name] = u.id }

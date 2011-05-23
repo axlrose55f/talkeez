@@ -27,16 +27,31 @@ has_many :artists, :through => :movie_roles do
   end
 end
 
-has_many :roles, :through => :movie_roles
+has_many :roles, :through => :movie_roles do
+  def cast
+    find :all, :conditions => ["role_type = 'cast'"]
+  end
+  def crew
+    find :all, :conditions => ["role_type = 'crew'"]
+  end
+end
 
 has_many :cast, :class_name  => "MovieRole" do
   def cast_list(movie_id)
      find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
                    "from artists as a, roles as r, movies_artists_roles as mr " +
-                   " where mr.artist_id = a.id and mr.role_id = r.id and mr.movie_id = ?",
+                   " where mr.artist_id = a.id and mr.role_id = r.id and r.role_type = 'cast' and mr.movie_id = ?",
+                   movie_id])
+  end
+  def crew_list(movie_id)
+     find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
+                   "from artists as a, roles as r, movies_artists_roles as mr " +
+                   " where mr.artist_id = a.id and mr.role_id = r.id and r.role_type = 'crew' and mr.movie_id = ?",
                    movie_id])
   end
 end
+
+
 # has_many :cast, :class_name  => "MovieRole",
 #          :finder_sql => "select a.*, r.name as role_name, r.id as role_id from artists as a, roles as r, movies_artists_roles as mr where mr.artist_id = a.id and mr.role_id = r.id and mr.movie_id = 1"
 # 
