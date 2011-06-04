@@ -1,7 +1,7 @@
 <h1>Selected Artists for the movie</h1>
 
 	<table><tbody>
-	  <% for cast in @movie.cast.cast_list(@movie.id) %>
+	  <% for cast in @artist_roles%>
 		<tr>
 		 <td><h3><a href="/artists/<%= cast.id%>" class="show-link" ><%=h cast.name %></a></h3></td>
 		 <td><h3>&nbsp;&nbsp;:&nbsp;</h3></td>
@@ -37,4 +37,4 @@
 <% end %>
 
 <%= link_to 'Show', @movie %> |
-<%= link_to 'Back', movies_path %>
+<%= link_to 'Back', @movie %>

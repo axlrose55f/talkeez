@@ -1,12 +1,12 @@
-<h1>Selected Artists for the movie</h1>
+<h1>Selected Movies for the Artist</h1>
 
 	<table><tbody>
-	  <% for cast in @artist.cast.cast_list(@movie.id) %>
+	  <% for movie in @artist.movies.roles(@artist.id) %>
 		<tr>
-		 <td><h3><a href="/artists/<%= cast.id%>" class="show-link" ><%=h cast.name %></a></h3></td>
-		 <td><h3>&nbsp;&nbsp;:&nbsp;</h3></td>
-		 <td aligh="left"><h3><a href="/role/<%= cast.role_id%>" class="show-link"><%=h cast.role_name %></a></h3></td>
-		 <% link = '/movies/'+ @movie.id.to_s + '/deleteCastDetail?mar_id='+ cast.mar_id %>
+  		 <td><h3><a href="/movies/<%= movie.id%>" class="show-link" ><%=h movie.name %></a></h3></td>
+		 <td><h3>&nbsp;&nbsp; as &nbsp;</h3></td>
+		 <td aligh="left"><h3><a href="/role/<%= movie.role_id%>" class="show-link"><%=h movie.role_name %></a></h3></td>
+		 <% link = '/movies/'+ movie.id.to_s + '/deleteCastDetail?mar_id='+ movie.mar_id %>
 		 <td>&nbsp;&nbsp;[<%= link_to 'Delete', link , :confirm => 'Are you sure?', :method => :delete %>]</td>		
 		</tr>
 	  <% end%>
@@ -15,14 +15,14 @@
 <br/>
 
 <hr>	
-<h1>Add Artists to the movie</h1>
+<h1>Add Movies to the Artist</h1>
 
-<% form_for(@movie, :url => addCastDetail_movie_path(:id => @movie.id)) do |f| %>
+<% form_for(@artist, :url => addCastDetail_artist_path(:id => @artist.id)) do |f| %>
   <%= f.error_messages %>
 
  <p>
-	<%= f.label :artist %>:<br/>
-	<%=f.collection_select(:artists, @artists, :id, :name) 	%>
+	<%= f.label :movie %>:<br/>
+	<%=f.collection_select(:movies, @movies, :id, :name) 	%>
  </p>
  <p>
 	<%= f.label :role_id %>:<br/>
@@ -36,5 +36,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @movie %> |
-<%= link_to 'Back', movies_path %>
+<%= link_to 'Show', @artist %> |
+<%= link_to 'Back', artists_path %>

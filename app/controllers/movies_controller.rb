@@ -129,6 +129,12 @@ class MoviesController < ApplicationController
     @artists = Artist.find(:all, :order => "name" )
     type = params[:type]
     @roles = Role.find(:all, :conditions => ['role_type = ?', type], :order => "name")
+    
+    if type == 'cast'
+     @artist_roles = @movie.cast.cast_list(@movie.id)
+    else
+     @artist_roles = @movie.cast.crew_list(@movie.id)
+    end
     # @artists = Hash.new 
     # @roles = Hash.new   
     # Artist.find(:all, :order => "name" ).map {|u|  @artists[u.name] = u.id }

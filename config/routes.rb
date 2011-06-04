@@ -46,8 +46,10 @@ ActionController::Routing::Routes.draw do |map|
                                        :reviews => :get,
                                        :awards => :get,
                                        :editawards => :get,
+                                       :editmovies => :get,
+                                       :addCastDetail => :put,
                                        :addAward => :put,
-                                       :videos => :get,}
+                                       :videos => :get}
   
   map.resources :movies, :member => { :editartists => :get,
                                       :editgenres => :get,

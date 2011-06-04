@@ -12,18 +12,19 @@
 		<h2>Filmography details for <%=h @artist.name%></h2><br>
 		<div id="editCast" style="float:right; posiiton:relative;">
 		<img src="/images/edit.gif"></img>
-	 	<a id="editProfileLink" href="/artist/<%= @artist.id%>/editmovies" title="Edit Movies">Edit Movies</a>
+	 	<a id="editProfileLink" href="/artists/<%= @artist.id%>/editmovies" title="Edit Movies">Edit Movies</a>
         </div>
 		<table><tbody>
-		  <% for movie in @artist.movies %>
+		  <% for movie in @artist.movies.roles(@artist.id) %>
 			<tr><td>
 			<a id="addMainPhotoLnk">
 			<img width="60" height="60" id="profile_picture" style="border-width: 0px;" src="<%=h movie.image.url %>"/>
 			</a>
-		</td><td>
-	   <h3><a href="/movies/<%= movie.id%>" class="show-link"><%=h movie.name %></a></h3>
-		</td></tr>
-		  <% end%>
+		</td>
+		<td><h3><a href="/movies/<%= movie.id%>" class="show-link"><%=h movie.name %></a></h3></td>
+		<td><h3>&nbsp;as&nbsp; <%=h movie.role_name %></h3></td>
+		</tr>
+		<% end%>
 	</tbody></table>
 	<br/>
 	</div>

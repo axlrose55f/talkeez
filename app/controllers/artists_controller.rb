@@ -132,10 +132,11 @@ class ArtistsController < ApplicationController
     end
   end
   
-  ######## Artists ##############
+  ######## Movies ##############
    
   def editmovies       
-    @artist = Artist.find(params[:id])   
+    @artist = Artist.find(params[:id])  
+    
     @movies = Movie.find(:all, :order => "name" )
     @roles = Role.find(:all, :order => "name")
     # @artists = Hash.new 
@@ -144,6 +145,22 @@ class ArtistsController < ApplicationController
     # Role.find(:all, :order => "name").map {|u| @roles[u.name] = u.id}
   end
   
+    # PUT /movies/1/updategenres
+  # PUT /movies/1.xml
+  def addCastDetail
+    @artist = Artist.find(params[:id])
+    @movie = Movie.find(params[:artist][:movies])
+    @role = Role.find(params[:artist][:roles])
+    movie_role = MovieRole.new
+    movie_role.movie = @movie
+    movie_role.artist = @artist
+    movie_role.role = @role
+    if movie_role.save    
+      redirect_to(:action => :filmography)
+    else
+      render :action => "editmovies"       
+    end     
+  end
   ########### Awards ###########
     # GET /movies/1/edit
   def editawards       
