@@ -2,6 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  include Facebooker2::Rails::Controller
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details
@@ -38,7 +39,7 @@ class ApplicationController < ActionController::Base
       if current_user
         store_location
         flash[:notice] = "You must be logged out to access this page"
-        redirect_to account_url
+        redirect_to users_url
         return false
       end
     end

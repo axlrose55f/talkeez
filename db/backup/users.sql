@@ -15,6 +15,8 @@ CREATE TABLE `users` (
   `single_access_token` varchar(255) NOT NULL,
   `perishable_token` varchar(255) NOT NULL,
   `openid_identifier` varchar(255) DEFAULT NULL,
+  `facebook_session_key` varchar(255) DEFAULT NULL,
+  `facebook_uid` int(11),
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `login_count` int(11) DEFAULT 0,

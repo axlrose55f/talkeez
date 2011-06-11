@@ -71,6 +71,29 @@
 	</div>
     -->
 	<div id="loginNavBar">
+		<!-- facebook -->
+<%
+=begin %>
+
+		<%= fb_connect_async_js %>
+		<%= authlogic_facebook_login_button("login", {:controller => 'user_sessions'})  %>
+       <%= fb_login_and_redirect('http://talkeez2.com:3000/', :perms => 'email,user_birthday') %>
+		<% if current_facebook_user %>
+			<%= "Hello #{fb_name(current_facebook_user, :useyou => false)}!"  %>
+			 <%= fb_logout_link("Logout of fb", request.url) %><br />
+			<% else
+			   # you must explicitly request permissions for facebook user fields.
+			   # here we instruct facebook to ask the user for permission for our website
+			   # to access the user's facebook email and birthday
+   			%>
+		  <%= fb_login_and_redirect('http://talkeez2.com:3000/', :perms => 'email,user_birthday') %>
+		<% end %>		
+<%
+=end 
+%>
+		<!-- end facebook -->
+
+
 		<% if current_user %>
 		  <%= link_to "Edit Profile" , edit_user_path(:current) %> |
 		  <%= link_to "Logout" , logout_path %>

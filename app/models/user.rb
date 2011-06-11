@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
 #  validates_attachment_presence :image
 
-#  validates_attachment_content_type :image, 
-#                                     :content_type => ['image/jpeg','image/gif','image/png'],
-#                                     :message => "Must be a image of type png, jpeg or gif"
+  validates_attachment_content_type :image, 
+                                     :content_type => ['image/jpeg','image/gif','image/png'],
+                                     :message => "Must be a image of type png, jpeg or gif"
 end
