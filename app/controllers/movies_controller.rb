@@ -305,4 +305,5 @@ class MoviesController < ApplicationController
   def determine_layout
 	"common"
   end
+
 end

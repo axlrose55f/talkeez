@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  # select the lay out to use for this controller
+  layout :determine_layout
   before_filter :require_user, :only => [:show, :edit, :update]
   
   # GET /users
@@ -16,6 +18,10 @@ class UsersController < ApplicationController
   # GET /user/new.xml
   def new
     @user = User.new
+    respond_to do |format|
+       format.html # index.html.erb
+       format.xml  { render :xml => @user }
+     end
   end
   
   def edit
@@ -37,26 +43,22 @@ class UsersController < ApplicationController
   # POST /user.xml
   def create
     @user = User.new(params[:user])
-    @user.save do | result |
-      if result 
-         flash[:notice] = 'Successfully registered user!'
+      if @user.save 
+        # flash[:notice] = 'Successfully registered user!'
          redirect_to(@user)        
        else
         render :action => "new"               
       end
-    end  
   end
   
   def update
     @user = current_user
     @user.attributes = params[:user]
-    @user.save do |result |
-     if result  
-      flash[:notice] = 'Successfully updated user!'
-      redirect_to users_url
+    if @user.save  
+       # flash[:notice] = 'Successfully updated user!'
+	   redirect_to(@user)
      else
       render :action => 'edit'
-     end    
     end       
   end
   
@@ -70,6 +72,12 @@ class UsersController < ApplicationController
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
-  end  
+  end 
+  
+    # Get the layout to use 
+  private   
+  def determine_layout
+	"common"
+  end
   
 end

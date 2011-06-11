@@ -10,14 +10,12 @@
 				<h1>Login</h1>
 
 				<% form_for @user_session do |f| %>
-				  <%= f.error_messages %>
+				  <%= f.error_messages :header_message => nil, :message => nil	 %>
 				  <%= f.label :username %><br />
 				  <%= f.text_field :username %><br />
 				  <br />
 				  <%= f.label :password %><br />
 				  <%= f.password_field :password %><br />
-
-
 				  <br />
 				  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
 				  <br/>
@@ -45,7 +43,8 @@
 
 
 
-
+<% 
+=begin %>
 
 <!-- <h1>Login</h1>
 
@@ -69,3 +68,6 @@ $('login_container').toggle(); $('openid_container').toggle();" %>)<br /><br />
   <br />
   <%= f.submit "Login" %>
 <% end %> -->
+<%
+=end
+%>
