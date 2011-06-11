@@ -31,7 +31,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :ragas
   
   # Login related stuff  
-  map.resources :users
+  map.resources :users, :member => { :movies => :get,
+                                     :reviews => :get,
+                                     :videos => :get,
+                                     :friends => :get} 
   map.resources :user_sessions
     
   map.login "login", :controller => "user_sessions", :action => "new"

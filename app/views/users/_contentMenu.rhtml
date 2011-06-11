@@ -8,10 +8,10 @@
 				<a href="/users/<%= @user.id%>">Overview</a>
 			</li>
 			<li <% if tab == "filmography" %> class="activeTab" <% end %> >
-				<a href="/users/<%= @user.id%>/favMovies">Fav Movies</a>
+				<a href="/users/<%= @user.id%>/movies">Fav Movies</a>
 			</li>
 			<li <% if tab == "videos" %> class="activeTab" <% end %> >
-			   <a href="/users/<%= @user.id%>/favMusic">Fav Music</a>
+			   <a href="/users/<%= @user.id%>/videos">Fav Videos</a>
 		    </li>
 			<li <% if tab == "reviews" %> class="activeTab" <% end %> >
 				<a href="/users/<%= @user.id%>/reviews">Reviews</a>

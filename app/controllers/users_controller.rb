@@ -72,7 +72,43 @@ class UsersController < ApplicationController
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
-  end 
+  end
+  
+  def reviews
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # reviews.html.erb
+      format.xml  { render :xml => @user }
+    end
+  end
+  
+  def videos
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # reviews.html.erb
+      format.xml  { render :xml => @user }
+    end
+  end
+  
+  def movies
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # reviews.html.erb
+      format.xml  { render :xml => @user }
+    end
+  end
+  
+  def friends
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # reviews.html.erb
+      format.xml  { render :xml => @user }
+    end
+  end
   
     # Get the layout to use 
   private   
