@@ -45,7 +45,6 @@ class AwardTypesController < ApplicationController
   # POST /awards.xml
   def create
     @award = AwardType.new(params[:award_type])
-
     respond_to do |format|
       if @award.save
         #flash[:notice] = 'Award was successfully created.'
@@ -62,7 +61,6 @@ class AwardTypesController < ApplicationController
   # PUT /awards/1.xml
   def update
     @award = AwardType.find(params[:id])
-
     respond_to do |format|
       if @award.update_attributes(params[:award_type])
        # flash[:notice] = 'Award was successfully updated.'

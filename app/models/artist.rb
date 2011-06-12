@@ -33,6 +33,8 @@ has_many :movies, :through => :movie_roles do
   end
 end         
 
+attr_accessor :image_url
+
 has_many :roles, :through => :movie_roles
 
 
@@ -42,10 +44,24 @@ has_attached_file :image,
                     :path => ":rails_root/public/images/:class/:id/:style_:basename.:extension"
                     
 #validates_attachment_presence :image
+before_validation :image_from_url, :if => :image_url_provided?
  
 validates_attachment_content_type :image, 
                                    :content_type => ['image/jpeg','image/gif','image/png'],
                                    :message => "Must be a image of type png, jpeg or gif"
 
+# helper method to get image from url
+private
+  def image_url_provided?
+    !self.image_url.blank?
+  end
+
+
+ def image_from_url
+    io = open(URI.parse(image_url))
+    def io.original_filename; base_uri.path.split('/').last; end
+    self.image = io.original_filename.blank? ? nil : io
+    rescue  # catch url errors with validations instead of exceptions (Errno::ENOENT, OpenURI::HTTPError, etc...) 
+ end
 
 end
