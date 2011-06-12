@@ -1,7 +1,7 @@
 class ArtistsController < ApplicationController
   # select the lay out to use for this controller
   layout :determine_layout
-  
+  before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy, :addCastDetail, :addAward] 
   
   # GET /artists
   # GET /artists.xml

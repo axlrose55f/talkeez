@@ -1,6 +1,7 @@
 class AwardTypesController < ApplicationController
   # select the lay out to use for this controller
   layout :determine_layout
+  before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy]
   
   # GET /awards
   # GET /awards.xml
@@ -47,7 +48,7 @@ class AwardTypesController < ApplicationController
 
     respond_to do |format|
       if @award.save
-        flash[:notice] = 'Award was successfully created.'
+        #flash[:notice] = 'Award was successfully created.'
         format.html { redirect_to(@award) }
         format.xml  { render :xml => @award, :status => :created, :location => @award }
       else
@@ -64,7 +65,7 @@ class AwardTypesController < ApplicationController
 
     respond_to do |format|
       if @award.update_attributes(params[:award_type])
-        flash[:notice] = 'Award was successfully updated.'
+       # flash[:notice] = 'Award was successfully updated.'
         format.html { redirect_to(@award) }
         format.xml  { head :ok }
       else

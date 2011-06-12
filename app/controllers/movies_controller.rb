@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   # select the lay out to use for this controller
   layout :determine_layout
-  
+  before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy, :updateartists, :addCastDetail, :deleteCastDetail, :updateawards, :deleteAward, :addAward, :deleteGenre, :addGenre, :updategenres  ]
   
   # GET /movies
   # GET /movies.xml

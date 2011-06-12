@@ -1,6 +1,7 @@
 class GenresController < ApplicationController
   # select the lay out to use for this controller
   layout :determine_layout
+  before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy]
 
   # GET /genres
   # GET /genres.xml
