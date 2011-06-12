@@ -120,6 +120,16 @@ class MoviesController < ApplicationController
     end
   end
   
+  ## Movie rating 
+  def rate
+    @moive = Movie.find(params[:id])
+    @moive.rate(params[:stars], current_user, params[:dimension])
+    render :update do |page|
+      page.replace_html @moive.wrapper_dom_id(params), ratings_for(@moive, params.merge(:wrap => false))
+      page.visual_effect :highlight, @moive.wrapper_dom_id(params)
+    end
+  end
+  
 
   #### Handle Artists  #####
   

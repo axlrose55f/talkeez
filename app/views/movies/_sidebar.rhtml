@@ -4,7 +4,12 @@
 		<div class="sidebarDivURt"> </div>
   	    <div class="moviePictureBox">
 	  		<img width="145" height="175" id="movie_picture" src="<%=h @movie.image.url %>" alt="<%=h @movie.image %>"/>
-			<div class="rating">			
+			 <div class="rating">
+			 <%= ratings_for @movie %>
+			 </div>
+			  <!--  old rating -->
+			 <!-- 
+			 <div class="rating">			
 				<% i = 0 %> 
 				<% num = (@movie.rating == nil)?0:@movie.rating %> 
 				<% while i < num   %>
@@ -12,7 +17,10 @@
 				<% i += 1 %> 
 				<% end%>
 			 </div>
+			  -->
+			 <!-- end old rating -->
 		</div>
+		<br>
 		<br/>	
   		    <div class="clearDiv"></div>
 	<!--	<h2>Basic Info</h2> -->

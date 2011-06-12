@@ -1,5 +1,6 @@
 class Artist < ActiveRecord::Base
-  acts_as_rateable 
+  ajaxful_rateable :stars => 5 , :cache_column => :rating
+  
   has_many :awards,
            :class_name => "MovieAward"
          

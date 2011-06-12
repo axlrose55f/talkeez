@@ -132,6 +132,18 @@ class ArtistsController < ApplicationController
     end
   end
   
+  ### Rating 
+  def rate
+    @artist = Artist.find(params[:id])
+    @artist.rate(params[:stars], current_user, params[:dimension])
+    render :update do |page|
+      page.replace_html @artist.wrapper_dom_id(params), ratings_for(@artist, params.merge(:wrap => false))
+      page.visual_effect :highlight, @artist.wrapper_dom_id(params)
+    end
+  end
+  
+  
+  
   ######## Movies ##############
    
   def editmovies       

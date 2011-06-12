@@ -1,4 +1,6 @@
 class Movie < ActiveRecord::Base
+ajaxful_rateable :stars => 5 , :cache_column => :rating
+
 has_many   :trivia
 has_many :awards,
          :class_name => "MovieAward"

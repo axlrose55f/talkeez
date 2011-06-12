@@ -52,7 +52,8 @@ ActionController::Routing::Routes.draw do |map|
                                        :editmovies => :get,
                                        :addCastDetail => :put,
                                        :addAward => :put,
-                                       :videos => :get}
+                                       :videos => :get,
+                                       :rate => :post}
   
   map.resources :movies, :member => { :editartists => :get,
                                       :editgenres => :get,
@@ -69,7 +70,8 @@ ActionController::Routing::Routes.draw do |map|
                                       :deleteAward => :delete,                                      
                                       :deleteCastDetail => :delete,
                                       :updateawards => :put,
-                                      :updateartists => :put} 
+                                      :updateartists => :put,
+                                      :rate => :post} 
 
   # The priority is based upon order of creation: first created -> highest priority.
 

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   acts_as_authentic
-
+  ajaxful_rater
   has_attached_file :image, 
                       :url => "/images//:class/:id/:style_:basename.:extension",
                       :path => ":rails_root/public/images/:class/:id/:style_:basename.:extension"
