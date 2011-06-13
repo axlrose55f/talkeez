@@ -18,7 +18,8 @@ class MoviesController < ApplicationController
   # GET /movies/1.xml
   def show
     @movie = Movie.find(params[:id])
-
+    @total_percentage_like = rate_percentage("like")
+    @total_percentage_hate = rate_percentage("hate")
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @movie }
@@ -311,9 +312,27 @@ class MoviesController < ApplicationController
   end
 
   # Get the layout to use 
-  private   
+private   
   def determine_layout
 	"common"
   end
 
+  # find info about rates    
+   def rate_percentage(like)
+    min = 0
+    max = 3.5
+    if(like == 'like')
+      min = 3.5
+      max = 5
+    end
+    total = @movie.total_rates
+    return 0 if ! (total > 0) 
+    num_rates_above = 0
+    for r in @movie.rates
+     if r.stars > min && r.stars < max 
+      num_rates_above = num_rates_above + 1
+     end
+    end 
+    total_percentage = (100 * num_rates_above)/ @movie.total_rates
+   end 
 end

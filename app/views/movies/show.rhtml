@@ -33,11 +33,34 @@
 <%
 =end 
 %>
-		<h1><%=h @movie.name%></h1>
-		<h3>Plot Summary:</h3>
-		<div id="movie_description" style="height:40%;">
-		<%=h @movie.description %> 
-		</div>
+
+		<h1><%=h @movie.name%> ( <%=h @movie.year.to_datetime.to_s(:year) %>)</h1>
+
+        <div class="movie_content_area">
+        <% if   @movie.rate_average == 0 %>
+          <span class="subText liked_it">No Ratings</span>		
+  		<% elsif @movie.rate_average > 3.5 %>
+    	  <span class="meter  numeric"><%= @total_percentage_like%></span>
+  		  <span class="subText liked_it">liked it</span>
+  		<% else %>
+  		  <span class="meter  numeric"><%= @total_percentage_hate%></span>
+  		  <span class="subText liked_it">hated it</span>  		
+		<% end %>
+		<p class="critic_stats">
+   		    <br>Average Rating: <%= @movie.rate_average %>/5
+		    <br>User Ratings: <%= @movie.total_rates %>
+		  </p>		   
+		 </div>
+		 <div class="rating">
+			 <%= ratings_for @movie %> 
+		 </div>		 
+	    <div id="movie_plot_summary" style="height:46%;">	 
+		  <h3>Plot Summary:</h3>
+		  <div id="movie_description" >
+		    <%=h @movie.description %> 
+		  </div>
+	    </div>
+   	    
 		<div id="movie_desc_readMore"><% if @movie.description.length > 900 %>
 		<a href="#" onclick="Effect.BlindDown('movie_description', { scaleFrom: 50 });return false;">Read More</a> 
 		<% end  %>
