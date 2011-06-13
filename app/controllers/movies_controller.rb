@@ -323,7 +323,7 @@ private
     max = 3.5
     if(like == 'like')
       min = 3.5
-      max = 5
+      max = 5.1
     end
     total = @movie.total_rates
     return 0 if ! (total > 0) 
