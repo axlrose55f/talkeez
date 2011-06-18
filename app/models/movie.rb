@@ -1,5 +1,7 @@
 class Movie < ActiveRecord::Base
 ajaxful_rateable :stars => 5 , :cache_column => :rating
+cattr_reader :per_page
+@@per_page = 3
 
 attr_accessor :image_url
 
@@ -11,6 +13,17 @@ has_and_belongs_to_many :genres,
 has_and_belongs_to_many :themes,
                         :join_table => "movies_themes"
 
+
+def self.search(search)
+  if search
+    find(:all,:conditions => ['name LIKE ?', "%#{search}%"])
+  else
+    find(:all)
+  end
+end
+
+
+# Roles Cast relation ####
 has_many :movie_roles, :class_name => "MovieRole"
 
 has_many :artists, :through => :movie_roles do

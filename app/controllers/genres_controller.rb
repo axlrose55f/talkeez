@@ -2,16 +2,12 @@ class GenresController < ApplicationController
   # select the lay out to use for this controller
   layout :determine_layout
   before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy]
+  auto_complete_for :genre, :name
 
   # GET /genres
   # GET /genres.xml
   def index
     @genres = Genre.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @genres }
-    end
   end
 
   # GET /genres/1

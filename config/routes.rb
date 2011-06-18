@@ -2,6 +2,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => 'movies'
 
+  map.auto_complete '/:controller/:action',
+     :requirements => { :action => /auto_complete_for_\S+/ },
+     :conditions => { :method => :get }
+     
   map.resources :trivias
 
   map.resources :awards
@@ -72,6 +76,8 @@ ActionController::Routing::Routes.draw do |map|
                                       :updateawards => :put,
                                       :updateartists => :put,
                                       :rate => :post} 
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
 

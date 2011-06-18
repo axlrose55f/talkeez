@@ -1,7 +1,24 @@
+<div id="searchwrapper" class="searchwrapper">
+<% form_tag movies_path, :method => 'get' do%>
+<div id="searchwrapper-border" class="searchwrapper-border">
+<div id="searchwrapper-inner" class="searchwrapper-inner">
+    <%= text_field_with_auto_complete :movie, :name, { :size => 50 , :class => 'search_bar', :autocomplete => 'off'}, {:method => :get} %>
+</div>
+</div>
+<%= submit_tag "Go", :class => 'searchsubmit', :name => nil %>
+    
+  </p>     
+<% end %>
+</div>
+
 <div id="yui-main" style="">
 	<div style="margin:0px 0px 0px -180px;">
+<%
+=begin
+%>
+<!--
 	<div id="body_main" class="yui-b sectioncontainer_brown" >
-		<div class="sectionCntrULFT"> </div>
+	<div class="sectionCntrULFT"> </div>
 		<div class="sectionCntrURt"> </div>	
 		<div id="MovieList" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
 			<div class="rndSecULFT"> </div>
@@ -19,7 +36,11 @@
 		</div>
 		 <div class="sectionCntrLLFT"> </div>
 		 <div class="sectionCntrLRT"> </div>	
-    </div>						
+    </div>	
+-->
+<%
+=end
+%>
 	<br/>
 	<div class="clearDiv"></div>	
 	<div id="body_main" class="yui-b sectioncontainer_brown" >
@@ -31,7 +52,6 @@
 				<div class="rndSecURt"> </div>  
 				<div class="sectionBG">
 					<h2 style="display: inline-block; margin-bottom: 5px;">Movies</h2>
-					<div style="border-bottom: 1px dotted rgb(187, 178, 164);"></div>
 				</div>
 			<% for movie in @movies -%>
 				<div class="sectionContainer">
@@ -71,5 +91,17 @@
 </div> 	
  </div>	
 </div>
-		
+
+<%
+=begin
+%>
+<div class="digg_pagination">
+  <div clas="page_info">
+    <%= page_entries_info @movies %>
+  </div>
+  <%= will_paginate @movies, :container => false %>
+</div>
+<%
+=end
+%>		
 <%= link_to 'New Movies', new_movie_path %>		

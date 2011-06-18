@@ -206,6 +206,42 @@ a.addTiny {
 	float:left; border:none; padding:5px 0px 5px 10px; font-size:11px; 
 }
 
+
+
+.searchwrapper{float:right;zoom:1;clear:left}
+.searchwrapper-border{border-width:1px; border-style:solid; border-color: #C1CAD2; float:left}
+.searchwrapper-inner{
+ background-color:#C1CAD2;
+ border-width:1px;
+ border-style:solid; 
+ border-color: white;
+ padding:.2em;
+ position:relative;
+ height:2.1em
+ }
+
+.search_bar {
+padding:.2em;
+border: 1px solid #CBCCCE;
+border-left: 1px solid #7B7B7B;
+border-top: 1px solid #7B7B7B;
+height: 1.8em;
+width: 30em;
+float: left;
+}
+
+.searchsubmit{
+background-color:#C1CAD2;
+border:2px;
+border-style:solid; 
+border-color: #7B7B7B;
+padding:3px;
+font-weight:bold;
+height:2.5em;
+width: 3em;
+margin:2px;
+}
+
 #search{float:right;padding:0 3px;} 
 * html #search{margin-top:-3px;}
 *+html #search{margin-top:-3px;}

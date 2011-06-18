@@ -2,16 +2,13 @@ class MoviesController < ApplicationController
   # select the lay out to use for this controller
   layout :determine_layout
   before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy, :updateartists, :addCastDetail, :deleteCastDetail, :updateawards, :deleteAward, :addAward, :deleteGenre, :addGenre, :updategenres  ]
+  auto_complete_for :movie, :name
   
   # GET /movies
   # GET /movies.xml
   def index
-    @movies = Movie.find(:all)
-    @top_movies = Movie.find(:all, :conditions => ['rating >= 3'])
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @movies }
-    end
+   search_param = params[:movie]? params[:movie][:name]: ""  
+   @movies = Movie.search(search_param).paginate :page => params[:page], :order => 'rating DESC'
   end
   
   # GET /movies/1
