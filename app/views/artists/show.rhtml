@@ -48,7 +48,7 @@
 			     <% for movie in @movies %>
 				  <td><a id="addMainPhotoLnk">
 				  <img width="60" height="60" id="profile_picture" style="border-width: 0px;" 
-				       src="<%=h movie.image.url %>"/></a>
+				       src="<%=h movie.image.url(:thumb) %>"/></a>
 				   <br/><center><em class="noItemAdded"><a href="/movies/<%= movie.id%>" class="show-link"><%=h movie.name %></a></em></center>
 				   </td>
 			      <% end%>

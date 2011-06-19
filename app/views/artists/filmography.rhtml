@@ -18,7 +18,7 @@
 		  <% for movie in @artist.movies.roles(@artist.id) %>
 			<tr><td>
 			<a id="addMainPhotoLnk">
-			<img width="60" height="60" id="profile_picture" style="border-width: 0px;" src="<%=h movie.image.url %>"/>
+			<img width="60" height="60" id="profile_picture" style="border-width: 0px;" src="<%=h movie.image.url(:thumb) %>"/>
 			</a>
 		</td>
 		<td><h3><a href="/movies/<%= movie.id%>" class="show-link"><%=h movie.name %></a></h3></td>
