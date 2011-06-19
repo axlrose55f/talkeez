@@ -25,4 +25,4 @@ config.action_view.cache_template_loading            = true
 # config.action_mailer.raise_delivery_errors = false
 
 # ImageMagic path
-Paperclip.options[:command_path] = "/usr/local/bin/"
+Paperclip.options[:command_path] = "/usr/bin/"
