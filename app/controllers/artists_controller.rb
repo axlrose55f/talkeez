@@ -2,16 +2,13 @@ class ArtistsController < ApplicationController
   # select the lay out to use for this controller
   layout :determine_layout
   before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy, :addCastDetail, :addAward] 
-  
+  auto_complete_for :artist, :name
+    
   # GET /artists
   # GET /artists.xml
   def index
-    @artists = Artist.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @artists }
-    end
+   search_param = params[:artist]? params[:artist][:name]: ""  
+   @artists = Artist.search(search_param, params[:page])
   end
 
   # GET /artists/1

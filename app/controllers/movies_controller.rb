@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
   # GET /movies.xml
   def index
    search_param = params[:movie]? params[:movie][:name]: ""  
-   @movies = Movie.search(search_param).paginate :page => params[:page], :order => 'rating DESC'
+   @movies = Movie.search(search_param, params[:page])
   end
   
   # GET /movies/1

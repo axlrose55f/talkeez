@@ -51,7 +51,7 @@
 				<div class="rndSecULFT"> </div>
 				<div class="rndSecURt"> </div>  
 				<div class="sectionBG">
-					<h2 style="display: inline-block; margin-bottom: 5px;">Movies</h2>
+					<h2 style="display: inline-block; margin-top: -8px;">Movies</h2>
 				</div>
 			<% for movie in @movies -%>
 				<div class="sectionContainer">
@@ -62,20 +62,21 @@
 						<img width="64" height="80" id="profile_picture" style="border-width: 0px;" src="<%=h movie.image.url %>"/>
 						</a>
 						</td></tr>
+						<tr>
+						<td>
+						 <h3><a href="/movies/<%= movie.id%>"><%=h movie.name %></a></h3><br/>	
+						 <h3><a><%=h movie.year.year%></a></h3>
+						</td>
+						</tr>
 						<tr><td>
 					    <div class="list_rating">			
-							<% i = 0 %> 
-							<% while i < movie.rating  %>
-							  <img src="/images/star.gif" > 
-							<% i += 1 %> 
-							<% end%>
+							<%= ratings_for movie , :static %>
 						 </div>	
 						</td></tr>
 						</tbody></table>
 					</div>			
-				 <div id="eventDetails">
-				 	<h3><a href="/movies/<%= movie.id%>"><%=h movie.name %></a></h3><p/> 	
-					<h3><a><%=h movie.year.year%></a></h3><br/>
+				 <div id="eventDetails">				 	
+					<h4><%=h movie.description%></a></h4>
 				 </div>
 				<div class="eventBottom"> </div>
 				</div>
@@ -92,16 +93,14 @@
  </div>	
 </div>
 
-<%
-=begin
-%>
+
 <div class="digg_pagination">
   <div clas="page_info">
     <%= page_entries_info @movies %>
   </div>
+  <br>
   <%= will_paginate @movies, :container => false %>
 </div>
-<%
-=end
-%>		
+
+<br><br>
 <%= link_to 'New Movies', new_movie_path %>		

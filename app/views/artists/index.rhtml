@@ -1,23 +1,82 @@
-<h1>Listing Artists</h1>
-
-<div id="movies-list">
-<table class="table-class"  cellspacing="10" >	
-	
-<% for artist in @artists -%>
-   <tr valign="top" >	 
-     <td width="10%" align="center" class="table-class"><a href="/artists/<%= artist.id%>" class="show-link">
-	
-	<img width="80" height="80" id="profile_picture"class="artist-list-image" src="<%=h artist.image.url %>"	</a></td> 
-     <td width="70%" class="table-class">		
-		<span class="heading-title">Name:</span>
-		<span class="list-title"><%=h artist.name %> </span><br>
-
-		<span class="heading-title">Biography:</span>	<%=h artist.biography %><br/>		
- 	 </td>   
-   </tr>
+<div id="searchwrapper" class="searchwrapper">
+<% form_tag artists_path, :method => 'get' do%>
+  <div id="searchwrapper-border" class="searchwrapper-border">
+   <div id="searchwrapper-inner" class="searchwrapper-inner">
+    <%= text_field_with_auto_complete :artist, :name, { :size => 50 , :class => 'search_bar', :autocomplete => 'off'}, {:method => :get} %>
+    </div>
+   </div>
+ <%= submit_tag "Go", :class => 'searchsubmit', :name => nil %> 
 <% end %>
-</table>
 </div>
-<br />
+
+<div id="yui-main" style="">
+	<div style="margin:0px 0px 0px -180px;">
+	
+	<br/>
+	<div class="clearDiv"></div>	
+	<div id="body_main" class="yui-b sectioncontainer_brown" >
+		<div class="sectionCntrULFT"> </div>
+		<div class="sectionCntrURt"> </div>
+			<div class="clearDiv"></div>		
+		    <div id="MovieList" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+				<div class="rndSecULFT"> </div>
+				<div class="rndSecURt"> </div>  
+				<div class="sectionBG">
+					<h2 style="display: inline-block; margin-top: -8px;">Artists</h2>
+				</div>
+			 <% for artist in @artists -%>
+				<div class="sectionContainer">
+				  <div class="event_container" style="clear: both;">
+					<div style="float: left; font-size: 10px; font-weight: bold;">
+						<table><tbody>
+						<tr><td>
+						<a href="/artists/<%= artist.id%>" id="addMainPhotoLnk">
+						<img width="64" height="80" id="profile_picture" style="border-width: 0px;" src="<%=h artist.image.url %>"/>
+						</a>
+						</td>
+						<td>
+						<div id="eventDetails">
+								<h4><%=h artist.biography %></h4>
+						</div>						
+						</td>
+						</tr>
+						<tr>
+						<td>
+						 	<h3><a href="/artists/<%= artist.id%>"><%=h artist.name %></a></h3><br> 	
+							<h3>DOB:<%=h artist.dob.year%></h3>
+						</td>
+						</tr>
+						<tr>
+						<td>
+					   	<div class="list-rating">
+ 							<%= ratings_for artist , :static %>
+					    </div>
+						</td></tr>
+						</tbody></table>
+					</div>			
+
+				<div class="eventBottom"> </div>
+				</div>
+			 </div>	<!-- end event_container -->
+			<% end %>	
+				<div class="rndSecLLFT"> </div>
+				<div class="rndSecLRT"> </div>				
+	        </div>
+		 <div class="sectionCntrLLFT"> </div>
+		 <div class="sectionCntrLRT"> </div>	
+	</div>
+</div> 	
+ </div>	
+</div>
+
+<div class="digg_pagination">
+  <div clas="page_info">
+    <%= page_entries_info @artists %>
+  </div>
+  <br>
+  <%= will_paginate @artists, :container => false %>
+</div>
+
+<br><br>
 
 <%= link_to "New Artists" , :action => :new %>

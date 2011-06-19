@@ -1,5 +1,7 @@
 class Artist < ActiveRecord::Base
   ajaxful_rateable :stars => 5 , :cache_column => :rating
+  cattr_reader :per_page
+  @@per_page = 3
   
   has_many :awards,
            :class_name => "MovieAward"
@@ -13,12 +15,20 @@ class Artist < ActiveRecord::Base
            :foreign_key => "lyricist_id"
   has_and_belongs_to_many :movies,
                           :join_table => "movies_artists_roles"
-  validates_presence_of :name, :biography
-  validates_uniqueness_of :name
- # validates_format_of :image_url,
- #                     :with  => %r{\.(gif|png|jpg)$}i,
- #                     :message => "must be a url for a GID, PNG or JPG image"
+
                       
+
+def self.search(search, page)
+  if search
+   search_condition = ['name LIKE ?', "%#{search}%"]
+  else
+   search_condition = []
+  end
+   paginate :page => page,
+		     :conditions => search_condition,
+		     :order => 'name'  
+end
+
 has_many :movie_roles, :class_name => "MovieRole"
 
 has_many :movies, :through => :movie_roles do
@@ -38,17 +48,20 @@ attr_accessor :image_url
 has_many :roles, :through => :movie_roles
 
 
-
 has_attached_file :image, 
                     :url => "/images/:class/:id/:style_:basename.:extension",
                     :path => ":rails_root/public/images/:class/:id/:style_:basename.:extension"
-                    
+
 #validates_attachment_presence :image
 before_validation :image_from_url, :if => :image_url_provided?
  
 validates_attachment_content_type :image, 
                                    :content_type => ['image/jpeg','image/gif','image/png'],
                                    :message => "Must be a image of type png, jpeg or gif"
+
+validates_presence_of :name, :biography
+validates_uniqueness_of :name
+
 
 # helper method to get image from url
 private

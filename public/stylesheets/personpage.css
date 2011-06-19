@@ -164,8 +164,11 @@ html:first-child .sidebarDivInnerLRTIE8 { bottom: 0px; display: inline-block; po
 #timeline{ margin-top: 1px; }
 .event_container { width: 100%; padding: 2px 0; * padding: 2px 0;  margin-top: -1px; margin-bottom: 0px; }
 .event_containerSM { width: 90%; }
-.event_container h3 a { font: normal 18px "Trebuchet MS", Verdana, Arial, sans-serif; color:#566C11; text-decoration:underline; }
+.event_container h3 a { font: normal 18px "Trebuchet MS", Verdana, Arial, sans-serif; color:#566C11; text-decoration:none; }
 .event_container h3 a:hover { text-decoration:underline; }
+.event_container h3 { font: normal 15px "Trebuchet MS", Verdana, Arial, sans-serif; color:#566C11; }
+.event_container h4 { font: normal 13px "Trebuchet MS", Verdana, Arial, sans-serif; color:#566C11; }
+
 .subhead { font: normal 11px "Trebuchet MS", Verdana, Arial, sans-serif; color: #695E49; }
 .subheadPP { font: normal 11px "Trebuchet MS", Verdana, Arial, sans-serif; color: #695E49; font-size: 14px; font-weight: normal; }
 .calendar { float:left; background: #E7EBBC url(../../../trees/i/pt/calendar_bg2.gif) no-repeat center top; width: 61px; min-height: 42px; _padding: 0 0 5px 0; text-align:center; padding-top:12px; font: 12px "Trebuchet MS", Verdana, Arial, sans-serif; color:#695e49; margin-right:13px; }
@@ -496,7 +499,7 @@ em.noItemAdded { text-align: center; padding-bottom: 7px; _padding-bottom: 0px; 
 .list_rating{
  padding-bottom:5px;
  padding-top:2px ;
- padding-left:5px;	
+ padding-left:0px;	
 }
 
 div.movie_content_area {

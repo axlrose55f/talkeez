@@ -14,12 +14,15 @@ has_and_belongs_to_many :themes,
                         :join_table => "movies_themes"
 
 
-def self.search(search)
+def self.search(search, page)
   if search
-    find(:all,:conditions => ['name LIKE ?', "%#{search}%"])
+   search_condition = ['name LIKE ?', "%#{search}%"]
   else
-    find(:all)
+   search_condition = []
   end
+   paginate :page => page,
+		     :conditions => search_condition,
+		     :order => 'name'  
 end
 
 
