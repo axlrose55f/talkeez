@@ -59,7 +59,7 @@
 					<div style="float: left; font-size: 10px; font-weight: bold;">
 						<table><tbody><tr><td>
 						<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
-						<img width="64" height="80" id="profile_picture" style="border-width: 0px;" src="<%=h movie.image.url %>"/>
+						<img width="64" height="80" id="profile_picture" style="border-width: 0px;" src="<%=h movie.image.url(:thumb) %>"/>
 						</a>
 						</td></tr>
 						<tr>

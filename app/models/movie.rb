@@ -13,7 +13,6 @@ has_and_belongs_to_many :genres,
 has_and_belongs_to_many :themes,
                         :join_table => "movies_themes"
 
-
 def self.search(search, page)
   if search
    search_condition = ['name LIKE ?', "%#{search}%"]
@@ -70,15 +69,14 @@ has_many :cast, :class_name  => "MovieRole" do
                    movie_id])
   end
 end
-
-
-# has_many :cast, :class_name  => "MovieRole",
-#          :finder_sql => "select a.*, r.name as role_name, r.id as role_id from artists as a, roles as r, movies_artists_roles as mr where mr.artist_id = a.id and mr.role_id = r.id and mr.movie_id = 1"
-# 
-#          
+      
 has_attached_file :image, 
-                   :url => "/images/:class/:id/:style_:basename.:extension",
-                   :path => ":rails_root/public/images/:class/:id/:style_:basename.:extension"
+				  :styles => { :medium => {:geometry => "175x175", :format => 'png'}, 
+				               :thumb =>  {:geometry =>"80x80>" , :format => 'png'}
+				             },
+				  :default_url => "/images/:class/default/:style_missing_movie.png",           
+                  :url => "/images/:class/:id/:style_:id_:name.:extension",
+                  :path => ":rails_root/public/images/:class/:id/:style_:id_:name.:extension"
 
 before_validation :image_from_url, :if => :image_url_provided?
 

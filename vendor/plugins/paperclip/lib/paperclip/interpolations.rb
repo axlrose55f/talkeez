@@ -91,6 +91,11 @@ module Paperclip
       ("%09d" % attachment.instance.id).scan(/\d{3}/).join("/")
     end
 
+        # Returns the id of the instance.
+    def name attachment, style
+      attachment.instance.name.downcase.tr("\s",'_')
+    end
+    
     # Returns the pluralized form of the attachment name. e.g.
     # "avatars" for an attachment of :avatar
     def attachment attachment, style
