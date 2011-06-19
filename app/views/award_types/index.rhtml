@@ -6,7 +6,7 @@
 <tr valign="top" >
     <td width="10%" align="center" class="table-class">
     <a href="/award_types/<%= award.id%>" class="show-link">	
-	<img width="80" height="80" id="profile_picture"class="artist-list-image" src="<%=h award.image.url %>"></a>
+	<img width="80" height="80" id="profile_picture"class="artist-list-image" src="<%=h award.image.url(:thumb) %>"></a>
 	</td> 
     <td width="70%" class="table-class">		
 		<span class="heading-title">Award Name:</span>

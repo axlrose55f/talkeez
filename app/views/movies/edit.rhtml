@@ -11,6 +11,9 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </p>
+  <p>
+   <img width="64" height="80" id="profile_picture" style="border-width: 0px;" src="<%=h @movie.image.url(:thumb) %>"/>						
+  </p>
   <p>Select a file to upload :  <%= f.file_field :image%> </p>
   <br>
   <p>

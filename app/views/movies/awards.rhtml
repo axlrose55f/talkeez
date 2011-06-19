@@ -20,7 +20,7 @@
 		  <% for award in @awards %>
 			<tr>
 			<td>
-			<img width="15" height="45" id="profile_picture" style="border-width: 0px;" src="<%=h award.categories.award_type.image.url %>"/>
+			<img width="45" height="45" id="profile_picture" style="border-width: 0px;" src="<%=h award.categories.award_type.image.url(:thumb) %>"/>
 			</td>
 			<td><h3><% if award.year %> <%= award.year.year %> <% end %>:</h3></td>
 			<td>

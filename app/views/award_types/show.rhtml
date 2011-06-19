@@ -1,6 +1,6 @@
 <h1><i>Award Type</i> :&nbsp; <b><%=h @award.name%></b></h1>
 <br/>
-<img width="150" height="150" id="profile_picture"class="artist-list-image" src="<%=h @award.image.url %>">
+<img width="150" height="150" id="profile_picture"class="artist-list-image" src="<%=h @award.image.url(:medium) %>">
 <br/>
 <b>Description:</b><br/> <%=h @award.description %>
 <br/>
