@@ -1,6 +1,6 @@
 <% award_type = @award_cat.award_type %>
 <h1><i>Award Type</i> :&nbsp; <b><a href="/award_types/<%= award_type.id %>" ><%=h award_type.name%></a></b></h1>
-<br/><%= image_tag(award_type.image.url, :size => "50x150", :alt => award_type.name) %>
+<br/><%= image_tag(award_type.image.url(:medium), :size => "150x150", :alt => award_type.name) %>
 <br>
 <br>
 <h1><i>Award Category Name</i> :&nbsp; <b><%=h @award_cat.name%></b></h1>

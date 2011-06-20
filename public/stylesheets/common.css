@@ -1,6 +1,16 @@
 #content {border: 1px solid #cecfc9; background: #FFFFFF;}
 .photo_container {background: #FFFFFF; padding: 5px; border: 1px solid #999999;}
 
+
+.flashNotice {
+    font: bold 11px Verdana, Arial, Helvetica, sans-serif; 
+	color: #566C11; 
+}
+
+.flashError {
+    font: bold 11px Verdana, Arial, Helvetica, sans-serif; 
+	color: #695E49; 
+}
 .g_btn4, .g_btnSmall4 
 {
 	background: url(../../../trees/i/pt/btn4.gif);

@@ -3,6 +3,7 @@ class MoviesController < ApplicationController
   layout :determine_layout
   before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy, :updateartists, :addCastDetail, :deleteCastDetail, :updateawards, :deleteAward, :addAward, :deleteGenre, :addGenre, :updategenres  ]
   auto_complete_for :movie, :name
+  filter_access_to :deleteCastDetail
   
   # GET /movies
   # GET /movies.xml

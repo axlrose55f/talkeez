@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
   # select the lay out to use for this controller
-  layout :determine_layout
+  filter_resource_access
   before_filter :require_user, :only => [:show, :edit, :update]
+  layout :determine_layout
   
   # GET /users
    # GET /users.xml
    def index
      @users = User.find(:all)
-
      respond_to do |format|
        format.html # index.html.erb
        format.xml  { render :xml => @users }
@@ -25,13 +25,13 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = current_user
+    @user = User.find(params[:id], :include => [{:roles => :role }])
   end
   
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = current_user
+    @user = User.find(params[:id], :include => [{:roles => :role }])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -43,8 +43,10 @@ class UsersController < ApplicationController
   # POST /user.xml
   def create
     @user = User.new(params[:user])
-      if @user.save 
+    if @user.save 
         # flash[:notice] = 'Successfully registered user!'
+        # seed it with User role.
+         UserRole.create(:user => @user, :role => UserRoleTypes.find(2))
          redirect_to(@user)        
        else
         render :action => "new"               
@@ -101,6 +103,15 @@ class UsersController < ApplicationController
     end
   end
   
+   def artists
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # reviews.html.erb
+      format.xml  { render :xml => @user }
+    end
+  end
+  
   def friends
     @user = User.find(params[:id])
 
@@ -108,6 +119,27 @@ class UsersController < ApplicationController
       format.html # reviews.html.erb
       format.xml  { render :xml => @user }
     end
+  end
+  
+  def addRole
+    @user = User.find(params[:id])
+    @role = UserRoleTypes.find(params[:user][:roles])
+    user_role = UserRole.new(:user => @user, :role => @role)
+    if user_role.save
+       redirect_to(@user) 
+    else
+       render :action => :edit
+    end     
+  end
+  
+  def deleteRole
+    @user = User.find(params[:id])
+    @role = UserRole.find(params[:role_id])
+    if @role.destroy
+      redirect_to(@user)
+    else  
+      render :action => :edit
+    end         
   end
   
     # Get the layout to use 

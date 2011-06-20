@@ -1,5 +1,5 @@
 <!-- Content Menu -->
-<%= render(:partial => "contentMenu" , :object => @user, :locals => { :tab => "friends"} )%>
+<%= render(:partial => "contentMenu" , :object => @user, :locals => { :tab => "artists"} )%>
 
 <div id="yui-main" style="">
  <div id="person_header_container" class="yui-b container_green">
@@ -9,8 +9,8 @@
 	<div class="persHeaderULFT"> </div>
 	<div class="persHeaderURt"> </div>
 	<div id="movie_cast" class="">
-		<h2><%=h @user.username%>'s  friends</h2><br>
-	     <h3> No friends yet </h3>
+		<h2><%=h @user.username%>'s  fav artists</h2><br>
+	     <h3> No fav artists yet </h3>
 	<br/>
 	</div>
 	<div class="clearDiv"></div>

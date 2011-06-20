@@ -57,17 +57,17 @@
 	                  <a href="/charts">Charts</a>
 	              </li>		   
 	              -->
+	              <% if permitted_to? :manage, :users %>
 		          <li id="peopleNav">
 	                  <a href="/users">People</a>
 	              </li>
+	              <% end %>
 	    
 	          </ul>     
 	         </div><!-- end nav inner-->
 		</div><!-- end nav -->
 	</div><!-- end header-->
-	<p style="color: green"><%= flash[:notice] %></p>
-	<h3 id="contentTitle"> </h3>
-	<!--
+<!--
 	<div id="contentSearch">
 		<input id="typeAheadMovieText" class="autoSuggestStart" type="text" style="width: 150px;" 	maxlength="256" value="Search a movies" autocomplete="off"/>
 	</div>
@@ -97,7 +97,7 @@
 
 
 		<% if current_user %>
-		  <%= link_to "Edit Profile" , edit_user_path(:current) %> |
+		  <%= link_to "Profile" , user_path(current_user.id) %> |
 		  <%= link_to "Logout" , logout_path %>
 		<% else %>
 		<%= link_to "Register" , new_user_path %> |
@@ -106,6 +106,8 @@
 	</div>
 
     <!-- Adding non working links here -->
+<center><span class="flashNotice"><%= flash[:notice] %></span></center> 
+<center><span class="flashError"><%= flash[:error] %></span></center> 
 <br/>
 </div>	<!-- End Main wrapper -->	
 

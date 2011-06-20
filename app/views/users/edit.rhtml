@@ -29,7 +29,43 @@
     <%= f.submit "Update" %>
   </p>
 <% end %>
+<hr>
+<% if permitted_to? :addRole, @user %>
 
+<h1><b>Current User Roles</b></h1>
+
+<div id="user-roles">
+<table class="table-class"  cellspacing="2" >
+<% @roles = @user.roles %>
+<% for r in @roles %>  
+<tr>
+   <td> #&nbsp;&nbsp; </td>
+   <td><%= r.role.name %></td> 
+   <% link = '/users/'+ @user.id.to_s + '/deleteRole?role_id='+ r.id.to_s %>
+   <td>&nbsp;&nbsp;&nbsp;[ <%= link_to 'Delete', link , :confirm => 'Are you sure?', :method => :delete %> ]</td>  
+  </tr>
+<% end %>
+</table>
+
+<br>
+<hr>
+<h1>Add new User Role</h1>
+
+<% form_for(@user, :url => {:action => :addRole, :id => @user.id}) do |f| %>
+  <%= f.error_messages %>
+ <p>
+	<%= f.label :user_role_types %>:<br/>
+	<%=f.collection_select(:roles, UserRoleTypes.all, :id, :name) 	%>
+ </p>
+<br/>
+
+
+<p>
+    <%= f.submit "Add" %>
+  </p>
+<% end %>
+
+<% end %>
 
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>

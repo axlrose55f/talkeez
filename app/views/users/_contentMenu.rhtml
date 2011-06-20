@@ -7,16 +7,21 @@
 			<li <% if tab == "overview" %> class="activeTab" <% end %> >
 				<a href="/users/<%= @user.id%>">Overview</a>
 			</li>
-			<li <% if tab == "filmography" %> class="activeTab" <% end %> >
+			<li <% if tab == "movies" %> class="activeTab" <% end %> >
 				<a href="/users/<%= @user.id%>/movies">Fav Movies</a>
 			</li>
+			<li <% if tab == "artists" %> class="activeTab" <% end %> >
+				<a href="/users/<%= @user.id%>/artists">Fav Artists</a>
+			</li>
+			<!--
 			<li <% if tab == "videos" %> class="activeTab" <% end %> >
 			   <a href="/users/<%= @user.id%>/videos">Fav Videos</a>
 		    </li>
+		    -->
 			<li <% if tab == "reviews" %> class="activeTab" <% end %> >
 				<a href="/users/<%= @user.id%>/reviews">Reviews</a>
 			</li>
-			<li <% if tab == "awards" %> class="activeTab" <% end %> >
+			<li <% if tab == "friends" %> class="activeTab" <% end %> >
 				<a href="/users/<%= @user.id%>/friends">Friends</a>
 			</li>
 	

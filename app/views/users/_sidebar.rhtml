@@ -17,8 +17,12 @@
 			      <div id="details_value">  DOB </div>			     
 			      <div id="details_heading">Email</div>
 			      <div id="details_value"><%=  @user.email %></div>
-			      <div id="details_heading">Country</div>
-			      <div id="details_value">country </div>
+			      <div id="details_heading">Roles</div>
+			      <div id="details_value"> 
+			       <% for r in @user.roles %>
+					  [<%= r.role.name %>]
+				   <% end %>
+			      </div>
 			      <div id="details_end"></div> 
 				</div>
 		    </div>

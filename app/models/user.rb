@@ -1,11 +1,20 @@
 class User < ActiveRecord::Base
   acts_as_authentic
   ajaxful_rater
+  has_many :roles, 
+           :class_name => "UserRole"
   
   def name
     "#{self[:username]}"
   end
   
+  def role_symbols
+    roles.map do |r|
+      r.role.name.underscore.to_sym
+    end
+  end
+  
+    
   has_attached_file :image, 
  				    :styles => { :medium => {:geometry => "175x175", :format => 'png'}, 
 				  				 :thumb =>  {:geometry =>"80x80>" , :format => 'png'}
