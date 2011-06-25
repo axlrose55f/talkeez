@@ -3,8 +3,12 @@
 		<div class="sidebarDivULFT sidebarDivULFTIE8"> </div>
 		<div class="sidebarDivURt"> </div>
   	    <div class="artistPictureBox">
+  	    <% if current_facebook_user %>
+  	    <%= fb_connect_async_js %>
+    	 <%=    fb_profile_pic(current_facebook_user, :width => "150", :height => "150", :size => :normal) %>
+  	  <% else %>
 	  		<img width="150" height="150" id="artist_picture" src="<%=h @user.image.url %>"/>
-
+	  <% end %>
 		</div>
 		<br/>	
   		    <div class="clearDiv"></div>

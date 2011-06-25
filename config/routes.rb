@@ -46,6 +46,8 @@ ActionController::Routing::Routes.draw do |map|
     
   map.login "login", :controller => "user_sessions", :action => "new"
   map.logout "logout", :controller => "user_sessions", :action => "destroy"
+  map.fblogin "fblogin", :controller => "user_sessions", :action => "create", :requirements => { :method => :post} 
+  
      
   # map.open_id_complete "session", :controller => "user_sessions", 
   #                                 :action => "create", 

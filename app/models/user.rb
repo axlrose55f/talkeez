@@ -14,6 +14,16 @@ class User < ActiveRecord::Base
     end
   end
   
+  def before_connect(facebook_session)
+   # self.first_name = facebook_session.first_name
+   # self.last_name = facebook_session.last_name
+    self.email = facebook_session.email
+    self.username = "#{facebook_session.first_name}.#{facebook_session.last_name}"
+    self.password = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{self.username}--")[0,6]
+    self.password_confirmation = self.password
+    #self.active = true
+  end
+  
     
   has_attached_file :image, 
  				    :styles => { :medium => {:geometry => "175x175", :format => 'png'}, 
