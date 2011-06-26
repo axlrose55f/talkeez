@@ -80,44 +80,7 @@
 <%
 =begin %>
 
-<%= authlogic_facebook_login_button("login", {:controller => 'user_sessions',
-											  :perms => 'email,user_birthday'})  %>
-
-	<%= fb_connect_async_js %>
-		
-       <% if current_facebook_user %>
-			<%= "Hello #{fb_name(current_facebook_user, :useyou => false)}!"  %>
-			 <%= fb_logout_link("Logout of fb", request.url) %><br />
-			<% else
-			   # you must explicitly request permissions for facebook user fields.
-			   # here we instruct facebook to ask the user for permission for our website
-			   # to access the user's facebook email and birthday
-   			%>
-		  <%= fb_login_and_redirect('http://talkeez2.com:3000/', :perms => 'email,user_birthday') %>
-		<% end %>		
-
-
-<% if current_facebook_user %>
-<%= "Hello #{fb_name(current_facebook_user, :useyou => false)}!"  %>
-<% else %>
-<%= authlogic_facebook_login_button("login", {:controller => 'fblogin',
-											  :perms => 'email,user_birthday',
-											 #'show-faces' => 'true'
-											  })  %>
-<% end %>	
-
-<%
-=end
-%>
-
-
-
-
-	
-		<!-- end facebook -->
-
-
-		<% if current_user %>
+	<% if current_user %>
 		  <%= link_to "Profile" , user_path(current_user.id) %> |
 		
 		  <% if current_facebook_user %>
@@ -133,6 +96,18 @@
 											  })  %>
 		<%= link_to "Register" , new_user_path %> |
 		<%= link_to "Login" , login_path %>
+		<% end %>
+
+<%
+=end
+%>
+		<!-- end facebook -->
+		<% if current_user %>
+		   <%= link_to "Profile" , user_path(current_user.id) %> |
+		   <%= link_to "Logout" , logout_path %>
+		 <% else %>
+		  <%= link_to "Register" , new_user_path %> |
+		  <%= link_to "Login" , login_path %>
 		<% end %>
 	</div>
 
