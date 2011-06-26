@@ -8,10 +8,65 @@
 	<div class="ylwBGURt"> </div>
 	<div class="persHeaderULFT"> </div>
 	<div class="persHeaderURt"> </div>
-	<div id="movie_cast" class="">
-		<h2>Reviews for  <%=h @movie.name%></h2><br>
-	     <h3> No reviews yet </h3>
-	<br/>
+	<div id="review_list_back" class="">
+	  <h2>Reviews for  <%=h @movie.name%></h2><br>
+	  <% if current_user && !@movie.reviewed_by?(current_user)%>
+  	    <div class="addPlusButtonDiv" style="float:right;">
+  	     <a href="/movies/<%= @movie.id%>/editreviews" id="addReviewLnk" class="gbtn sml-gray" style="background-position: 0% 0%;float:right; ">
+		  <em style="background-position: 100% 0%; ">
+           <span class="flat_icon add_white_small"></span>Add a review
+	      </em>
+	     </a>
+         </div>
+       <% end %>
+		<% @revs = @movie.reviews %>
+		 <% if @revs.empty? %>		
+	     <h3> No reviews yet </h3><br>
+	     <% else %>	     
+       <!-- Start Review container -->
+    <div id="commentsDiv" class="commentsDiv">
+     <div class="commentsDetCont">
+      <div class="rptCommentRow">
+		<table width="100%" cellpadding="0" cellspacing="0" class="commentblock" id="roInst0">
+		  <tbody>
+		   <!-- Loop Review  -->
+		   <% for review in @revs %>
+			<tr onmouseover="javascript:expandCollapse('commentTools<%=review.id %>');" onmouseout="javascript:expandCollapse('commentTools<%=review.id %>');"><td>
+			<a name="bc-193360222"></a>
+			<h3><%= review.title %></h3>
+			<div class="comment">
+			  <div class="addedByCont">
+				<div class="profileItem"></div>
+				<div class="profileItem">
+				   <a href="/users/<%= review.user.id%>/" class="uLink">
+				    <img src="<%= review.user.image.url %>" width="15" height="20">
+					<span id="ul_174408a5"><%= review.user.username %></span>
+				   </a>added this on <%= review.created_at.strftime("%a , %B %d %Y").to_s %>
+				   </div>
+				<div class="profileItem"></div>
+				</div>
+			<span class="commentDetail"><%= review.text %></span>
+			 <div id="commentTools<%=review.id %>" class="commentTools" style="display: none; ">
+			  <% if current_user && current_user.id == review.user.id  %>
+			  <a id="" class="editLnk" href="/movies/<%= @movie.id%>/editreviews?rev=<%= review.id%>">Edit Review</a>			  
+			  <% end %>
+			<div class="clearDiv"></div>
+		   </div>
+		  </div>
+		 </td></tr>
+		  <% end %>
+		   <!-- End Loop Review  -->
+		 </tbody>
+		</table>
+		</div>
+	   </div>
+	  </div>	  
+      <% end %>      
+    <!-- End Review container -->
+    
+    <!-- Add Review container -->
+
+	<!-- End Add Review -->
 	</div>
 	<div class="clearDiv"></div>
 	<div class="persHeaderLLFT"> </div>

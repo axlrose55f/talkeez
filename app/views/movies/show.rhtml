@@ -97,7 +97,8 @@
 				   </td>
 			      <% end%>
 				</tr>
-				</tbody></table>			
+				</tbody></table>
+				<br>
 			   </div>
 			</div>
 			
@@ -106,15 +107,39 @@
 		</div>
 		<div class="clearDiv"></div>		
 	    <div id="Reviews" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+	     <% @revs = @movie.reviews %>
 			<div class="rndSecULFT"> </div>
 			<div class="rndSecURt"> </div>  
 			<div class="sectionBG">
-				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Reviews</h2>
-				
+				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Reviews (<%=@revs.size.to_s%>)</h2>
 			</div>
 			<div class="sectionContainer">
-			   <div id="reviews1" class="">
-				<em class="noItemAdded">No Reviews has been added.</em>
+			   <div id="reviews" class="commentsSection">	  
+
+			   <% if @revs.empty? %> 
+			    <em class="noItemAdded">No Reviews has been added.</em>
+			   <% else %> 
+			   <ul id="commentRow" class="firstItem">
+				 <% for review in @revs %>
+				 <li class="comment title">
+				  <a href="/movies/<%= @movie.id%>/reviews" id="viewCommentLink">
+				  <em class="flat_icon">&nbsp;</em>
+				  <span><%=h review.title %></span></a>
+				  </li>
+				  <li class="addedBy">
+				  <div class="addedByCont">
+				    <div class="profileItem">
+					 <a href=" " class="uLink">
+					  <img src="<%=h review.user.image.url %>" width="15" height="20"> 
+					  <span id="ul_1c767fcd"><%=h review.user.username %></span>
+					  </a>added this on <%=h review.created_at.strftime("%a , %B %d %Y").to_s %>
+					 </div>
+				   </div>
+				  </li>
+				  <% end %>
+				</ul>
+			   <% end %> 
+               <br>
 			   </div>
 			</div>
 			<div class="rndSecLLFT"> </div>
@@ -150,6 +175,7 @@
 				<% else %>
 				<em class="noItemAdded">No Awards has been added.</em>
 				<% end %>
+				<br>
 			   </div>
 			</div>
 			<div class="rndSecLLFT"> </div>
@@ -167,6 +193,7 @@
 			   <div id="Videos1" class="">
 				<em class="noItemAdded">No Videos has been added.</em>
 			   </div>
+			   <br>
 			</div>
 			<div class="rndSecLLFT"> </div>
 			<div class="rndSecLRT"> </div>

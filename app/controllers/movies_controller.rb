@@ -243,6 +243,33 @@ class MoviesController < ApplicationController
     end         
   end
   
+  ###### Edit Reviews #####
+  def editreviews
+    @movie = Movie.find(params[:id])    
+    @review = if(params[:rev]) 
+       Review.find(params[:rev]) 
+     else
+       Review.new
+     end
+  end
+  
+  def addReview
+    @movie = Movie.find(params[:id])
+    if(params[:movie][:review_id]) 
+      review = Review.find(params[:movie][:review_id])
+      review.title = params[:movie][:review_title]
+      review.text = params[:movie][:review_text]      
+      review.save
+    else 
+        @movie.review(params[:movie][:review_title],params[:movie][:review_text], current_user)
+    end
+    respond_to do |format|
+     format.html { redirect_to(:action => 'reviews' ) }
+     format.xml  { head :ok }
+    end     
+  end
+  
+ 
   #### Handle Awards ####
   
  # PUT /movies/1/addAward
@@ -325,11 +352,12 @@ private
     total = @movie.total_rates
     return 0 if ! (total > 0) 
     num_rates_above = 0
-    for r in @movie.rates
+    rates = @movie.rates
+    for r in rates
      if r.stars > min && r.stars < max 
       num_rates_above = num_rates_above + 1
      end
     end 
-    total_percentage = (100 * num_rates_above)/ @movie.total_rates
+    total_percentage = (100 * num_rates_above)/ total
    end 
 end

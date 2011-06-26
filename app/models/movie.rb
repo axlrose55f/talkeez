@@ -3,7 +3,11 @@ ajaxful_rateable :stars => 5 , :cache_column => :rating
 cattr_reader :per_page
 @@per_page = 3
 
+acts_as_reviewable
+
 attr_accessor :image_url
+attr_accessor :review_title
+attr_accessor :review_text
 
 has_many   :trivia
 has_many :awards,

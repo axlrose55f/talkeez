@@ -1,0 +1,81 @@
+<!-- Content Menu -->
+<%= render(:partial => "contentMenu" , :object => @movie, :locals => { :tab => "reviews"} )%>
+
+<div id="yui-main" style="">
+ <div id="person_header_container" class="yui-b container_green">
+
+	<div class="ylwBGULFT"> </div>
+	<div class="ylwBGURt"> </div>
+	<div class="persHeaderULFT"> </div>
+	<div class="persHeaderURt"> </div>
+	<div id="review_background" class="">
+	<% form_for( @movie, :url => {:action => :addReview, :id => @movie.id}) do |f| %>	
+	
+   <div id="commentsDiv" class="commentsDiv">
+     <div class="commentsDetCont">
+  	 <!-- Start Comment container -->
+	
+	<!-- Add new comment section -->
+	<div class="addNewCommentSection">
+	  <div class="tl"></div>
+	  <div class="tr"></div>
+	  <div class="addNewCommentInner">
+	  <h4 class="addNewCommentTitle"><a id="addCommentAnchor"></a>Add a new Review</h4>		
+		Add a new review below for <%= @movie.name %>.
+		  <div id="errorBox" class="g_error" style="display:none;margin:7px 0;">
+			The following errors occurred:
+				<div id="errorMsgBody">
+					<ul id="errorList">
+					  <li><%= f.error_messages %></li>
+					</ul>
+				</div>
+		  </div>
+		  <div class="inputSection">
+			<ul>
+			 <li class="labelLi"><span class="inputLabel">Title</span></li>
+			 <li id="subjectCell">
+				<div id="subjectError" style="display:none">
+			  	   <i>Please enter the title for the Review</i><br>
+				</div>
+				<%= f.text_field :review_title , :value => @review.title ,:class=> "inputBox",  :size => "88", :style => "width:99%;" %>
+			  </li>
+			 <li class="labelLi"><span class="inputLabel">Comment</span><span class="maxChars">&nbsp;(Maximum of 5000 characters)</span></li>
+			 <li id="commentCell">
+			   <div id="commentError" style="display:none">
+				  <i>Please enter your Review</i><br>
+				</div>
+				<%= f.text_area :review_text , :value => @review.text, :class=> "inputBox", :rows => "10", :cols => "66", :style => "width:99%;" %>
+			 </li>
+   			 <li class="addButtonLi">
+				<div class="padding4ButtonDiv">
+					<a class="gbtn med-orange2">
+					  <% if @review.title.blank? %>					  				  
+  					  <em> <%= f.submit "Add Review" , :class => "submit_button" %> </em>
+  					  <%else %>
+  					  <%= f.hidden_field :review_id , :value => @review.id %>
+  					  <em> <%= f.submit "Update Review" , :class => "submit_button" %> </em>  					  
+  					  <% end %>
+					</a>
+				</div>
+			 </li>
+		    </ul>
+		   </div> <!-- 	inputSection -->
+   	      </div><!-- 	addNewCommentInner -->
+  		  <div class="bl"></div>
+		  <div class="br"></div>
+		</div>	 <!-- 	addNewCommentSection -->	
+      </div> <!-- 	commentsDetCont -->
+     </div> <!-- 	commentsDiv -->
+     <% end %>
+	</div>
+	<div class="clearDiv"></div>
+	<div class="persHeaderLLFT"> </div>
+	<div class="persHeaderLRT"> </div>
+	<div class="ylwBGLLFT"> </div>
+	<div class="ylwBGLRT"> </div> 
+  </div> 
+</div>
+  
+
+<!-- Side Bar --> 
+<%= render(:partial => "sidebar", :object => @movie )%>
