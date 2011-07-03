@@ -57,14 +57,19 @@
 	    <div id="movie_plot_summary" style="height:46%;">	 
 		  <h3>Plot Summary:</h3>
 		  <div id="movie_description" >
-		    <%=h @movie.description %> 
+		    <%=h  @movie.description[0..500] unless (@movie.description == nil || @movie.description.length < 500)%> 
+		    <%=h  "..." unless (@movie.description == nil || @movie.description.length < 500)%> 
 		  </div>
+		  <div id="movie_description_full" style="display:none;">
+		    <%=h  @movie.description %> 
+		  </div>
+
 	    </div>
-   	    
-		<div id="movie_desc_readMore"><% if (@movie.description != nil) && @movie.description.length > 900 %>
-		<a href="#" onclick="Effect.BlindDown('movie_description', { scaleFrom: 50 });return false;">Read More</a> 
+		 <div id="movie_desc_readMore"><% if (@movie.description != nil) && @movie.description.length > 500 %>
+	     <a href="" onclick="$('movie_description').hide();Effect.BlindDown('movie_description_full');$('movie_desc_readMore').hide();return false;">Read More</a> 
 		<% end  %>
 		</div>
+		<br/><br/>
 	</div>
 	<div class="clearDiv"></div>
 	<div class="persHeaderLLFT"> </div>

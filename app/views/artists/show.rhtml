@@ -12,11 +12,16 @@
 		<h1><%=h @artist.name%></h1>
 
 		<h3>Plot Summary:</h3>
-		<div id="album_description" style="height:40%;">
-		<%=h @artist.biography %> 
+		<div id="artist_description" style="height:40%;">
+		<%=h  @artist.biography[0..500] unless (@artist.biography == nil || @artist.biography.length < 500)%> 
 		</div>
-		<div id="album_desc_readMore"><% if (@artist.biography != nil) && @artist.biography.length > 900 %>
-		<a href="#" onclick="Effect.BlindDown('album_description', { scaleFrom: 50 });return false;">Read More</a> 
+		<div id="artist_description_full" style="display:none;">
+		 <div>
+		 <%=h @artist.biography %> 
+		 </div>
+		</div>
+		<div id="artist_desc_readMore"><% if (@artist.biography != nil) && @artist.biography.length > 500 %>
+		 ... <a href="" onclick="$('artist_description').hide();Effect.SlideDown('artist_description_full');$('artist_desc_readMore').hide(); return false;">Read More</a> 
 		<% end  %>
 		</div>
 		<br/><br/>
