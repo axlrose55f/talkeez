@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.xml
   def index
-   search_param = params[:movie]? params[:movie][:name]: ""  
+   search_param = params[:movie]? params[:movie][:name]: nil  
    @movies = Movie.search(search_param, params[:page])
   end
   
