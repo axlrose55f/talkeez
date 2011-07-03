@@ -22,11 +22,11 @@ def self.search(search, page)
   if search
    search_condition = ['name LIKE ?', "%#{search}%"]
   else
-   search_condition = []
+   search_condition = ['rating > 3']
   end
    paginate :page => page,
 		     :conditions => search_condition,
-		     :order => 'name'  
+		     :order => 'rating DESC'  
 end
 
 has_many :movie_roles, :class_name => "MovieRole"

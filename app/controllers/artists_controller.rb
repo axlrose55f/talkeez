@@ -7,7 +7,7 @@ class ArtistsController < ApplicationController
   # GET /artists
   # GET /artists.xml
   def index
-   search_param = params[:artist]? params[:artist][:name]: ""  
+   search_param = params[:artist]? params[:artist][:name]: nil 
    @artists = Artist.search(search_param, params[:page])
   end
 
