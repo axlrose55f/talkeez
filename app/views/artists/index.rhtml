@@ -43,7 +43,7 @@
 						<tr>
 						<td>
 						 	<h3><a href="/artists/<%= artist.id%>"><%=h artist.name %></a></h3><br> 	
-							<h3>DOB:<%=h artist.dob.year%></h3>
+							<h3>DOB:<%=h artist.dob.year unless (artist.dob == nil) %></h3>
 						</td>
 						</tr>
 						<tr>

@@ -31,7 +31,7 @@
 			<div class="innerBox">
 				<div id="minitree">
 			      <div id="details_heading">Height</div>			     
-			      <div id="details_value"><%=h "#{(@artist.height)/12}\' #{(@artist.height)% 12}\" " %></div>
+			      <div id="details_value"><%=h ("#{(@artist.height)/12}\' #{(@artist.height)% 12}\" ") unless @artist.height == nil  %></div>
 			      <div id="details_heading">Weight</div>				  
 				  <div id="details_value"><%=h @artist.weight %></div>
 			    		

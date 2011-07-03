@@ -61,7 +61,7 @@
 		  </div>
 	    </div>
    	    
-		<div id="movie_desc_readMore"><% if @movie.description.length > 900 %>
+		<div id="movie_desc_readMore"><% if (@movie.description != nil) && @movie.description.length > 900 %>
 		<a href="#" onclick="Effect.BlindDown('movie_description', { scaleFrom: 50 });return false;">Read More</a> 
 		<% end  %>
 		</div>

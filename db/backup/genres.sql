@@ -53,7 +53,7 @@ INSERT INTO `genres` (`id`, `name`, `description`) VALUES
 (14,'Foreign','This is Foreign'),
 (15,'Game','This is Game'),
 (16,'Health','This is Health'),
-(17,'History','This is History'),
+(17,'Historical','This is Historical'),
 (18,'Horror','This is Horror'),
 (19,'Music','This is Music'),
 (20,'Musical','This is Musical'),
@@ -68,11 +68,13 @@ INSERT INTO `genres` (`id`, `name`, `description`) VALUES
 (29,'Social','This is Social'),
 (30,'Special','This is Special'),
 (31,'Sports','This is Sports'),
-(32,'Sports','This is Sports'),
+(32,'Suspense','This is Suspense'),
 (33,'Talk','This is Talk'),
 (34,'Thriller','This is Thriller'),
 (35,'War','This is War'),
-(36,'Western','This is Western');
+(36,'Western','This is Western'),
+(37,'Epic','This is Epic'),
+(38,'Cult','This is Cult');
 
 /*!40000 ALTER TABLE `genres` ENABLE KEYS */;
 UNLOCK TABLES;

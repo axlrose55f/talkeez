@@ -15,7 +15,7 @@
 		<div id="album_description" style="height:40%;">
 		<%=h @artist.biography %> 
 		</div>
-		<div id="album_desc_readMore"><% if @artist.biography.length > 900 %>
+		<div id="album_desc_readMore"><% if (@artist.biography != nil) && @artist.biography.length > 900 %>
 		<a href="#" onclick="Effect.BlindDown('album_description', { scaleFrom: 50 });return false;">Read More</a> 
 		<% end  %>
 		</div>
