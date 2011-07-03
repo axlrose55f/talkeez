@@ -41,7 +41,7 @@
 			</div>
 			<div class="sectionContainer">
 			   <div id="cast1" class="">
-			   <% @movies = @artist.movies %>
+			   <% @movies = @artist.movies.first(10) %>
 			   <% if ! @movies.empty? %>
 			   <table><tbody>
 			     <tr>

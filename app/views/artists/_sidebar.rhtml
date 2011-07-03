@@ -15,7 +15,7 @@
 			<div class="innerBox">
 				<div id="minitree">				  
 			      <div id="details_heading">Date of birth</div>
-			      <div id="details_value"><%=  @artist.dob %></div>			     
+			      <div id="details_value"><%=  @artist.dob.to_formatted_s(:long) unless @artist.dob == nil %></div>			     
 		
 			      <div id="details_heading">Birthplace</div>
 			      <div id="details_value"><%=  @artist.birth_place %></div>

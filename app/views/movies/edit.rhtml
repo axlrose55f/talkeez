@@ -59,6 +59,8 @@
     <%= f.submit "Update" %>
   </p>
 <% end %>
-
+<% if permitted_to? :delete, @movie %>
+<%= link_to 'Delete', @movie, :confirm => 'Are you sure?', :method => :delete %>
+<% end %> |
 <%= link_to 'Show', @movie %> |
 <%= link_to 'Back', movies_path %>

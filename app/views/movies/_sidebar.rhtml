@@ -57,8 +57,9 @@
 				<div id="minitree">
 			      <div id="details_heading">Color</div>
 			      <div id="details_value"><%=  @movie.color  %></div>
-			      <div id="details_heading">Studio</div>
-			      <div id="details_value"><%= @movie.studio %></div>
+			      <div id="details_heading">Banner</div>
+			      <% banner = @movie.artists.banner.first %>
+			      <div id="details_value"><%= banner.name unless banner == nil %></div>
 			      <div id="details_heading">Country</div>
 			      <div id="details_value"><%= @movie.country %></div>
 			      <div id="details_heading">Certification</div>

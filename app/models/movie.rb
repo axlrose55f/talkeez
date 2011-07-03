@@ -34,19 +34,40 @@ has_many :movie_roles, :class_name => "MovieRole"
 
 has_many :artists, :through => :movie_roles do
   def as(role)
-    find :all, :conditions => ['role_id = ?', role]
+    role_id = Role.find(:first, :conditions => [ "name = ?", role], :select => "id")
+    find :all, :conditions => ['role_id = ?', role_id]
+  end
+  def role(role_id)
+    find :all, :conditions => ['role_id in (?)', role_id]
+  end
+  def cast_type(type)
+    casts = Role.find(:all, :conditions => [ "role_type = ?", type], :select => "id")
+    find :all, :conditions => ['role_id in (?)', casts]
+  end
+  
+  def cast
+    cast_type('cast')
+  end
+  def crew
+    cast_type('crew')
   end  
-  def heroes
-    find :all, :conditions => ['role_id in (1,2)']
+  def artist
+    as('artist')
+  end  
+  def lead
+    role([1,2])
   end
   def heroines
-    find :all, :conditions => ['role_id = 2']
+    role(2)
   end
   def director
-    find :all, :conditions => ['role_id = 3']
+    role(68)
   end
   def producer
-    find :all, :conditions => ['role_id = 4']
+    role(102)
+  end
+  def banner
+    role(41)
   end
 end
 
@@ -62,17 +83,17 @@ end
 has_many :cast, :class_name  => "MovieRole" do
   def cast_list(movie_id)
      find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
-                   "from artists as a, roles as r, movies_artists_roles as mr " +
-                   " where mr.artist_id = a.id and mr.role_id = r.id and r.role_type = 'cast' and mr.movie_id = ?",
-                   movie_id])
+                    "from artists as a, roles as r, movies_artists_roles as mr " +                   
+                    " where mr.artist_id = a.id and mr.role_id = r.id and r.role_type = 'cast' and mr.movie_id = ?", movie_id])
   end
   def crew_list(movie_id)
      find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
-                   "from artists as a, roles as r, movies_artists_roles as mr " +
-                   " where mr.artist_id = a.id and mr.role_id = r.id and r.role_type = 'crew' and mr.movie_id = ?",
-                   movie_id])
+                   "from artists as a, roles as r, movies_artists_roles as mr " +                   
+                   " where mr.artist_id = a.id and mr.role_id = r.id and r.role_type = 'crew' and mr.movie_id = ?", movie_id])
   end
 end
+
+
       
 has_attached_file :image, 
 				  :styles => { :medium => {:geometry => "175x175", :format => 'png'}, 
