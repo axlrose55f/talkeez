@@ -2,13 +2,20 @@ class MoviesController < ApplicationController
   # select the lay out to use for this controller
   layout :determine_layout
   before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy, :updateartists, :addCastDetail, :deleteCastDetail, :updateawards, :deleteAward, :addAward, :deleteGenre, :addGenre, :updategenres  ]
-  auto_complete_for :movie, :name
   
   # GET /movies
-  # GET /movies.xml
+  # GET /movies.js
   def index
-   search_param = params[:movie]? params[:movie][:name]: nil  
+   search_param = params[:search]? params[:search]: nil  	 
+   search_param = ( params[:movie]? params[:movie][:name]: nil) unless (search_param != nil && !search_param.empty?) 
    @movies = Movie.search(search_param, params[:page])
+   respond_to do |format|
+      format.html # show.html.erb
+      format.js  { 
+      layout = nil 
+        render :js => @movie 
+      }
+   end
   end
   
   # GET /movies/1
@@ -104,11 +111,9 @@ class MoviesController < ApplicationController
   # PUT /movies/1.xml
   def update
     @movie = Movie.find(params[:id])
-   STDERR.puts("\nI'm in update\n ")
     respond_to do |format|
       if @movie.update_attributes(params[:movie])
         #flash[:notice] = 'Movie was successfully updated.'
-        
         format.html { redirect_to(@movie) }
         format.xml  { head :ok }
       else
@@ -134,7 +139,7 @@ class MoviesController < ApplicationController
     # GET /movies/1/edit
   def editartists       
     @movie = Movie.find(params[:id])   
-    @artists = Artist.find(:all, :order => "name" )
+    #@artists = Artist.find(:all, :order => "name" )
     type = params[:type]
     @roles = Role.find(:all, :conditions => ['role_type = ?', type], :order => "name")
     
@@ -169,7 +174,7 @@ class MoviesController < ApplicationController
   # PUT /movies/1.xml
   def addCastDetail
     @movie = Movie.find(params[:id])
-    @artist = Artist.find(params[:movie][:artists])
+    @artist = Artist.find_by_name(params[:movie][:artist_name])
     @role = Role.find(params[:movie][:roles])
     movie_role = MovieRole.new
     movie_role.movie = @movie

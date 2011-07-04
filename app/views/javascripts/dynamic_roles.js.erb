@@ -1,0 +1,27 @@
+var roles = new Array();
+<% for role in @roles -%>
+  roles.push(new Array(<%= role.id %>, '<%=h role.name %>', '<%=h role.role_type %>'));
+<% end -%>
+
+function roleTypeSelected() {
+  role_type = $('role_type').getValue();
+  options = $('artist_roles').options;
+  options.length = 1;
+  roles.each(function(role) {
+    if (role[2] == role_type) {
+      options[options.length] = new Option(role[1], role[0]);
+    }
+  });
+  if (options.length == 1) {
+    $('select_role_menu').hide();
+  } else {
+    $('select_role_menu').show();
+    options[1].selected= true;
+    options.remove(0);
+  }
+}
+
+document.observe('dom:loaded', function() {
+  roleTypeSelected();
+  $('role_type').observe('change', roleTypeSelected);
+});

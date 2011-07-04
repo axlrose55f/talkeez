@@ -1,13 +1,14 @@
 class Movie < ActiveRecord::Base
 ajaxful_rateable :stars => 5 , :cache_column => :rating
 cattr_reader :per_page
-@@per_page = 3
+@@per_page = 6
 
 acts_as_reviewable
 
 attr_accessor :image_url
 attr_accessor :review_title
 attr_accessor :review_text
+attr_accessor :artist_name  # used in edit cast view
 
 has_many   :trivia
 has_many :awards,
@@ -17,13 +18,13 @@ has_and_belongs_to_many :genres,
 has_and_belongs_to_many :themes,
                         :join_table => "movies_themes"
 
-def self.search(search, page)
-  if search
-   search_condition = ['name LIKE ?', "%#{search}%"]
+def self.search(search_param, page)
+  if search_param
+   search_condition = ['name LIKE ?', "%#{search_param}%"]
   else
    search_condition = ['rating > 3']
   end
-   paginate :page => page,
+  paginate :page => page,
 		     :conditions => search_condition,
 		     :order => 'rating DESC'
 end
@@ -41,13 +42,16 @@ has_many :artists, :through => :movie_roles do
     find :all, :conditions => ['role_id in (?)', role_id]
   end
   def cast_type(type)
-    casts = Role.find(:all, :conditions => [ "role_type = ?", type], :select => "id")
+    casts = Role.find(:all, :conditions => [ "role_type in (?)", type], :select => "id")
     find :all, :conditions => ['role_id in (?)', casts]
   end
   
   def cast
     cast_type('cast')
   end
+  def main_cast
+    cast_type('ProductionCrew')
+  end  
   def crew
     cast_type('crew')
   end  
@@ -89,7 +93,7 @@ has_many :cast, :class_name  => "MovieRole" do
   def crew_list(movie_id)
      find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
                    "from artists as a, roles as r, movies_artists_roles as mr " +                   
-                   " where mr.artist_id = a.id and mr.role_id = r.id and r.role_type = 'crew' and mr.movie_id = ?", movie_id])
+                   " where mr.artist_id = a.id and mr.role_id = r.id and r.role_type in ('crew', 'ProductionCrew') and mr.movie_id = ?", movie_id])
   end
 end
 

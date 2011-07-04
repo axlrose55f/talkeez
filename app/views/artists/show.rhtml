@@ -13,7 +13,8 @@
 
 		<h3>Plot Summary:</h3>
 		<div id="artist_description" style="height:40%;">
-		<%=h  @artist.biography[0..500] unless (@artist.biography == nil || @artist.biography.length < 500)%> 
+		<%=h  @artist.biography[0..500] unless (@artist.biography == nil || @artist.biography.length < 500)%>
+		<%=h  "..." unless (@artist.biography == nil || @artist.biography.length < 500)%> 
 		</div>
 		<div id="artist_description_full" style="display:none;">
 		 <div>
@@ -21,7 +22,7 @@
 		 </div>
 		</div>
 		<div id="artist_desc_readMore"><% if (@artist.biography != nil) && @artist.biography.length > 500 %>
-		 ... <a href="" onclick="$('artist_description').hide();Effect.SlideDown('artist_description_full');$('artist_desc_readMore').hide(); return false;">Read More</a> 
+		 <a href="" onclick="$('artist_description').hide();Effect.SlideDown('artist_description_full');$('artist_desc_readMore').hide(); return false;">Read More</a> 
 		<% end  %>
 		</div>
 		<br/><br/>

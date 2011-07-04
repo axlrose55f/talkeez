@@ -85,6 +85,9 @@ ActionController::Routing::Routes.draw do |map|
                                       :rate => :post} 
 
 
+  # Javascript based routes
+  map.connect ':controller/:action.:format'
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
 

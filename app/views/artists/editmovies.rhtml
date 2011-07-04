@@ -1,3 +1,5 @@
+<% javascript 'dynamic_roles' %>
+
 <h1>Selected Movies for the Artist</h1>
 
 	<table><tbody>
@@ -21,12 +23,23 @@
   <%= f.error_messages %>
 
  <p>
-	<%= f.label :movie %>:<br/>
-	<%=f.collection_select(:movies, @movies, :id, :name) 	%>
+	<%= f.label :movie %>:
+	<%= text_field_with_auto_complete :artist, :movie_name, { :size => 25 }, { :url => movies_path(:format => :js), :method => :get, :param_name => 'search' } 	%>
  </p>
+ <br/>
  <p>
-	<%= f.label :role_id %>:<br/>
-	<%=f.collection_select(:roles, @roles, :id, :name) 	%>
+<label for="role_type">Role Type:</label>
+ <select id="role_type" name="role_type">
+  <option value="">Please select</option>
+  <option value="cast">Cast</option>
+  <option value="ProductionCrew">Production Crew</option>
+  <option value="crew">Technical Crew</option>
+</select>
+ </p>
+ <br/>
+ <p id="select_role_menu">
+	<%= f.label :role_id %>:
+	<%=f.collection_select(:roles,[], :id, :name) 	%>
  </p>
 <br/>
 

@@ -2,13 +2,20 @@ class ArtistsController < ApplicationController
   # select the lay out to use for this controller
   layout :determine_layout
   before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy, :addCastDetail, :addAward] 
-  auto_complete_for :artist, :name
     
   # GET /artists
-  # GET /artists.xml
+  # GET /artists.js
   def index
-   search_param = params[:artist]? params[:artist][:name]: nil 
+   search_param = params[:search]? params[:search]: nil  	 
+   search_param = ( params[:artist]? params[:artist][:name]: nil) unless (search_param != nil && !search_param.empty?) 
    @artists = Artist.search(search_param, params[:page])
+      respond_to do |format|
+      format.html # show.html.erb
+      format.js  { 
+      layout = nil 
+        render :js => @artist 
+      }
+   end
   end
 
   # GET /artists/1
@@ -145,9 +152,8 @@ class ArtistsController < ApplicationController
    
   def editmovies       
     @artist = Artist.find(params[:id])  
-    
-    @movies = Movie.find(:all, :order => "name" )
-    @roles = Role.find(:all, :order => "name")
+    #@movies = Movie.find(:all, :order => "name" )
+    # @roles = Role.find(:all, :order => "name")
     # @artists = Hash.new 
     # @roles = Hash.new   
     # Artist.find(:all, :order => "name" ).map {|u|  @artists[u.name] = u.id }
@@ -158,7 +164,9 @@ class ArtistsController < ApplicationController
   # PUT /movies/1.xml
   def addCastDetail
     @artist = Artist.find(params[:id])
-    @movie = Movie.find(params[:artist][:movies])
+    @movie = Movie.find_by_name(params[:artist][:movie_name])
+    
+#    @movie = Movie.find(params[:artist][:movies])
     @role = Role.find(params[:artist][:roles])
     movie_role = MovieRole.new
     movie_role.movie = @movie

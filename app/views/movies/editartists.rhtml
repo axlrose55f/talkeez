@@ -21,8 +21,8 @@
   <%= f.error_messages %>
 
  <p>
-	<%= f.label :artist %>:<br/>
-	<%=f.collection_select(:artists, @artists, :id, :name) 	%>
+   <%= f.label :artist %>:
+	<%= text_field_with_auto_complete :movie, :artist_name, { :size => 25 }, { :url => artists_path(:format => :js), :method => :get, :param_name => 'search' } 	%>
  </p>
  <p>
 	<%= f.label :role_id %>:<br/>

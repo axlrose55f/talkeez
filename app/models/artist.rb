@@ -3,6 +3,8 @@ class Artist < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 3
   
+  attr_accessor :movie_name
+  
   has_many :awards,
            :class_name => "MovieAward"
          
@@ -64,7 +66,7 @@ validates_attachment_content_type :image,
                                    :message => "Must be a image of type png, jpeg or gif"
 
 validates_presence_of :name, :biography
-validates_uniqueness_of :name
+validates_uniqueness_of :name , :scope => :dob
 
 
 # helper method to get image from url
