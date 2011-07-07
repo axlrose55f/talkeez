@@ -29,9 +29,9 @@ class User < ActiveRecord::Base
  				    :styles => { :medium => {:geometry => "175x175", :format => 'png'}, 
 				  				 :thumb =>  {:geometry =>"80x80>" , :format => 'png'}
 				               },
-				  	 :default_url => "/images/:class/default/:style_missing_user.png", 
-                     :url => "/images//:class/:id/:style_:id_:name.:extension",
-                     :path => ":rails_root/public/images/:class/:id/:style_:id_:name.:extension"
+				  	 :default_url => "/data/images/:class/default/:style_missing_user.png", 
+                     :url => "/data/images//:class/:id/:style_:id_:name.:extension",
+                     :path => ":rails_root/public/data/images/:class/:id/:style_:id_:name.:extension"
 
 #  validates_attachment_presence :image
 
