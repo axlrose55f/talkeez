@@ -1,0 +1,101 @@
+<div id="GlobalWrpr">
+  <div class="container-4 clearfix">
+	<div class="kbSearch clearfix">
+			<div class="tl"></div>
+			<div class="tr"></div>
+			<div class="bl"></div>
+			<div class="br"></div>
+			<h3>Awesome Search:</h3>
+			<% if controller_name == "movies" %>
+				<% form_tag search_movies_path, :name => 'awesome_search_form', :method => 'get' do%>
+				<%= text_field_with_auto_complete :movie, :name, { 
+					:size => 100,
+					:class => 'search_bar', 
+					:autocomplete => 'off', 
+					:maxlength=>"255", 
+					:value=> "  Enter a movie name to search", 
+					:onfocus=> "if(this.value=='  Enter a movie name to search'){this.value='';this.style.color='#000';this.style.fontStyle='normal';}", 
+					:onblur=> "if(this.value==''){this.style.color='#aaa';this.style.fontStyle='italic';this.value='  Enter a movie name to search';}" }, 
+					{:url => search_movies_path(:format => :js), :method => :get,:param_name => 'search'} %>			
+				<% end %>	
+			<% elsif  controller_name == "artists" %>
+				<% form_tag artists_path, :name => 'awesome_search_form', :method => 'get' do%>
+				<%= text_field_with_auto_complete :artist, :name, { 
+					:size => 100,
+					:class => 'search_bar', 
+					:autocomplete => 'off', 
+					:maxlength=>"255", 
+					:value=> "  Enter an artist name to search", 
+					:onfocus=> "if(this.value=='  Enter an artist name to search'){this.value='';this.style.color='#000';this.style.fontStyle='normal';}", 
+					:onblur=> "if(this.value==''){this.style.color='#aaa';this.style.fontStyle='italic';this.value='  Enter an artist name to search';}" }, 
+					{:url => artists_path(:format => :js), :method => :get,:param_name => 'search'} %>
+				<% end %>
+			<% else %>
+				<% form_tag movies_path, :name => 'awesome_search_form', :method => 'get' do%>
+				<%= text_field_with_auto_complete :movie, :name, { 
+					:size => 100,
+					:class => 'search_bar', 
+					:autocomplete => 'off', 
+					:maxlength=>"255", 
+					:value=> "  Enter a movie name to search", 
+					:onfocus=> "if(this.value=='  Enter a movie name to search'){this.value='';this.style.color='#000';this.style.fontStyle='normal';}", 
+					:onblur=> "if(this.value==''){this.style.color='#aaa';this.style.fontStyle='italic';this.value='  Enter a movie name to search';}" }, 
+					{:url => movies_path(:format => :js), :method => :get,:param_name => 'search'} %>	
+				<% end %>
+			<% end %>
+			<div class="btn">
+				<a href="javascript: document.awesome_search_form.submit()" class="gbtn med-gray">
+				<em>Search<span class="flat_icon search_white"></span></em>
+				</a>
+			</div>
+			&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a style="vertical-align: middle; line-height: 27px;" id="AdvancedSearchLink" href="" class="advanced">
+			Start typing the name to find auto suggetions</a>			
+		  <!--  advanced search options --> 
+		  <div style="width:925px;">
+		  <!--
+			<a style="vertical-align: middle; line-height: 27px;" id="AdvancedSearchLink" href="javascript:toggleAdvansedSearch()" class="advanced">
+			<span class="flat_icon arrow3down_green"></span> Show advanced search and search tips</a>		
+			<div id="asSearch" style="height: 0px; ">		
+				<div class="left">
+					<p>Search by topic</p>
+					
+					<table cellpadding="0">
+					<tbody>
+					<tr>
+					<td style="color:#797978; font-family:Tahoma,Geneva,sans-serif; font-size:11px;">Select a topic below first, then perform a search</td>
+					</tr>
+					</tbody>
+					</table>
+					<p>Search by</p>
+					<select name="p_search_type">
+					<option value="answers.search_nl">Phrases</option>
+					<option value="answers.search_fnl">Simliar Phrases</option>
+					<option value="answers.search_ex">Exact Search</option>
+					<option value="answers.search_cpx">Complex Expression</option>
+					</select>
+				</div>			
+				<div class="right">
+					<p>Search Tips</p>
+					<table cellpadding="0">
+					<tbody>
+					<tr><td class="first">Census Viewer</td>
+					<td> Results contain any use of 'census' or 'viewer'.</td></tr>
+					<tr><td class="first">Use + New + Search</td>
+					<td>Results contain all 'Use', 'New' and 'Search'</td></tr>
+					<tr><td class="first">Census - Print</td>
+					<td>Results contain 'Census' and don't contain 'print'</td></tr>
+					</tbody>
+					</table>
+					<a href="sab_answer.php?p_faqid=2581&amp;p_sid=gNktb6yk"> read more about search tips </a>
+					<span class="flat_icon_small arrow1right_green_small"></span>
+				</div>
+		   </div>
+		   -->
+		 </div>  
+		  <!-- End advanced search options --> 
+	</div>
+  </div>		
+ <div class="container-4btm"></div>
+</div>

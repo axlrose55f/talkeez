@@ -1,14 +1,3 @@
-<div id="searchwrapper" class="searchwrapper">
-<% form_tag artists_path, :method => 'get' do%>
-  <div id="searchwrapper-border" class="searchwrapper-border">
-   <div id="searchwrapper-inner" class="searchwrapper-inner">
-    <%= text_field_with_auto_complete :artist, :name, { :size => 50 , :class => 'search_bar', :autocomplete => 'off'}, {:url => artists_path(:format => :js), :method => :get,:param_name => 'search'} %>
-    </div>
-   </div>
- <%= submit_tag "Go", :class => 'searchsubmit', :name => nil %> 
-<% end %>
-</div>
-
 <div id="yui-main" style="">
 	<div style="margin:0px 0px 0px -180px;">
 	

@@ -25,3 +25,20 @@ function collapseElement() {
 	}
 	document.getElementsByTagName('body')[0].style.position = 'static';
 }
+	var asSearchElm = document.getElementById("asSearch");
+	var BoxLinkElm = document.getElementById("AdvancedSearchLink");
+var openingState="hidden";		
+function toggleAdvansedSearch(){
+
+			if(openingState=="shown"){
+				BoxLinkElm.innerHTML="<span class='flat_icon arrow3down_green'></span> Show advanced search and search tips";
+				openingState="hidden";
+				asSearchElm.style.height="0px";
+			    //Effect.SlideUp('asSearch',{ duration: 0.50 });
+			}else{
+				BoxLinkElm.innerHTML="<span class='flat_icon arrow3up_green'></span> Hide advanced search and search tip examples";
+				openingState="shown";
+				asSearchElm.style.height="100px";
+				//Effect.SlideDown('asSearch',{ duration: 0.50 });
+			}
+		}
