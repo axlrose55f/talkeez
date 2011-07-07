@@ -71,7 +71,7 @@ ActionController::Routing::Routes.draw do |map|
                                       :showcast => :get,
                                       :reviews => :get,
                                       :awards => :get,
-                                      :videos => :get,
+                                      :videos => :get,                                      
                                       :updategenres => :put,
                                       :addCastDetail => :put,
                                       :addGenre => :put,
@@ -82,7 +82,9 @@ ActionController::Routing::Routes.draw do |map|
                                       :deleteCastDetail => :delete,
                                       :updateawards => :put,
                                       :updateartists => :put,
-                                      :rate => :post} 
+                                      :rate => :post} ,
+                             :collection => {:search => :get }         
+
 
 
   # Javascript based routes

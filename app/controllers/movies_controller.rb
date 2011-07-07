@@ -6,6 +6,13 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.js
   def index
+   @movies = Movie.find(:all, :limit => 4, :conditions => 'rating > 4', :order => 'rating DESC')
+   @latest_movies = Movie.find(:all, :limit => 4, :order => 'year DESC')
+  end
+  
+  # GET /movies
+  # GET /movies.js
+  def search
    search_param = params[:search]? params[:search]: nil  	 
    search_param = ( params[:movie]? params[:movie][:name]: nil) unless (search_param != nil && !search_param.empty?) 
    @movies = Movie.search(search_param, params[:page])

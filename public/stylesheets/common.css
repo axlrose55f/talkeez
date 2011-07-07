@@ -238,6 +238,8 @@ border-top: 1px solid #7B7B7B;
 height: 1.8em;
 width: 30em;
 float: left;
+color: #AAA;
+font-style: italic;
 }
 
 .searchsubmit{

@@ -1,0 +1,93 @@
+<div id="yui-main" style="">
+	<div style="margin:0px 0px 0px -180px;">
+<%
+=begin
+%>
+<!--
+	<div id="body_main" class="yui-b sectioncontainer_brown" >
+	<div class="sectionCntrULFT"> </div>
+		<div class="sectionCntrURt"> </div>	
+		<div id="MovieList" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+			<div class="rndSecULFT"> </div>
+			<div class="rndSecURt"> </div>
+					<% for movie in @top_movies -%>					
+							<div style="float: left; font-size: 10px; font-weight: bold;padding-bottom:10px;">								
+								<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
+								<img width="64" height="80" id="profile_picture" style="border-width: 0px;" src="<%=h movie.image.url %>"/>
+								</a>					
+							</div>
+					<% end %>
+				<div class="clearDiv"></div>		
+  		    <div class="rndSecLLFT"> </div>
+		    <div class="rndSecLRT"> </div>				
+		</div>
+		 <div class="sectionCntrLLFT"> </div>
+		 <div class="sectionCntrLRT"> </div>	
+    </div>	
+-->
+<%
+=end
+%>
+	<br/>
+	<div class="clearDiv"></div>	
+	<div id="body_main" class="yui-b sectioncontainer_brown" >
+		<div class="sectionCntrULFT"> </div>
+		<div class="sectionCntrURt"> </div>
+			<div class="clearDiv"></div>		
+		    <div id="MovieList" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+				<div class="rndSecULFT"> </div>
+				<div class="rndSecURt"> </div>  
+				<div class="sectionBG">
+					<h2 style="display: inline-block; margin-top: -8px;">Movies</h2>
+				</div>
+			<% for movie in @movies -%>
+				<div class="sectionContainer">
+				  <div class="event_container" style="clear: both;">
+					<div style="float: left; font-size: 10px; font-weight: bold;">
+						<table><tbody><tr><td>
+						<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
+						<img width="64" height="80" id="profile_picture" style="border-width: 0px;" src="<%=h movie.image.url(:thumb) %>"/>
+						</a>
+						</td></tr>
+						<tr>
+						<td>
+						 <h3><a href="/movies/<%= movie.id%>"><%=h movie.name %></a></h3><br/>	
+						 <h3><a><%=h movie.year.year%></a></h3>
+						</td>
+						</tr>
+						<tr><td>
+					    <div class="list_rating">			
+							<%= ratings_for movie , :static %>
+						 </div>	
+						</td></tr>
+						</tbody></table>
+					</div>			
+				 <div id="eventDetails">				 	
+					<h4><%=h movie.description%></a></h4>
+				 </div>
+				<div class="eventBottom"> </div>
+				</div>
+			 </div>	<!-- end event_container -->
+			<% end %>	
+			
+				<div class="rndSecLLFT"> </div>
+				<div class="rndSecLRT"> </div>				
+	        </div>
+		 <div class="sectionCntrLLFT"> </div>
+		 <div class="sectionCntrLRT"> </div>	
+	</div>
+</div> 	
+ </div>	
+</div>
+
+
+<div class="digg_pagination">
+  <div clas="page_info">
+    <%= page_entries_info @movies %>
+  </div>
+  <br>
+  <%= will_paginate @movies, :container => false %>
+</div>
+
+<br><br>
+<%= link_to 'New Movies', new_movie_path %>		
