@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-
+ 
   map.root :controller => 'movies'
 
   map.auto_complete '/:controller/:action',
@@ -33,6 +33,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :moods
    
   map.resources :ragas
+  
+  map.resources :videos , :only => [:index, :show]
   
   # Login related stuff  
   map.resources :users, :member => { :movies => :get,
@@ -71,7 +73,8 @@ ActionController::Routing::Routes.draw do |map|
                                       :showcast => :get,
                                       :reviews => :get,
                                       :awards => :get,
-                                      :videos => :get,                                      
+                                      :videos => :get,
+                                      :addVideo => :put,   
                                       :updategenres => :put,
                                       :addCastDetail => :put,
                                       :addGenre => :put,

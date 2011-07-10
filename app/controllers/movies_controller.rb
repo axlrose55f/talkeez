@@ -255,6 +255,19 @@ class MoviesController < ApplicationController
     end         
   end
   
+  
+  #### Add Video ####
+  def addVideo
+    @movie = Movie.find(params[:id])
+    video_url = params[:movie][:video_url]
+    if(video_url != nil)
+      video = Video.create_with_url(video_url)
+      @movie.videos << video
+    end  
+    redirect_to(:action => :videos)
+  end
+  
+  
   ###### Edit Reviews #####
   def editreviews
     @movie = Movie.find(params[:id])    

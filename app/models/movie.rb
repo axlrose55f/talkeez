@@ -3,7 +3,11 @@ ajaxful_rateable :stars => 5 , :cache_column => :rating
 cattr_reader :per_page
 @@per_page = 6
 
+# suppor treviews using acts_as_reviewable plugin
 acts_as_reviewable
+
+# Attach videos using video_attachments
+video_attachments
 
 attr_accessor :image_url
 attr_accessor :review_title

@@ -3,6 +3,9 @@ class Artist < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 3
   
+  # Attach videos using video_attachments plugin
+  video_attachments
+
   attr_accessor :movie_name
   
   has_many :awards,

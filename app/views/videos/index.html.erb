@@ -1,0 +1,15 @@
+<h1>Listing videos</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% @videos.each do |video| %>
+  <tr>
+  <td><%= link_to 'Show', video %></td>
+	<%= video.id %>: <%= video.url %>
+  </tr>
+<% end %>
+</table>
+
+

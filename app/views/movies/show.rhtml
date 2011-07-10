@@ -116,7 +116,7 @@
 			<div class="rndSecULFT"> </div>
 			<div class="rndSecURt"> </div>  
 			<div class="sectionBG">
-				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Reviews (<%=@revs.size.to_s%>)</h2>
+				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Reviews <%= "(#{@revs.size.to_s})" unless @revs.empty? %></h2>
 			</div>
 			<div class="sectionContainer">
 			   <div id="reviews" class="commentsSection">	  
@@ -188,18 +188,30 @@
 		</div>
 		<div class="clearDiv"></div>		
 	    <div id="Videos" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+			<% @videos = @movie.videos %>	
 			<div class="rndSecULFT"> </div>
 			<div class="rndSecURt"> </div>  
 			<div class="sectionBG">
-				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Videos</h2>
-				
+				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Videos <%=h "(#{@videos.size.to_s})" unless @videos.empty?  %></h2>				
 			</div>
 			<div class="sectionContainer">
-			   <div id="Videos1" class="">
-				<em class="noItemAdded">No Videos has been added.</em>
-			   </div>
-			   <br>
-			</div>
+			   <div id="Videos1" class="">							   
+					<% if ! @videos.empty? %>
+					  <table width="100%"><tbody>			     			     
+					 <tr>					 
+					 <% for video in @videos[0..4] %>
+					  <td>
+					  <a id="youtubeLnk" href="/movies/<%= @movie.id%>/videos"> <img width="120" height="90" id="youtube_thumb" src="http://img.youtube.com/vi/<%=h video.url %>/1.jpg"/></a>					
+					  </td>	
+					  <% end %>				
+					 </tr>
+					</tbody></table>
+					<% else %>
+					<em class="noItemAdded">No Videos have been added.</em>
+					<% end %>
+					<br>
+			    </div>
+ 			</div>
 			<div class="rndSecLLFT"> </div>
 			<div class="rndSecLRT"> </div>
 		</div>
