@@ -50,7 +50,8 @@ CREATE TABLE `video_attachments` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_video_attachments_on_videoable_id` (`videoable_id`),
-  KEY `index_video_attachments_on_videoable_id_and_videoable_type` (`videoable_id`,`videoable_type`)
+  KEY `index_video_attachments_on_videoable_id_and_videoable_type` (`videoable_id`,`videoable_type`),
+  UNIQUE KEY `unique_key_videoid_videoable_id_videoable_type` (`video_id`,`videoable_id`,`videoable_type`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

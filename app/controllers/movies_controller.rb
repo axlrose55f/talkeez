@@ -262,7 +262,13 @@ class MoviesController < ApplicationController
     video_url = params[:movie][:video_url]
     if(video_url != nil)
       video = Video.create_with_url(video_url)
-      @movie.videos << video
+      begin      
+      	@movie.videos << video
+      rescue Exception => e
+       if e.is_a? ActiveRecord::StatementInvalid
+         logger.debug("trying to add duplicate entry")
+       end
+      end
     end  
     redirect_to(:action => :videos)
   end
