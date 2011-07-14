@@ -34,11 +34,11 @@
 						<div class="list_rating">			
 							<%= ratings_for artist , :static %>
 						</div>
-						<h3><%=  artist.dob.to_formatted_s(:long) unless artist.dob == nil %></h3> 
+						<h3>DOB : <%=  (artist.dob ==nil) ? "N/A" : artist.dob.to_formatted_s(:long) %></h3> 
 						<h3>Birth Name</h3>						
-						<p><%=  (artist.birth_name == nil)? "N/A" : artist.birth_name %></p>
+						<p><%=  (artist.birth_name == nil || artist.birth_name.empty? )? "N/A" : artist.birth_name %></p>
 						<h3>Birth Place</h3>						
-						<p><%=  (artist.birth_place == nil)? "N/A" : artist.birth_place%></p>
+						<p><%=  (artist.birth_place == nil || artist.birth_place.empty?)? "N/A" : artist.birth_place%></p>
 					</div>
 				</div>
 				<div class="subConBL"></div>
