@@ -1,6 +1,7 @@
 <!-- Content Menu -->
 <%= render(:partial => "contentMenu" , :object => @artist, :locals => { :tab => "filmography"} )%>
 
+
 <div id="yui-main" style="">
  <div id="person_header_container" class="yui-b container_green">
 
@@ -14,18 +15,23 @@
 		<img src="/images/edit.gif"></img>
 	 	<a id="editProfileLink" href="/artists/<%= @artist.id%>/editmovies" title="Edit Movies">Edit Movies</a>
         </div>
-		<table><tbody>
+		<!-- Add sorting -->
+		<div id="movie_listing">
+		 <ul>
 		  <% for movie in @artist.movies.roles(@artist.id) %>
-			<tr><td>
-			<a id="addMainPhotoLnk">
-			<img width="60" height="60" id="profile_picture" style="border-width: 0px;" src="<%=h movie.image.url(:thumb) %>"/>
-			</a>
-		</td>
-		<td><h3><a href="/movies/<%= movie.id%>" class="show-link"><%=h movie.name %></a></h3></td>
-		<td><h3>&nbsp;as&nbsp; <%=h movie.role_name %></h3></td>
-		</tr>
-		<% end%>
-	</tbody></table>
+			<li>
+			<div id="filmography_<%= movie.id%>">
+			<h3>
+			<span><%=h movie.year.to_datetime.to_s(:year) %></span>
+			<span><a href="/movies/<%= movie.id%>" class="show-link" onmouseout="Effect.toggle('movie_detail_<%= movie.id.to_s %>', 'appear',{ duration: 0}); return false;" onmouseover="Effect.toggle('movie_detail_<%= movie.id.to_s %>', 'appear',{ duration: 0}); return false;" ><%=h movie.name %></a></span>
+			<span style="float:right">&nbsp;as&nbsp; <%=h movie.role_name %></span>
+			</h3>
+			<%= render :partial => "moviedetail", :object => movie, :as => "movie" %>
+			</div>
+			</li>
+		  <% end%>
+		 </ul> 
+		</div>
 	<br/>
 	</div>
 	<div class="clearDiv"></div>

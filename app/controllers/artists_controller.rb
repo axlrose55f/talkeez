@@ -6,10 +6,15 @@ class ArtistsController < ApplicationController
   # GET /artists
   # GET /artists.js
   def index
+   @artists = Artist.find(:all, :limit => 4, :conditions => 'rating > 4', :order => 'rating DESC')
+   @latest_artists = Artist.find(:all, :limit => 4, :order => 'updated_at DESC')
+  end
+
+  def search
    search_param = params[:search]? params[:search]: nil  	 
    search_param = ( params[:artist]? params[:artist][:name]: nil) unless (search_param != nil && !search_param.empty?) 
    @artists = Artist.search(search_param, params[:page])
-      respond_to do |format|
+   respond_to do |format|
       format.html # show.html.erb
       format.js  { 
       layout = nil 

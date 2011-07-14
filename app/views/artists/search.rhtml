@@ -6,119 +6,63 @@
     <div class="top"></div>
 	<div class="content clearfix">
   	 <div class="lefPan">
-	 <!-- Top Artist divMap -->
-	 <div id="divMap" class="mapContent areaSection mar20Bot">
+	  <div id="divMap" class="mapContent areaSection">
 		<div class="exploreLoc">
 	      <div class="ancSecHd">
 			<div class="ancSecHdL"></div>
 			<div class="ancSecHdM">
-			 <h1>Top Rated Artists</h1>
+			 <h1>Search Results </h1>
 			</div>
 			<div class="ancSecHdR"></div>
           </div>
        <div class="widgtContnt">
-       <table>
-       <tr>
+    
        <% for artist in @artists -%>
-       <td>
-       <div class="subCon subConGray" >
+
+       <div class="subCon subConGray mar10Bot" >
 				<div class="subConTL"></div>
 				<div class="subConT"></div>
 				<div class="subConTR"></div>
 				<div class="subConBd MapBody">
-					<h2><%=h artist.name[0..13] %>
-					<% if artist.name.size > 13 %>
-					<%= "..." %>
-					<% end %>
-					<% if artist.name.size < 14 %>
-					<% 	s = (14 - artist.name.size)%>
-					<%	s.times do |a| %><%= "&nbsp;" %><% end %></h2>
-					<% end %>
 					<div class="PictureBox">
 				  		<a href="/artists/<%= artist.id%>" id="addMainPhotoLnk">
-				  		<img width="100" height="122" id="movie_picture" src="<%=h artist.image.url(:medium) %>" >
+				  		<img width="100" height="122" id="movie_picture" src="<%=h artist.image.url(:thumb) %>" >
 				  		</a>
 					</div>
-					
-					<div class="list_rating">			
-						<%= ratings_for artist , :static %>
-					 </div>
-					<h3><%=  artist.dob.to_formatted_s(:long) unless artist.dob == nil %></h3> 
-					<h3>Birth Name</h3>						
-					<p><%=  (artist.birth_name == nil)? "N/A" : artist.birth_name %></p>
-					<h3>Birth Place</h3>						
-					<p><%=  (artist.birth_place == nil)? "N/A" : artist.birth_place%></p>
+					<div class="detail">
+						<h2><%=h artist.name %></h2>
+						<div class="list_rating">			
+							<%= ratings_for artist , :static %>
+						</div>
+						<h3><%=  artist.dob.to_formatted_s(:long) unless artist.dob == nil %></h3> 
+						<h3>Birth Name</h3>						
+						<p><%=  (artist.birth_name == nil)? "N/A" : artist.birth_name %></p>
+						<h3>Birth Place</h3>						
+						<p><%=  (artist.birth_place == nil)? "N/A" : artist.birth_place%></p>
+					</div>
 				</div>
 				<div class="subConBL"></div>
 				<div class="subConB"></div>
 				<div class="subConBR"></div>
 		</div>
-       </td>
+
 	  <% end %>
-       </tr>
-       </table>
        
+       <% if @artists.size < 2 %>
+       <br><br><br>
+       <% end %>
        </div> <!-- widgtContnt -->
        </div> <!-- exploreLoc -->
-      </div> <!-- div map -->
-      
-      <!-- latest movies div map --> 
-      <div id="divMap" class="mapContent areaSection">
-		<div class="exploreLoc">
-	      <div class="ancSecHd">
-			<div class="ancSecHdL"></div>
-			<div class="ancSecHdM">
-			 <h1>Latest Artists</h1>
-			</div>
-			<div class="ancSecHdR"></div>
-          </div>
-       <div class="widgtContnt">
-       <table>
-       <tr>
-       <% for artist in @latest_artists -%>
-       <td>
-       <div class="subCon subConGray" >
-				<div class="subConTL"></div>
-				<div class="subConT"></div>
-				<div class="subConTR"></div>
-				<div class="subConBd MapBody">
-					<h2><%=h artist.name[0..13] %>
-					<% if artist.name.size > 13 %>
-					<%= "..." %>
-					<% end %>
-					<% if artist.name.size < 14 %>
-					<% 	s = (14 - artist.name.size)%>
-					<%	s.times do |a| %><%= "&nbsp;" %><% end %></h2>
-					<% end %>
-					<div class="PictureBox">
-				  		<a href="/artists/<%= artist.id%>" id="addMainPhotoLnk">
-				  		<img width="100" height="122" id="movie_picture" src="<%=h artist.image.url(:medium) %>" >
-				  		</a>
-					</div>
-					
-					<div class="list_rating">			
-						<%= ratings_for artist , :static %>
-					 </div>
-					<h3><%=  artist.dob.to_formatted_s(:long) unless artist.dob == nil %></h3> 
-					<h3>Birth Name</h3>						
-					<p><%=  (artist.birth_name == nil)? "N/A" : artist.birth_name %></p>
-					<h3>Birth Place</h3>						
-					<p><%=  (artist.birth_place == nil)? "N/A" : artist.birth_place%></p>
-				</div>
-				<div class="subConBL"></div>
-				<div class="subConB"></div>
-				<div class="subConBR"></div>
+       <!-- pagination -->
+       <div class="digg_pagination">
+		  <div clas="page_info">
+			<%= page_entries_info @artists %>
+		  </div>
+		  <br>
+		  <%= will_paginate @artists, :container => false %>
 		</div>
-       </td>
-	  <% end %>
-       </tr>
-       </table>
-       
-       </div> <!-- widgtContnt -->
-       </div> <!-- exploreLoc -->
+       <!-- pagination end -->
       </div> <!-- div map -->
-      
-      
      </div> <!-- lefpan -->
      
      <div class="ritPan">

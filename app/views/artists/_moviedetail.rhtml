@@ -1,0 +1,38 @@
+       <div class="subCon subConGray" id="movie_detail_<%= moviedetail.id.to_s %>"  style="display:none;position:absolute;">
+				<div class="subConTL"></div>
+				<div class="subConT"></div>
+				<div class="subConTR"></div>
+				<div class="subConBd MapBody">
+					<div class="PictureBox">
+				  		<a href="/movies/<%= moviedetail.id%>" id="addMainPhotoLnk">
+				  		<img width="100" height="122" id="movie_picture" src="<%=h moviedetail.image.url(:medium) %>" >
+				  		</a>
+					</div>
+					
+					<div class="list_rating">			
+						<%= ratings_for moviedetail , :static %>
+					</div>
+					<div style="float:left;margin-top:-160px;margin-left:130px">
+					<h2><%=h moviedetail.name[0..50] %>
+					<% if moviedetail.name.size > 50 %>
+					<%= "..." %>
+					<% end %>
+					<% if moviedetail.name.size < 51 %>
+					<% 	s = (51 - moviedetail.name.size)%>
+					<%	s.times do |a| %><%= "&nbsp;" %><% end %></h2>
+					<% end %>
+					<br>
+					<h3>Year:</h3>
+					<%=h moviedetail.year.year%>
+					<% a = moviedetail.artists.director[0] %>
+					<h3>Directed By:</h3>
+					<%=  (a == nil)? "N/A" : a.name[0..50]%>
+					<h3>Produced By</h3>
+					<% a = moviedetail.artists.producer[0] unless moviedetail.artists.producer == nil %>
+					<p><%=  (a == nil)? "N/A" : a.name[0..50]%></p>
+					</div>
+				</div>
+				<div class="subConBL"></div>
+				<div class="subConB"></div>
+				<div class="subConBR"></div>
+		</div>

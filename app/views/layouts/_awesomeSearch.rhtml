@@ -19,7 +19,7 @@
 					{:url => search_movies_path(:format => :js), :method => :get,:param_name => 'search'} %>			
 				<% end %>	
 			<% elsif  controller_name == "artists" %>
-				<% form_tag artists_path, :name => 'awesome_search_form', :method => 'get' do%>
+				<% form_tag search_artists_path, :name => 'awesome_search_form', :method => 'get' do%>
 				<%= text_field_with_auto_complete :artist, :name, { 
 					:size => 100,
 					:class => 'search_bar', 
@@ -28,7 +28,7 @@
 					:value=> "  Enter an artist name to search", 
 					:onfocus=> "if(this.value=='  Enter an artist name to search'){this.value='';this.style.color='#000';this.style.fontStyle='normal';}", 
 					:onblur=> "if(this.value==''){this.style.color='#aaa';this.style.fontStyle='italic';this.value='  Enter an artist name to search';}" }, 
-					{:url => artists_path(:format => :js), :method => :get,:param_name => 'search'} %>
+					{:url => search_artists_path(:format => :js), :method => :get,:param_name => 'search'} %>
 				<% end %>
 			<% else %>
 				<% form_tag movies_path, :name => 'awesome_search_form', :method => 'get' do%>

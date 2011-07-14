@@ -43,7 +43,7 @@ has_many :movies, :through => :movie_roles do
   def roles(artist_id)
      find_by_sql( [ "select m.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
                    "from movies as m, roles as r, movies_artists_roles as mr " +
-                   " where mr.movie_id = m.id and mr.role_id = r.id and mr.artist_id = ?",
+                   " where mr.movie_id = m.id and mr.role_id = r.id and mr.artist_id = ? order by m.year ASC",
                    artist_id])
   end
 end         
