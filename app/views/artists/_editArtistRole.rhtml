@@ -1,0 +1,27 @@
+<h1>Add Artist Role for movie</h1>
+
+<% form_for(@artist, :url => updateMovieRole_artist_path(:id => @artist.id)) do |f| %>
+  <%= f.error_messages %>
+
+<span>
+	<%= f.label :movie %>:
+	<%= text_field_with_auto_complete :artist, :movie_name, { :size => 25 }, { :url => movies_path(:format => :js), :method => :get, :param_name => 'search' } 	%>
+</sapn>
+
+<span>
+<label for="role_type">Role Type:</label>
+ <select id="role_type" name="role_type">
+  <option value="">Please select</option>
+  <option value="cast">Cast</option>
+  <option value="ProductionCrew">Production Crew</option>
+  <option value="crew">Technical Crew</option>
+</select>
+</span>
+<span id="select_role_menu">
+	<%= f.label :role_id %>:
+	<%=f.collection_select(:roles,[], :id, :name) 	%>
+</span> 
+<span>
+    <%= f.submit "Update" %>
+</span>
+<% end %>

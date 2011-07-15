@@ -64,7 +64,9 @@ ActionController::Routing::Routes.draw do |map|
                                        :addCastDetail => :put,
                                        :addAward => :put,
                                        :videos => :get,
-                                       :rate => :post} ,
+                                       :rate => :post,
+                                       :editArtistRole => :get,
+                                       :updateArtistRole => :put} ,
                           :collection => {:search => :get } 
   
   map.resources :movies, :member => { :editartists => :get,
@@ -87,9 +89,9 @@ ActionController::Routing::Routes.draw do |map|
                                       :updateawards => :put,
                                       :updateartists => :put,
                                       :rate => :post} ,
-                             :collection => {:search => :get }         
+                         :collection => {:search => :get }         
 
-
+  map.resources :movie_roles
 
   # Javascript based routes
   map.connect ':controller/:action.:format'

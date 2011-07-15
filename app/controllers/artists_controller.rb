@@ -22,7 +22,7 @@ class ArtistsController < ApplicationController
       }
    end
   end
-
+  
   # GET /artists/1
   # GET /artists/1.xml
   def show
@@ -183,6 +183,7 @@ class ArtistsController < ApplicationController
       render :action => "editmovies"       
     end     
   end
+  
   ########### Awards ###########
     # GET /movies/1/edit
   def editawards       

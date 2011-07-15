@@ -13,6 +13,9 @@
    <td><%=h  genre.id %></td> 
    <td><a href="/genres/<%= genre.id%>" ><%=h  genre.name %></a></td>
    <td><%=h  genre.description %></td>
+
+   <td>
+    <%= link_to 'Delete', genre, :confirm => 'Are you sure?', :method => :delete %></td>
 <%
 =begin %>
    <td>

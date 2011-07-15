@@ -1,0 +1,9 @@
+<div id="filmography_<%= @movie.id%>">
+	<h3>
+	<span><%=h @movie.year.to_datetime.to_s(:year) %></span>
+	<span><%=h @artist.name %></span>	
+	<span><a href="/movies/<%= @movie.id%>" class="show-link" ><%=h @movie.name %></a></span>
+	<span >&nbsp;as&nbsp; <%=h @role.name %></span>
+	</h3>
+	<%= render :partial => "artists/moviedetail", :object => @movie %>
+</div>

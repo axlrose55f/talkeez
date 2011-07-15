@@ -1,0 +1,29 @@
+<div class="commentsDetCont">
+<div class="addNewCommentSection">
+  <div class="tl"></div>
+  <div class="tr"></div>
+  <div class="addNewCommentInner">
+<% form_for(@mar) do |f| %>
+  <%= f.error_messages %>
+	<h3>
+	<span><%=h @movie.year.to_datetime.to_s(:year) %></span>
+	<span><%= @movie.name %></span>
+	<span id="select_role_menu2" style="padding-right:40px;">
+	 <%=f.collection_select(:role_id,@roles, :id, :name) 	%>
+    </span>	
+    <span >
+     <%= f.submit "Update" %>
+    </span>
+    <span>
+       <%= link_to "Delete", movie_role_url(:id => @mar.id), :confirm => 'Are you sure?', :method => :delete %>
+    </span>
+	<span>
+       <%= link_to "Cancel", '#', :onclick => "$(filmography_update_#{@num}).hide();$(filmography_#{@num}).show();"  %>
+     </span>
+	</h3>
+<% end %>
+</div>
+  <div class="bl"></div>
+  <div class="br"></div>
+</div>
+</div>

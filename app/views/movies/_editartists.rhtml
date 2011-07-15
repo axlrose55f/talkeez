@@ -1,0 +1,20 @@
+<h1>Add Artists to the movie</h1>
+
+<% form_for(@movie, :url => updateCastDetail_movie_path(:id => @movie.id)) do |f| %>
+  <%= f.error_messages %>
+
+ <p>
+   <%= f.label  @artist_name %>:
+	<%= hidden_field :movie, :artist_name, :value => @artist_name	%>
+ </p>
+ <p>
+	<%= f.label :role_id %>:<br/>
+	<%=f.collection_select(:roles, @roles, :id, :name ,{:selected => @role}) 	%>
+ </p>
+<br/>
+
+
+<p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>

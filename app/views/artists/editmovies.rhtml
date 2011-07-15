@@ -9,45 +9,37 @@
 		 <td><h3>&nbsp;&nbsp; as &nbsp;</h3></td>
 		 <td aligh="left"><h3><a href="/role/<%= movie.role_id%>" class="show-link"><%=h movie.role_name %></a></h3></td>
 		 <% link = '/movies/'+ movie.id.to_s + '/deleteCastDetail?mar_id='+ movie.mar_id %>
-		 <td>&nbsp;&nbsp;[<%= link_to 'Delete', link , :confirm => 'Are you sure?', :method => :delete %>]</td>		
+		 <td>&nbsp;&nbsp;[<%= link_to 'Delete', link , :confirm => 'Are you sure?', :method => :delete %>]</td>
+		 <td>
+		 [<%= link_to "Delete Artist Role", movie_role_url(:id => movie.mar_id), :confirm => 'Are you sure?', :method => :delete %>]
+         </td>
+		 <td>
+		 [<%= link_to_remote "edit Artist Role", :update => "editArtistRole", :url => edit_movie_role_path(:id => movie.mar_id), :method => :get %>]
+         </td>
 		</tr>
 	  <% end%>
 </tbody></table>
-	
-<br/>
 
-<hr>	
-<h1>Add Movies to the Artist</h1>
+<hr>
+<div id="editArtistRole">
+	<div style="display:none;">
+	<select id="role_types" name="role_types" onchange="roleType();">
+	  <option value="">Please select</option>
+	  <option value="cast">Cast</option>
+	  <option value="ProductionCrew">Production Crew</option>
+	  <option value="crew">Technical Crew</option>
+	</select>
+	<p id="select_role_menu2">
+		<select id="artist_roles" name="artist[roles]">
+		<option></option>
+		</select>
+	 </p>
 
-<% form_for(@artist, :url => addCastDetail_artist_path(:id => @artist.id)) do |f| %>
-  <%= f.error_messages %>
-
- <p>
-	<%= f.label :movie %>:
-	<%= text_field_with_auto_complete :artist, :movie_name, { :size => 25 }, { :url => movies_path(:format => :js), :method => :get, :param_name => 'search' } 	%>
- </p>
- <br/>
- <p>
-<label for="role_type">Role Type:</label>
- <select id="role_type" name="role_type">
-  <option value="">Please select</option>
-  <option value="cast">Cast</option>
-  <option value="ProductionCrew">Production Crew</option>
-  <option value="crew">Technical Crew</option>
-</select>
- </p>
- <br/>
- <p id="select_role_menu">
-	<%= f.label :role_id %>:
-	<%=f.collection_select(:roles,[], :id, :name) 	%>
- </p>
-<br/>
-
-
-<p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @artist %> |
+	 </div>
+</div> 
+<br>
+<div>
+<%= link_to_remote "Add Artist Role", :update => "editArtistRole", :url => new_movie_role_path(:artist_id => @artist.id), :method => :get %> | 
+<%= link_to 'Show', @artist %>  |
 <%= link_to 'Back', artists_path %>
+</div>

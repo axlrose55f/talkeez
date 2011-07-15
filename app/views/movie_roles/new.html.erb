@@ -1,0 +1,49 @@
+<div class="commentsDetCont">
+<div class="addNewCommentSection">
+  <div class="tl"></div>
+  <div class="tr"></div>
+  <div class="addNewCommentInner">
+<% form_for(@mar) do |f| %>
+  <%= f.error_messages %>
+  <span style="float:left;">
+    <% if(@movie != nil) %>
+    <%= f.hidden_field :movie_id , :value => @movie.id  %>
+    <% else %>
+    <%= f.label :movie_id  %> : <%=text_field_with_auto_complete :movie_role, :movie_name, { :size => 25 }, { :url => search_movies_path(:format => :js), :method => :get, :param_name => 'search' }%>
+    <% end %>
+  </span>
+  <span style="float:left;">
+	 <% if(@artist != nil) %>
+      <%= f.hidden_field :artist_id , :value => @artist.id  %>
+     <% else %>
+      <%= f.label :artist_id  %> : <%= f.text_field :artist_id %>
+     <% end %>
+  </span>
+  <span style="float:left;padding-left:10px;margin-top:-5px;">
+	<label for="role_type">Role Type:</label>
+	 <select id="role_type" name="role_type2" onchange="roleTypeChanged();">
+	  <option value="">Please select</option>
+	  <option value="cast">Cast</option>
+	  <option value="ProductionCrew">Production Crew</option>
+	  <option value="crew">Technical Crew</option>
+	</select>
+  </span>
+  <span id="select_role_menu" style="float:left;padding:0px 10px 0px 20px;margin-top:-5px;">
+	<%= f.label :role_id %>:
+	<%=f.collection_select(:role_id,[], :id, :name) %>
+  </span>   
+  <span style="float:left;margin-top:-3px;">
+    <%= f.submit "Update" %>
+  </span>
+  <h3>
+  <span style="padding-left:10px;">
+  <%= link_to "Cancel", '#', :onclick => "$(#{@div_name}).hide();$('addCast').show();"  %>
+  </span>
+  </h3>
+<% end %>
+<br>
+  </div>
+  <div class="bl"></div>
+  <div class="br"></div>
+</div>
+</div>

@@ -1,4 +1,5 @@
 <!-- Content Menu -->
+<% javascript 'dynamic_roles' %>
 <%= render(:partial => "contentMenu" , :object => @artist, :locals => { :tab => "filmography"} )%>
 
 
@@ -11,28 +12,40 @@
 	<div class="persHeaderURt"> </div>
 	<div id="movie_cast" class="">
 		<h2>Filmography details for <%=h @artist.name%></h2><br>
-		<div id="editCast" style="float:right; posiiton:relative;">
-		<img src="/images/edit.gif"></img>
-	 	<a id="editProfileLink" href="/artists/<%= @artist.id%>/editmovies" title="Edit Movies">Edit Movies</a>
-        </div>
 		<!-- Add sorting -->
 		<div id="movie_listing">
 		 <ul>
+		  <% count = 1 %>
 		  <% for movie in @artist.movies.roles(@artist.id) %>
-			<li>
-			<div id="filmography_<%= movie.id%>">
+			<li id="movie_item">
+			<div id="filmography_<%= count += 1 %>">
 			<h3>
 			<span><%=h movie.year.to_datetime.to_s(:year) %></span>
 			<span><a href="/movies/<%= movie.id%>" class="show-link" onmouseout="Effect.toggle('movie_detail_<%= movie.id.to_s %>', 'appear',{ duration: 0}); return false;" onmouseover="Effect.toggle('movie_detail_<%= movie.id.to_s %>', 'appear',{ duration: 0}); return false;" ><%=h movie.name %></a></span>
-			<span style="float:right">&nbsp;as&nbsp; <%=h movie.role_name %></span>
+			<span style="float:right;padding-right:60px;">&nbsp;as&nbsp; <%=h movie.role_name %></span>
 			</h3>
-			<%= render :partial => "moviedetail", :object => movie, :as => "movie" %>
+			<%= render :partial => "moviedetail", :object => movie %>
+
+			<span style="display:block;float:right; margin-right:-10px;margin-top:-13px;">
+  			  <%= link_to_remote "Edit", :update => "filmography_update_#{count}" , :url => edit_movie_role_path(:id => movie.mar_id), :with => "'num=#{count}'" ,:loaded => "$('filmography_#{count}').hide();$('filmography_update_#{count}').show();", :method => :get %>
+			</span>
 			</div>
+			<div id="filmography_update_<%= count %>"></div>
 			</li>
 		  <% end%>
 		 </ul> 
 		</div>
-	<br/>
+
+	   <div id="editArtistRole">
+	   </div> 
+       <br>
+       <span id="addCast" style="float:right; margin-top:-20px;" >
+       <img src="/images/edit.gif"></img>
+	    <%= link_to_remote "Add Role", :update => "editArtistRole", :url => new_movie_role_path(:artist_id => @artist.id), :with => "'div_name=editArtistRole'", :loaded => "$('addCast').hide();$('editArtistRole').show();" ,:method => :get %>
+	   </span> 
+	   <br/>
+	  
+	  
 	</div>
 	<div class="clearDiv"></div>
 	<div class="persHeaderLLFT"> </div>
