@@ -131,9 +131,9 @@
        <td>
        <div class="padleft10">
 		 <div class="PictureBox padbot10">
-				  		<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
-				  		<img width="80" height="98" id="movie_picture" src="<%=h movie.image.url(:medium) %>" >
-				  		</a>
+			<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
+			<img width="80" height="98" id="movie_picture" src="<%=h movie.image.url(:medium) %>" >
+			</a>
 		 </div>
          <span id="movie_title">
            <%=h movie.name[0..15] %>
@@ -204,12 +204,16 @@
 								<ul>
 									<li class="pImg dfemale">
 									<div class="defaultImg mediumSmImg">
-									 <span><img width="42" height="42" id="" src="<%=h movie.image.url(:thumb) %>" ></span>
+									 <span>
+									 <a href="<%= movie_path(movie) %>" />
+									 <img width="42" height="42" id="" src="<%=h movie.image.url(:thumb) %>" >
+									 </a>
+									 </span>
 									</div>
 									</li>
 								</ul>
 								<div class="padleft30">
-								  <h3><%= movie.name[0..30] %></h3>
+								  <h3><%= link_to "#{movie.name[0..30]}", movie_path(movie) %></h3>
 								  <p>Last edited <%= movie.updated_at.to_date.to_formatted_s(:long)%></p> 
 								 </div>                              
                             </div>
