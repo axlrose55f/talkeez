@@ -7,7 +7,6 @@
   <meta http-equiv="Content-Script-Type" content="text/javascript">
   <title>Movies: <%= controller.action_name %></title>
   <link href="/stylesheets/2_col.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/grids.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/reset.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/personpage.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/common.css" media="screen" rel="stylesheet" type="text/css" />
@@ -16,9 +15,7 @@
 <script src="/javascripts/scriptaculous.js" type="text/javascript"></script>
 
 <%= yield(:head) %>
-
-  <%= ajaxful_rating_style %>
-   <%= fb_connect_async_js %>
+<%= ajaxful_rating_style %>
 </head>
 <body>
 
@@ -72,10 +69,9 @@
 				<ul class="lower">
 					<li><span>© 2007-2011 Talkeez.com</span></li>
 				
-					<li><a href="http://www.talkeez.com/">Company Information</a></li>
-					<li><a href="http://www.talkeez.com/careers">Careers</a></li>
-				
-					<li class="privPol"><a href="http://www.talkeez.com/legal/privacy">PRIVACY POLICY</a></li>
+					<li><a href="http://www.talkeez.com/">HELP</a></li>
+					<li><a href="http://www.talkeez.com/careers">FAQ</a></li>				
+					<li class="privPol"><a href="http://www.talkeez.com/legal/privacy">Privacy Policy</a></li>
 					<li class="lastOne"><a href="http://www.talkeez.com/legal/terms">Terms and Conditions</a></li>
 				
 				</ul>

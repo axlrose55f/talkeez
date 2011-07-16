@@ -5,7 +5,7 @@
 			<div class="tr"></div>
 			<div class="bl"></div>
 			<div class="br"></div>
-			<h3>Awesome Search:</h3>
+			<h3>Search:</h3>
 			<% if controller_name == "movies" %>
 				<% form_tag search_movies_path, :name => 'awesome_search_form', :method => 'get' do%>
 				<%= text_field_with_auto_complete :movie, :name, { 

@@ -6,9 +6,9 @@
 		<div id="MovieList" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
 			<div class="rndSecULFT"> </div>
 			<div class="rndSecURt"> </div>
-			<div id="login" style="position:center;">
+			<div id="login" style="position:center;padding-bottom:10px;">
 				<h1>Login</h1>
-
+				<br>
 				<% form_for @user_session do |f| %>
 				  <%= f.error_messages :header_message => nil, :message => nil	 %>
 				  <%= f.label :username %><br />
@@ -17,8 +17,7 @@
 				  <%= f.label :password %><br />
 				  <%= f.password_field :password %><br />
 				  <br />
-				  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
-				  <br>
+				  <%= f.check_box :remember_me %> <%= f.label :remember_me %><br />
 				  <br>
 				  <%= f.submit "Login" %>
 				<% end %>
@@ -31,8 +30,7 @@
 		 <div class="sectionCntrLRT"> </div>	
     </div>						
 	<br/>
-	<div class="clearDiv"></div>	
-	
+	<div class="clearDiv"></div>
 </div> 	
  </div>	
 </div>

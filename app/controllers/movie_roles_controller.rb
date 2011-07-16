@@ -1,4 +1,6 @@
 class MovieRolesController < ApplicationController
+   before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy, :editArtistRole] 
+  
   def edit
   	  @mar = MovieRole.find(params[:id])
   	  @movie = @mar.movie

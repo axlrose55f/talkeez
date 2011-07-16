@@ -40,9 +40,13 @@ class ApplicationController < ActionController::Base
   
     def require_user
       unless current_user
-        store_location
-        flash[:notice] = "You must be logged in to access this page"
-        redirect_to login_url
+        store_location        
+        if request.xhr?
+		   render "user_sessions/error.rhtml", :layout => false	
+        else
+	      flash[:notice] = "You must be logged in to access this page"
+          redirect_to login_url        
+        end
         return false
       end
     end
