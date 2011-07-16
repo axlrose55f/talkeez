@@ -1,6 +1,7 @@
 class AwardsController < ApplicationController
   # select the lay out to use for this controller
   layout :determine_layout
+  before_filter :require_user
   
   # GET /awards
   # GET /awards.xml
