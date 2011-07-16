@@ -21,7 +21,7 @@
 			<div id="filmography_<%= count += 1 %>">
 			<h3>
 			<span><%=h movie.year.to_datetime.to_s(:year) %></span>
-			<span><a href="/movies/<%= movie.id%>" class="show-link" onmouseout="Effect.toggle('movie_detail_<%= movie.id.to_s %>', 'appear',{ duration: 0}); return false;" onmouseover="Effect.toggle('movie_detail_<%= movie.id.to_s %>', 'appear',{ duration: 0}); return false;" ><%=h movie.name %></a></span>
+			<span><a href="/movies/<%= movie.id%>" class="show-link" onmouseout="$('movie_detail_<%= movie.id.to_s %>').hide();" onmouseover="$('movie_detail_<%= movie.id.to_s %>').show();" ><%=h movie.name %></a></span>
 			<span style="float:right;padding-right:60px;">&nbsp;as&nbsp; <%=h movie.role_name %></span>
 			</h3>
 			<%= render :partial => "moviedetail", :object => movie %>

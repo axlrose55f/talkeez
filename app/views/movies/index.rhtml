@@ -64,6 +64,56 @@
        </div> <!-- exploreLoc -->
       </div> <!-- div map -->
       
+      <!-- Top movies list -->
+      
+      <div class="list_table">
+      <table>
+      <tr>
+       <td>
+	   <div class="widgtContnt  colorWhite">
+		<h2 style="border-bottom: solid 1px #CBC5B1;">Top rated movies this year(<%= Date.today.beginning_of_year().year %>)</h2>
+		 <div id="divMiniCardCatalog"></div>
+		 <div id="divMiniCardCatalog">
+		 <ul class="ulHistRecs">
+		 <% for movie in @top_this_year -%>
+		  <li><%= link_to "#{movie.name}", movie_path(movie), :class => "collGroup"  %></li>
+		 <% end %> 
+		 </ul>
+		</div>			    			  
+	    </div>
+       </td>
+       <td>
+        <div class="widgtContnt  colorWhite">
+		<h2 style="border-bottom: solid 1px #CBC5B1;">Top rated movies this decade</h2>
+		 <div id="divMiniCardCatalog"></div>
+		 <div id="divMiniCardCatalog">
+		 <ul class="ulHistRecs">
+		 <% for movie in @top_decade -%>
+		  <li><%= link_to "#{movie.name}", movie_path(movie), :class => "collGroup"  %></li>
+		 <% end %> 
+		 </ul>
+		</div>			    			  
+	    </div>
+       </td>
+       <td>
+ 		<div class="widgtContnt  colorWhite">
+		<h2 style="border-bottom: solid 1px #CBC5B1;">Top rated all time movies</h2>
+		 <div id="divMiniCardCatalog"></div>
+		 <div id="divMiniCardCatalog">
+		 <ul class="ulHistRecs">
+		 <% for movie in @top_all -%>
+		  <li><%= link_to "#{movie.name}", movie_path(movie), :class => "collGroup"  %></li>
+		 <% end %> 
+		 </ul>
+		</div>			    			  
+	    </div>
+       </td>
+      </tr>
+      </table>
+      </div>  
+      <br>
+      <!-- End Top movies list -->
+      
       <!-- latest movies div map --> 
       <div id="divMap" class="mapContent areaSection">
 		<div class="exploreLoc">
@@ -79,40 +129,23 @@
        <tr>
        <% for movie in @latest_movies -%>
        <td>
-       <div class="subCon subConGray" >
-				<div class="subConTL"></div>
-				<div class="subConT"></div>
-				<div class="subConTR"></div>
-				<div class="subConBd MapBody">
-					<h2><%=h movie.name[0..13] %>
-					<% if movie.name.size > 13 %>
-					<%= "..." %>
-					<% end %>
-					<% if movie.name.size < 14 %>
-					<% 	s = (14 - movie.name.size)%>
-					<%	s.times do |a| %><%= "&nbsp;" %><% end %></h2>
-					<% end %>
-					<div class="PictureBox">
+       <div class="padleft10">
+		 <div class="PictureBox padbot10">
 				  		<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
-				  		<img width="100" height="122" id="movie_picture" src="<%=h movie.image.url(:medium) %>" >
+				  		<img width="80" height="98" id="movie_picture" src="<%=h movie.image.url(:medium) %>" >
 				  		</a>
-					</div>
-					
-					<div class="list_rating">			
-						<%= ratings_for movie , :static %>
-					 </div>
-					<h3><%=h movie.year.year%></h3> 
-					<h3>Directed By</h3>
-					<% a = movie.artists.director[0] %>
-					<p><%=  (a == nil)? "N/A" : a.name[0..19]%></p>
-					<h3>Produced By</h3>
-					<% a = movie.artists.producer[0] unless movie.artists.producer == nil %>
-					<p><%=  (a == nil)? "N/A" : a.name[0..19]%></p>
-				</div>
-				<div class="subConBL"></div>
-				<div class="subConB"></div>
-				<div class="subConBR"></div>
-		</div>
+		 </div>
+         <span id="movie_title">
+           <%=h movie.name[0..15] %>
+			<% if movie.name.size > 15 %>
+			 <%= "..." %>
+			<% end %>
+			<% if movie.name.size < 16 %>
+			  <% 	s = (16 - movie.name.size)%>
+			  <%	s.times do |a| %><%= "&nbsp;" %><% end %>
+			<% end %>       
+		</span>
+	   </div>
        </td>
 	  <% end %>
        </tr>
@@ -145,19 +178,52 @@
 				<h2><center>Edits to the content</center></h2> 
 			</div>
 		  </div>
-	 </div> <!-- ritPan -->
+	 </div> 
+	 <!-- ritPan 1-->
 	 <br>
 	 <div class="ritPan mar20Top">
 	  <div class="rightContent">                
 		<div class="ancSecHd brown">
 			<div class="ancSecHdL"></div>
  			<div class="ancSecHdM">
-				<h1><span class="left">Top Contributers</span></h1>
+				<h1><span class="left">Latest Edits</span></h1>
 			</div>
 			<div class="ancSecHdR"></div>
-			</div>
+		</div>
+			<!-- Movie edits -->
 			<div class="widgtContnt  colorWhite">
-				<h2>Top Editors </h2>
+				<h2>Latest Movie Edits </h2>
+			    <div id="divMiniCardCatalog"></div>
+			    <!-- user list-->
+			    <% for movie in @recently_edited -%>			  
+			   <div class="subCon subConGray">
+                            <div class="subConTL"></div>
+                            <div class="subConT"></div>
+                            <div class="subConTR"></div>
+                            <div class="subConBd MapBody">
+								<ul>
+									<li class="pImg dfemale">
+									<div class="defaultImg mediumSmImg">
+									 <span><img width="42" height="42" id="" src="<%=h movie.image.url(:thumb) %>" ></span>
+									</div>
+									</li>
+								</ul>
+								<div class="padleft30">
+								  <h3><%= movie.name[0..30] %></h3>
+								  <p>Last edited <%= movie.updated_at.to_date.to_formatted_s(:long)%></p> 
+								 </div>                              
+                            </div>
+                            <div class="subConBL"></div>
+                            <div class="subConB"></div>
+                            <div class="subConBR"></div>
+                </div>			    
+			 <% end %>
+			 <!-- user list -->
+			</div>
+			<!-- end movie edits -->
+						<!-- Movie edits -->
+			<div class="widgtContnt  colorWhite">
+				<h2>Top Contributers </h2>
 			    <div id="divMiniCardCatalog"></div>
 			    <!-- user list-->
 			   <% @user = User.find(:all, :limit => 3) %>
@@ -168,26 +234,30 @@
                             <div class="subConTR"></div>
                             <div class="subConBd MapBody">
 								<ul>
-								<li class="pImg dfemale">
-								<div class="defaultImg mediumSmImg">
-								 <span><img width="42" height="42" id="" src="<%=h u.image.url(:thumb) %>" ></span>
-								</div>
-								</li>
+									<li class="pImg dfemale">
+									<div class="defaultImg mediumSmImg">
+									 <span><img width="42" height="42" id="" src="<%=h u.image.url(:thumb) %>" ></span>
+									</div>
+									</li>
 								</ul>
-							<div class="padleft30">
-							<h3><%= u.username %></h3>
-							<p>Active since <%= u.created_at.to_date.to_formatted_s(:long)%></p> </div>                              
+								<div class="padleft30">
+								  <h3><%= u.username %></h3>
+								  <p>Active since <%= u.created_at.to_date.to_formatted_s(:long)%></p> 
+								 </div>                              
                             </div>
                             <div class="subConBL"></div>
                             <div class="subConB"></div>
                             <div class="subConBR"></div>
-                        </div>
-			    
-			    <% end %>
-			    <!-- user list -->
+                </div>			    
+			 <% end %>
+			 <!-- user list -->
 			</div>
-		  </div>
-	 </div> <!-- ritPan -->
+			<!-- end movie edits -->
+			
+		</div>
+	 </div> <!-- ritPan 1 -->
+	 
+	
 	 
 	</div>
     <div class="bottom"></div>
