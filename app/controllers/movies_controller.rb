@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
   # GET /movies.js
   def index
    @movies = Movie.find(:all, :limit => 4, :conditions => 'rating > 4', :order => 'rating DESC')
-   @latest_movies = Movie.find(:all, :limit => 5, :conditions => ['rating > 4 and year between ? and ?', Date.today.beginning_of_year(), Date.today], :order => 'year DESC')
+   @latest_movies = Movie.find(:all, :limit => 5, :conditions => ['rating > 3 and year between ? and ?', Date.today.beginning_of_year(), Date.today], :order => 'rating DESC, year DESC')
    @recently_edited =  Movie.find(:all, :limit => 4, :order => 'updated_at DESC')
    @top_all = Movie.find(:all, :limit => 10, :conditions => 'rating > 4', :order => 'rating DESC')
    @top_this_year = Movie.find(:all, :limit => 10, :conditions => ['year > ?', Date.today.beginning_of_year()], :order => 'rating DESC')
