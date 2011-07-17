@@ -136,14 +136,10 @@
 			</a>
 		 </div>
          <span id="movie_title">
-           <%=h movie.name[0..15] %>
-			<% if movie.name.size > 15 %>
-			 <%= "..." %>
+           <%=h movie.name[0..12] %>
+			<% if movie.name.size > 12 %>
+			 <%= ".." %>
 			<% end %>
-			<% if movie.name.size < 16 %>
-			  <% 	s = (16 - movie.name.size)%>
-			  <%	s.times do |a| %><%= "&nbsp;" %><% end %>
-			<% end %>       
 		</span>
 	   </div>
        </td>
