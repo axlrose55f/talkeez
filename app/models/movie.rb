@@ -104,7 +104,7 @@ end
 
       
 has_attached_file :image, 
-				  :styles => { :medium => {:geometry => "175x175", :format => 'png'}, 
+				  :styles => { :medium => {:geometry => "200x200", :format => 'png'}, 
 				               :thumb =>  {:geometry =>"80x80>" , :format => 'png'}
 				             },
 				  :default_url => "/data/images/:class/default/:style_missing_movie.png",           

@@ -34,9 +34,9 @@
 					<% 	s = (14 - movie.name.size)%>
 					<%	s.times do |a| %><%= "&nbsp;" %><% end %></h2>
 					<% end %>
-					<div class="PictureBox">
+					<div class="moviePictureBox mar5Top">
 				  		<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
-				  		<img width="100" height="122" id="movie_picture" src="<%=h movie.image.url(:medium) %>" >
+				  		<img width="120" height="150" id="movie_picture" src="<%=h movie.image.url(:medium) %>" >
 				  		</a>
 					</div>
 					
@@ -132,7 +132,7 @@
        <div class="padleft10">
 		 <div class="PictureBox padbot10">
 			<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
-			<img width="80" height="98" id="movie_picture" src="<%=h movie.image.url(:medium) %>" >
+			<img width="80" height="98" id="artist_picture" src="<%=h movie.image.url(:medium) %>" >
 			</a>
 		 </div>
          <span id="movie_title">

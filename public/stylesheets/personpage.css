@@ -127,10 +127,10 @@ h2 { font: bold 1.62em "Trebuchet MS", Verdana, Arial, sans-serif; * font-size: 
 html:first-child .rndSecLLFTIE8 { margin-top: 7px; }
 html:first-child .rndSecLRTIE8 { margin-top: 7px; }
 
-.sidebarDivULFT { background:transparent url(/images/curves/rndsidebarDivUpperLft.gif) no-repeat scroll left top; width: 5px; height: 5px; float: left; margin:-7px 0 0 -7px; * margin:-7px 0 0 -6px; * left: -1px; * display: inline-block; * position: relative; _left: 5px; }
-.sidebarDivURt { background:transparent url(/images/curves/rndsidebarDivUpperRt.gif) no-repeat scroll right top; width: 5px; height: 5px; float: right; margin:-7px -7px 0 0; * right: -2px; * display: inline-block; * position: relative; _right: 4px; }
-.sidebarDivLLFT { background:transparent url(/images/curves/rndsidebarDivLowerLft.gif) no-repeat scroll left bottom; width: 5px; height: 5px; float: left; margin: 1px 0 0 -7px; * margin: 1px 0 0 -6px; * left: -1px; * bottom: -1px; * display: inline-block; * position: relative; _bottom: 3px; _left: 5px; }
-.sidebarDivLRT { background:transparent url(/images/curves/rndsidebarDivLowerRt.gif) no-repeat scroll right bottom; width: 5px; height: 5px; float: right; margin: 1px -7px 0 0; * right: -2px; * bottom: -1px; * display: inline-block; * position: relative; _bottom: 3px; _right: 4px; }
+.sidebarDivULFT { background:transparent url(/images/curves/rndsidebarDivUpperLft.gif) no-repeat scroll left top; width: 5px; height: 5px; float: left; margin:-6px 0 0 -6px; * margin:-7px 0 0 -6px; * left: -1px; * display: inline-block; * position: relative; _left: 5px; }
+.sidebarDivURt { background:transparent url(/images/curves/rndsidebarDivUpperRt.gif) no-repeat scroll right top; width: 5px; height: 5px; float: right; margin:-6px -6px 0 0; * right: -2px; * display: inline-block; * position: relative; _right: 4px; }
+.sidebarDivLLFT { /*background:transparent url(/images/curves/rndsidebarDivLowerLft.gif)*/ no-repeat scroll left bottom; width: 5px; height: 5px; float: left; margin: 1px 0 0 -6px; * margin: 1px 0 0 -6px; * left: -1px; * bottom: -1px; * display: inline-block; * position: relative; _bottom: 3px; _left: 5px; }
+.sidebarDivLRT { /*background:transparent url(/images/curves/rndsidebarDivLowerRt.gif)*/ no-repeat scroll right bottom; width: 5px; height: 5px; float: right; margin: 1px -7px 0 0; * right: -2px; * bottom: -1px; * display: inline-block; * position: relative; _bottom: 3px; _right: 4px; }
 .sidebarDivULFTFix { margin-top: -7px; * margin-top: -7px; }
 .sidebarDivURtFix { margin-top: -7px; * margin-top: -7px; }
 .sidebarDivULFTFix2 { margin-top: -6px; * margin-top: -7px; }
