@@ -5,5 +5,6 @@ class MovieRole < ActiveRecord::Base
  belongs_to :role
  
  attr_accessor :movie_name
- attr_accessor :artist_name  
+ attr_accessor :artist_name
+ attr_accessor :origin
 end

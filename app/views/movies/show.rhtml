@@ -94,16 +94,21 @@
 			   <div id="cast1" class="">
 				<table><tbody>
 			     <tr>
-			     <% for artist in @movie.artists.lead %>
+			     <% @cast_list =  @movie.artists.lead %>
+			     <% @cast_list = @movie.artists.artist unless !@cast_list.empty? %>
+			     <% for artist in @cast_list[0..8] %>
 				  <td><a id="addMainPhotoLnk">
 				  <img width="60" height="60" id="profile_picture" style="border-width: 0px;" 
 				       src="<%=h artist.image.url(:thumb) %>"/></a>
-				   <br/><center><em class="noItemAdded"><a href="/artists/<%= artist.id%>" class="show-link"><%=h artist.name %></a></em></center>
+				   <br/><center><em class="noItemAdded"><a href="/artists/<%= artist.id%>" class="show-link"><%=h artist.name[0..9] %></a></em></center>
 				   </td>
 			      <% end%>
 				</tr>
 				</tbody></table>
 				<br>
+				<div id="add_video_link" class="add_video_link" >
+				  <%= "<a href=\"/movies/#{@movie.id}/showcast\">See All</a>" unless @cast_list.empty? %>
+    			</div>
 			   </div>
 			</div>
 			

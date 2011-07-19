@@ -6,55 +6,35 @@
     <div class="top"></div>
 	<div class="content clearfix">
   	 <div class="lefPan">
-	 <!-- Top Movies divMap -->
-	 <div id="divMap" class="mapContent areaSection mar20Bot">
+  	 
+  	       <!-- latest movies div map --> 
+      <div id="divMap" class="mapContent areaSection">
 		<div class="exploreLoc">
 	      <div class="ancSecHd">
 			<div class="ancSecHdL"></div>
 			<div class="ancSecHdM">
-			 <h1>Top Rated Movies</h1>
+			 <h1>Latest Movies</h1>
 			</div>
 			<div class="ancSecHdR"></div>
           </div>
        <div class="widgtContnt">
        <table>
        <tr>
-       <% for movie in @movies -%>
+       <% for movie in @latest_movies -%>
        <td>
-       <div class="subCon subConGray" >
-				<div class="subConTL"></div>
-				<div class="subConT"></div>
-				<div class="subConTR"></div>
-				<div class="subConBd MapBody">
-					<h2><%=h movie.name[0..13] %>
-					<% if movie.name.size > 13 %>
-					<%= "..." %>
-					<% end %>
-					<% if movie.name.size < 14 %>
-					<% 	s = (14 - movie.name.size)%>
-					<%	s.times do |a| %><%= "&nbsp;" %><% end %></h2>
-					<% end %>
-					<div class="moviePictureBox mar5Top">
-				  		<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
-				  		<img width="120" height="150" id="movie_picture" src="<%=h movie.image.url(:medium) %>" >
-				  		</a>
-					</div>
-					
-					<div class="list_rating">			
-						<%= ratings_for movie , :static %>
-					 </div>
-					<h3><%=h movie.year.year%></h3> 
-					<h3>Directed By</h3>
-					<% a = movie.artists.director[0] %>
-					<p><%=  (a == nil)? "N/A" : a.name[0..19]%></p>
-					<h3>Produced By</h3>
-					<% a = movie.artists.producer[0] unless movie.artists.producer == nil %>
-					<p><%=  (a == nil)? "N/A" : a.name[0..19]%></p>
-				</div>
-				<div class="subConBL"></div>
-				<div class="subConB"></div>
-				<div class="subConBR"></div>
-		</div>
+       <div class="padleft10">
+		 <div class="PictureBox padbot10">
+			<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
+			<img width="80" height="98" id="artist_picture" src="<%=h movie.image.url(:medium) %>" >
+			</a>
+		 </div>
+         <span id="movie_title">
+           <%=h movie.name[0..12] %>
+			<% if movie.name.size > 12 %>
+			 <%= ".." %>
+			<% end %>
+		</span>
+	   </div>
        </td>
 	  <% end %>
        </tr>
@@ -63,6 +43,9 @@
        </div> <!-- widgtContnt -->
        </div> <!-- exploreLoc -->
       </div> <!-- div map -->
+  	 <br>
+  	 
+	
       
       <!-- Top movies list -->
       
@@ -114,34 +97,55 @@
       <br>
       <!-- End Top movies list -->
       
-      <!-- latest movies div map --> 
-      <div id="divMap" class="mapContent areaSection">
+ <!-- Top Movies divMap -->
+	 <div id="divMap" class="mapContent areaSection mar20Bot">
 		<div class="exploreLoc">
 	      <div class="ancSecHd">
 			<div class="ancSecHdL"></div>
 			<div class="ancSecHdM">
-			 <h1>Latest Movies</h1>
+			 <h1>Top Rated Movies</h1>
 			</div>
 			<div class="ancSecHdR"></div>
           </div>
        <div class="widgtContnt">
        <table>
        <tr>
-       <% for movie in @latest_movies -%>
+       <% for movie in @movies -%>
        <td>
-       <div class="padleft10">
-		 <div class="PictureBox padbot10">
-			<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
-			<img width="80" height="98" id="artist_picture" src="<%=h movie.image.url(:medium) %>" >
-			</a>
-		 </div>
-         <span id="movie_title">
-           <%=h movie.name[0..12] %>
-			<% if movie.name.size > 12 %>
-			 <%= ".." %>
-			<% end %>
-		</span>
-	   </div>
+       <div class="subCon subConGray" >
+				<div class="subConTL"></div>
+				<div class="subConT"></div>
+				<div class="subConTR"></div>
+				<div class="subConBd MapBody">
+					<h2><%=h movie.name[0..13] %>
+					<% if movie.name.size > 13 %>
+					<%= "..." %>
+					<% end %>
+					<% if movie.name.size < 14 %>
+					<% 	s = (14 - movie.name.size)%>
+					<%	s.times do |a| %><%= "&nbsp;" %><% end %></h2>
+					<% end %>
+					<div class="moviePictureBox mar5Top">
+				  		<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
+				  		<img width="120" height="150" id="movie_picture" src="<%=h movie.image.url(:medium) %>" >
+				  		</a>
+					</div>
+					
+					<div class="list_rating">			
+						<%= ratings_for movie , :static %>
+					 </div>
+					<h3><%=h movie.year.year%></h3> 
+					<h3>Directed By</h3>
+					<% a = movie.artists.director[0] %>
+					<p><%=  (a == nil)? "N/A" : a.name[0..19]%></p>
+					<h3>Produced By</h3>
+					<% a = movie.artists.producer[0] unless movie.artists.producer == nil %>
+					<p><%=  (a == nil)? "N/A" : a.name[0..19]%></p>
+				</div>
+				<div class="subConBL"></div>
+				<div class="subConB"></div>
+				<div class="subConBR"></div>
+		</div>
        </td>
 	  <% end %>
        </tr>

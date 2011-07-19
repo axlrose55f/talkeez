@@ -17,27 +17,35 @@
 	 	<a id="editProfileLink" href="/movies/<%= @movie.id%>/editartists?type=cast" title="Edit Cast">Edit Cast</a>
         </div>		
 		<% @casts = @movie.cast.cast_list(@movie.id) %>
-		<table><tbody>
 		 <% if @casts.empty? %>
-		  <tr>
-		  <td><h3> No Cast details Yet </h3></td>
-		  </tr>
+			<h3> No Cast details Yet </h3>
 		 <% else %> 
+		  <div id="artist_listing">
+		  <ul>
+		  <% count = 1 %>
 	      <% for cast in  @casts %>
-		  <% artist = Artist.find(cast.id) %>
-		  <tr>
-			<td>
-			 <a id="addMainPhotoLnk">
-			 <img width="50" height="50" id="profile_picture" style="border-width: 0px;" src="<%=h artist.image.url(:thumb) %>"/>
-			 </a>
-		   </td>
-		   <td>
-		    <h3><a href="/artists/<%= artist.id%>" class="show-link"><%=h cast.name %></a> as <%=h cast.role_name %></h3>
-		   </td>
-		  </tr>
-		  <% end%>
-		  <% end %>
-	</tbody></table>
+		   <% artist = Artist.find(cast.id) %>
+ 		  	 <li id="artist_item">
+ 		  	 <div id="filmography_<%= count += 1 %>">
+ 		  	  <div>
+ 		  	  <a id="addMainPhotoLnk">
+			   <img width="50" height="50" id="profile_picture" style="border-width: 0px;" src="<%=h artist.image.url(:thumb) %>"/>
+			  </a>	
+			  </div>
+		      <div id="detail">
+		        <h3><a href="/artists/<%= artist.id%>" class="show-link"><%=h cast.name %></a> 
+		        <br>as <%=h cast.role_name %></h3>
+		      </div>
+		      <span style="display:block;float:right; margin-right:-10px;margin-top:-13px;">
+  			   <%= link_to_remote "Edit", :update => "filmography_update_#{count}" , :url => edit_movie_role_path(:id => cast.mar_id), :with => "'num=#{count}&origin=movie'" ,:loaded => "$('filmography_#{count}').hide();$('filmography_update_#{count}').show();", :method => :get %>
+			  </span>
+		     </div>
+		     <div id="filmography_update_<%= count %>"></div>
+		     </li>
+		   <% end%>
+		   </ul>
+		  </div> 
+		<% end %>
 	<br>
 	</div> 	
 	<div class="persHeaderLLFT"> </div>

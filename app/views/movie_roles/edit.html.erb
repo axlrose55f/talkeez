@@ -5,9 +5,14 @@
   <div class="addNewCommentInner">
 <% form_for(@mar) do |f| %>
   <%= f.error_messages %>
+  <%= f.hidden_field :origin, :value => @origin %>
 	<h3>
 	<span><%=h @movie.year.to_datetime.to_s(:year) %></span>
-	<span><%= @movie.name %></span>
+	<% if @origin == "artist" %>
+		<span><%= @movie.name %></span>
+	<% elsif @origin == "movie" %>	
+		<span><%= @artist.name %></span>
+	<% end %>
 	<span id="select_role_menu2" style="padding-right:40px;">
 	 <%=f.collection_select(:role_id,@roles, :id, :name) 	%>
     </span>	

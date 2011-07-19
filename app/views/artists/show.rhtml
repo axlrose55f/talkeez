@@ -47,7 +47,7 @@
 			</div>
 			<div class="sectionContainer">
 			   <div id="cast1" class="">
-			   <% @movies = @artist.movies.first(10) %>
+			   <% @movies = @artist.movies.first(9) %>
 			   <% if ! @movies.empty? %>
 			   <table><tbody>
 			     <tr>
@@ -55,11 +55,15 @@
 				  <td><a id="addMainPhotoLnk">
 				  <img width="60" height="60" id="profile_picture" style="border-width: 0px;" 
 				       src="<%=h movie.image.url(:thumb) %>"/></a>
-				   <br/><center><em class="noItemAdded"><a href="/movies/<%= movie.id%>" class="show-link"><%=h movie.name %></a></em></center>
+				   <br/><center><em class="noItemAdded"><a href="/movies/<%= movie.id%>" class="show-link"><%=h movie.name[0..9] %></a></em></center>
 				   </td>
 			      <% end%>
 				</tr>
-				</tbody></table>	
+				</tbody></table>
+				<br><br>
+			    <div id="add_video_link" class="add_video_link" >
+				  <a href="/artists/<%= @artist.id %>/filmography">See All</a>
+    			</div>
 			   <% else %>			   
 				<em class="noItemAdded">No moive info has been added.</em>
 			   <% end %>	

@@ -8,6 +8,7 @@ class MovieRolesController < ApplicationController
 	  role = @mar.role
 	  @roles = Role.find(:all, :conditions => ['role_type = ?', role.role_type], :order => "name")
 	  @num = params["num"]
+	  @origin = params["origin"]
   end
  
  def new	  
@@ -66,15 +67,15 @@ class MovieRolesController < ApplicationController
 
   def update
 	  @mar = MovieRole.find(params[:id])
-	  @artist = @mar.artist	  
+	  @artist = @mar.artist
+	  @movie = @mar.movie
+	  origin = params[:movie_role][:origin]	  
 	  @mar.update_attributes(params[:movie_role])
-	#      if @mar.update_attributes(params[:movie_role])
-    #         flash[:notice] = 'Role was successfully updated.'        
-    #       else
-    #   		flash[:notice] = 'Role update failed.'
-    #       end
-	  
-	redirect_to filmography_artist_path(@artist)	  
+	  if origin == "artist"
+	  	 redirect_to filmography_artist_path(@artist)	  
+	  else
+	     redirect_to showcast_movie_path(@movie)
+	  end   
   end
 
 end
