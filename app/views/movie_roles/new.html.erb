@@ -9,14 +9,22 @@
     <% if(@movie != nil) %>
     <%= f.hidden_field :movie_id , :value => @movie.id  %>
     <% else %>
-    <%= f.label :movie_id  %> : <%=text_field_with_auto_complete :movie_role, :movie_name, { :size => 25 }, { :url => search_movies_path(:format => :js), :method => :get, :param_name => 'search' }%>
+    <%= f.label :movie_id  %> : <%=text_field_with_auto_complete :movie_role, 
+    															 :movie_name, 
+    															 { :size => 25,:autocomplete => 'off'}, 
+    															 { :url => search_movies_path(:format => :js), 
+    															   :method => :get, :param_name => 'search' } %>
     <% end %>
   </span>
   <span style="float:left;">
 	 <% if(@artist != nil) %>
       <%= f.hidden_field :artist_id , :value => @artist.id  %>
      <% else %>
-      <%= f.label :artist_id  %> : <%= f.text_field :artist_id %>
+      <%= f.label :artist_id  %> : <%= text_field_with_auto_complete :movie_role, 
+      																 :artist_name, 
+      																 {:size => 25,:autocomplete => 'off'}, 
+												  					 {:url => search_artists_path(:format => :js), 
+												  					  :method => :get,:param_name => 'search'} %>
      <% end %>
   </span>
   <span style="float:left;padding-left:10px;margin-top:-5px;">

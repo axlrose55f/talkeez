@@ -91,24 +91,25 @@
 				
 			</div>
 			<div class="sectionContainer">
-			   <div id="cast1" class="">
+			   <div id="cast1" class="castPics">
 				<table><tbody>
 			     <tr>
 			     <% @cast_list =  @movie.artists.lead %>
 			     <% @cast_list = @movie.artists.artist unless !@cast_list.empty? %>
-			     <% for artist in @cast_list[0..8] %>
-				  <td><a id="addMainPhotoLnk">
-				  <img width="60" height="60" id="profile_picture" style="border-width: 0px;" 
-				       src="<%=h artist.image.url(:thumb) %>"/></a>
-				   <br/><center><em class="noItemAdded"><a href="/artists/<%= artist.id%>" class="show-link"><%=h artist.name[0..9] %></a></em></center>
+			     <% for artist in @cast_list[0..7] %>
+				  <td><a id="addMainPhotoLnk" class="items" href="<%= artist_path(artist) %>">
+				  <img width="75" height="100" id="profile_picture" style="border-width: 0px;" 
+				       src="<%=h artist.image.url(:thumb) %>"/></a>			
+				   <br/><center><a href="<%= artist_path(artist)%>" class="items"><%=h artist.name[0..13] %></a></center>
 				   </td>
 			      <% end%>
 				</tr>
 				</tbody></table>
 				<br>
-				<div id="add_video_link" class="add_video_link" >
-				  <%= "<a href=\"/movies/#{@movie.id}/showcast\">See All</a>" unless @cast_list.empty? %>
+				<div id="see_all_cast" class="add_video_link" >
+				  <%= "<a href=\"/movies/#{@movie.id}/showcast\">See complete cast list</a>" unless @cast_list.empty? %>
     			</div>
+    			<br>
 			   </div>
 			</div>
 			
@@ -128,12 +129,16 @@
 
 			   <% if @revs.empty? %> 
 			    <em class="noItemAdded">No Reviews has been added.</em>
+			    <br>
+                <div id="add_review_link" class="add_video_link" >
+				  <%= '<a href="' + editreviews_movie_path(@movie) + '">Add review</a>'  unless @cast_list.empty? %>
+    		    </div>
 			   <% else %> 
 			   <ul id="commentRow" class="firstItem">
 				 <% for review in @revs %>
-				 <li class="comment title">
-				  <a href="/movies/<%= @movie.id%>/reviews" id="viewCommentLink">
+				 <li class="comment padtop10">
 				  <em class="flat_icon">&nbsp;</em>
+				  <a href="/movies/<%= @movie.id%>/reviews" id="viewCommentLink">				  
 				  <span><%=h review.title %></span></a>
 				  </li>
 				  <li class="addedBy">
@@ -148,8 +153,12 @@
 				  </li>
 				  <% end %>
 				</ul>
+                <br>
+                <div id="see_all_reviews" class="add_video_link" >
+				  <%= '<a href="' + editreviews_movie_path(@movie) + '">See all review</a>'  unless @cast_list.empty? %>
+    		    </div>
 			   <% end %> 
-               <br>
+    		   <br>
 			   </div>
 			</div>
 			<div class="rndSecLLFT"> </div>
@@ -164,7 +173,7 @@
 				
 			</div>
 			<div class="sectionContainer">
-			   <div id="Awards1" class="">
+			   <div id="Awards1" class="padtop10 padbot10">
 			   <% @awards = @movie.awards %>
 			   <% if ! @awards.empty? %>
 			   <table><tbody>			     			     
@@ -200,7 +209,7 @@
 				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Videos <%=h "(#{@videos.size.to_s})" unless @videos.empty?  %></h2>				
 			</div>
 			<div class="sectionContainer">
-			   <div id="Videos1" class="">							   
+			   <div id="Videos1" class="padtop10 padbot10">							   
 					<% if ! @videos.empty? %>
 					  <table width="100%"><tbody>			     			     
 					 <tr>					 
@@ -214,10 +223,23 @@
 					<% else %>
 					<em class="noItemAdded">No Videos have been added.</em>
 					<% end %>
-					<br>
-			       <div id="add_video_link" class="add_video_link">
-					 <a href="/movies/<%= @movie.id%>/videos">Add Video</a> 
-	   			   </div>
+					<div id="add_video_link" class="add_video_link">
+					 <a href="" onclick="Effect.toggle('addVideo', 'appear');$('add_video_link').hide();return false;">Add Video</a> 
+				    </div>
+				   <div class="addVideo" id="addVideo" style="display:none">
+				   <% form_for( @movie, :url => {:action => :addVideo}, :html => { :name => "addVideoForm"} ) do |f| %>	
+					<%= f.text_field :video_url , :value => "Enter a video url" ,:class=> "inputVideoUrl",  :size => "120", 
+									 :onfocus=> "if(this.value=='Enter a video url'){this.value='';this.style.color='#000';this.style.fontStyle='normal';}", 
+									 :onblur=> "if(this.value==''){this.style.color='#aaa';this.style.fontStyle='italic';this.value='Enter a video url';}"%>
+					 <div class="addPlusButtonDiv">
+					  <a href="javascript:if(($('movie_video_url').value !='Enter a video url') && ($('movie_video_url').value !='')){document.addVideoForm.submit();}else{alert('Please enter a valid url')}" class="gbtn med-gray">
+					   <em style="background-position: 100% 0%; ">
+						<span class="flat_icon add_white_small mar7Top"></span>Add Video
+					   </em>
+					  </a>
+					</div>
+				   <%end %>
+				   </div>
 	   			   	<br>
 			    </div>
  			</div>

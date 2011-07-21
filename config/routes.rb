@@ -64,6 +64,7 @@ ActionController::Routing::Routes.draw do |map|
                                        :addCastDetail => :put,
                                        :addAward => :put,
                                        :videos => :get,
+                                       :addVideo => :put,  
                                        :rate => :post,
                                        :editArtistRole => :get,
                                        :updateArtistRole => :put} ,

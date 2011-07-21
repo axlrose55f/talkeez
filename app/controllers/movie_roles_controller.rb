@@ -55,7 +55,7 @@ class MovieRolesController < ApplicationController
     if(movie != nil)
        redirect_to filmography_artist_path(:id => artist_id)
     elsif (artist != nil)
-       redirect_to editartists_movie_path(:id => movie_id)	 
+       redirect_to showcast_movie_path(:id => movie_id)	 
     end
     
   end

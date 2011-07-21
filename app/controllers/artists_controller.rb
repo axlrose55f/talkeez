@@ -151,7 +151,22 @@ class ArtistsController < ApplicationController
     end
   end
   
-  
+    #### Add Video ####
+  def addVideo
+    @artist = Artist.find(params[:id])
+    video_url = params[:artist][:video_url]
+    if(video_url != nil)
+      video = Video.create_with_url(video_url)
+      begin      
+      	@artist.videos << video
+      rescue Exception => e
+       if e.is_a? ActiveRecord::StatementInvalid
+         logger.debug("trying to add duplicate entry")
+       end
+      end
+    end  
+    redirect_to(:action => :videos)
+  end
   
   ######## Movies ##############
    

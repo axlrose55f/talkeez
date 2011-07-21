@@ -1,4 +1,5 @@
 <!-- Content Menu -->
+<% javascript 'dynamic_roles' %>
 <%= render(:partial => "contentMenu" , :object => @movie, :locals => { :tab => "cast"} )%>
 
 <div id="yui-main" style="">
@@ -12,10 +13,11 @@
 	<div class="persHeaderURt"> </div>
 	<div id="movie_cast" class="">
 		<h2>Cast details for - <%=h @movie.name%></h2><br>
-		<div id="editCast" style="float:right; posiiton:relative;">
+		<div id="addCast" style="float:right; posiiton:relative;">
 		<img src="/images/edit.gif"></img>
-	 	<a id="editProfileLink" href="/movies/<%= @movie.id%>/editartists?type=cast" title="Edit Cast">Edit Cast</a>
-        </div>		
+	 	<%= link_to_remote "Add Role", :update => "editArtistRole", :url => new_movie_role_path(:movie_id => @movie.id), :with => "'div_name=editArtistRole'", :loaded => "$('addCast').hide();$('editArtistRole').show();" ,:method => :get %>
+        </div>
+        <div id="editArtistRole"></div> 
 		<% @casts = @movie.cast.cast_list(@movie.id) %>
 		 <% if @casts.empty? %>
 			<h3> No Cast details Yet </h3>
@@ -27,15 +29,28 @@
 		   <% artist = Artist.find(cast.id) %>
  		  	 <li id="artist_item">
  		  	 <div id="filmography_<%= count += 1 %>">
+
+<%
+=begin
+%>
  		  	  <div>
- 		  	  <a id="addMainPhotoLnk">
-			   <img width="50" height="50" id="profile_picture" style="border-width: 0px;" src="<%=h artist.image.url(:thumb) %>"/>
+ 		  	  <a id="1addMainPhotoLnk">
+			   <img width="15" height="20" id="1profile_picture" style="border-width: 0px;" src="<%=h artist.image.url(:thumb) %>"/>
 			  </a>	
 			  </div>
-		      <div id="detail">
-		        <h3><a href="/artists/<%= artist.id%>" class="show-link"><%=h cast.name %></a> 
-		        <br>as <%=h cast.role_name %></h3>
+
+<%
+=end
+%>
+			  <h3>
+		      <div class="castlistleft">
+		        <a href="/artists/<%= artist.id%>" class="show-link"><%=h cast.name %></a>
 		      </div>
+		      <div style="clear:both;"></div>&nbsp;
+		      <div class="castlistright">
+		        as <%=h cast.role_name %>
+		      </div>
+		      </h3>
 		      <span style="display:block;float:right; margin-right:-10px;margin-top:-13px;">
   			   <%= link_to_remote "Edit", :update => "filmography_update_#{count}" , :url => edit_movie_role_path(:id => cast.mar_id), :with => "'num=#{count}&origin=movie'" ,:loaded => "$('filmography_#{count}').hide();$('filmography_update_#{count}').show();", :method => :get %>
 			  </span>
@@ -58,33 +73,30 @@
 	<div class="persHeaderURt"> </div>
     <div id="movie_cast" class="">
     <h2>Crew details for - <%=h @movie.name%></h2><br>
-  		<div id="editCast" style="float:right; posiiton:relative;">
-		<img src="/images/edit.gif"></img>
-	 	<a id="editProfileLink" href="/movies/<%= @movie.id%>/editartists?type=crew" title="Edit Cast">Edit Crew</a>
-        </div>
-
         <% @crews = @movie.cast.crew_list(@movie.id) %>
-		<table><tbody>
+        <ul>
 		 <% if @crews.empty? %>
-		  <tr>
-		  <td><h3> No Crew details Yet </h3></td>
-		  </tr>
-		 <% else %> 
+		  <li id="artist_item"><h3> No Crew details Yet </h3></li>
+		 <% else %>
 		  <% for crew in @crews %>
 		  <% artist = Artist.find(crew.id) %>
-		  <tr>
-			<td>
-			 <a id="addMainPhotoLnk">
-			 <img width="50" height="50" id="profile_picture" style="border-width: 0px;" src="<%=h artist.image.url(:thumb) %>"/>
-			 </a>
-		   </td>
-		   <td>
-		    <h3><a href="/artists/<%= artist.id%>" class="show-link"><%=h crew.name %></a> as <%=h crew.role_name %></h3>
-		   </td>
-		  </tr>
+		   <li>
+		   <div id="filmography_<%= count += 1 %>">
+		    <h3>
+		    <div class="crewlistleft"><a href="/artists/<%= artist.id%>" class="show-link"><%=h crew.name %></a>&nbsp;&nbsp;&nbsp;:</div>
+		    <div style="clear:both;"></div>&nbsp;
+		    <div class="castlistright"> <%=h crew.role_name %></div>
+		    </h3>
+		    <span class="crewEdit">
+  			   <%= link_to_remote "Edit", :update => "filmography_update_#{count}" , :url => edit_movie_role_path(:id => cast.mar_id), :with => "'num=#{count}&origin=movie'" ,:loaded => "$('filmography_#{count}').hide();$('filmography_update_#{count}').show();", :method => :get %>
+			</span>
+			</div>
+			 <div id="filmography_update_<%= count %>"></div>
+		     </li>
+		   </li>
 		  <% end %>	
 		 <% end %> 
-	</tbody></table>
+	</ul>
 	<br>
     </div>
 	<div class="persHeaderLLFT"> </div>

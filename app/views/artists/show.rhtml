@@ -46,24 +46,25 @@
 				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Filmography</h2>
 			</div>
 			<div class="sectionContainer">
-			   <div id="cast1" class="">
-			   <% @movies = @artist.movies.first(9) %>
+			   <div id="cast1" class="moviePics">
+			   <% @movies = @artist.movies.first(8) %>
 			   <% if ! @movies.empty? %>
 			   <table><tbody>
 			     <tr>
 			     <% for movie in @movies %>
-				  <td><a id="addMainPhotoLnk">
-				  <img width="60" height="60" id="profile_picture" style="border-width: 0px;" 
+				  <td><a id="addMainPhotoLnk" class="items" href="<%= movie_path(movie)%>" >
+				  <img width="75" height="100" id="profile_picture" style="border-width: 0px;" 
 				       src="<%=h movie.image.url(:thumb) %>"/></a>
-				   <br/><center><em class="noItemAdded"><a href="/movies/<%= movie.id%>" class="show-link"><%=h movie.name[0..9] %></a></em></center>
+				   <br/><center><a href="<%= movie_path(movie)%>" class="items"><%=h movie.name[0..9] %></a></center>
 				   </td>
 			      <% end%>
 				</tr>
 				</tbody></table>
-				<br><br>
-			    <div id="add_video_link" class="add_video_link" >
-				  <a href="/artists/<%= @artist.id %>/filmography">See All</a>
+				<br>
+			    <div id="see_all_movies" class="add_video_link" >
+				  <a href="/artists/<%= @artist.id %>/filmography">See complete list</a>
     			</div>
+    			<br>
 			   <% else %>			   
 				<em class="noItemAdded">No moive info has been added.</em>
 			   <% end %>	
@@ -71,23 +72,7 @@
 			</div>
 			<div class="rndSecLLFT"> </div>
 			<div class="rndSecLRT"> </div>
-		</div>
-		<div class="clearDiv"></div>		
-	    <div id="Reviews" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
-			<div class="rndSecULFT"> </div>
-			<div class="rndSecURt"> </div>  
-			<div class="sectionBG">
-				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Reviews</h2>
-
-			</div>
-			<div class="sectionContainer">
-			   <div id="reviews1" class="">
-				<em class="noItemAdded">No Reviews has been added.</em>
-			   </div>
-			</div>
-			<div class="rndSecLLFT"> </div>
-			<div class="rndSecLRT"> </div>
-		</div>
+		</div>		
 		<div class="clearDiv"></div>		
 	    <div id="Awards" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
 			<div class="rndSecULFT"> </div>
@@ -97,7 +82,7 @@
 
 			</div>
 			<div class="sectionContainer">
-			   <div id="Awards1" class="">
+			   <div id="Awards1" class="padtop10 padbot10">
 			   <% @awards = @artist.awards %>
 			   <% if ! @awards.empty? %>
 			   <table><tbody>
@@ -124,7 +109,24 @@
 			<div class="rndSecLRT"> </div>
 		</div>
 		<div class="clearDiv"></div>		
+	    <div id="Pictures" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+			<div class="rndSecULFT"> </div>
+			<div class="rndSecURt"> </div>  
+			<div class="sectionBG">
+				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Pictures</h2>
+
+			</div>
+			<div class="sectionContainer">
+			   <div id="reviews1" class="padtop10 padbot10">
+				<em class="noItemAdded">No Pictures have been added.</em>
+			   </div>
+			</div>
+			<div class="rndSecLLFT"> </div>
+			<div class="rndSecLRT"> </div>
+		</div>
+		<div class="clearDiv"></div>		
 	    <div id="Videos" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+			<% @videos = @artist.videos %>	
 			<div class="rndSecULFT"> </div>
 			<div class="rndSecURt"> </div>  
 			<div class="sectionBG">
@@ -132,8 +134,38 @@
 
 			</div>
 			<div class="sectionContainer">
-			   <div id="Videos1" class="">
-				<em class="noItemAdded">No Videos has been added.</em>
+			   <div id="Videos1" class="padtop10 padbot10">
+				<% if ! @videos.empty? %>
+					  <table width="100%"><tbody>			     			     
+					 <tr>					 
+					 <% for video in @videos[0..4] %>
+					  <td>
+					  <a id="youtubeLnk" href="<%= videos_artist_path(@artist)%>"> <img width="120" height="90" id="youtube_thumb" src="http://img.youtube.com/vi/<%=h video.url %>/1.jpg"/></a>					
+					  </td>	
+					  <% end %>				
+					 </tr>
+					</tbody></table>
+					<% else %>
+					<em class="noItemAdded">No Videos have been added.</em>
+					<% end %>
+					<div id="add_video_link" class="add_video_link">
+					 <a href="" onclick="Effect.toggle('addVideo', 'appear');$('add_video_link').hide();return false;">Add Video</a> 
+				    </div>
+				   <div class="addVideo" id="addVideo" style="display:none">
+				   <% form_for( @artist, :url => {:action => :addVideo}, :html => { :name => "addVideoForm"} ) do |f| %>	
+					<%= f.text_field :video_url , :value => "Enter a video url" ,:class=> "inputVideoUrl",  :size => "120", 
+									 :onfocus=> "if(this.value=='Enter a video url'){this.value='';this.style.color='#000';this.style.fontStyle='normal';}", 
+									 :onblur=> "if(this.value==''){this.style.color='#aaa';this.style.fontStyle='italic';this.value='Enter a video url';}"%>
+					 <div class="addPlusButtonDiv">
+					  <a href="javascript:if(($('artist_video_url').value !='Enter a video url') && ($('artist_video_url').value !='')){document.addVideoForm.submit();}else{alert('Please enter a valid url')}" class="gbtn med-gray">
+					   <em style="background-position: 100% 0%; ">
+						<span class="flat_icon add_white_small mar7Top"></span>Add Video
+					   </em>
+					  </a>
+					</div>
+				   <%end %>
+				   </div>
+	   			   	<br>
 			   </div>
 			</div>
 			<div class="rndSecLLFT"> </div>
