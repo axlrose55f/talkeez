@@ -47,7 +47,7 @@ has_many :artists, :through => :movie_roles do
   end
   def cast_type(type)
     casts = Role.find(:all, :conditions => [ "role_type in (?)", type], :select => "id")
-    find :all, :conditions => ['role_id in (?)', casts]
+    find :all, :conditions => ['role_id in (?)', casts],  :order => 'role_id ASC'
   end
   
   def cast

@@ -95,7 +95,7 @@
 				<table><tbody>
 			     <tr>
 			     <% @cast_list =  @movie.artists.lead %>
-			     <% @cast_list = @movie.artists.artist unless !@cast_list.empty? %>
+			     <% @cast_list.concat(@movie.artists.artist)  %>
 			     <% for artist in @cast_list[0..7] %>
 				  <td><a id="addMainPhotoLnk" class="items" href="<%= artist_path(artist) %>">
 				  <img width="75" height="100" id="profile_picture" style="border-width: 0px;" 
