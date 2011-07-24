@@ -11,9 +11,9 @@
 
 		<h1><%=h @artist.name%></h1>
 
-		<h3>Plot Summary:</h3>
+		<h3>Artist Biography:</h3>
 		<div id="artist_description" style="height:40%;">
-		<%=h  @artist.biography[0..500] unless (@artist.biography == nil || @artist.biography.length < 500)%>
+		<%=h  @artist.biography[0..500] unless @artist.biography.nil? %>
 		<%=h  "..." unless (@artist.biography == nil || @artist.biography.length < 500)%> 
 		</div>
 		<div id="artist_description_full" style="display:none;">

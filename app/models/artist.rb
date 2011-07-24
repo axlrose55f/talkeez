@@ -6,6 +6,9 @@ class Artist < ActiveRecord::Base
   # Attach videos using video_attachments plugin
   video_attachments
 
+# has an auditor for modifications
+has_auditor :class_name => 'Audit'
+
   attr_accessor :movie_name
   
   has_many :awards,

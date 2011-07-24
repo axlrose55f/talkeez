@@ -24,6 +24,14 @@
 			<li <% if tab == "friends" %> class="activeTab" <% end %> >
 				<a href="/users/<%= @user.id%>/friends">Friends</a>
 			</li>
+			<% has_role? :admin do %>
+			<li <% if tab == "accounts" %> class="activeTab" <% end %> >
+			   <a href="/users/<%= @user.id%>/accounts">Accounts</a>
+		    </li>
+			<li <% if tab == "audits" %> class="activeTab" <% end %> >
+			   <a href="/users/<%= @user.id%>/audits">Audits</a>
+		    </li>
+		    <% end %>
 	
 	    </ul>
 		</div> <!-- end content_nav -->

@@ -1,0 +1,48 @@
+<!-- Content Menu -->
+<%= render(:partial => "contentMenu" , :object => @user, :locals => { :tab => "accounts"} )%>
+
+<div id="yui-main" style="">
+ <div id="person_header_container" class="yui-b container_green">
+
+	<div class="ylwBGULFT"> </div>
+	<div class="ylwBGURt"> </div>
+	<div class="persHeaderULFT"> </div>
+	<div class="persHeaderURt"> </div>
+	<div id="movie_cast" class="admin_lists">
+	 <h2>Manage Accounts</h2><br>
+	 <table class="adminTable">
+	 <tr>
+	  <td ><b>Id </b></td>
+	  <td ><b>Pic</b></td>
+	  <td ><b>Name</b></td>
+	  <td ><b>Email</b></td>
+	  <td ><b>Operations</b></td>
+     </tr>
+     <% for user in @users %>  
+	 <tr>
+	   <td><%=h  user.id %></td> 
+	   <td><a href="/users/<%= user.id%>" ><img width="50" height="50" id="artist_picture" src="<%=h user.image.url %>"/></a></td>
+	   <td><a href="/users/<%= user.id%>" ><%=h  user.username %></a></td>
+	   <td><%=h  user.email %></td>
+	   <td><%= link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete %></td>
+     </tr>
+     <% end %>
+    </table>
+    <br/>
+    <div class="addUser" style="float:right"%>
+	    <%= link_to 'New user', new_user_path %>
+    </div>
+    <br>
+    <br>
+	</div>
+	<div class="clearDiv"></div>
+	<div class="persHeaderLLFT"> </div>
+	<div class="persHeaderLRT"> </div>
+	<div class="ylwBGLLFT"> </div>
+	<div class="ylwBGLRT"> </div> 
+  </div> 
+</div>
+  
+
+<!-- Side Bar --> 
+<%= render(:partial => "sidebar", :object => @user )%>

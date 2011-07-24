@@ -39,13 +39,21 @@
         <div class="movie_content_area">
         <% if   @movie.rate_average == 0 %>
           <span class="subText liked_it">No Ratings</span>		
-  		<% elsif @movie.rate_average > 3.5 %>
+  		<% else %>
     	  <span class="meter  numeric"><%= @total_percentage_like%></span>
   		  <span class="subText liked_it">liked it</span>
+		<% end %>
+<%
+=begin
+%>
+
   		<% else %>
   		  <span class="meter  numeric"><%= @total_percentage_hate%></span>
   		  <span class="subText liked_it">hated it</span>  		
-		<% end %>
+<%
+=end
+%>
+
 		<p class="critic_stats">
    		    <br>Average Rating: <%= @movie.rate_average %>/5
 		    <br>User Ratings: <%= @movie.total_rates %>

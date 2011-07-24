@@ -1,0 +1,62 @@
+<!-- Content Menu -->
+<%= render(:partial => "contentMenu" , :object => @user, :locals => { :tab => "audits"} )%>
+
+<div id="yui-main" style="">
+ <div id="person_header_container" class="yui-b container_green">
+
+	<div class="ylwBGULFT"> </div>
+	<div class="ylwBGURt"> </div>
+	<div class="persHeaderULFT"> </div>
+	<div class="persHeaderURt"> </div>
+	<div id="movie_cast" class="admin_lists">
+	<h2>Manage Pending approvals</h2><br>
+	 <h3>
+	 <table class="adminTable" >
+     <tr>
+     <b>
+      <td>ID</td>
+      <td>Type</td>
+      <td>Type ID</td>
+      <td>Event</td>
+      <td>User</td>
+      <td>Created at</td>
+      <td>Updated at</td>
+	  <td>Approve </td>
+      <td>Reject</td>
+      </b>
+     </tr>
+     </h3>
+	 <% if @audits.empty? %>		
+	 <tr>
+	  <td colspan=9><h3> No pending edits </h3></td>
+	 </tr> 
+	  <% else %>	    
+	    <% @audits.each do |record| %>
+		   <tr>
+			 <td><%= link_to record.id, record %></td>
+			 <td><%= record.item_type %></td>
+			 
+			 <td><%= link_to record.item_id ,  "/#{record.item_type.pluralize.downcase}/#{record.item_id}" %></td>
+			 <td> <%= record.event %></td>
+			 <td> <%= record.whodunnit %>  </td>
+			 <td> <%= record.created_at %></td>
+			 <td> <%= record.updated_at %></td>
+			 <td><%= link_to 'Approve', approve_audit_path(record), :confirm => 'Are you sure?', :method => :put %></td>
+			 <td><%= link_to 'Reject', reject_audit_path(record), :confirm => 'Are you sure?', :method => :put %></td>
+		   </tr>
+	    <% end %>	   
+	  <% end %>
+	  </table>
+	<br/>
+	</div>
+	<div class="clearDiv"></div>
+	<div class="persHeaderLLFT"> </div>
+	<div class="persHeaderLRT"> </div>
+	<div class="ylwBGLLFT"> </div>
+	<div class="ylwBGLRT"> </div> 
+  </div> 
+</div>
+  
+
+<!-- Side Bar --> 
+<%= render(:partial => "sidebar", :object => @user )%>

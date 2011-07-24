@@ -9,6 +9,9 @@ acts_as_reviewable
 # Attach videos using video_attachments
 video_attachments
 
+# has an auditor for modifications
+has_auditor :class_name => 'Audit'
+
 attr_accessor :image_url
 attr_accessor :review_title
 attr_accessor :review_text

@@ -43,7 +43,11 @@ ActionController::Routing::Routes.draw do |map|
                                      :friends => :get,
                                      :artists => :get,
                                      :addRole => :put,
+                                     :audits => :get,
+                                     :accounts => :get,
                                      :deleteRole => :delete} 
+                                     
+  map.resources :audits , :member => {:approve => :put, :reject => :put }                                     
   map.resources :user_sessions
     
   map.login "login", :controller => "user_sessions", :action => "new"

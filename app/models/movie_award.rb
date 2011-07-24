@@ -5,7 +5,10 @@ class MovieAward < ActiveRecord::Base
  belongs_to :categories,
 			:class_name => "AwardCategories",
 			:foreign_key => "award_id"
-			
+
+  # has an auditor for modifications
+ has_auditor :class_name => 'Audit'
+ 
  def name
    categories.full_name
  end 

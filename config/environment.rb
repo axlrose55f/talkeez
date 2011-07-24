@@ -36,12 +36,12 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "aws-s3", :lib => "aws/s3"
+  # config.gem "mogli", :version => "0.0.28"
   config.gem "calendar_date_select"
   config.gem "authlogic", :version => '2.1.0'
   config.gem "ajaxful_rating", :version =>  '2.2.8.2'
-  config.gem "will_paginate", :version => '2.3.15'
-  config.gem "mogli", :version => "0.0.28"
-  
+  config.gem "will_paginate", :version => '2.3.15'  
+  config.gem 'paper_trail', :version => '~> 1'
   
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.

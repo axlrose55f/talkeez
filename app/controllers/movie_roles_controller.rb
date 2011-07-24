@@ -27,9 +27,16 @@ class MovieRolesController < ApplicationController
   
   def destroy
     @mar = MovieRole.find(params[:id])
+    origin = params[:origin]
     artist_id = @mar.artist.id
-    @mar.delete
-    redirect_to filmography_artist_path(:id => artist_id)  
+    movie_id = @mar.movie_id
+    @mar.log_destroy_for_audit
+    flash[:notice] = "Your requests for deletion was successfully submitted."
+    if origin && origin == "movie"
+     redirect_to showcast_movie_path(:id => movie_id)      
+    else
+     redirect_to filmography_artist_path(:id => artist_id)  
+    end
   end
   
   def create    

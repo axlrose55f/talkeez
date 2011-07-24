@@ -93,6 +93,8 @@ class ArtistsController < ApplicationController
   # GET /artists/1/edit
   def edit
     @artist = Artist.find(params[:id])
+    # If the data has been modified already, show the modified version
+    @artist = @artist.version.reify  unless @artist.live?
   end
 
   # POST /artists
@@ -133,7 +135,8 @@ class ArtistsController < ApplicationController
   # DELETE /artists/1.xml
   def destroy
     @artist = Artist.find(params[:id])
-    @artist.destroy
+    @artist.log_destroy_for_audit
+    flash[:notice] = "Your requests for deletion of #{@artist.name} was successfully submitted."
 
     respond_to do |format|
       format.html { redirect_to(artists_url) }

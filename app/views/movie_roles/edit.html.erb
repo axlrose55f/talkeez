@@ -20,7 +20,7 @@
      <%= f.submit "Update" %>
     </span>
     <span>
-       <%= link_to "Delete", movie_role_url(:id => @mar.id), :confirm => 'Are you sure?', :method => :delete %>
+       <%= link_to "Delete", movie_role_path(:id => @mar.id, :origin => @origin), :confirm => 'Are you sure?', :method => :delete %>
     </span>
 	<span>
        <%= link_to "Cancel", '#', :onclick => "$(filmography_update_#{@num}).hide();$(filmography_#{@num}).show();"  %>

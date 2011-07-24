@@ -34,7 +34,7 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @total_percentage_like = rate_percentage("like")
-    @total_percentage_hate = rate_percentage("hate")
+   # @total_percentage_hate = rate_percentage("hate")
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @movie }
@@ -94,7 +94,9 @@ class MoviesController < ApplicationController
 
   # GET /movies/1/edit
   def edit
-    @movie = Movie.find(params[:id])   
+    @movie = Movie.find(params[:id]) 
+    # If the data has been modified already, show the modified version
+    @movie = @movie.version.reify  unless @movie.live?
   end
 
   
@@ -144,70 +146,6 @@ class MoviesController < ApplicationController
     end
   end
   
-
-  #### Handle Artists  #####
-  
-    # GET /movies/1/edit
-  def editartists       
-    @movie = Movie.find(params[:id])   
-    #@artists = Artist.find(:all, :order => "name" )
-    type = params[:type]
-    @roles = Role.find(:all, :conditions => ['role_type = ?', type], :order => "name")
-    
-    if type == 'cast'
-     @artist_roles = @movie.cast.cast_list(@movie.id)
-    else
-     @artist_roles = @movie.cast.crew_list(@movie.id)
-    end
-    # @artists = Hash.new 
-    # @roles = Hash.new   
-    # Artist.find(:all, :order => "name" ).map {|u|  @artists[u.name] = u.id }
-    # Role.find(:all, :order => "name").map {|u| @roles[u.name] = u.id}
-  end
-  
-  # PUT /movies/1/updategenres
-  # PUT /movies/1.xml
-  def updateartists
-    @movie = Movie.find(params[:id])
-    movie_param = params[:movies]
-    @selected_artists = Array.new
-    movie_param[:artist_ids].each do |artist_id|       
-         @selected_artists << Artist.find(artist_id)       
-    end
-     @movie.artists = @selected_artists            
-    respond_to do |format|
-     format.html { redirect_to(:action => :showcast) }
-     format.xml  { head :ok }
-    end    
-  end
-  
-  # PUT /movies/1/updategenres
-  # PUT /movies/1.xml
-  def addCastDetail
-    @movie = Movie.find(params[:id])
-    @artist = Artist.find_by_name(params[:movie][:artist_name])
-    @role = Role.find(params[:movie][:roles])
-    movie_role = MovieRole.new
-    movie_role.movie = @movie
-    movie_role.artist = @artist
-    movie_role.role = @role
-    if movie_role.save    
-      redirect_to(:action => :showcast)
-    else
-      render :action => "editartists"       
-    end     
-  end
-  
- 
-  # DELETE /movies/1/deleteCastDetail
-  # DELETE /movies/1.xml
-  def deleteCastDetail
-    @movie = Movie.find(params[:id])
-    movie_role = MovieRole.find(params[:mar_id])
-    movie_role.destroy 
-    redirect_to(:action => :showcast)
-        
-  end
 
   #### Handle Genres  #####
   
@@ -362,8 +300,8 @@ class MoviesController < ApplicationController
   # DELETE /movies/1.xml
   def destroy
     @movie = Movie.find(params[:id])
-    @movie.destroy
-
+    @movie.log_destroy_for_audit
+    flash[:notice] = "Your requests for deletion of #{@movie.name} was successfully submitted."
     respond_to do |format|
       format.html { redirect_to(movies_url) }
       format.xml  { head :ok }
@@ -396,3 +334,77 @@ private
     total_percentage = (100 * num_rates_above)/ total
    end 
 end
+
+
+
+
+######## unused ############
+
+  #### Handle Artists  #####
+  
+    # GET /movies/1/edit
+#   def editartists       
+#     @movie = Movie.find(params[:id])   
+#     #@artists = Artist.find(:all, :order => "name" )
+#     type = params[:type]
+#     @roles = Role.find(:all, :conditions => ['role_type = ?', type], :order => "name")
+#     
+#     if type == 'cast'
+#      @artist_roles = @movie.cast.cast_list(@movie.id)
+#     else
+#      @artist_roles = @movie.cast.crew_list(@movie.id)
+#     end
+#     # @artists = Hash.new 
+#     # @roles = Hash.new   
+#     # Artist.find(:all, :order => "name" ).map {|u|  @artists[u.name] = u.id }
+#     # Role.find(:all, :order => "name").map {|u| @roles[u.name] = u.id}
+#   end
+  
+  # PUT /movies/1/updategenres
+  # PUT /movies/1.xml
+#   def updateartists
+#     @movie = Movie.find(params[:id])
+#     movie_param = params[:movies]
+#     @selected_artists = Array.new
+#     movie_param[:artist_ids].each do |artist_id|       
+#          @selected_artists << Artist.find(artist_id)       
+#     end
+#      @movie.artists = @selected_artists            
+#     respond_to do |format|
+#      format.html { redirect_to(:action => :showcast) }
+#      format.xml  { head :ok }
+#     end    
+#   end
+  
+  # PUT /movies/1/updategenres
+  # PUT /movies/1.xml
+#   def addCastDetail
+#     @movie = Movie.find(params[:id])
+#     @artist = Artist.find_by_name(params[:movie][:artist_name])
+#     @role = Role.find(params[:movie][:roles])
+#     movie_role = MovieRole.new
+#     movie_role.movie = @movie
+#     movie_role.artist = @artist
+#     movie_role.role = @role
+#     if movie_role.save    
+#       redirect_to(:action => :showcast)
+#     else
+#       render :action => "editartists"       
+#     end     
+#   end
+  
+ 
+  # DELETE /movies/1/deleteCastDetail
+  # DELETE /movies/1.xml
+#   def deleteCastDetail
+#     @movie = Movie.find(params[:id])
+#     movie_role = MovieRole.find(params[:mar_id])
+#     movie_role.destroy 
+#     redirect_to(:action => :showcast)
+#         
+#   end
+
+
+
+
+

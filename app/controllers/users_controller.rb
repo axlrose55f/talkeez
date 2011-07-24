@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   
   # GET /users
    # GET /users.xml
-   def index
+   def accounts
      @users = User.find(:all)
      respond_to do |format|
        format.html # index.html.erb
@@ -119,6 +119,10 @@ class UsersController < ApplicationController
       format.html # reviews.html.erb
       format.xml  { render :xml => @user }
     end
+  end
+  
+  def audits
+	  @audits = Audit.find(:all)  
   end
   
   def addRole
