@@ -5,13 +5,29 @@ filter_resource_access
   	@audit = Audit.find(params[:id])
     if @audit != nil 
 	  	audit_type = @audit.item_type
-	  	object = audit_type.constantize.find(@audit.item_id)
+	  	if @audit.event == "create"
+		  	object = audit_type.constantize.pending(@audit.item_id).first
+		else
+		    object = audit_type.constantize.find(@audit.item_id)
+		end
 	  	if object.approve_operation
            flash[:notice] = "Operation on #{audit_type} was successfully!"  
    		end    
      redirect_to(audits_user_path(current_user))     
 	end  	
   end
+  
+#   def approve_create
+#     @audit = Audit.find(params[:id])
+#     if !@audit.nil? && @audit.event == "create"
+#       audit_type = @audit.item_type
+# 	  object = audit_type.constantize.pending(@audit.item_id)
+# 	  if object.approve_operation
+#            flash[:notice] = "Create Operation on #{audit_type} was approved successfully!"  
+#    	  end    
+#      redirect_to(audits_user_path(current_user)) 	  
+#     end
+#   end
   
   def show
    @audit = Audit.find(params[:id])

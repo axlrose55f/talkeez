@@ -20,8 +20,14 @@ attr_accessor :artist_name  # used in edit cast view
 has_many   :trivia
 has_many :awards,
          :class_name => "MovieAward"
-has_and_belongs_to_many :genres,
-                        :join_table => "movies_genres"
+
+has_many :movie_genres, :class_name => "MovieGenre" , :include => :genre
+
+has_many :genres, :through => :movie_genres , :conditions => { "movies_genres.active" => true }
+  
+
+# has_and_belongs_to_many :genres,
+#                         :join_table => "movies_genres"
 has_and_belongs_to_many :themes,
                         :join_table => "movies_themes"
 
@@ -38,9 +44,9 @@ end
 
 
 # Roles Cast relation ####
-has_many :movie_roles, :class_name => "MovieRole"
+has_many :movie_roles, :class_name => "MovieRole" 
 
-has_many :artists, :through => :movie_roles do
+has_many :artists, :through => :movie_roles , :conditions => { "movies_artists_roles.active" => true } do
   def as(role)
     role_id = Role.find(:first, :conditions => [ "name = ?", role], :select => "id")
     find :all, :conditions => ['role_id = ?', role_id]
@@ -56,7 +62,7 @@ has_many :artists, :through => :movie_roles do
   def cast
     cast_type('cast')
   end
-  def main_cast
+  def main_crew
     cast_type('ProductionCrew')
   end  
   def crew
@@ -95,12 +101,12 @@ has_many :cast, :class_name  => "MovieRole" do
   def cast_list(movie_id)
      find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
                     "from artists as a, roles as r, movies_artists_roles as mr " +                   
-                    " where mr.artist_id = a.id and mr.role_id = r.id and r.role_type = 'cast' and mr.movie_id = ?", movie_id])
+                    " where mr.active = 1 and mr.artist_id = a.id and mr.role_id = r.id and r.role_type = 'cast' and mr.movie_id = ?", movie_id])
   end
   def crew_list(movie_id)
      find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
                    "from artists as a, roles as r, movies_artists_roles as mr " +                   
-                   " where mr.artist_id = a.id and mr.role_id = r.id and r.role_type in ('crew', 'ProductionCrew') and mr.movie_id = ?", movie_id])
+                   " where mr.active = 1 and mr.artist_id = a.id and mr.role_id = r.id and r.role_type in ('crew', 'ProductionCrew') and mr.movie_id = ?", movie_id])
   end
 end
 

@@ -1,0 +1,19 @@
+<div id="movie_genres_edit" class="movie_genres_edit">
+<ul class="token-input-list-facebook">
+<% @movie_genres = @movie.genres %>
+<% for g in @movie_genres %>  
+  <li class="token-input-token-facebook">
+   <p><%=h  g.name %></p>
+   <span class="token-input-delete-token-facebook"><%= link_to "X", movie_genre_path(:id => g.id, :movie_id => @movie.id), :confirm => 'Are you sure?', :method => :delete %></span>
+  </li>
+<% end %>
+</ul>
+  <% form_for(@movie_genre) do |f| %>
+   <%= f.error_messages %>
+   <%= f.hidden_field :movie_id , :value => @movie.id  %>   
+   <%=f.collection_select(:genre_id, @genres, :id, :name) %>
+   <br>
+   <%= f.submit "Add" %>&nbsp;&nbsp;<%= link_to "Cancel", '#', :onclick => "$(movieGenreEdit).hide();", :style => "float:right;"  %>
+  <% end %>
+ 
+</div>

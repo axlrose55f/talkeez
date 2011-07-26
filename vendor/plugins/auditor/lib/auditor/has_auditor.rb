@@ -41,6 +41,7 @@ module Auditor
 
         has_one :version, :class_name => version_class_name, :as => :item
 
+        before_create :before_create
         after_create  :record_create
         before_update :record_update
         #before_destroy :record_destroy
@@ -110,7 +111,19 @@ module Auditor
           end       	  
       end
 
-     # Admin operations
+      # Admin operations
+      
+#       def approve_create
+#        logger.debug("Findeme in approve_create User: #{Auditor.whodunnit.username} ")
+#         if switched_on? && moderator?
+#           if !version.nil? && version.event == "create"
+#              logger.debug("Findeme approving create: setting approved flag")
+#              result = self.update_attributes(:active => 1)
+#              version.destroy
+#     	     logger.debug("Findeme approving create: after setting approved flag")   
+#           end          
+#         end
+#       end
 
       def approve_operation
        logger.debug("Findeme User: #{Auditor.whodunnit.username} ")
@@ -120,14 +133,16 @@ module Auditor
 		  result = false
 		  if dirty_version != nil	    	 
 		     if( dirty_version.event == "destroy" )
-		     logger.debug("Findeme in destroy: #{self.to_json} ")
-			    result =  self.destroy
-   		     logger.debug("Findeme after destroy: #{dirty_version.to_json} ")
+		       logger.debug("Findeme in destroy: #{self.to_json} ")
+			   result =  self.destroy
+   		       logger.debug("Findeme after destroy: #{dirty_version.to_json} ")
 		     elsif( dirty_version.event == "update")      
 			    obj = dirty_version.reify
      			result = self.update_attributes(obj.attributes)
     	     elsif(dirty_version.event == "create")
-    	      logger.debug("Findeme approving create: setting approved flag")
+    	       logger.debug("Findeme approving create: setting approved flag")
+    	       result = self.update_attributes(:active => 1)
+    	       logger.debug("Findeme approving create: after setting approved flag")    	       
     	     end
     	  end
     	  dirty_version.destroy if result 
@@ -158,12 +173,16 @@ module Auditor
         version_class_name.constantize
       end
       
+      # set active to false before create
+      def before_create
+	      self.active = 0   
+      end
+      
       def record_create
         if switched_on? && not_moderator?
           create_version merge_metadata(:event => 'create', 
           				  		        :object    => object_to_string(item_created),
-          								:whodunnit => Auditor.whodunnit)
-          # set the unapproved bit true.           								
+          								:whodunnit => Auditor.whodunnit)              								
         end
       end
 
@@ -171,7 +190,7 @@ module Auditor
         logger.debug("Findeme in update: User= #{Auditor.whodunnit.username}")
         if switched_on? && changed_notably? && not_moderator?
 		  #copy the current changed obj
-		  changed_obj = self.clone
+		  changed_obj = self.clone		  
           revert_changes # revert changes to the obj
           # search for exiting record with same model and id
           cur_version = version_class.with_item_keys(self.class.base_class.name, id).first
@@ -179,6 +198,9 @@ module Auditor
           cur_version.update_attributes merge_metadata(:event     => 'update',
                                 	                   :object    => object_to_string(changed_obj),
                                            		       :whodunnit => Auditor.whodunnit)
+        elsif moderator?
+          cur_version = version_class.with_item_keys(self.class.base_class.name, id).first
+        
         end
       end
 

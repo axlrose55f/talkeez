@@ -12,10 +12,12 @@ CREATE TABLE `movies_awards` (
   `artist_id` int(11) ,
    `year` date DEFAULT '1900-01-01',
   `location` varchar(255) DEFAULT NULL,
+  `active` TINYINT(1) DEFAULT 1,
   PRIMARY KEY (`id`),
  KEY `index_movies_awards_on_award_id_and_movie_id_and_artist_id` (`award_id`,`movie_id`,`artist_id`),
   KEY `index_movies_awards_on_artist_id_and_award_id` (`artist_id`,`award_id`),
   KEY `index_movies_awards_on_movie_id_and_award_id` (`movie_id`,`award_id`),
-  KEY `index_movies_awards_on_award_id` (`award_id`)
+  KEY `index_movies_awards_on_award_id` (`award_id`),
+  KEY `index_movies_awards_on_active` (`active`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

@@ -3,7 +3,8 @@ class MovieRole < ActiveRecord::Base
  belongs_to :movie
  belongs_to :artist
  belongs_to :role
- 
+ named_scope :pending , :conditions => ["active = 0"]
+  
  # has an auditor for modifications
  has_auditor :class_name => 'Audit'
  

@@ -7,6 +7,7 @@
 <tr>
    <td>*</td> 
    <td>&nbsp;&nbsp;&nbsp;<a href="/genres/<%= g.id%>" ><%=h  g.name %></a></td>   
+   <td>&nbsp;&nbsp;&nbsp;[<%= link_to "Remove", movie_genre_path(:id => g.id, :movie_id => @movie.id), :confirm => 'Are you sure?', :method => :delete %>]</td>
     <% link = '/movies/'+ @movie.id.to_s + '/deleteGenre?genre_id='+ g.id.to_s %>
     <td>&nbsp;&nbsp;&nbsp;[ <%= link_to 'Delete', link , :confirm => 'Are you sure?', :method => :delete %> ]</td>	
   
@@ -21,11 +22,12 @@
 <hr>
 <h1>Add new Movie Genre</h1>
 
-<% form_for(@movie, :url => {:action => :addGenre, :id => @movie.id}) do |f| %>
+<% form_for(MovieGenre.new) do |f| %>
   <%= f.error_messages %>
+ <%= f.hidden_field :movie_id , :value => @movie.id  %>
  <p>
-	<%= f.label :genres %>:<br/>
-	<%=f.collection_select(:genres, @genres, :id, :name) 	%>
+	<%= f.label :genre_id %>:<br/>
+	<%=f.collection_select(:genre_id, @genres, :id, :name) 	%>
  </p>
 <br/>
 

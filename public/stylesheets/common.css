@@ -453,4 +453,44 @@ margin:2px;
 * html #g_footer .links .genlinks{margin-right:30%}
 *+html #g_footer .links .genlinks{margin-right:30%}
 
+.message_block {
+	background-color: #ECEFC9;
+	border: 1px solid #BFC187;
+  color: #735005;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding-top: 8px;
+}
+
+.message_block ul li h4 {color:#833820;line-height: 1.4;font-size: 120%;padding-bottom: 7px;font-weight: 700;}
+.message_block ul li a {color:#695E49}
+.message_block ul {
+  list-style: none;
+  padding: 10px;
+}
+.message_block ul li {
+  margin-left: 3em;
+}
+
+/*
+.message_block ul.error {
+  background: url(/images/error.gif) 16px 50% no-repeat;
+}
+
+.message_block ul.info {
+  background: #fcf6d0 url(/images/info.gif) 16px 50% no-repeat;
+}
+
+.message_block ul.notice {
+  background: #fcf6d0 url(/images/notice.gif) 16px 50% no-repeat;
+}
+
+.message_block ul.confirm {
+  background: #fcf6d0 url(/images/confirmation.gif) 16px 50% no-repeat;
+}
+
+.message_block ul.warn {
+  background: #fcf6d0 url(/images/warn.gif) 1em 50% no-repeat;
+}*/
 

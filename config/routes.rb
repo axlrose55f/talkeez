@@ -97,7 +97,9 @@ ActionController::Routing::Routes.draw do |map|
                          :collection => {:search => :get }         
 
   map.resources :movie_roles
-
+  
+  map.resources :movie_genres
+  
   # Javascript based routes
   map.connect ':controller/:action.:format'
   

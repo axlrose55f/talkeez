@@ -255,10 +255,9 @@ CREATE TABLE `movies_artists_roles` (
   `artist_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `index_movies_artists_roles_on_movie_id_and_artist_id_and_role_id` (`movie_id`,`artist_id`,`role_id`),
-  KEY `index_movies_artists_roles_on_artist_id_and_role_id` (`artist_id`,`role_id`),
-  KEY `index_movies_artists_roles_on_role_id` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `index_movies_artists_roles_on_movie_id_and_artist_id_and_role_id` (`movie_id`,`artist_id`,`role_id`),
+  KEY `index_movies_artists_roles_on_movie_id_and_artist_id` (`movie_id`,`artist_id`),
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

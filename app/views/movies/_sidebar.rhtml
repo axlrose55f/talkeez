@@ -41,13 +41,18 @@
 			      <div id="details_heading">Language</div>
 			      <div id="details_value"><%= @movie.language %></div>
 			      <div id="details_heading">Genre 
-				   <a href="/movies/<%= @movie.id%>/editgenres" class="nav-edit-link">Edit</a>
-				  </div>
+				  <%= link_to_remote "Edit", :update => {:success => "movieGenreEdit", :failure => "ajax-error-div"}, 
+				  							 :url => new_movie_genre_path(:movie_id => @movie.id), 
+				  							 :loaded => "$('movieGenreEdit').show();" ,
+				 	 	                     :failure => "$('ajax-error-div').replaceWith(request.responseText)",
+				  							 :method => :get %>
+       			  </div>
+       			  <div id="movieGenreEdit" style="display:none;"></div>
 			      <div id="details_value">	
 			          <% for genre in @movie.genres %>
-					  <a href="/genres/<%= genre.id%>" class="show-link"><%= genre.name %></a>
+					    <a href="/genres/<%= genre.id%>" class="show-link"><%= genre.name %></a>
 					  <% end %>
-				  </div>
+				  </div>				  
 			      <div id="details_end"></div> 
 				</div>
 		    </div>

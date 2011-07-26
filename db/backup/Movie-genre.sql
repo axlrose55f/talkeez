@@ -4,7 +4,7 @@
 
 LOCK TABLES `movies_genres` WRITE;
 /*!40000 ALTER TABLE `movies_genres` DISABLE KEYS */;
-INSERT INTO `movies_genres` VALUES 
+INSERT INTO `movies_genres` (`movie_id`, `genre_id`) VALUES 
 (10022,1),
 (10022,34),
 (9914,1),
@@ -530,7 +530,6 @@ INSERT INTO `movies_genres` VALUES
 (10511,27),
 (10762,1),
 (10762,34),
-(10762,1),
 (10403,34),
 (10403,32),
 (10765,4),
@@ -576,7 +575,6 @@ INSERT INTO `movies_genres` VALUES
 (10423,20),
 (10525,1),
 (10525,10),
-(10525,1),
 (10525,8),
 (10424,6),
 (10424,4),
@@ -913,7 +911,6 @@ INSERT INTO `movies_genres` VALUES
 (10643,27),
 (10644,1),
 (10644,10),
-(10644,1),
 (10992,7),
 (10992,27),
 (10645,18),
@@ -945,7 +942,6 @@ INSERT INTO `movies_genres` VALUES
 (11013,27),
 (11015,29),
 (11016,29),
-(11017,6),
 (11017,6),
 (11018,6),
 (11018,11),
@@ -2159,7 +2155,6 @@ INSERT INTO `movies_genres` VALUES
 (8948,7),
 (8949,1),
 (8949,10),
-(8949,1),
 (8950,1),
 (8951,10),
 (8952,7),
@@ -3221,7 +3216,6 @@ INSERT INTO `movies_genres` VALUES
 (10012,27),
 (10013,27),
 (10013,20),
-(9900,6),
 (9900,6),
 (9900,21),
 (9901,7),

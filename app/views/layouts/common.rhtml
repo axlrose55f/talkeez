@@ -52,9 +52,18 @@
 <!-- Awesome Search Bar -->
 <%= render(:partial => "layouts/awesomeSearch")%>
 <!-- End Awesome Search Bar -->
-<center><span class="flashNotice"><%= flash[:notice] %></span></center> 
-<center><span class="flashError"><%= flash[:error] %></span></center> 
-
+<% flash.each do |key, msg| %>
+ <center>
+ <div id="message_block" class="message_block" style="width: 500px;"> 
+    <p style="float:right;padding-right:10px;"><%= link_to_function 'Close', "Effect.Fade('message_block')" %></p>
+    <ul class="<%= key %>">
+	   <li><h4><p><%= msg %></p></h4></li>
+    </ul>
+    <div class="clear"></div>
+  </div>
+ </center> 
+<% end %>
+<center><div id="ajax-error-div" style="width: 500px;"></div></center>
 <!--Main Body -->
 <div id="bd">
 	<%= yield :layout %>

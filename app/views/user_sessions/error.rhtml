@@ -1,6 +1,7 @@
-<div id="error_require_signin">
-	<h3>
-	<span>You must be logged in to access this page: </span>
-	<span><%= link_to '<em class="subText"><span>Login</span></em>' , login_path  %></span>
-	</h3>
+<div id="message_block" class="message_block"> 
+<p style="float:right;padding-right:10px;"><%= link_to_function 'Close', "Effect.Fade('message_block')" %></p>
+<ul class="error">  
+   <li><h4>You must be logged in to access this page: <%= link_to '<em>Login</em>' , login_path  %></h4></li>  
+</ul>
+   
 </div>

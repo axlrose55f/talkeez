@@ -15,7 +15,13 @@
 		<h2>Cast details for - <%=h @movie.name%></h2><br>
 		<div id="addCast" style="float:right; posiiton:relative;">
 		<img src="/images/edit.gif"></img>
-	 	<%= link_to_remote "Add Role", :update => "editArtistRole", :url => new_movie_role_path(:movie_id => @movie.id), :with => "'div_name=editArtistRole'", :loaded => "$('addCast').hide();$('editArtistRole').show();" ,:method => :get %>
+	 	<%= link_to_remote "Add Role", 
+	 	                   :update => {:success => "editArtistRole", :failure => "ajax-error-div"}, 
+	 	                   :url => new_movie_role_path(:movie_id => @movie.id), 
+	 	                   :with => "'div_name=editArtistRole'", 
+	 	                   :loaded => "$('addCast').hide();$('editArtistRole').show();" ,
+	 	                   :failure => "$('ajax-error-div').replaceWith(request.responseText)",
+	 	                   :method => :get %>
         </div>
         <div id="editArtistRole"></div> 
 		<% @casts = @movie.cast.cast_list(@movie.id) %>
@@ -88,7 +94,7 @@
 		    <div class="castlistright"> <%=h crew.role_name %></div>
 		    </h3>
 		    <span class="crewEdit">
-  			   <%= link_to_remote "Edit", :update => "filmography_update_#{count}" , :url => edit_movie_role_path(:id => cast.mar_id), :with => "'num=#{count}&origin=movie'" ,:loaded => "$('filmography_#{count}').hide();$('filmography_update_#{count}').show();", :method => :get %>
+  			   <%= link_to_remote "Edit", :update => "filmography_update_#{count}" , :url => edit_movie_role_path(:id => crew.mar_id), :with => "'num=#{count}&origin=movie'" ,:loaded => "$('filmography_#{count}').hide();$('filmography_update_#{count}').show();", :method => :get %>
 			</span>
 			</div>
 			 <div id="filmography_update_<%= count %>"></div>

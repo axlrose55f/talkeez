@@ -149,54 +149,53 @@ class MoviesController < ApplicationController
 
   #### Handle Genres  #####
   
-  # PUT /movies/1/addGenre
+ # PUT /movies/1/addGenre
   # PUT /movies/1.xml
-  def addGenre
-    @movie = Movie.find(params[:id])
-    @genre = Genre.find(params[:movie][:genres])
-    @movie.genres << @genre
-    respond_to do |format|
-     format.html { redirect_to(@movie) }
-     format.xml  { head :ok }
-    end     
-  end
+#   def addGenre
+#     @movie = Movie.find(params[:id])
+#     @genre = Genre.find(params[:movie][:genres])
+#     @movie.genres << @genre
+#     respond_to do |format|
+#      format.html { redirect_to(@movie) }
+#      format.xml  { head :ok }
+#     end     
+#   end
   
     # GET /movies/1/edit
   def editgenres
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find(params[:id])   
     # @genres = Hash.new 
     #    Genre.find(:all, :order => "name" ).map {|u|  @genres[u.name] = u.id }
     @genres = Genre.find(:all, :order => "name" )
   end
   
-    # PUT /movies/1/updategenres
-  # PUT /movies/1.xml
-  def updategenres
-    @movie = Movie.find(params[:id])    
-    @selected_genres = Array.new   
-    movie_param = params[:movies]  
-    # logger.debug ("FindMe I'm in genre update #{movie_param[:genre_ids].length}")
-    movie_param[:genre_ids].each do |genre_id|       
-        @selected_genres << Genre.find(genre_id)
-    end    
-    @movie.genres = @selected_genres    
-    respond_to do |format|
-     format.html { redirect_to(@movie) }
-     format.xml  { head :ok }
-    end    
-  end
-  
   # DELETE /movies/1/deleteGenre
   # DELETE /movies/1.xml
-  def deleteGenre
-    @movie = Movie.find(params[:id])
-    @movie.genres.delete(Genre.find(params[:genre_id]))
-    respond_to do |format|
-     format.html { redirect_to(@movie) }
-     format.xml  { head :ok }
-    end         
-  end
+#   def deleteGenre
+#     @movie = Movie.find(params[:id])
+#     @movie.genres.delete(Genre.find(params[:genre_id]))
+#     respond_to do |format|
+#      format.html { redirect_to(@movie) }
+#      format.xml  { head :ok }
+#     end         
+#   end
   
+  # PUT /movies/1/updategenres
+  # PUT /movies/1.xml
+#   def updategenres
+#     @movie = Movie.find(params[:id])    
+#     @selected_genres = Array.new   
+#     movie_param = params[:movies]  
+#     # logger.debug ("FindMe I'm in genre update #{movie_param[:genre_ids].length}")
+#     movie_param[:genre_ids].each do |genre_id|       
+#         @selected_genres << Genre.find(genre_id)
+#     end    
+#     @movie.genres = @selected_genres    
+#     respond_to do |format|
+#      format.html { redirect_to(@movie) }
+#      format.xml  { head :ok }
+#     end    
+#   end
   
   #### Add Video ####
   def addVideo
