@@ -106,7 +106,7 @@ module AutoCompleteMacrosHelper
   # 
   def text_field_with_auto_complete(object, method, tag_options = {}, completion_options = {})
      method_name = completion_options[:update_function]
-    (completion_options[:skip_style] ? "" : auto_complete_stylesheet) +
+  #  (completion_options[:skip_style] ? "" : auto_complete_stylesheet) +
     ((method_name.nil?) ? "": javascript_tag("function submitSearch(txt, li){document.#{method_name}.submit();}")) +    
     text_field(object, method, tag_options) +
     content_tag("div", "", :id => "#{object}_#{method}_auto_complete", :class => "auto_complete") +
