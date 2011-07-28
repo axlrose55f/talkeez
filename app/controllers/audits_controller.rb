@@ -35,8 +35,7 @@ filter_resource_access
   
     
   def versions
-     @audit = Audit.find(params[:id])
-     @versions = @audit.versions
+     @versions = Audit.records(params[:id])
   end
   
   def revert

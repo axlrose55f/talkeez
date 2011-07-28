@@ -26,7 +26,7 @@ module Auditor
         attr_accessor :version
 
 	    cattr_accessor :version_class_name
-        self.version_class_name = options[:class_name] || 'Version'
+        self.version_class_name = options[:class_name] || 'Audit'
      
         cattr_accessor :ignore
         self.ignore = (options[:ignore] || []).map &:to_s
