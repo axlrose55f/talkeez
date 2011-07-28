@@ -33,6 +33,20 @@ filter_resource_access
    @audit = Audit.find(params[:id])
   end
   
+    
+  def versions
+     @audit = Audit.find(params[:id])
+     @versions = @audit.versions
+  end
+  
+  def revert
+    @version = Version.find(params[:version_id])
+    if @version.reify
+       @version.reify.save!
+    end
+    redirect_to(audits_user_path(current_user))     
+  end
+  
   def reject
     @audit = Audit.find(params[:id])
     if @audit != nil 

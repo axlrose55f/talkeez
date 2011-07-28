@@ -784,3 +784,33 @@ div.movie_content_area .critic_stats { color:#627D11; clear:left; font-size: 10p
 div.movie_content_area .critic_stats .subText { display:inline-block; font-weight:bold; font-size:11px; }
 div.movie_content_area .critic_stats .subText.liked_it { padding:0px 0px 0px 65px; }
 div.movie_content_area .critic_stats .subText.want_to_see { padding:0px 0px 0px 50px; }
+
+#miniSearch {width: 293px;margin: 0px auto;padding: 0 5px;position: relative; float:right;}
+
+.slimCard{margin-bottom:-2px;padding-top:0;padding-bottom:8px;position:relative;z-index:12;}
+.slimCard>.subConB,.slimCard>.subConBL,.slimCard>.subConBR{bottom:0;background-image:url(/images/container-sprite.png);}
+.slimCard>.subConB{background-position:left -20px;background-repeat:repeat;}
+.slimCard>.subConBL{background-position:left -30px;}
+.slimCard>.subConBR{background-position:right -40px;}
+.slimCard>.subConBd{border-right:1px solid #b8ac92;border-left:1px solid #b8ac92;padding:5px 10px 0 10px;min-height:26px;position:relative;}
+.slimCard>.subConBd .pnlCntnt{padding-right:307px;word-wrap:break-word;}
+.slimCard>.subConBd h1{color:#000;display:inline;font:400 18px/25px Georgia;padding:0;margin:0 11px 0 0;*margin-right:15px;vertical-align:top;*vertical-align:middle;}
+.slimCard>.subConBd h1 span{cursor:default;display:none;font:400 18px/24px Georgia;vertical-align:top;*vertical-align:middle;white-space:nowrap;}
+.slimCard>.subConBd h1 span.linkedTreeIcon,.slimCard>.subConBd h1 span.linkedTreeIcon span{display:inline;}
+.pCardDiv>.subConBd .pnlGrdnt,.slimCard>.subConBd .pnlGrdnt{background:url(/images/container-sprite.png) repeat-x 0 -50px;height:42px;left:2px;right:2px;bottom:0;position:absolute;z-index:0;}
+.pCardDiv>.subConBd .pnlCntnt,.slimCard>.subConBd .pnlCntnt{position:relative;z-index:2;}
+.slimCard>.subConBd h1 span.separator{color:#cacaca;font:400 14px/22px Tahoma,Geneva,sans-serif;*zoom:1;*vertical-align:top;*margin-right:-4px;}
+.slimCard .treeLinks{color:#43540d;display:inline;margin-right:11px;*position:relative;z-index:4;vertical-align:top;*vertical-align:middle;}
+.slimCard .scSearch{height:25px;padding:0 20px 5px 7px;position:absolute;top:0; right:35px; z-index:0;}
+.slimCard .scSearch .searchL{background:url(/images/slim-card.png) 0 0;height:25px;width:7px;position:absolute;top:0;left:0;z-index:4;}
+.slimCard .scSearch .searchR{background:url(/images/slim-card.png) -6px 0;height:25px;width:20px;position:absolute;top:0;right:0;z-index:4;}
+.slimCard .scSearch:hover .searchL{background-position:0 -25px;}
+.slimCard .scSearch:hover .searchR{background-position:-6px -25px;}
+.slimCard .scSearch .searchR .arrow3down_green_small{background-position:-55px -846px;display:block;float:none;position:absolute;top:11px;left:6px;height:4px;width:7px;}
+.slimCard .scSearch .searchBox{background-color:#fff;border:1px solid #b8ac92;height:23px;padding:0;position:relative;z-index:4;}
+.slimCard .scSearch .searchBox .search_green{background-position:0 -500px;display:block;float:none;position:absolute;top:4px;left:5px;z-index:4;}
+.slimCard .scSearch .searchBox .ancText{background:none;border:none;color:#AAA;font-style:italic;float:left;padding:5px 8px 5px 26px;position:relative;overflow:visible;vertical-align:top;white-space:nowrap;width:214px;z-index:6;}
+.slimCard .scSearch .searchBox .toggleMessage{color:#999;display:block;font:italic 400 11px/13px Tahoma,Geneva,sans-serif;padding:5px 8px 5px 26px;position:absolute;top:0;right:0;bottom:0;left:0;z-index:2;}
+.slimCard .scSearch:hover .sDropDown{display:block;}
+.slimCard .scSearch.scSearchOn .sDropDown{display:block;}
+

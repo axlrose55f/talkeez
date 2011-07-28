@@ -1,0 +1,19 @@
+<table>
+<% for version in @versions%>
+		   <tr>
+			 <td><%= version.id %></td>
+			 <td><%= version.item_type %></td>			 
+			 <td><%= version.item_id %></td>
+			 <td><%= version.audit_item_type %></td>
+			 <td><%= link_to version.audit_item_id ,  "/#{version.audit_item_type.pluralize.downcase}/#{version.audit_item_id}" %></td>
+			 <td> <%= version.event %></td>
+			 <td> <%= version.whodunnit %>  </td>
+			 <td> <%= version.created_at %></td>
+			 <td><%= link_to 'Revert', revert_audit_path(@audit.id, :version_id => version.id ), :confirm => 'Are you sure?', :method => :put %></td>
+			 
+		   </tr>
+ <% end %>
+</table>
+<span>
+ <%= link_to "Close", '#', :onclick => "$(auditVersions).hide();"  %>
+</span>

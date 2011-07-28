@@ -1,3 +1,6 @@
+<% content_for :searchBar do %>
+   <%= render(:partial => "layouts/slimSearch")%>
+<% end %>
 <h1><i>Genres</i> :&nbsp; <%=h @genre.name%></h1>
 <br/>
 <b>Description:</b><br/> <%=h @genre.description %>

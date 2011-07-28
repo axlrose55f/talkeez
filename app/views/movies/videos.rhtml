@@ -1,3 +1,6 @@
+<% content_for :searchBar do %>
+   <%= render(:partial => "layouts/slimSearch")%>
+<% end %>
 <!-- Content Menu -->
 <%= render(:partial => "contentMenu" , :object => @movie, :locals => { :tab => "videos"} )%>
 

@@ -121,7 +121,7 @@ class UsersController < ApplicationController
     end
   end
   
-  def audits
+  def audits  
 	  @audits = Audit.find(:all)  
   end
   

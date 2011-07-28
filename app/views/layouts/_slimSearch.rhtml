@@ -1,0 +1,54 @@
+<div id="miniSearch">
+<div class="subCon slimCard">
+		<div class="subConB"></div>
+		<div class="subConBL"></div>
+		<div class="subConBR"></div>
+		<div class="subConBd">
+		 <div class="pnlGrdnt"></div>
+			<div class="pnlCntnt">
+				<div class="scSearch yui-ac">
+					<div class="searchL"></div>
+					<div class="searchR">
+						<span class="flat_icon arrow3down_green_small "></span>
+					</div>
+					<div class="searchBox">
+						<span class="flat_icon search_green"></span>
+						<% if controller_name == "artists" %>						
+							<% form_tag search_artists_path, :name => 'awesome_search_form', :method => 'get' do%>
+								<%= text_field_with_auto_complete :artist, :name, { 
+									:size => 100,
+									:class => 'ancText yui-ac-input', 
+									:autocomplete => 'off', 
+									:maxlength=>"255", 
+									:value=> "Enter an artist name", 								
+									:onfocus=> "if(this.value=='Enter an artist name'){this.value='';this.style.color='#000';this.style.fontStyle='normal';}", 
+									:onblur=> "if(this.value==''){this.style.color='#aaa';this.style.fontStyle='italic';this.value='Enter an artist name';}" }, 
+									{ :url => search_artists_path(:format => :js),
+									  :update_function => "awesome_search_form",
+									  :after_update_element => 'submitSearch', 
+									  :method => :get,
+									  :param_name => 'search'} %>			
+						   <% end %>	
+						<% else %>
+						   <% form_tag search_movies_path, :name => 'awesome_search_form', :method => 'get' do%>
+								<%= text_field_with_auto_complete :movie, :name, { 
+									:size => 100,
+									:class => 'ancText yui-ac-input', 
+									:autocomplete => 'off', 
+									:maxlength=>"255", 
+									:value=> "Enter a movie name", 								
+									:onfocus=> "if(this.value=='Enter a movie name'){this.value='';this.style.color='#000';this.style.fontStyle='normal';}", 
+									:onblur=> "if(this.value==''){this.style.color='#aaa';this.style.fontStyle='italic';this.value='Enter a movie name';}" }, 
+									{ :url => search_movies_path(:format => :js),
+									  :update_function => "awesome_search_form",
+									  :after_update_element => 'submitSearch', 
+									  :method => :get,
+									  :param_name => 'search'} %>			
+						   <% end %>	
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

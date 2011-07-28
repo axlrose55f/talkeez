@@ -41,6 +41,11 @@
 			 <td> <%= record.whodunnit %>  </td>
 			 <td> <%= record.created_at %></td>
 			 <td> <%= record.updated_at %></td>
+	   	     <td><%= link_to_remote "Versions", :update => "auditVersions", 
+				  							 :url => versions_audit_path(record),
+				  							 :loaded => "$('auditVersions').show();" ,
+				  							 :method => :get %></td>
+			 
 			 <td><%= link_to 'Approve', approve_audit_path(record), :confirm => 'Are you sure?', :method => :put %></td>
 			 <td><%= link_to 'Reject', reject_audit_path(record), :confirm => 'Are you sure?', :method => :put %></td>
 		   </tr>
@@ -48,6 +53,7 @@
 	  <% end %>
 	  </table>
 	<br/>
+	<div class="auditVersions" id="auditVersions"></div>
 	</div>
 	<div class="clearDiv"></div>
 	<div class="persHeaderLLFT"> </div>
