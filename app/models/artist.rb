@@ -1,7 +1,7 @@
 class Artist < ActiveRecord::Base
   ajaxful_rateable :stars => 5 , :cache_column => :rating
   cattr_reader :per_page
-  @@per_page = 3
+  @@per_page = 10
   
   # Attach videos using video_attachments plugin
   video_attachments

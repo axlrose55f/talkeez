@@ -235,11 +235,11 @@
 					<em class="noItemAdded">No Videos have been added.</em>
 					<% end %>
 					<div id="add_video_link" class="add_video_link">
-					 <a href="" onclick="Effect.toggle('addVideo', 'appear');$('add_video_link').hide();return false;">Add Video</a> 
+					 <a href="" onclick="$('addVideo').show();$('add_video_link').hide();return false;">Add Video</a> 
 				    </div>
 				   <div class="addVideo" id="addVideo" style="display:none">
 				   <% form_for( @movie, :url => {:action => :addVideo}, :html => { :name => "addVideoForm"} ) do |f| %>	
-					<%= f.text_field :video_url , :value => "Enter a video url" ,:class=> "inputVideoUrl",  :size => "120", 
+					<%= f.text_field :video_url , :value => "Enter a video url" ,:class=> "inputVideoUrl", 
 									 :onfocus=> "if(this.value=='Enter a video url'){this.value='';this.style.color='#000';this.style.fontStyle='normal';}", 
 									 :onblur=> "if(this.value==''){this.style.color='#aaa';this.style.fontStyle='italic';this.value='Enter a video url';}"%>
 					 <div class="addPlusButtonDiv">
@@ -249,6 +249,7 @@
 					   </em>
 					  </a>
 					</div>
+					 <a href="" onclick="$('addVideo').hide();$('add_video_link').show();return false;" class="cancelVideo">Cancel</a> 
 				   <%end %>
 				   </div>
 	   			   	<br>

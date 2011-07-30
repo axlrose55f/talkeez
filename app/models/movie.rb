@@ -1,7 +1,7 @@
 class Movie < ActiveRecord::Base
 ajaxful_rateable :stars => 5 , :cache_column => :rating
 cattr_reader :per_page
-@@per_page = 6
+@@per_page = 10
 
 # suppor treviews using acts_as_reviewable plugin
 acts_as_reviewable
