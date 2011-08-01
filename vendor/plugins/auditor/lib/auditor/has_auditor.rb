@@ -21,6 +21,7 @@ module Auditor
         # Lazily include the instance methods so we don't clutter up
         # any more ActiveRecord models than we have to.
         send :include, InstanceMethods
+        send :extend,  SingletonMethods
 
         # The version this instance was reified from.
         attr_accessor :version
@@ -58,6 +59,32 @@ module Auditor
       end
       
     end
+    
+    module SingletonMethods
+          
+      def show_data(id, user)
+        item_type = ActiveRecord::Base.send(:class_name_of_active_record_descendant, self).to_s
+        item_data = item_type.constantize.find(id)
+        if(user)
+           edited_obj = item_data.user_edits(user)
+           item_data = edited_obj unless edited_obj.nil?
+        end
+        item_data
+      end
+      
+      def pending_objects(user)
+        item_type = ActiveRecord::Base.send(:class_name_of_active_record_descendant, self).to_s
+        objects =  Audit.item(item_type).user(user)       
+        items = []
+        objects.each do |obj|
+	      item = obj.getObj
+	      item["event"] = obj.event
+          items << item
+        end
+        items
+      end 
+
+    end
 
     # Wrap the following methods in a module so we can include them only in the
     # ActiveRecord models that declare `has_auditor`.
@@ -71,6 +98,16 @@ module Auditor
       def is_edited?
          !version.nil?
       end
+
+	  def user_edits(user)
+	    sql = "SELECT a.* FROM versions as v,audits as a WHERE " +
+	          "a.id = v.item_id and " +
+	          "v.whodunnit = ? and " +
+	          "a.item_type = ? and a.item_id = ?" 
+	          
+         a = Audit.find_by_sql [sql, user.id, self.class.base_class.name, id]
+         a.empty? ? nil : a[0].getObj
+	  end
 
       # Returns who put the object into its current state.
       def originator
@@ -126,23 +163,19 @@ module Auditor
 #       end
 
       def approve_operation
-       logger.debug("Findeme User: #{Auditor.whodunnit.username} ")
+
        if switched_on? && moderator?
       	   # check if a dirty version exists
 		  dirty_version =  version
 		  result = false
 		  if dirty_version != nil	    	 
 		     if( dirty_version.event == "destroy" )
-		       logger.debug("Findeme in destroy: #{self.to_json} ")
 			   result =  self.destroy
-   		       logger.debug("Findeme after destroy: #{dirty_version.to_json} ")
 		     elsif( dirty_version.event == "update")      
 			    obj = dirty_version.reify
      			result = self.update_attributes(obj.attributes)
     	     elsif(dirty_version.event == "create")
-    	       logger.debug("Findeme approving create: setting approved flag")
     	       result = self.update_attributes(:active => 1)
-    	       logger.debug("Findeme approving create: after setting approved flag")    	       
     	     end
     	  end
     	  dirty_version.destroy if result 
@@ -150,15 +183,12 @@ module Auditor
       end
      
       def reject_operation
-       logger.debug("Findeme inside reject_operation")
         if switched_on? && moderator?
           dirty_version =  version
           if(!dirty_version.nil?)
             if( dirty_version.event == "create")
-              logger.debug("Findeme destroy parent object: #{self.to_json} ")
               self.destroy
             end 
-          logger.debug("Findeme destroying audit object: #{dirty_version.to_json} ")
           dirty_version.destroy
           end
         end
@@ -187,7 +217,6 @@ module Auditor
       end
 
       def record_update
-        logger.debug("Findeme in update: User= #{Auditor.whodunnit.username}")
         if switched_on? && changed_notably? && not_moderator?
 		  #copy the current changed obj
 		  changed_obj = self.clone		  
@@ -228,7 +257,6 @@ module Auditor
 	  end
 	  
 	  def revert_changes
-	   logger.debug("Findeme - before revert : #{self.to_json} ")
 	   changed_attributes.each do |k, v|
          begin
            self.send :write_attribute, k.to_sym , v
@@ -236,7 +264,6 @@ module Auditor
            logger.warn "Attribute #{k} does not exist on #{item_type} (Version id: #{id})."
          end
         end
-        logger.debug("Findeme - after revert : #{self.to_json} ")
 	  end
 	  
       def item_before_change

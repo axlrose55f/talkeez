@@ -817,7 +817,7 @@ div.movie_content_area .critic_stats .subText.want_to_see { padding:0px 0px 0px 
 
 
 /* search bar */
-div.auto_complete { width: 350px;background: #fff; z-index:2;}
+div.auto_complete { width: auto;background: #fff; z-index:2;}
 div.auto_complete ul {border-radius:0 0 5px 5px;-moz-border-radius:0 0 5px 5px;-webkit-border-radius:0 0 5px 5px;border:1px solid #888;margin:0;padding:0;width:100%;list-style-type:none;}
 div.auto_complete ul li {margin:0;padding:3px;}
 div.auto_complete ul li.selected {background-color: #E8EEBB;}

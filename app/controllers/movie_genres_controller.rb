@@ -4,6 +4,7 @@ class MovieGenresController < ApplicationController
   def new 
    @movie_genre = MovieGenre.new
    @movie = Movie.find(params[:movie_id])
+   @movie_genres = @movie.active_genres(current_user)
    @genres = Genre.find(:all, :order => "name" )
   end
   
@@ -22,8 +23,14 @@ class MovieGenresController < ApplicationController
   end
   
   def create
-    MovieGenre.create(params[:movie_genre])
-    flash[:notice] = "Your requests to add genre was successfully submitted."
+     begin      
+		MovieGenre.create(params[:movie_genre])
+		flash[:notice] = "Your requests to add genre was successfully submitted."
+     rescue Exception => e
+       if e.is_a? ActiveRecord::StatementInvalid
+         flash[:notice] = "This genre is already added."
+       end
+     end
     redirect_to movie_path(:id => params[:movie_genre][:movie_id])  
   end
   

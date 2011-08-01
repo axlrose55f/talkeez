@@ -88,7 +88,7 @@
 		 <div id="divMiniCardCatalog"></div>
 		 <div id="divMiniCardCatalog">
 		 <ul class="ulHistRecs">
-		 <% for movie in @top_all -%>
+		 <% for movie in @movies -%>
 		  <li><%= link_to "#{movie.name}", movie_path(movie), :class => "collGroup"  %></li>
 		 <% end %> 
 		 </ul>
@@ -114,7 +114,7 @@
        <div class="widgtContnt">
        <table>
        <tr>
-       <% for movie in @movies -%>
+       <% for movie in @movies[0..3] -%>
        <td>
        <div class="subCon subConGray" >
 				<div class="subConTL"></div>
@@ -143,8 +143,8 @@
 					<% a = movie.artists.director[0] %>
 					<p><%=  (a == nil)? "N/A" : a.name[0..19]%></p>
 					<h3>Produced By</h3>
-					<% a = movie.artists.producer[0] unless movie.artists.producer == nil %>
-					<p><%=  (a == nil)? "N/A" : a.name[0..19]%></p>
+				    <% p = movie.artists.producer[0] %>
+					<p><%=  (p == nil)? "N/A" : p.name[0..19]%></p>
 				</div>
 				<div class="subConBL"></div>
 				<div class="subConB"></div>

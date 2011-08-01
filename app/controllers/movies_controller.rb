@@ -6,12 +6,18 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.js
   def index
-   @movies = Movie.find(:all, :limit => 4, :conditions => 'rating > 4', :order => 'rating DESC')
-   @latest_movies = Movie.find(:all, :limit => 6, :conditions => ['rating > 3 and year between ? and ?', Date.today.beginning_of_year(), Date.today], :order => 'rating DESC, year DESC')
-   @recently_edited =  Movie.find(:all, :limit => 4, :order => 'updated_at DESC')
-   @top_all = Movie.find(:all, :limit => 10, :conditions => 'rating > 4', :order => 'rating DESC')
-   @top_this_year = Movie.find(:all, :limit => 10, :conditions => ['year > ?', Date.today.beginning_of_year()], :order => 'rating DESC')
-   @top_decade = Movie.find(:all, :limit => 10, :conditions => ['year > ?', Date.today.years_ago(10)],  :order => 'rating DESC')
+   @movies = Movie.active.rated.limit(10).order
+   @latest_movies = Movie.active.rated(3).latest.limit(6).order('rating DESC, year DESC')
+   @recently_edited =  Movie.active.limit(4).order('updated_at DESC')
+   @top_this_year = Movie.active.after.limit(10).order
+   @top_decade = Movie.active.after(Date.today.years_ago(10)).limit(10).order
+   
+   #@movies = Movie.find(:all, :limit => 4, :conditions => 'rating > 4', :order => 'rating DESC')   
+   #@latest_movies = Movie.find(:all, :limit => 6, :conditions => ['rating > 3 and year between ? and ?', Date.today.beginning_of_year(), Date.today], :order => 'rating DESC, year DESC')
+   #@recently_edited =  Movie.find(:all, :limit => 4, :order => 'updated_at DESC')
+   #@top_all = Movie.find(:all, :limit => 10, :conditions => 'rating > 4', :order => 'rating DESC')
+   #@top_this_year = Movie.find(:all, :limit => 10, :conditions => ['year > ?', Date.today.beginning_of_year()], :order => 'rating DESC')
+   #@top_decade = Movie.find(:all, :limit => 10, :conditions => ['year > ?', Date.today.years_ago(10)],  :order => 'rating DESC')
   end
   
   # GET /movies
@@ -32,9 +38,12 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.xml
   def show
-    @movie = Movie.find(params[:id])
+    @movie = Movie.show_data(params[:id],current_user) 
+    @genres = @movie.active_genres(current_user)
+    @videos = @movie.active_videos(current_user)
+    @cast_list = @movie.active_artists_leads(current_user)
     @total_percentage_like = rate_percentage("like")
-   # @total_percentage_hate = rate_percentage("hate")
+    # @total_percentage_hate = rate_percentage("hate")
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @movie }
@@ -43,7 +52,12 @@ class MoviesController < ApplicationController
 
   # GET /movies/1/showcast
   def showcast
-    @movie = Movie.find(params[:id])    
+    @movie = Movie.find(params[:id]) 
+    @genres = @movie.active_genres(current_user)
+    
+    @casts = @movie.show_artists(current_user,['cast'])
+    @crews = @movie.show_artists(current_user,['crew','ProductionCrew'])
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @movie }
@@ -53,7 +67,7 @@ class MoviesController < ApplicationController
   # GET /movies/1/reviews
   def reviews
     @movie = Movie.find(params[:id])
-
+    @genres = @movie.active_genres(current_user)
     respond_to do |format|
       format.html # reviews.html.erb
       format.xml  { render :xml => @movie }
@@ -63,7 +77,7 @@ class MoviesController < ApplicationController
   # GET /movies/1/awards
   def awards
     @movie = Movie.find(params[:id])
-
+    @genres = @movie.active_genres(current_user)
     respond_to do |format|
       format.html # awards.html.erb
       format.xml  { render :xml => @movie }
@@ -73,7 +87,8 @@ class MoviesController < ApplicationController
   # GET /movies/1/videos
   def videos
     @movie = Movie.find(params[:id])
-
+    @genres = @movie.active_genres(current_user)
+ 	@videos = @movie.active_videos(current_user)
     respond_to do |format|
       format.html # videos.html.erb
       format.xml  { render :xml => @movie }

@@ -1,3 +1,7 @@
+<% content_for :searchBar do %>
+   <%= render(:partial => "layouts/slimSearch")%>
+<% end %>
+
 <!-- Content Menu -->
 <%= render(:partial => "contentMenu", :object => @user, :locals => { :tab => "overview"} )%>
 
@@ -10,12 +14,13 @@
 	<div id="person_header" class="">
 
 		<h1><%=h @user.username%></h1>
-		<h3>Email:</h3><div =id="user_email"><%= @user.email%></div>
+		<div><h3>Email:</h3></div><div id="user_email"><%= @user.email%></div>
 		<br/>
 		<h3>About Myself:</h3>
 		<div id="album_description" style="height:40%;">
 		 No bio yet 
-		</div>		
+		</div>	
+		<br>
 	</div>
 	<div class="clearDiv"></div>
 	<div class="persHeaderLLFT"> </div>

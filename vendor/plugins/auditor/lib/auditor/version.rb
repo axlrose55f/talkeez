@@ -6,6 +6,12 @@ class Version < ActiveRecord::Base
     :conditions => { :item_type => item_type, :item_id => item_id }
   } }
 
+  named_scope :item, lambda { |item_type| {:conditions => { :item_type => item_type }  } }
+
+  named_scope :operation, lambda { |op| { :conditions => { :event => op } } }
+  
+  named_scope :user, lambda { |user| { :conditions => { :whodunnit => user.id } } }
+  
   named_scope :subsequent, lambda { |version| {
     :conditions => ["#{self.primary_key} > ?", version.is_a?(ActiveRecord::Base) ? version.id : version],
     :order      => "id ASC",
@@ -77,6 +83,27 @@ class Version < ActiveRecord::Base
       model
     end
   end
+  
+  def getObj
+   unless object.nil?
+     attrs = YAML::load object
+     class_name = attrs['type'].blank? ? item_type : attrs['type']
+     klass = class_name.constantize
+     model = klass.new
+     
+     attrs.each do |k, v|
+        begin
+          model.send :write_attribute, k.to_sym , v
+        rescue NoMethodError
+          logger.warn "Attribute #{k} does not exist on #{item_type} (Version id: #{id})."
+        end
+      end     
+      if (event == "destroy") || (event == "update")
+        model.send :write_attribute, :id , item_id
+      end
+     model
+   end
+  end
 
   # Returns who put the item into the state stored in this version.
   def originator
@@ -104,7 +131,7 @@ class Version < ActiveRecord::Base
   def index
     sibling_versions.all(:select => :id, :order => "id ASC").map(&:id).index(self.id)
   end
-
+  
   private
 
   # Restore the `model`'s has_one associations as they were when this version was

@@ -6,8 +6,8 @@ class ArtistsController < ApplicationController
   # GET /artists
   # GET /artists.js
   def index
-   @artists = Artist.find(:all, :limit => 4, :conditions => 'rating > 4', :order => 'rating DESC')
-   @latest_artists = Artist.find(:all, :limit => 4, :order => 'updated_at DESC')
+   @artists = Artist.active.rated.limit(4).order 
+   @latest_artists = Artist.active.limit(4).order('updated_at DESC')
   end
 
   def search

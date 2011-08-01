@@ -105,8 +105,9 @@
 			   <div id="cast1" class="castPics">
 				<table><tbody>
 			     <tr>
-			     <% @cast_list =  @movie.artists.lead %>
-			     <% @cast_list.concat(@movie.artists.artist)  %>
+			     
+
+			     
 			     <% for artist in @cast_list[0..7] %>
 				  <td><a id="addMainPhotoLnk" class="items" href="<%= artist_path(artist) %>">
 				  <img width="75" height="100" id="profile_picture" style="border-width: 0px;" 
@@ -213,7 +214,6 @@
 		</div>
 		<div class="clearDiv"></div>		
 	    <div id="Videos" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
-			<% @videos = @movie.videos %>	
 			<div class="rndSecULFT"> </div>
 			<div class="rndSecURt"> </div>  
 			<div class="sectionBG">

@@ -1,7 +1,19 @@
 class Movie < ActiveRecord::Base
-ajaxful_rateable :stars => 5 , :cache_column => :rating
+
+
+### new attributes ########
+attr_accessor :image_url
+attr_accessor :review_title
+attr_accessor :review_text
+attr_accessor :artist_name  # used in edit cast view
+
+
+###### Plugins ###########
 cattr_reader :per_page
 @@per_page = 10
+
+# ajaxful rating 
+ajaxful_rateable :stars => 5 , :cache_column => :rating
 
 # suppor treviews using acts_as_reviewable plugin
 acts_as_reviewable
@@ -12,16 +24,12 @@ video_attachments
 # has an auditor for modifications
 has_auditor :class_name => 'Audit'
 
-attr_accessor :image_url
-attr_accessor :review_title
-attr_accessor :review_text
-attr_accessor :artist_name  # used in edit cast view
 
 has_many   :trivia
 has_many :awards,
          :class_name => "MovieAward"
 
-has_many :movie_genres, :class_name => "MovieGenre" , :include => :genre
+has_many :movie_genres, :class_name => "MovieGenre" 
 
 has_many :genres, :through => :movie_genres , :conditions => { "movies_genres.active" => true }
   
@@ -31,16 +39,159 @@ has_many :genres, :through => :movie_genres , :conditions => { "movies_genres.ac
 has_and_belongs_to_many :themes,
                         :join_table => "movies_themes"
 
+
+### Scopes #########
+
+ named_scope :active , :conditions => ["movies.active = 1"]
+ named_scope :pending , :conditions => ["movies.active = 0"]
+ named_scope :rated , lambda { |*rate| { :conditions => ["movies.rating > ?",(rate.first || 4)] } }
+ 
+ named_scope :latest, lambda { {:conditions => ['year between ? and ?', Date.today.beginning_of_year(), Date.today]}}
+ named_scope :after, lambda { |*args| { :conditions => ['year > ?', (args.first || Date.today.beginning_of_year() )] }}
+
+ named_scope :limit, lambda { |*num| { :limit => (num.first || 10) } }
+ named_scope :order, lambda { |*order| { :order => order.flatten.first || 'rating DESC' } }
+
+#### Methods #########
+
 def self.search(search_param, page)
   if search_param
-   search_condition = ['name LIKE ?', "%#{search_param}%"]
+   search_condition = ['active = 1 and name LIKE ?', "%#{search_param}%"]
   else
-   search_condition = ['rating > 3']
+   search_condition = ['active = 1 and rating > 3']
   end
-  paginate :page => page,
-		     :conditions => search_condition,
-		     :order => 'rating DESC'
+  paginate(:page => page, :conditions => search_condition , :order => 'rating DESC')
 end
+
+def active_genres(user)
+    if user
+      genres =  self.movie_genres.active  
+	  pending_list = MovieGenre.pending_objects(user)
+
+	  list = []
+	  genres.each do |g| 
+		list << g.genre_id
+	  end
+	  
+	  pending_list.each do |g|
+	     if(g.event == "destroy")
+  		   list.delete(g.genre_id)
+  		 else
+  		   list << g.genre_id
+  		 end
+	  end
+     Genre.find(list) 
+   else
+    self.genres 
+   end
+end
+
+def active_videos(user)
+  if user
+    videos =  self.video_attachments.active
+    pending_list = VideoAttachment.pending_objects(user)
+    
+    list = []
+	videos.each do |g| 
+		list << g.video_id
+	end
+	  
+	pending_list.each do |g|
+	     if(g.event == "destroy")
+  		   list.delete(g.video_id)
+  		 else
+  		   list << g.video_id
+  		 end
+	end
+    Video.find(list)    
+    
+  else
+    self.videos
+  end
+end
+
+
+def active_artists_leads(user)
+   arr = self.active_artists(user, [1,2])
+   arr.concat(self.active_artists(user, [3,4,5,10]))
+   arr
+end
+
+def active_artists(user,roles)
+  if user
+    m_roles =  self.movie_roles.active
+    pending_list = MovieRole.pending_objects(user)
+    
+    # consolidate all roles
+	pending_list.each do |g|
+	     if(g.event == "destroy")
+  		   m_roles.delete(g)
+  		 else
+  		   m_roles << g
+  		 end
+	 end
+    
+    # filter out the roles
+    list = []
+    m_roles.each do|r|
+      list << r.artist_id unless roles.index(r.role_id).nil?    
+    end
+
+    Artist.find(list)    
+    
+  else
+    self.artists.role(roles)
+  end
+end
+
+def show_artists(user,role_type_list)
+  if user
+    m_roles =  self.movie_roles.active
+    pending_list = MovieRole.pending_objects(user)
+    
+    # consolidate all roles
+	role_updates = {}
+	pending_list.each do |g|
+	     if(g.event == "destroy")
+  		   m_roles.delete(g)
+  		 elsif(g.event == "update")   
+  		   role_updates[g.id.to_s] = g.role_id
+  		 else
+  		   m_roles << g
+  		 end
+	 end
+    
+    # filter out the roles
+    list = m_roles.map {|r| r.id }
+    
+    artists = Artist.find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
+                         "from artists as a, roles as r, movies_artists_roles as mr " +                   
+                         " where mr.artist_id = a.id and mr.role_id = r.id " + 
+                         " and r.role_type in (?) and mr.id  in (?)", role_type_list, list])       
+
+    # fianlly get any updates
+    result = []
+    if(!role_updates.empty?) 
+      @roles = {}
+      Role.find(role_updates.values).map { |u| @roles[u.id] = u.name }
+      
+      artists.each do |a|
+         if(role_updates.has_key? a.mar_id ) 
+            a["role_name"] = @roles[role_updates[a.mar_id]]
+            a["role_id"] = role_updates[a.mar_id]
+         end
+         result << a 
+      end
+    else 
+      result = artists
+    end    
+    result
+  else
+    self.cast.cast_list(role_type_list,id)
+  end
+end
+
+
 
 
 # Roles Cast relation ####
@@ -98,15 +249,11 @@ has_many :roles, :through => :movie_roles do
 end
 
 has_many :cast, :class_name  => "MovieRole" do
-  def cast_list(movie_id)
-     find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
+  
+  def cast_list(role_type_list, movie_id)
+     Artist.find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
                     "from artists as a, roles as r, movies_artists_roles as mr " +                   
-                    " where mr.active = 1 and mr.artist_id = a.id and mr.role_id = r.id and r.role_type = 'cast' and mr.movie_id = ?", movie_id])
-  end
-  def crew_list(movie_id)
-     find_by_sql( [ "select a.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
-                   "from artists as a, roles as r, movies_artists_roles as mr " +                   
-                   " where mr.active = 1 and mr.artist_id = a.id and mr.role_id = r.id and r.role_type in ('crew', 'ProductionCrew') and mr.movie_id = ?", movie_id])
+                    " where mr.active = 1 and mr.artist_id = a.id and mr.role_id = r.id and r.role_type in (?) and mr.movie_id = ?", role_type_list, movie_id])
   end
 end
 

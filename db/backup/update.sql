@@ -59,4 +59,8 @@ ALTER TABLE movies ADD INDEX `index_movies_active` (id, active);
 
 ALTER TABLE artists ADD INDEX `index_artists_active` (id, active);
 
+ALTER TABLE movies ADD INDEX `index_movies_active_col` (active);
+
+ALTER TABLE video_attachments add column `active` TINYINT(1) DEFAULT 1 after `videoable_type`;
+
 -- update movie_artist_roles unique, drop 

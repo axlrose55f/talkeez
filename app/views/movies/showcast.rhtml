@@ -28,7 +28,6 @@
 	 	                   :method => :get %>
         </div>
         <div id="editArtistRole"></div> 
-		<% @casts = @movie.cast.cast_list(@movie.id) %>
 		 <% if @casts.empty? %>
 			<h3> No Cast details Yet </h3>
 		 <% else %> 
@@ -36,7 +35,7 @@
 		  <ul>
 		  <% count = 1 %>
 	      <% for cast in  @casts %>
-		   <% artist = Artist.find(cast.id) %>
+		   <% artist = cast %>
  		  	 <li id="artist_item">
  		  	 <div id="filmography_<%= count += 1 %>">
 
@@ -83,13 +82,12 @@
 	<div class="persHeaderURt"> </div>
     <div id="movie_cast" class="">
     <h2>Crew details for - <%=h @movie.name%></h2><br>
-        <% @crews = @movie.cast.crew_list(@movie.id) %>
-        <ul>
+       <ul>
 		 <% if @crews.empty? %>
 		  <li id="artist_item"><h3> No Crew details Yet </h3></li>
 		 <% else %>
 		  <% for crew in @crews %>
-		  <% artist = Artist.find(crew.id) %>
+		  <% artist = crew %>
 		   <li>
 		   <div id="filmography_<%= count += 1 %>">
 		    <h3>

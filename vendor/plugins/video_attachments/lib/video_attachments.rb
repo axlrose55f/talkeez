@@ -7,7 +7,7 @@ module VideoAttachments #:nodoc:
       module ClassMethods
         def video_attachments
           has_many :video_attachments , :as => :videoable, :dependent => :destroy
-          has_many :videos, :through => :video_attachments
+          has_many :videos, :through => :video_attachments, :conditions => { "video_attachments.active" => true }
           include VideoAttachments::InstanceMethods
           extend VideoAttachments::SingletonMethods
         end

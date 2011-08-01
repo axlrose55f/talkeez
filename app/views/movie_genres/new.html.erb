@@ -1,6 +1,5 @@
 <div id="movie_genres_edit" class="movie_genres_edit">
 <ul class="token-input-list-facebook">
-<% @movie_genres = @movie.genres %>
 <% for g in @movie_genres %>  
   <li class="token-input-token-facebook">
    <p><%=h  g.name %></p>
@@ -13,7 +12,7 @@
    <%= f.hidden_field :movie_id , :value => @movie.id  %>   
    <%=f.collection_select(:genre_id, @genres, :id, :name) %>
    <br>
-   <%= f.submit "Add" %>&nbsp;&nbsp;<%= link_to "Cancel", '#', :onclick => "$(movieGenreEdit).hide();", :style => "float:right;"  %>
+   <%= f.submit "Add" %>&nbsp;&nbsp;<%= link_to "Cancel", 'javascript:$(movieGenreEdit).hide();', :onclick => "$(movieGenreEdit).hide();", :style => "float:right;"  %>
   <% end %>
  
 </div>
