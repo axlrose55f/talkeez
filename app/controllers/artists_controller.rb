@@ -26,8 +26,9 @@ class ArtistsController < ApplicationController
   # GET /artists/1
   # GET /artists/1.xml
   def show
-    @artist = Artist.find(params[:id])
-
+    @artist = Artist.show_data(params[:id],current_user)
+    @movies = @artist.show_movies(current_user,8)
+    @videos = @artist.active_videos(current_user)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @artist }
@@ -38,7 +39,7 @@ class ArtistsController < ApplicationController
   # GET /artists/1.xml
   def filmography
     @artist = Artist.find(params[:id])
-
+    @movies = @artist.filmography(current_user)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @artist }
@@ -49,7 +50,7 @@ class ArtistsController < ApplicationController
   # GET /artists/1.xml
   def videos
     @artist = Artist.find(params[:id])
-
+    @videos = @artist.active_videos(current_user)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @artist }

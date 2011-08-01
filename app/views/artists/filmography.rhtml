@@ -19,7 +19,7 @@
 		<div id="movie_listing">
 		 <ul>
 		  <% count = 1 %>
-		  <% for movie in @artist.movies.roles(@artist.id) %>
+		  <% for movie in @movies %>
 			<li id="movie_item">
 			<div id="filmography_<%= count += 1 %>">
 			<h3>

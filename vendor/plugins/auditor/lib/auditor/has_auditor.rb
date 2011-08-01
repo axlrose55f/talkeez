@@ -205,7 +205,9 @@ module Auditor
       
       # set active to false before create
       def before_create
-	      self.active = 0   
+	     if switched_on? && not_moderator?
+  	      self.active = 0   
+  	     end 
       end
       
       def record_create

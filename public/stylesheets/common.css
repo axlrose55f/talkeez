@@ -454,17 +454,24 @@ margin:2px;
 *+html #g_footer .links .genlinks{margin-right:30%}
 
 .message_block {
-	background-color: #ECEFC9;
-	border: 1px solid #BFC187;
+  background-color: #ECEFC9;
+  border: 1px solid #BFC187;
   color: #735005;
+  border-radius: 5px;
+  padding: 5px 0 5px 0;
+  margin: 10px 0 10px 0;
+  width: 500px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  border-radius: 5px;
-  padding-top: 8px;
+  box-shadow: -4px 5px 8px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow:-4px 5px 8px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: -4px 5px 8px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+
 }
 
 .message_block ul li h4 {color:#833820;line-height: 1.4;font-size: 120%;padding-bottom: 7px;font-weight: 700;}
-.message_block ul li a {color:#695E49}
+.message_block ul li a {color:#695E49;}
 .message_block ul {
   list-style: none;
   padding: 10px;
@@ -472,6 +479,10 @@ margin:2px;
 .message_block ul li {
   margin-left: 3em;
 }
+
+.message_block .close {float:right;padding-right:10px;}
+.message_block .close a {color:#695E49;text-decoration: none;}
+
 
 /*
 .message_block ul.error {

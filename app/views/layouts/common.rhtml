@@ -56,8 +56,8 @@
 <!-- End Awesome Search Bar -->
 <% flash.each do |key, msg| %>
  <center>
- <div id="message_block" class="message_block" style="width: 500px;"> 
-    <p style="float:right;padding-right:10px;"><%= link_to_function 'Close', "Effect.Fade('message_block')" %></p>
+ <div id="message_block" class="message_block"> 
+    <p class="close"><%= link_to_function 'Close [X]', "Effect.Fade('message_block')" %></p>
     <ul class="<%= key %>">
 	   <li><h4><p><%= msg %></p></h4></li>
     </ul>

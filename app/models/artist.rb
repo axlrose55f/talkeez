@@ -23,8 +23,7 @@ class Artist < ActiveRecord::Base
 	  def roles(artist_id)
 		 find_by_sql( [ "select m.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
 					   "from movies as m, roles as r, movies_artists_roles as mr " +
-					   " where mr.movie_id = m.id and mr.role_id = r.id and mr.artist_id = ? order by m.year ASC",
-					   artist_id])
+					   " where mr.movie_id = m.id and mr.role_id = r.id and mr.artist_id = ? order by m.year ASC", artist_id])
 	  end
 	end         
 
@@ -64,10 +63,106 @@ def self.search(search, page)
 		     :order => 'rating DESC'  
 end
 
+def active_videos(user)
+  if user
+    videos =  self.video_attachments.active
+    pending_list = VideoAttachment.pending_objects(user)
+    
+    list = []
+	videos.each do |g| 
+		list << g.video_id
+	end
+	  
+	pending_list.each do |g|
+	     if(g.event == "destroy")
+  		   list.delete(g.video_id)
+  		 else
+  		   list << g.video_id
+  		 end
+	end
+    Video.find(list)    
+    
+  else
+    self.videos
+  end
+end
 
+def show_movies(user, limit_num = 8)
+  if user
+    m_roles =  self.movie_roles.active
+    pending_list = MovieRole.pending_objects(user)
+    
+    # consolidate all roles
+	pending_list.each do |g|
+	     if(g.event == "destroy")
+  		   m_roles.delete(g)
+  		 else
+  		   m_roles << g
+  		 end
+	 end
+    
+    # filter out the roles
+    list = m_roles.map { |r| r.movie_id }      
+    movies = []
+    begin
+     movies = Movie.find(list[0..(limit_num-1)])    
+    rescue ActiveRecord::RecordNotFound 
+    end
+    movies
+  else
+    self.artist.movies.limit(limit_num)
+  end
+end
 
+def filmography(user, limit_num = nil)
+  limit = limit_num.nil? ? "" : " LIMIT " + limit_num.to_s
+  if user
+    m_roles =  self.movie_roles.active
+    pending_list = MovieRole.pending_objects(user)
+    
+    # consolidate all roles
+	role_updates = {}
+	pending_list.each do |g|
+	     if(g.event == "destroy")
+  		   m_roles.delete(g)
+  		 elsif(g.event == "update")   
+  		   role_updates[g.id.to_s] = g.role_id
+  		 else
+  		   m_roles << g
+  		 end
+	 end
+    
+    # filter out the roles
+    list = m_roles.map {|r| r.id }
 
+    movies = Movie.find_by_sql( [ "select m.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
+	   				     "from movies as m, roles as r, movies_artists_roles as mr " +
+					     " where mr.movie_id = m.id and mr.role_id = r.id and mr.id in (?) order by m.year ASC" + limit, list])
+     
 
+    # fianlly get any updates
+    result = []
+    if(!role_updates.empty?) 
+      @roles = {}
+      Role.find(role_updates.values).map { |u| @roles[u.id] = u.name }
+      
+      movies.each do |a|
+         if(role_updates.has_key? a.mar_id ) 
+            a["role_name"] = @roles[role_updates[a.mar_id]]
+            a["role_id"] = role_updates[a.mar_id]
+         end
+         result << a 
+      end
+    else 
+      result = movies
+    end    
+    result
+  else
+    Movie.find_by_sql([ "select m.*, r.name as role_name, r.id as role_id, mr.id as mar_id " + 
+		 			    "from movies as m, roles as r, movies_artists_roles as mr " +
+					    " where mr.movie_id = m.id and mr.role_id = r.id and mr.artist_id = ? order by m.year ASC" + limit, id])
+  end
+end
 
 
 
