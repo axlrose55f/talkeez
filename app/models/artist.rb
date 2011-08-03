@@ -110,7 +110,7 @@ def show_movies(user, limit_num = 8)
     end
     movies
   else
-    self.artist.movies.limit(limit_num)
+    self.movies.limit(limit_num)
   end
 end
 
