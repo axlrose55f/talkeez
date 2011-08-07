@@ -1,29 +1,72 @@
 <% content_for :searchBar do %>
    <%= render(:partial => "layouts/slimSearch")%>
 <% end %>
-<h1><i>Award :</i>&nbsp; <%=h @category.full_name %></h1>
 
-<div id="award-list">
-<table class="table-class"  cellspacing="2" cellpadding="5" >
-<tr>
- <th>ID</th>
- <th>Year</th>
- <th>Award</th>
- <th>Movie</th>
- <th>Artist</th>
-</tr>
-<% for award in @awards %>  
-<tr>
-   <td><%=h  award.id %></td> 
-   <td><a href="/awards/<%= award.categories.award_type.id %>/awards" ><%=h  award.year.year %></a></td>
-   <td><a href="/awards/<%= award.categories.id %>" > <%=h  award.categories.full_name %></a></td>
-   <td><a href="/movies/<%= award.movie.id %>/awards" ><%=h  award.movie.name %></a></td>
-   <td><a href="/artists/<%= award.artist.id %>/awards" ><%=h  award.artist.name %></a></td>
-   <td>
-    <%= link_to 'Delete', :controller => "awards", :action => "show", :id => award.id, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<div id="yui-main" style="">
+
+<div class="award_title">
+ <h1><%=h @year.to_datetime.to_s(:year) %> <%=h @type_name %> Award</h1>
+ <ul id="award-nav-tabs">
+	<li class="previous"><a href="/awards/<%=h@type_id %>/?year=<%=h @year.years_ago(1) %>">< PREV YEAR</a></li>
+    <li class="next"><a href="/awards/<%=h@type_id %>/?year=<%=h @year.years_since(1)%>">NEXT YEAR ></a></li>
+ </ul>
+</div>
+
+<% if @awards.empty? %>
+
+ <h2>No award info present.</h2>
+
+<% else %>
+	<div id="award-list">
+	 <ul>
+	 <% @list.each do|name| %>
+	 <li>
+	   <div class="award_name" >
+  	     <%=h  name %>
+  	   </div>  
+  	   <% awards = @awards[name] %>
+  	   <% m_id = nil %>
+  	   <% awards.each do|award| %>
+		  <% if !award.movie.nil? %>  
+		   <% if m_id.nil? ||  ( m_id != award.movie_id ) %> 
+			   <div class="award_movie padleft20">	     
+				 <a href="/movies/<%= award.movie.id %>/awards" >
+				  <img width="150" height="200" id="movie_picture" src="<%=h award.movie.image.url(:medium) %>"/></a>
+				 <center>
+				 <span id="a_movie_title"> 
+				  <a href="/movies/<%= award.movie.id %>/awards" ><%=h  award.movie.name %></a>
+				 </span>
+				 </center>
+			   </div>    	   
+		   <% end %>
+ 	   	   <% m_id = award.movie_id %>
+		   <% else %>
+		     <% if award.award.recipient == 2 %>
+		     <div class="a_movie_missing padleft20"><span class="movie_missing"><a href="">Movie Info Missing</a></span></div>
+		     <% end %>
+		   <% end %>
+		   <% if !award.artist.nil? %>
+		   <div class="award_recp padright20">
+			 <a href="/artists/<%= award.artist.id %>/awards" ><img width="150" height="200" id="movie_picture" src="<%=h award.artist.image.url(:medium) %>"/></a>
+		   <center> 
+			<span id="a_artist_title"> 
+			  <a href="/artists/<%= award.artist.id %>/awards" ><%=h  award.artist.name %></a>
+		   </span>
+		   </center>
+		   </div>
+		   <% else %>
+		    <% if award.award.recipient == 1 %>
+		     <div class="a_artist_missing padright20"><span class="artist_missing"><a href="">Artist Info Missing</a></span></div> 
+		     <% end %> 
+		   <% end %>
+	
+	   <% end %>
+
+  	   <div style="clear:both;"></div>
+	 </li>
+	<% end %>
+   </ul>
+  </div> 
 <% end %>
-</table>
-<br>
-<br>
-<%= link_to 'Back', awards_path %>
+</div>
+

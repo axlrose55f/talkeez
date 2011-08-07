@@ -3,12 +3,12 @@ class AwardType < ActiveRecord::Base
 
 attr_accessor :image_url
 
-has_many :categories,  
-         :class_name => "AwardCategories"
+has_many :awards,
+         :foreign_key => "type_id"        
 
 
 has_attached_file :image,
-				  :styles => { :medium => {:geometry => "100x100", :format => 'png'}, 
+				  :styles => { :medium => {:geometry => "150x150", :format => 'png'}, 
 				               :thumb =>  {:geometry =>"60x60>" , :format => 'png'}
 				             },
 				  :default_url => "/data/images/:class/default/:style_missing.png",

@@ -19,21 +19,42 @@
 		<img src="/images/edit.gif"></img>
 	 	<a id="editProfileLink" href="/movies/<%= @movie.id%>/editawards" title="Edit Awards">Edit Awards</a>
         </div>
-		<table><tbody>
-		  <% @awards = @movie.awards %>
-		  <% for award in @awards %>
-			<tr>
-			<td>
-			<img width="45" height="45" id="profile_picture" style="border-width: 0px;" src="<%=h award.categories.award_type.image.url(:thumb) %>"/>
-			</td>
-			<td><h3><% if award.year %> <%= award.year.year %> <% end %>:</h3></td>
-			<td>
-	   		 <h3><a href="/award_types/<%= award.categories.award_type_id%>/showCategories?cat_id=<%= award.categories.id%>" class="show-link"><%=h award.name %></a></h3>
-		    </td>
-		    </tr>
-		  <% end%>
-	</tbody></table>
-
+        <div id="editMovieAward"></div> 
+         <% if @awards.empty? %>
+			<h3> No Awards details </h3>
+		 <% else %> 
+		  <div id="award_listing">
+		  <ul>
+          <% count = 1 %>        
+		  <% @awards.each_pair do|type, m_awards| %>
+		   <li id="award_type">
+		   <div class="award_type_name">
+		    <h2><span><b><%=h type %> (<%=h m_awards[0].year.to_datetime.to_s(:year) %>) </b></span></h2>
+		   </div
+		    <ul>
+			   <% for award in m_awards %>
+				<li id="award_item">
+				<div id="movie_award_<%= count += 1 %>"> 		   
+				 <h3>
+				 <div class="awardlistleft">  			  
+				  <span><a href="/awards/<%= award.type_id%>/?year=<%= award.year.to_datetime.to_s(:year) %>" class="award-link"><%=h award.name %></a>&nbsp;&nbsp;:</span>
+				 </div>
+				 <div style="clear:both;"></div>&nbsp;
+				 <div class="awardlistright">
+				  <span><a href="/artists/<%= award.artist_id%>/" class="award-link"><%=h award.artist_name %></a></span>
+				 </div> 
+				 </h3>
+				</div> 
+				<div id="movie_award_update_<%= count %>"></div>
+				</li>
+			   <% end%>
+		   </ul>
+		   </li>
+		  <% end %>  
+		  
+ 	     </ul>
+ 	    </div>
+ 	    <%end %>
 	<br/>
 	</div>
 	<div class="clearDiv"></div>

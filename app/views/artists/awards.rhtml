@@ -13,35 +13,39 @@
 	<div class="persHeaderURt"> </div>
 	<div id="movie_cast" class="">
 		<h2>Awards for  <%=h @artist.name%></h2><br>
-		 <% @awards = @artist.awards %>
-		 <% if !@awards.empty? %>	    
 		<div id="editCast" style="float:right; posiiton:relative;">
 		<img src="/images/edit.gif"></img>
 	 	<a id="editProfileLink" href="/artists/<%= @artist.id%>/editawards" title="Edit Awards">Edit Awards</a>
-        </div>
-		<table><tbody>	
-<tr>
-		<td><h3>Year</h3></td>
-		<td><h3>Award</h3></td>
-		<td><h3>Movie</h3></td>
-</tr>
-
+        </div>		
+ 		<div id="editArtistAward"></div> 
+         <% if @awards.empty? %>
+			<h3> No Awards details </h3>
+		 <% else %> 
+		  <div id="award_listing">
+		  <ul>
+          <% count = 1 %>        
 		  <% for award in @awards %>
-			<tr>
-			<td><h3><% if award.year %><%= award.year.year %> <% end %></h3></td>
-		    <td>
-	   		 <h3><a href="/award_types/<%= award.categories.award_type_id%>/showCategories?cat_id=<%= award.categories.id%>" class="show-link"><%=h award.name %></a></h3>
-		    </td>
-			<td>
-	   		 <h3><a href="/movies/<%= award.movie.id %>" class="show-link"><%=h award.movie.name %></a></h3>
-		    </td>
-			
-		    </tr>
+		   <li id="award_item">
+ 		   <div id="movie_award_<%= count += 1 %>"> 		   
+			 <h3>
+			 <div class="awardlist" > 
+  			  <span><% if award.year %> <%= award.year.to_datetime.to_s(:year) %> <% end %></span>
+  			 </div>
+	  		<div class="a_awardlistleft">
+			  <span><a href="/awards/<%= award.type_id%>/?year=<%= award.year.to_datetime.to_s(:year)%>" class="show-link"><%=h award.type_name %> - <%=h award.name %></a>&nbsp;&nbsp;:</span>
+			</div>
+			<div style="clear:both;"></div>&nbsp;
+			<div class="a_awardlistright">
+			  <span><a href="/movies/<%= award.movie_id%>/" class="show-link"><%=h award.movie_name %></a></span>
+			</div>
+			</h3>
+ 		    </div> 
+ 		    <div id="movie_award_update_<%= count %>"></div>
+ 		   </li>
 		  <% end%>
-	</tbody></table>
-		<% else %>		 
-	     <h3> No awards yet </h3>
-	     <% end %>
+ 	     </ul>
+ 	    </div>
+ 	    <%end %>
 	<br/>
 	</div>
 	<div class="clearDiv"></div>

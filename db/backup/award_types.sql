@@ -39,7 +39,9 @@ INSERT INTO `award_types` (`id`, `name`, `description`) VALUES
 (2,'Star Screen Award','This is Star Screen Award'),
 (3,'Zee Cine Award','This is Zee Cine Award'),
 (4,'International Indian Film Academy (IIFA)','This is International Indian Film Academy (IIFA)'),
-(5,'National Film Award','This is National Film Award');
+(5,'National Film Award','This is National Film Award'),
+(6,'Stardust Award','This is Stardust Award'),
+(8,'Apsara Awards','This is Apsara Award');
 
 /*!40000 ALTER TABLE `award_types` ENABLE KEYS */;
 UNLOCK TABLES;

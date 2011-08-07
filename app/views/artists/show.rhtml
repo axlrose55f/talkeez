@@ -80,31 +80,28 @@
 			<div class="rndSecULFT"> </div>
 			<div class="rndSecURt"> </div>  
 			<div class="sectionBG">
-				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Awards</h2>
+				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Awards <%=h "(#{@awards.size})" unless @awards.empty? %></h2>
 
 			</div>
 			<div class="sectionContainer">
-			   <div id="Awards1" class="padtop10 padbot10">
-			   <% @awards = @artist.awards %>
+			   <div id="Awards" class="padtop10 padbot10">			 
 			   <% if ! @awards.empty? %>
-			   <table><tbody>
-			     <% for award in @awards %>
-				  <tr>
-				  <td>
-				   <h3><% if award.year %> <%= award.year.year %> <% end %> - </h3>
-				  </td>
-				  <td>
-				   &nbsp;<em class="noItemAdded"><a href="/award_types/<%= award.categories.award_type_id%>/showCategories?cat_id=<%= award.categories.id%>" class="show-link"><%=h award.name %></a></em>
-		          </td>
-		          <td>
-				   &nbsp;- &nbsp;<em class="noItemAdded"><a href="/movies/<%= award.movie.id %>" class="show-link"><%=h award.movie.name %></a></em>
-		          </td>
-		          </tr>
+			   <ul>
+			     <% for award in @awards[0..4] %>
+				  <li>
+				   <em class="noItemAdded"><% if award.year %> <%= award.year.to_datetime.to_s(:year) %> <% end %> - </em>
+				   &nbsp;<em class="noItemAdded"><a href="/awards/<%= award.type_id%>/?year=<%= award.year.to_datetime.to_s(:year)%>" class="award-link"><%=h award.type_name %> : <%=h award.name %></a></em>
+				   &nbsp;- &nbsp;<em class="noItemAdded"><a href="/movies/<%= award.movie_id %>" class="award-link"><%=h award.movie_name %></a></em>
+		          </li>
 			      <% end%>
-				</tbody></table>	
-			   <% else %>			   
-				<em class="noItemAdded">No Award info has been added.</em>
-			   <% end %>
+				 </ul>
+				  <br>
+                 <div id="see_all_reviews" class="add_video_link" >
+				   <%= '<a href="' + awards_artist_path(@artist) + '">See all awards</a>'  unless @awards.empty? %>
+    		     </div>	
+				<% else %>			   
+				 <em class="noItemAdded">No Award info has been added.</em>
+			    <% end %>
 			   </div>
 			</div>
 			<div class="rndSecLLFT"> </div>

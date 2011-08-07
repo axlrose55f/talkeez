@@ -6,26 +6,20 @@
 <table class="table-class"  cellspacing="2" cellpadding="5" >
 
 
-<% for award in @awards %>  
+<% for awardType in @awardTypes %>  
 <tr valign="top" >
     <td width="10%" align="center" class="table-class">
-    <a href="/award_types/<%= award.id%>" class="show-link">	
-	<img width="80" height="80" id="profile_picture"class="artist-list-image" src="<%=h award.image.url(:thumb) %>"></a>
+    <a href="/award_types/<%= awardType.id%>" class="show-link">	
+	<img width="80" height="80" id="profile_picture"class="artist-list-image" src="<%=h awardType.image.url(:thumb) %>"></a>
 	</td> 
     <td width="70%" class="table-class">		
-		<span class="heading-title">Award Name:</span>
-		<span class="list-title"><%=h award.name %> </span><br>
+		<span class="heading-title">Award Type Name:</span>
+		<span class="list-title"><%=h awardType.name %> </span><br>
 
-		<span class="heading-title">Description:</span>	<%=h award.description %><br/>		
+		<span class="heading-title">Description:</span>	<%=h awardType.description %><br/>		
  	 </td>   
-  
-<%
-=begin %>
-   <td>
-    <%= link_to 'Delete', award, :confirm => 'Are you sure?', :method => :delete %></td>
-<%
-=end %>
 
+   <td><%= link_to 'Delete', awardType, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
 <% end %>
 </table>

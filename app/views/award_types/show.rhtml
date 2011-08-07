@@ -2,29 +2,29 @@
    <%= render(:partial => "layouts/slimSearch")%>
 <% end %>
 
-<h1><i>Award Type</i> :&nbsp; <b><%=h @award.name%></b></h1>
+<h1><i>Award Type</i> :&nbsp; <b><%=h @awardType.name%></b></h1>
 <br/>
-<img width="150" height="150" id="profile_picture"class="artist-list-image" src="<%=h @award.image.url(:medium) %>">
+<img width="150" height="150" id="profile_picture"class="artist-list-image" src="<%=h @awardType.image.url(:medium) %>">
 <br/>
-<b>Description:</b><br/> <%=h @award.description %>
+<b>Description:</b><br/> <%=h @awardType.description %>
 <br/>
 <br/>
 
 
-<b>Categories under :<i> <%=h @award.name %></i></b>
+<b>Awards under :<i> <%=h @awardType.name %></i></b>
 <br>
 <br>
 <div id="award-type-details">
 <table class="table-class"  cellspacing="2" cellpadding="5" >
- <% for category in @award.categories %> 
+ <% for award in @awardType.awards %> 
 <tr>
-   <td>&nbsp;<%=h  category.id %></td> 
-   <td>&nbsp;&nbsp;<a href="/award_types/<%= @award.id %>/showCategories?cat_id=<%= category.id %>" ><%=h  category.name %></a></td>
-   <td>&nbsp;&nbsp;<%=h  category.description %></td>
+   <td>&nbsp;<%=h  award.id %></td> 
+   <td>&nbsp;&nbsp;<a href="/award_types/<%= @awardType.id %>/showCategories?award_id=<%= award.id %>" ><%=h  award.name %></a></td>
+   <td>&nbsp;&nbsp;<%=h  award.description %></td>
 </tr>
 <% end %>
 </table>
 <br/><br/>
-<%= link_to 'Edit',  edit_award_type_path(@award) %> |
+<%= link_to 'Edit',  edit_award_type_path(@awardType) %> |
 <%= link_to 'Back', award_types_path %>
 

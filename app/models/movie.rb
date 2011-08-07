@@ -26,8 +26,10 @@ has_auditor :class_name => 'Audit'
 
 
 has_many   :trivia
-has_many :awards,
-         :class_name => "MovieAward"
+
+has_many :movie_awards,  :class_name  => "MovieAward"
+
+has_many :awards, :through => :movie_awards, :conditions => { "movies_awards.active" => true }
 
 has_many :movie_genres, :class_name => "MovieGenre" 
 
@@ -61,6 +63,20 @@ def self.search(search_param, page)
    search_condition = ['active = 1 and rating > 3']
   end
   paginate(:page => page, :conditions => search_condition , :order => 'rating DESC')
+end
+
+def active_awards(user)
+	if user 
+      Award.find_by_sql( [ "select a.*, ar.name as artist_name, ar.id as artist_id, ma.id as ma_id, ma.year as year " +
+                           " from awards as a, movies_awards as ma, artists as ar " +                   
+                           " where ma.active = 1 and ar.id = ma.artist_id and ma.award_id = a.id " + 
+                           " and  ma.movie_id = ? order by ma.year DESC", id])
+	else
+	  Award.find_by_sql( [ "select a.*, ar.name as artist_name, ar.id as artist_id, ma.id as ma_id, ma.year as year " +
+                           " from awards as a, movies_awards as ma, artists as ar " +                   
+                           " where ma.active = 1 and ar.id = ma.artist_id and ma.award_id = a.id " + 
+                           " and  ma.movie_id = ? order by ma.year DESC", id])
+	end
 end
 
 def active_genres(user)

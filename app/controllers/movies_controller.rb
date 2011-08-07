@@ -42,6 +42,8 @@ class MoviesController < ApplicationController
     @genres = @movie.active_genres(current_user)
     @videos = @movie.active_videos(current_user)
     @cast_list = @movie.active_artists_leads(current_user)
+    @awards = @movie.active_awards(current_user)
+    
     @total_percentage_like = rate_percentage("like")
     # @total_percentage_hate = rate_percentage("hate")
     respond_to do |format|
@@ -78,6 +80,13 @@ class MoviesController < ApplicationController
   def awards
     @movie = Movie.find(params[:id])
     @genres = @movie.active_genres(current_user)
+    m_awards = @movie.active_awards(current_user)
+    @awards = {}
+    if !m_awards.nil? 
+      m_awards.each do |a|
+       (@awards[a.type_name] ||= []) << a
+      end
+    end    
     respond_to do |format|
       format.html # awards.html.erb
       format.xml  { render :xml => @movie }

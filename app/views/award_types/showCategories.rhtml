@@ -1,20 +1,21 @@
 <% content_for :searchBar do %>
    <%= render(:partial => "layouts/slimSearch")%>
 <% end %>
-<% award_type = @award_cat.award_type %>
+<br>
+<% award_type = @award.award_type %>
 <h1><i>Award Type</i> :&nbsp; <b><a href="/award_types/<%= award_type.id %>" ><%=h award_type.name%></a></b></h1>
 <br/><%= image_tag(award_type.image.url(:medium), :size => "150x150", :alt => award_type.name) %>
 <br>
 <br>
-<h1><i>Award Category Name</i> :&nbsp; <b><%=h @award_cat.name%></b></h1>
+<h1><i>Award Name</i> :&nbsp; <b><%=h @award.name%></b></h1>
 <br>
-<b>Description:</b><br/> <%=h @award_cat.description %>
+<b>Description:</b><br/> <%=h @award.description %>
 <br/>
 <br/>
 
 <br/><br/>
 
-<h1>Awards in this Category : &nbsp; <b> <%=h @award_cat.full_name %></b></h1>
+<h1>Movies with this Awards: &nbsp; <b> <%=h @award.full_name %></b></h1>
 
 <div id="award-list">
 <table class="table-class"  cellspacing="2" cellpadding="5" >
@@ -25,13 +26,17 @@
  <th>Movie</th>
  <th>Artist</th>
 </tr>
-<% for award in @award_cat.awards %>  
+<% for m_award in @movie_awards %>  
 <tr>
-   <td><%=h  award.id %></td> 
-   <td><a href="/awards/<%= award.categories.award_type.id %>/awards" ><%=h  award.year.year %></a></td>
-   <td><a href="/awards/<%= award.categories.id %>" > <%=h  award.categories.full_name %></a></td>
-   <td><a href="/movies/<%= award.movie.id %>/awards" ><%=h  award.movie.name %></a></td>
-   <td><a href="/artists/<%= award.artist.id %>/awards" ><%=h  award.artist.name %></a></td>
+   <td><%=h  m_award.id %></td> 
+   <td><a href="/award_type/<%= m_award.award.award_type.id %>/awards" ><%=h  m_award.year.year %></a></td>
+   <td><a href="/awards/<%= m_award.id %>" > <%=h  m_award.award.name %></a></td>
+   <% if m_award.movie %>
+   <td><a href="/movies/<%= m_award.movie.id %>/awards" ><%=h  m_award.movie.name  %></a></td>
+   <% end %>
+   <% if m_award.artist %>
+   <td><a href="/artists/<%= m_award.artist.id %>/awards" ><%=h  m_award.artist.name  %></a></td>
+   <% end %>
  </tr>
 <% end %>
 </table>

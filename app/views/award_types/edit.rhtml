@@ -1,6 +1,6 @@
-<h1>Editing award</h1>
+<h1>Editing award Type</h1>
 
-<% form_for @award, :html => { :multipart => true } do |f| %>
+<% form_for @awardType, :html => { :multipart => true } do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -22,6 +22,6 @@
 <% end %>
 
 
-<%= link_to 'Show', @award %> |
+<%= link_to 'Show', @awardType %> |
 <%= link_to 'Back', award_types_path %>
 

@@ -5,8 +5,9 @@ class Artist < ActiveRecord::Base
   attr_accessor :image_url
   
   ### realtion ships ####
-  has_many :awards,
-           :class_name => "MovieAward"
+  has_many :movie_awards,  :class_name  => "MovieAward"
+
+  has_many :awards, :through => :movie_awards, :conditions => { "movies_awards.active" => true }
  
   has_many :movie_roles, :class_name => "MovieRole"
   
@@ -61,6 +62,20 @@ def self.search(search, page)
    paginate :page => page,
 		     :conditions => search_condition,
 		     :order => 'rating DESC'  
+end
+
+def active_awards(user)
+	if user 
+     Award.find_by_sql( [ "select a.*, m.name as movie_name, m.id as movie_id, ma.id as ma_id, ma.year as year " + 
+	                       " from awards as a, movies_awards as ma, movies as m " +                   
+                           " where ma.active = 1 and m.id = ma.movie_id and ma.award_id = a.id " + 
+                           " and ma.artist_id = ? order by ma.year DESC", id])
+	else
+	  Award.find_by_sql( [ "select a.*, m.name as movie_name, m.id as movie_id, ma.id as ma_id, ma.year as year " + 
+	                       " from awards as a, movies_awards as ma, movies as m " +                   
+                           " where ma.active = 1 and m.id = ma.movie_id and ma.award_id = a.id " + 
+                           " and ma.artist_id = ? order by ma.year DESC", id])
+	end
 end
 
 def active_videos(user)

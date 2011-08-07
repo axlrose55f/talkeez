@@ -23,9 +23,9 @@
 			<li id="movie_item">
 			<div id="filmography_<%= count += 1 %>">
 			<h3>
-			<span><%=h movie.year.to_datetime.to_s(:year) %></span>
-			<span><a href="/movies/<%= movie.id%>" class="show-link" onmouseout="$('movie_detail_<%= movie.id.to_s %>').hide();" onmouseover="$('movie_detail_<%= movie.id.to_s %>').show();" ><%=h movie.name %></a></span>
-			<span style="float:right;padding-right:60px;">&nbsp;as&nbsp; <%=h movie.role_name %></span>
+    		 <span><%=h movie.year.to_datetime.to_s(:year) %></span>
+			 <span><a href="/movies/<%= movie.id%>" class="show-link" onmouseout="$('movie_detail_<%= movie.id.to_s %>').hide();" onmouseover="$('movie_detail_<%= movie.id.to_s %>').show();" ><%=h movie.name %></a></span>
+			 <span style="float:right;padding-right:60px;">&nbsp;as&nbsp; <%=h movie.role_name %></span>
 			</h3>
 			<%= render :partial => "moviedetail", :object => movie %>
 

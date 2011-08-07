@@ -6,53 +6,53 @@ class AwardTypesController < ApplicationController
   # GET /awards
   # GET /awards.xml
   def index
-    @awards = AwardType.find(:all)
-
+    @awardTypes = AwardType.find(:all)
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @awards }
+      format.xml  { render :xml => @awardTypes }
     end
   end
 
   # GET /awards/1
   # GET /awards/1.xml
   def show
-    @award = AwardType.find(params[:id])
+    @awardType = AwardType.find(params[:id])
+    @awards = @awardType.awards
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @award }
+      format.xml  { render :xml => @awardType }
     end
   end
 
   # GET /awards/new
   # GET /awards/new.xml
   def new
-    @award = AwardType.new
+    @awardType = AwardType.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @award }
+      format.xml  { render :xml => @awardType }
     end
   end
 
   # GET /awards/1/edit
   def edit
-    @award = AwardType.find(params[:id])
+    @awardType = AwardType.find(params[:id])
   end
 
   # POST /awards
   # POST /awards.xml
   def create
-    @award = AwardType.new(params[:award_type])
+    @awardType = AwardType.new(params[:award_type])
     respond_to do |format|
-      if @award.save
-        #flash[:notice] = 'Award was successfully created.'
-        format.html { redirect_to(@award) }
-        format.xml  { render :xml => @award, :status => :created, :location => @award }
+      if @awardType.save
+        #flash[:notice] = 'Award Type was successfully created.'
+        format.html { redirect_to(@awardType) }
+        format.xml  { render :xml => @awardType, :status => :created, :location => @awardType }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @award.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @awardType.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -60,15 +60,15 @@ class AwardTypesController < ApplicationController
   # PUT /awards/1
   # PUT /awards/1.xml
   def update
-    @award = AwardType.find(params[:id])
+    @awardType = AwardType.find(params[:id])
     respond_to do |format|
-      if @award.update_attributes(params[:award_type])
-       # flash[:notice] = 'Award was successfully updated.'
-        format.html { redirect_to(@award) }
+      if @awardType.update_attributes(params[:award_type])
+       # flash[:notice] = 'Award Type was successfully updated.'
+        format.html { redirect_to(@awardType) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @award.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @awardType.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -76,20 +76,20 @@ class AwardTypesController < ApplicationController
   # GET /awards/1
   # GET /awards/1.xml
   def showCategories
-    @award_cat = AwardCategories.find(params[:cat_id])
-    
+    @award = Award.find(params[:award_id])
+    @movie_awards = @award.movie_awards    
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @award }
+      format.xml  { render :xml => @movie_awards }
     end
   end
 
   # DELETE /awards/1
   # DELETE /awards/1.xml
   def destroy
-    @award = AwardType.find(params[:id])
-    @award.destroy
+    @awardType = AwardType.find(params[:id])
+    @awardType.destroy
 
     respond_to do |format|
       format.html { redirect_to(award_types_url) }

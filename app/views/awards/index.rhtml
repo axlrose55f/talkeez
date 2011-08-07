@@ -1,21 +1,37 @@
-<div id="movies-details">
-<table class="table-class"  cellspacing="2" cellpadding="5" >
-
-
-<% for award in @awards %>  
-<tr>
-
-   <td><%=h  award.id %></td> 
-   <td><a href="/awards/<%= award.categories.id %>" > <%=h  award.categories.full_name %></a></td>
-   <td><a href="/movies/<%= award.movie.id %>/awards" ><%=h  award.movie.name %></a></td>
-   <td><a href="/artists/<%= award.artist.id %>/awards" ><%=h  award.artist.name %></a></td>
-   <td>
-    <%= link_to 'Delete', :controller => "awards", :action => "show", :id => award.id, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% content_for :searchBar do %>
+   <%= render(:partial => "layouts/slimSearch")%>
 <% end %>
-</table>
 
-<br />
+<div id="yui-main" style="">
+<br>
+<br>
+<div id="award-type-list">
+ <table>
+ <% count = 0 %>
+	<tr>
+  <% for awardType in @awardTypes %>  
+     <% count += 1 %>     
+	   <td>
+	    <div class="award_type_detail">
+		  <ul>
+			<li>
+			<a href="/awards/<%= awardType.id%>" class="show-link">	
+			 <img width="160" height="180" id="award_picture" class="award-list-image" src="<%=h awardType.image.url(:medium) %>">
+			</a>
+			</li>
+			<li style="text-align: center;">
+			 <% name = (awardType.name.size > 16) ? "#{awardType.name[0..18]}..." : awardType.name %>
+			 <a href="/awards/<%= awardType.id%>" class="show-link"><%=h  name %></a>
+			</li>
+		  </ul> 
+	    </div>
+	   </td> 
+	  <% if (count % 4) == 0 %></tr><br><tr><% end %> 
+  <% end %>
+	</tr>
+ </table>
+</div>
 
-<%= link_to 'New Award', new_award_path %>
+
+</div>
 

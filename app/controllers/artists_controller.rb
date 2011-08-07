@@ -29,6 +29,8 @@ class ArtistsController < ApplicationController
     @artist = Artist.show_data(params[:id],current_user)
     @movies = @artist.show_movies(current_user,8)
     @videos = @artist.active_videos(current_user)
+    @awards = @artist.active_awards(current_user)
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @artist }
@@ -61,7 +63,8 @@ class ArtistsController < ApplicationController
   # GET /artists/1.xml
   def awards
     @artist = Artist.find(params[:id])
-
+    @awards = @artist.active_awards(current_user)
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @artist }

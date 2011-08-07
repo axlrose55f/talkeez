@@ -1,29 +1,47 @@
 class AwardsController < ApplicationController
   # select the lay out to use for this controller
   layout :determine_layout
-  before_filter :require_user
+  before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy]
   
   # GET /awards
   # GET /awards.xml
   def index
-    @awards = MovieAward.find(:all)
+    @awardTypes = AwardType.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @awards }
+      format.xml  { render :xml => @awardTypes }
     end
   end
 
-  # GET /awards/1
-  # GET /awards/1.xml
-  def show   
-    @category = AwardCategories.find(params[:id])
-    @awards = MovieAward.find(:all, :conditions => [ "award_id = ?", params[:id]])
+  def show
+    @year = params[:year] ? "#{params[:year]}-01-01".to_date : Date.today.years_ago(1).beginning_of_year()
+    @type = Award.find(:all, :conditions => [" type_id=?",params[:id]])
+    a_list = []
+    @type.each do |a|
+     a_list << a.id 
+    end
+    @type_name = @type[0].type_name unless @type.empty?
+    @type_id = @type[0].type_id unless @type.empty?
+
+    m_awards = MovieAward.find(:all, :conditions => [" award_id in (?) and year = ?", a_list, @year],:include => [:award, :movie, :artist] )
+
+    
+    @awards = {}
+    @list = []
+    if !m_awards.nil? 
+      m_awards.each do |a|
+       @list << a.award.name
+       (@awards[a.award.name] ||= []) << a
+      end
+    end 
+    @list.uniq!
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @award }
     end
   end
+  
 
   # GET /awards/new
   # GET /awards/new.xml
