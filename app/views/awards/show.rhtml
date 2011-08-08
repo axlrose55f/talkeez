@@ -31,7 +31,7 @@
 		   <% if m_id.nil? ||  ( m_id != award.movie_id ) %> 
 			   <div class="award_movie padleft20">	     
 				 <a href="/movies/<%= award.movie.id %>/awards" >
-				  <img width="150" height="200" id="movie_picture" src="<%=h award.movie.image.url(:medium) %>"/></a>
+				  <img width="120" height="150" id="movie_picture" src="<%=h award.movie.image.url(:medium) %>"/></a>
 				 <center>
 				 <span id="a_movie_title"> 
 				  <a href="/movies/<%= award.movie.id %>/awards" ><%=h  award.movie.name %></a>
@@ -43,11 +43,13 @@
 		   <% else %>
 		     <% if award.award.recipient == 2 %>
 		     <div class="a_movie_missing padleft20"><span class="movie_missing"><a href="">Movie Info Missing</a></span></div>
+		     <% else %>
+		      <div style="margin-left:20px;float:left;">&nbsp;</div>
 		     <% end %>
 		   <% end %>
 		   <% if !award.artist.nil? %>
 		   <div class="award_recp padright20">
-			 <a href="/artists/<%= award.artist.id %>/awards" ><img width="150" height="200" id="movie_picture" src="<%=h award.artist.image.url(:medium) %>"/></a>
+			 <a href="/artists/<%= award.artist.id %>/awards" ><img width="120" height="150" id="movie_picture" src="<%=h award.artist.image.url(:medium) %>"/></a>
 		   <center> 
 			<span id="a_artist_title"> 
 			  <a href="/artists/<%= award.artist.id %>/awards" ><%=h  award.artist.name %></a>
