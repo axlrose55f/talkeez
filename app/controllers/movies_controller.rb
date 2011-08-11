@@ -205,7 +205,8 @@ class MoviesController < ApplicationController
   
   ###### Edit Reviews #####
   def editreviews
-    @movie = Movie.find(params[:id])    
+    @movie = Movie.find(params[:id])
+    @genres = @movie.active_genres(current_user)
     @review = if(params[:rev]) 
        Review.find(params[:rev]) 
      else
