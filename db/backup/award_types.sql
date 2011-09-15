@@ -20,6 +20,7 @@ CREATE TABLE `award_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `description` text,
+  `start_year` date,
   `image_updated_at` datetime DEFAULT NULL,
   `image_file_name` varchar(255) DEFAULT NULL,
   `image_content_type` varchar(255) DEFAULT NULL,
@@ -34,14 +35,14 @@ CREATE TABLE `award_types` (
 
 LOCK TABLES `award_types` WRITE;
 /*!40000 ALTER TABLE `award_types` DISABLE KEYS */;
-INSERT INTO `award_types` (`id`, `name`, `description`) VALUES 
-(1,'Filmfare','This is Filmfare'),
-(2,'Star Screen Award','This is Star Screen Award'),
-(3,'Zee Cine Award','This is Zee Cine Award'),
-(4,'International Indian Film Academy (IIFA)','This is International Indian Film Academy (IIFA)'),
-(5,'National Film Award','This is National Film Award'),
-(6,'Stardust Award','This is Stardust Award'),
-(8,'Apsara Awards','This is Apsara Award');
+INSERT INTO `award_types` (`id`, `name`, `description`,`start_year`) VALUES 
+(1,'Filmfare','This is Filmfare','1953-01-01'),
+(2,'Star Screen Award','This is Star Screen Award','1994-01-01'),
+(3,'Zee Cine Award','This is Zee Cine Award','1998-01-01'),
+(4,'International Indian Film Academy (IIFA)','This is International Indian Film Academy (IIFA)','2009-01-01'),
+(5,'National Film Award','This is National Film Award','1953-01-01'),
+(6,'Stardust Award','This is Stardust Award','2005-01-01'),
+(8,'Apsara Awards','This is Apsara Award','2010-01-01');
 
 /*!40000 ALTER TABLE `award_types` ENABLE KEYS */;
 UNLOCK TABLES;

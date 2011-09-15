@@ -8,7 +8,9 @@ ActionController::Routing::Routes.draw do |map|
      
   map.resources :trivias
 
-  map.resources :awards
+  map.resources :awards , :member => {:categories => :get}
+  
+  map.resources :movie_awards
   
   map.resources :award_types ,:member => {:showCategories => :get }
  

@@ -1,0 +1,27 @@
+<% content_for :searchBar do %>
+   <%= render(:partial => "layouts/slimSearch")%>
+<% end %>
+
+<div id="yui-main" style="">
+
+<div class="award_title">
+ <img width="150" height="150" src="<%=h @awardType.image.url(:medium) %>">
+ <h1><a href="/awards/<%= @awardType.id%>" class="show-link"><%=h @awardType.name %> Award</a></h1>
+</div>
+
+
+<br>
+<br>
+<div id="award-type-details">
+<table class="table-class"  cellspacing="2" cellpadding="5" >
+ <% for award in @awardType.awards %> 
+<tr>
+   <td>&nbsp;&nbsp;<a href="/award_types/<%= @awardType.id %>/showCategories?award_id=<%= award.id %>" ><%=h  award.name %></a></td>
+   <td>&nbsp;&nbsp;<%=h  award.description %></td>
+</tr>
+<% end %>
+</table>
+<br/><br/>
+<%= link_to 'Edit',  edit_award_type_path(@awardType) %> |
+<%= link_to 'Back', award_types_path %>
+

@@ -1,37 +1,243 @@
 <% content_for :searchBar do %>
-   <%= render(:partial => "layouts/slimSearch")%>
+ <%= render(:partial => "layouts/awesomeSearch")%>
 <% end %>
 
 <div id="yui-main" style="">
-<br>
-<br>
-<div id="award-type-list">
- <table>
- <% count = 0 %>
-	<tr>
-  <% for awardType in @awardTypes %>  
-     <% count += 1 %>     
-	   <td>
-	    <div class="award_type_detail">
-		  <ul>
-			<li>
-			<a href="/awards/<%= awardType.id%>" class="show-link">	
-			 <img width="160" height="180" id="award_picture" class="award-list-image" src="<%=h awardType.image.url(:medium) %>">
+
+<!-- simple secod main -->
+<div id="searchHomeWrapper" class="SearchHome collecWrp">
+ <div class="pan2-rL">
+    <div class="top"></div>
+	<div class="content clearfix">
+  	 <div class="lefPan">
+  	 
+  	       <!-- latest movies div map --> 
+      <div id="divMap" class="mapContent areaSection">
+		<div class="exploreLoc">
+	      <div class="ancSecHd">
+			<div class="ancSecHdL"></div>
+			<div class="ancSecHdM">
+			 <h1>Movie Awards</h1>
+			</div>
+			<div class="ancSecHdR"></div>
+          </div>
+       <div class="widgtContnt">
+       <table>
+       <tr>
+       <% for awardType in @awardTypes[0..5] -%>
+       <td>
+       <div class="padleft10">
+		 <div class="PictureBox padbot10">
+ 		    <a href="/awards/<%= awardType.id%>" class="show-link">
+			<img width="80" height="98" id="artist_picture" src="<%=h awardType.image.url(:medium) %>" >
 			</a>
-			</li>
-			<li style="text-align: center;">
-			 <% name = (awardType.name.size > 16) ? "#{awardType.name[0..18]}..." : awardType.name %>
-			 <a href="/awards/<%= awardType.id%>" class="show-link"><%=h  name %></a>
-			</li>
-		  </ul> 
+		 </div>
+         <span id="movie_title">
+          <% name = (awardType.name.size > 16) ? "#{awardType.name[0..18]}..." : awardType.name %>
+          <a href="/awards/<%= awardType.id%>" class="show-link"><%=h  name %></a>
+		</span>
+	   </div>
+       </td>
+	  <% end %>
+       </tr>
+       </table>
+       
+       </div> <!-- widgtContnt -->
+       </div> <!-- exploreLoc -->
+      </div> <!-- div map -->
+  	 <br>
+  	 
+	
+      
+      <!-- Top movies list -->
+      
+      <div class="list_table">
+      <table width="100%">
+      <tr>
+       <td>
+	   <div class="widgtContnt  colorWhite">
+		<h2 style="border-bottom: solid 1px #CBC5B1;">Top Awarded movies</h2>
+		 <div id="divMiniCardCatalog"></div>
+		 <div id="divMiniCardCatalog">
+		 <ul class="ulHistRecs">
+		
+		 <% for award in @top_movies -%>
+		  <% movie = award.movie %>
+		  <li><%= link_to "#{movie.name}", movie_path(movie), :class => "collGroup"  %></li>
+		 <% end %> 
+		
+		</ul>
+		</div>			    			  
 	    </div>
-	   </td> 
-	  <% if (count % 4) == 0 %></tr><br><tr><% end %> 
-  <% end %>
-	</tr>
- </table>
+       </td>
+       <td>
+        <div class="widgtContnt  colorWhite">
+		<h2 style="border-bottom: solid 1px #CBC5B1;">Top awarded Artist </h2>
+		 <div id="divMiniCardCatalog"></div>
+		 <div id="divMiniCardCatalog">
+		 <ul class="ulHistRecs">
+		
+		 <% for award in @top_artists %>
+		 <% artist = award.artist %>
+		  <li><%= link_to "#{artist.name}", artist_path(artist), :class => "collGroup"  %></li>
+		 <% end %> 
+		 
+		</ul>
+		</div>			    			  
+	    </div>
+       </td>
+      </tr>
+      </table>
+      </div>  
+      <br>
+      <!-- End Top movies list -->
+      
+ <!-- Top Movies divMap -->
+  <div id="divMap" class="mapContent areaSection mar20Bot">
+		<div class="exploreLoc">
+	      <div class="ancSecHd">
+			<div class="ancSecHdL"></div>
+			<div class="ancSecHdM">
+			 <h1>Top Rated Movies</h1>
+			</div>
+			<div class="ancSecHdR"></div>
+          </div>
+       <div class="widgtContnt">
+       <table>
+       <tr>
+       <% for award in @top_movies[0..3] -%>
+       <% movie = award.movie %>
+       <td>
+       <div class="subCon subConGray" >
+				<div class="subConTL"></div>
+				<div class="subConT"></div>
+				<div class="subConTR"></div>
+				<div class="subConBd MapBody">
+					<h2><%=h movie.name[0..13] %>
+					<% if movie.name.size > 13 %>
+					<%= "..." %>
+					<% end %>
+					<% if movie.name.size < 14 %>
+					<% 	s = (14 - movie.name.size)%>
+					<%	s.times do |a| %><%= "&nbsp;" %><% end %></h2>
+					<% end %>
+					<div class="moviePictureBox mar5Top">
+				  		<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
+				  		<img width="120" height="150" id="movie_picture" src="<%=h movie.image.url(:medium) %>" >
+				  		</a>
+					</div>
+					
+					<div class="list_rating">			
+						<%= ratings_for movie , :static %>
+					 </div>
+					<h3><%=h movie.year.year%></h3> 
+					<h3>Directed By</h3>
+					<% a = movie.artists.director[0] %>
+					<p><%=  (a == nil)? "N/A" : a.name[0..19]%></p>
+					<h3>Produced By</h3>
+				    <% p = movie.artists.producer[0] %>
+					<p><%=  (p == nil)? "N/A" : p.name[0..19]%></p>
+				</div>
+				<div class="subConBL"></div>
+				<div class="subConB"></div>
+				<div class="subConBR"></div>
+		</div>
+       </td>
+	  <% end %>
+       </tr>
+       </table>
+       
+       </div> <!-- widgtContnt -->
+       </div> <!-- exploreLoc -->
+      </div>  <!-- div map -->
+      
+      
+     </div> <!-- lefpan -->
+     
+     <div class="ritPan">
+	  <div class="rightContent">                
+		<div class="ancSecHd brown">
+			<div class="ancSecHdL"></div>
+ 			<div class="ancSecHdM">
+				<h1><span class="left">Site Statistics</span></h1>
+			</div>
+			<div class="ancSecHdR"></div>
+			</div>
+			<div class="widgtContnt colorWhite">
+				<h1><strong>22,345</strong></h1> 
+				<h2><center>movies added</center></h2> 
+			    <div id="divMiniCardCatalog"></div>
+			    <h1><strong>30,256</strong></h1> 
+				<h2><center>artists added</center></h2> 			   
+  			    <div id="divMiniCardCatalog"></div>
+			    <h1><strong>8,256</strong></h1> 
+				<h2><center>Edits to the content</center></h2> 
+			</div>
+		  </div>
+	 </div> 
+	 <!-- ritPan 1-->
+	 <br>
+	 <div class="ritPan mar20Top">
+	  <div class="rightContent">                
+		<div class="ancSecHd brown">
+			<div class="ancSecHdL"></div>
+ 			<div class="ancSecHdM">
+				<h1><span class="left">Latest Edits</span></h1>
+			</div>
+			<div class="ancSecHdR"></div>
+		</div>
+			<!-- Movie edits -->
+			
+			<!-- end movie edits -->
+						<!-- Movie edits -->
+			<div class="widgtContnt  colorWhite">
+				<h2>Top Contributers </h2>
+			    <div id="divMiniCardCatalog"></div>
+			    <!-- user list-->
+			   <% @user = User.find(:all, :limit => 3) %>
+			   <% for u in  @user %>
+			   <div class="subCon subConGray">
+                            <div class="subConTL"></div>
+                            <div class="subConT"></div>
+                            <div class="subConTR"></div>
+                            <div class="subConBd MapBody">
+								<ul>
+									<li class="pImg dfemale">
+									<div class="defaultImg mediumSmImg">
+									 <span><img width="42" height="42" id="" src="<%=h u.image.url(:thumb) %>" ></span>
+									</div>
+									</li>
+								</ul>
+								<div class="padleft30">
+								  <h3><%= u.username %></h3>
+								  <p>Active since <%= u.created_at.to_date.to_formatted_s(:long)%></p> 
+								 </div>                              
+                            </div>
+                            <div class="subConBL"></div>
+                            <div class="subConB"></div>
+                            <div class="subConBR"></div>
+                </div>			    
+			 <% end %>
+			 <!-- user list -->
+			</div>
+			<!-- end movie edits -->
+			
+		</div>
+	 </div> <!-- ritPan 1 -->
+	 
+	
+	 
+	</div>
+    <div class="bottom"></div>
+ </div> <!-- pan2-rl -->
+</div> <!-- searchHomeWrapper -->
 </div>
+<!-- end simple second main -->
 
 
-</div>
 
+
+
+
+<br><br>
+	

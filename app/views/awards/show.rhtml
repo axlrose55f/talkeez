@@ -1,17 +1,60 @@
 <% content_for :searchBar do %>
-   <%= render(:partial => "layouts/slimSearch")%>
+ <%= render(:partial => "layouts/awesomeSearch")%>
 <% end %>
 
 <div id="yui-main" style="">
 
 <div class="award_title">
- <h1><%=h @year.to_datetime.to_s(:year) %> <%=h @type_name %> Award</h1>
+ 
+ <h1><a href="/awards/<%=h@type_id %>/categories"><%=h @year.to_datetime.to_s(:year) %> - <%=h @type_name %> Award </a></h1>
+ 
  <ul id="award-nav-tabs">
 	<li class="previous"><a href="/awards/<%=h@type_id %>/?year=<%=h @year.years_ago(1) %>">< PREV YEAR</a></li>
+	<li class="previous"><a href=""><%=h @year.year %></a></li>
     <li class="next"><a href="/awards/<%=h@type_id %>/?year=<%=h @year.years_since(1)%>">NEXT YEAR ></a></li>
  </ul>
 </div>
+<br>
+   <div class="months-12" id="timeline">
+     <div id="timeline-left">
+      <a href="/awards/<%=h@type_id %>/?year=<%=h @year.year %>&cal_pos=<%=h @cal_start.year %>">&lt;</a>
+     </div>
 
+      <!-- can be .selecting -->
+      
+      <ol id="timeline-list">
+      <% for i in 0..@cal_width %>
+        <% if @cal_start.years_since(i).year == @year.year %>
+         <li id="timeline-24117" class="selected" style="width: 28px;">
+         <% else %>
+         <li id="timeline-24117" class="year" style="width: 28px;" >
+         <% end %>
+          <a class="good" href="/awards/<%=h@type_id %>/?year=<%=h @cal_start.years_since(i).beginning_of_year() %>" title="<%= @cal_start.years_since(i)%>">
+            <span class="status">&nbsp;</span>
+            <span class="month" style="width: 26px; "></span>
+            <span class="year" style="width: 26px;" ><%= @cal_start.years_since(i).year %></span>
+          </a>
+         </li>
+
+    <% end %>
+        </ol>
+   <div id="timeline-right">
+      <a href="/awards/<%=h@type_id %>/?year=<%=h @year.year %>&cal_pos=<%=h @cal_end.years_since(@cal_width).year() %>">&gt;</a>
+   </div>
+   </div>  
+	<div id="addAwardLink" style="float:right; posiiton:relative;margin-top:15px;">
+	<img src="/images/edit.gif"></img>
+	<%= link_to_remote "Add Award", 
+					   :update => {:success => "addAward", :failure => "ajax-error-div"}, 
+					   :url => new_movie_award_path(:id => @type_id, :year => @year ), 					  
+					   :loaded => "$('addAwardLink').hide();$('addAward').show();" ,
+					   :failure => "$('ajax-error-div').replaceWith(request.responseText)",
+					   :method => :get %>
+	</div>
+	<div id="addAward"></div> 
+    <div id="ajax-error-div" style="display:none;"></div>
+<br>
+<br>
 <% if @awards.empty? %>
 
  <h2>No award info present.</h2>
@@ -27,11 +70,12 @@
   	   <% awards = @awards[name] %>
   	   <% m_id = nil %>
   	   <% awards.each do|award| %>
+    	<div id="award_detail_<%= award.id %>" >
 		  <% if !award.movie.nil? %>  
 		   <% if m_id.nil? ||  ( m_id != award.movie_id ) %> 
 			   <div class="award_movie padleft20">	     
 				 <a href="/movies/<%= award.movie.id %>/awards" >
-				  <img width="120" height="150" id="movie_picture" src="<%=h award.movie.image.url(:medium) %>"/></a>
+				  <img width="60" height="75" id="movie_picture" src="<%=h award.movie.image.url(:medium) %>"/></a>
 				 <center>
 				 <span id="a_movie_title"> 
 				  <a href="/movies/<%= award.movie.id %>/awards" ><%=h  award.movie.name %></a>
@@ -49,7 +93,7 @@
 		   <% end %>
 		   <% if !award.artist.nil? %>
 		   <div class="award_recp padright20">
-			 <a href="/artists/<%= award.artist.id %>/awards" ><img width="120" height="150" id="movie_picture" src="<%=h award.artist.image.url(:medium) %>"/></a>
+			 <a href="/artists/<%= award.artist.id %>/awards" ><img width="60" height="75" id="movie_picture" src="<%=h award.artist.image.url(:medium) %>"/></a>
 		   <center> 
 			<span id="a_artist_title"> 
 			  <a href="/artists/<%= award.artist.id %>/awards" ><%=h  award.artist.name %></a>
@@ -61,10 +105,13 @@
 		     <div class="a_artist_missing padright20"><span class="artist_missing"><a href="">Artist Info Missing</a></span></div> 
 		     <% end %> 
 		   <% end %>
-	
-	   <% end %>
-
   	   <div style="clear:both;"></div>
+  	   <span style="display:block;float:right;margin-top:-13px;">
+  		  <%= link_to_remote "Edit", :update => "award_update_#{award.id}" , :url => edit_movie_award_path(:id => award.id), :loaded => "$('award_detail_#{award.id}').hide();$('award_update_#{award.id}').show();", :method => :get %>
+	   </span>
+	   </div>
+       <div id="award_update_<%= award.id %>"></div>	
+	   <% end %>
 	 </li>
 	<% end %>
    </ul>

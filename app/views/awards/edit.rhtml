@@ -1,25 +1,35 @@
-<h1>Editing award</h1>
-
-<% form_for @award, :html => { :multipart => true } do |f| %>
+<div class="commentsDetCont">
+<div class="addNewCommentSection">
+  <div class="tl"></div>
+  <div class="tr"></div>
+  <div class="addNewCommentInner">
+<% form_for(@award) do |f| %>
   <%= f.error_messages %>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </p>
-<p>
-  <%= f.file_field :image%>
-</p>
-  <p>
-    <%= f.submit "Update" %>
-  </p>
+  <%= f.hidden_field :origin, :value => @origin %>
+	<h3>
+	<span><%=h @movie.year.to_datetime.to_s(:year) %></span>
+	<% if @origin == "artist" %>
+		<span><%= @movie.name %></span>
+	<% elsif @origin == "movie" %>	
+		<span><%= @artist.name %></span>
+	<% end %>
+	<span id="select_role_menu2" style="padding-right:40px;">
+	 <%=f.collection_select(:role_id,@roles, :id, :name) 	%>
+    </span>	
+    <span >
+     <%= f.submit "Update" %>
+    </span>
+    <span>
+       <%= link_to "Delete", movie_role_path(:id => @mar.id, :origin => @origin), :confirm => 'Are you sure?', :method => :delete %>
+    </span>
+	<span>
+       <%= link_to "Cancel", '#', :onclick => "$(filmography_update_#{@num}).hide();$(filmography_#{@num}).show();"  %>
+     </span>
+	</h3>
 <% end %>
-
-
-<%= link_to 'Show', @award %> |
-<%= link_to 'Back', awards_path %>
+</div>
+  <div class="bl"></div>
+  <div class="br"></div>
+</div>
+</div>
 
