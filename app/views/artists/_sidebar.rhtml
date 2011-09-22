@@ -24,7 +24,7 @@
 			      <div id="details_heading">Country</div>
 			      <div id="details_value">
 			       <% if @artist.country %>
-  			        <img id="country_icon" src="/images/flag-<%= @artist.country%>.png"/>			 
+  			        <img id="country_icon" src="/images/flag-<%= @artist.country.downcase%>.png"/>			 
 			      <% end %>
 			      <%=  @artist.country %>
 			      </div>

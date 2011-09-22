@@ -68,7 +68,7 @@
 			      <div id="details_heading">Country</div>
 			      <div id="details_value">
 			      <% if @movie.country %>
-  			        <img id="country_icon" src="/images/flag-<%= @movie.country%>.png"/>			 
+  			        <img id="country_icon" src="/images/flag-<%= @movie.country.downcase%>.png"/>			 
 			      <% end %>
 			      <%= @movie.country %>
 			      </div>
