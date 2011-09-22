@@ -428,10 +428,10 @@ margin:2px;
 
 
 /* New Footer (2009-12-02) */
-.footerWrp{width:970px; height:auto; margin:25px auto !important;position:relative;z-index:2;}
-.footerWrp .topBG{background:url(/images/global_sprite.png) no-repeat 0 -143px; width:970px; height:5px;}
-.footerWrp .btmBG{background:url(/images/global_sprite.png) no-repeat 0 -148px; width:970px; height:5px;}
-.footerWrp .contner{background:#fff; width:948px; height:auto; padding:12px 10px; border-left:solid 1px #bbb0a3; border-right:solid 1px #bbb0a3; font:10px Tahoma, Geneva, sans-serif; color:#232323; position:relative;}
+.footerWrp{width:100%; height:auto; margin:25px auto !important;position:relative;z-index:2;}
+.footerWrp .topBG{background:url(/images/global_sprite.png) no-repeat 0 -143px; width:100%; height:5px;}
+.footerWrp .btmBG{background:url(/images/global_sprite.png) no-repeat 0 -148px; width:100%; height:5px;}
+.footerWrp .contner{background:#fff;height:auto; padding:20px 0px 20px 0px; font:10px Tahoma, Geneva, sans-serif; color:#232323;}
 .footerWrp .contner a{text-decoration:none; color:#445708;}
 .footerWrp .contner ul.upper{margin-bottom:25px; list-style:none; display:block; font-size:11px;}
 .footerWrp .contner ul.upper li{float:left; list-style:none; border-right:1px solid #DCD8CD; padding:0px 12px; margin-left:0px;}
@@ -445,6 +445,27 @@ margin:2px;
 .footerWrp .intPop span{font:12px Tahoma, Geneva, sans-serif; color:#333; line-height:21px;}
 .footerWrp .contner ul.lower li.sarl {position:absolute;right:28px;padding-right:0;bottom:5px;}
 .footerWrp .contner ul.lower li sup {color:red;}
+
+.bg-wrapper {
+background: white; 
+padding:10px;
+border-left: 1px solid #D9D7C5;
+border-right: 1px solid #D9D7C5;
+box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+z-index: 0;
+}
+
+.ft-wrapper {
+background: white; 
+border-left: 1px solid #D9D7C5;
+border-right: 1px solid #D9D7C5;
+box-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
+-moz-box-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
+-webkit-box-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
+z-index: 0;
+} 
 
 /* For noncompliant browsers (you know who you are) */
 * html #g_footer #sites ul div{width:500px}

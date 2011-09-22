@@ -66,7 +66,12 @@
 			      <% banner = @movie.artists.banner.first %>
 			      <div id="details_value"><%= banner.name unless banner == nil %></div>
 			      <div id="details_heading">Country</div>
-			      <div id="details_value"><%= @movie.country %></div>
+			      <div id="details_value">
+			      <% if @movie.country %>
+  			        <img id="country_icon" src="/images/flag-<%= @movie.country%>.png"/>			 
+			      <% end %>
+			      <%= @movie.country %>
+			      </div>
 			      <div id="details_heading">Certification</div>
 			      <div id="details_value"><%= @movie.certification %></div>
 			

@@ -3,9 +3,14 @@
 <% end %>
 
 <div id="yui-main" style="">
+<!--
+<div class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+<div class="rndSecULFT"> </div>
+<div class="rndSecURt"> </div>  
+<div class="sectionContainer">
+ main container -->
 
 <div class="award_title">
- 
  <h1><a href="/awards/<%=h@type_id %>/categories"><%=h @year.to_datetime.to_s(:year) %> - <%=h @type_name %> Award </a></h1>
  
  <ul id="award-nav-tabs">
@@ -17,7 +22,9 @@
 <br>
    <div class="months-12" id="timeline">
      <div id="timeline-left">
-      <a href="/awards/<%=h@type_id %>/?year=<%=h @year.year %>&cal_pos=<%=h @cal_start.year %>">&lt;</a>
+      <a href="/awards/<%=h@type_id %>/?year=<%=h @year.year %>&cal_pos=<%=h @cal_start.year %>">
+      <span id="toc-prev" title="Next entry" style="opacity: 1" unselectable="on"></span>
+      </a>
      </div>
 
       <!-- can be .selecting -->
@@ -39,7 +46,10 @@
     <% end %>
         </ol>
    <div id="timeline-right">
-      <a href="/awards/<%=h@type_id %>/?year=<%=h @year.year %>&cal_pos=<%=h @cal_end.years_since(@cal_width).year() %>">&gt;</a>
+      <a href="/awards/<%=h@type_id %>/?year=<%=h @year.year %>&cal_pos=<%=h @cal_end.years_since(@cal_width).year() %>">
+      <span id="toc-next" title="Next entry" style="opacity: 1" unselectable="on"></span>
+      </a>
+      
    </div>
    </div>  
 	<div id="addAwardLink" style="float:right; posiiton:relative;margin-top:15px;">
@@ -117,5 +127,11 @@
    </ul>
   </div> 
 <% end %>
-</div>
 
+<!-- end container
+ </div>
+ <div class="rndSecLLFT"> </div>
+ <div class="rndSecLRT"> </div>
+ </div>
+ -->
+</div>

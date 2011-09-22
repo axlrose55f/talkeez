@@ -1,8 +1,11 @@
 <% content_for :searchBar do %>
    <%= render(:partial => "layouts/slimSearch")%>
 <% end %>
+
 <!-- Content Menu -->
 <%= render(:partial => "contentMenu", :object => @movie, :locals => { :tab => "overview"} )%>
+
+
 
 <div id="yui-main" style="">
  <div id="person_header_container" class="yui-b container_green">
@@ -79,7 +82,8 @@
 	<div class="sectionCntrULFT2"> </div>
 	<div class="sectionCntrURt2"> </div>
 	  
-	  <div class="clearDiv"></div>		
+	  <div class="clearDiv"></div>
+	  <div class="g_outerBox">
 	    <div id="Cast" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
 			<div class="rndSecULFT"> </div>
 			<div class="rndSecURt"> </div>  
@@ -114,11 +118,16 @@
 			<div class="rndSecLLFT"> </div>
 			<div class="rndSecLRT"> </div>
 		</div>
-		<div class="clearDiv"></div>		
-	    <div id="Reviews" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
+	   </div>
+		
+		<div class="clearDiv"></div>	
+		
 	     <% @revs = @movie.reviews %>
-			<div class="rndSecULFT"> </div>
-			<div class="rndSecURt"> </div>  
+		<div class="g_outerBox">
+	    <div id="Reviews" class="contentdiv section negMarginIE" >
+
+   			<div class="rndSecULFT"> </div>
+			<div class="rndSecURt"> </div> 
 			<div class="sectionBG">
 				<h2 style="display: inline-block; margin-bottom: 5px;margin-top:-10px;">Reviews <%= "(#{@revs.size.to_s})" unless @revs.empty? %></h2>
 			</div>
@@ -161,7 +170,11 @@
 			<div class="rndSecLLFT"> </div>
 			<div class="rndSecLRT"> </div>
 		</div>
+      </div>
+				
+		
 		<div class="clearDiv"></div>		
+	    <div class="g_outerBox">
 	    <div id="Awards" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
 			<div class="rndSecULFT"> </div>
 			<div class="rndSecURt"> </div>  
@@ -191,7 +204,10 @@
 			<div class="rndSecLLFT"> </div>
 			<div class="rndSecLRT"> </div>
 		</div>
-		<div class="clearDiv"></div>		
+		</div>
+		
+		<div class="clearDiv"></div>
+		<div class="g_outerBox">
 	    <div id="Videos" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
 			<div class="rndSecULFT"> </div>
 			<div class="rndSecURt"> </div>  
@@ -237,6 +253,7 @@
 			<div class="rndSecLLFT"> </div>
 			<div class="rndSecLRT"> </div>
 		</div>
+	   </div>	
 	    <div class="clearDiv"></div>
 	<div class="sectionCntrLLFT2"> </div>
 	<div class="sectionCntrLRT2"> </div>	
@@ -246,4 +263,5 @@
 <!-- Side Bar --> 
 
 <%= render(:partial => "sidebar", :object => @movie )%>
+
 

@@ -67,15 +67,15 @@
 <% end %>
 <center><div id="ajax-error-div" style="width: 500px;"></div></center>
 <!--Main Body -->
-<div id="bd">
+<div id="bd" class="bg-wrapper">
+   <!-- main container -->
 	<%= yield :layout %>
 </div>
 
 <!-- Footer -->
 
-	<div id="footerWrp" class="footerWrp">
-			<div class="topBG"><!--handles top BG--></div>
-			<div class="contner clearfix">
+	<div id="footerWrp" class="footerWrp ft-wrapper">
+		<div class="contner clearfix">
 				<ul class="lower">
 					<li><span>© 2007-2011 Talkeez.com</span></li>
 				
@@ -85,10 +85,11 @@
 					<li class="lastOne"><a href="http://www.talkeez.com/legal/terms">Terms and Conditions</a></li>
 				
 				</ul>
-				<div class="btm"></div>
-			</div>
-			<div class="btmBG"><!--handles bottom BG--></div>
+	     </div>
 		</div>
+
+	
+		
 <!-- end footer-->
 </div>
 </div>

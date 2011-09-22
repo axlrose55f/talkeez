@@ -1,0 +1,56 @@
+<div class="commentsDetCont">
+<div class="addNewCommentSection">
+  <div class="tl"></div>
+  <div class="tr"></div>
+  <div class="addNewCommentInner">
+<% form_for(MovieAward.new) do |f| %>
+  <%= f.error_messages %>
+
+  <span style="float:left;padding-left:10px;margin-top:-5px;">
+	<label id="award_year"><%=h @year.to_datetime.to_s(:year) %></label>
+  </span>  
+  <span style="float:left;padding-left:10px;margin-top:-5px;">
+	<label id="award_type"><%=h @awardType.name %></label>
+  </span>
+  <span id="select_category_menu" style="float:left;padding:0px 10px 0px 20px;margin-top:-5px;">	
+	<%=f.collection_select(:award_id, @categories, :id, :name) %>
+  </span> 
+  <span style="float:left;">
+    <% if(@movie != nil) %>
+    <%= f.hidden_field :movie_id , :value => @movie.id  %>
+    <% else %>
+    <%= f.label :movie_id  %> : <%=text_field_with_auto_complete :movie_award, 
+    															 :movie_name, 
+    															 { :size => 25,:autocomplete => 'off'}, 
+    															 { :url => search_movies_path(:format => :js), 
+    															   :method => :get, :param_name => 'search' } %>
+    <% end %>
+  </span>
+  <span style="float:left;">
+	 <% if(@artist != nil) %>
+      <%= f.hidden_field :artist_id , :value => @artist.id  %>
+     <% else %>
+      <%= f.label :artist_id  %> : <%= text_field_with_auto_complete :movie_award, 
+      																 :artist_name, 
+      																 {:size => 25,:autocomplete => 'off'}, 
+												  					 {:url => search_artists_path(:format => :js), 
+												  					  :method => :get,:param_name => 'search'} %>
+     <% end %>
+  </span>
+
+  
+  <span style="float:left;padding-left:10px;margin-top:-3px;">
+    <%= f.submit "Update" %>
+  </span>
+  <h3>
+  <span style="padding-left:10px;">
+  <%= link_to "Cancel", '#', :onclick => "$('addAward').hide();$('addAwardLink').show();"  %>
+  </span>
+  </h3>
+<% end %>
+<br>
+  </div>
+  <div class="bl"></div>
+  <div class="br"></div>
+</div>
+</div>

@@ -1,0 +1,47 @@
+<div class="commentsDetCont">
+<div class="addNewCommentSection">
+  <div class="tl"></div>
+  <div class="tr"></div>
+  <div class="addNewCommentInner">
+<% form_for(@award) do |f| %>
+  <%= f.error_messages %>
+  <span style="float:left;padding-left:10px;">
+	<label class="award_label"><b>Year: </b></lablel><label id="award_year"><%=h @award.year.to_datetime.to_s(:year) %></label>
+  </span><br>  
+  <span style="float:left;padding-left:10px;">
+	<label class="award_label"><b>Name: </b></label><label id="award_type"><%=h @award.award.name %></label>
+  </span>
+  <br>
+  <span style="float:left;padding-left:10px;">
+   <label class="award_label"><b>Movie Name: </b></label>
+  <% if @award.movie_id.nil?  %>
+	<label id="award_movie">movie nil</label>
+  <% else %>
+	<label id="award_movie"><%=h @award.movie.name %></label>
+  <% end %>
+  </span>  
+
+  <br>
+ <span style="float:left;padding-left:10px;">
+  <label class="award_label"><b>Artist Name: </b></label>
+  <% if @award.artist_id.nil?  %>
+	<label id="award_artist">Artist nil</label>
+  <% else %>
+	<label id="award_movie"><%=h @award.artist.name %></label>
+  <% end %>
+  </span>  
+  
+  <br>
+  <span style="padding-left:10px;">
+       <%= link_to "Delete", movie_award_path(:id => @award.id), :confirm => 'Are you sure?', :method => :delete %>
+  </span>
+   <span style="padding-left:10px;">
+       <%= link_to "Cancel", '#', :onclick => "$(award_update_#{@award.id}).hide();$(award_detail_#{@award.id}).show();"  %>
+   </span>
+	</h3>
+<% end %>
+</div>
+  <div class="bl"></div>
+  <div class="br"></div>
+</div>
+</div>

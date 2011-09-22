@@ -41,7 +41,7 @@ class AwardsController < ApplicationController
     @list.uniq!
        
     # get the dates for calender
-    @cal_width = 33
+    @cal_width = 31
     cal_center = (@cal_width/2).round
     @cal_end = params[:cal_pos] ? "#{params[:cal_pos]}-01-01".to_date : @year.years_since(cal_center).beginning_of_year()
 

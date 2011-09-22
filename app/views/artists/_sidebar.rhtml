@@ -22,7 +22,12 @@
 			      <div id="details_heading">Birth Name</div>
 			      <div id="details_value"><%=  @artist.birth_name %></div>
 			      <div id="details_heading">Country</div>
-			      <div id="details_value"><%=  @artist.country %></div>
+			      <div id="details_value">
+			       <% if @artist.country %>
+  			        <img id="country_icon" src="/images/flag-<%= @artist.country%>.png"/>			 
+			      <% end %>
+			      <%=  @artist.country %>
+			      </div>
 			      <div id="details_end"></div> 
 				</div>
 		    </div>

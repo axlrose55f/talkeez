@@ -1,4 +1,10 @@
-body { /*background: url("/images/bodyGrdnt.png") repeat-x scroll 0 0 #E2DECD;*/ color: #333333; font: 12px/1.2 Verdana, Arial, Helvetica, sans-serif; text-align:left; }
+body { 
+background: url("/images/bodyGrdnt.png") repeat-x scroll 0 0 #E2DECD; 
+color: #333333; 
+font: 12px/1.2 Verdana, Arial, Helvetica, sans-serif; 
+text-align:left; 
+}
+
 
  
 #doc3 {	margin: 0 !important; }
@@ -94,7 +100,7 @@ html:first-child #vitals { float: left; }
 
 .hover_hints { _margin-top: -35px; _margin-right: 0px; _display: inline-block; _position: relative; }
 .contentdiv { background:#ffffff; border: 1px solid #bbb2a4; padding: .92em; * padding: .9em; _padding-right: 0px; _margin-right: -5px; * display: inline-block; * position: relative; }
-.section { margin-bottom: 5px; padding-bottom: 0; * display: inline-block; * position: relative; }
+.section { margin-bottom: 0px; padding-bottom: 0; * display: inline-block; * position: relative; }
 .clearDiv { clear: both; padding: 0px; margin: 0px; }
 .negMarginIE { * margin-top: 0px; _margin-top: 0px; _display: inline-block; _position: relative; }
 h2 { font: bold 1.62em "Trebuchet MS", Verdana, Arial, sans-serif; * font-size: 1.58em; color: #695E49; }
@@ -102,6 +108,13 @@ h2 { font: bold 1.62em "Trebuchet MS", Verdana, Arial, sans-serif; * font-size: 
 .sectionBG { border-bottom: 1px solid #BAAE95;height: 15px; padding-top: 0px; margin: 5px 0 0 0;}
 .bgComments { background:#FFFFFF url(/images/titlegradbg.gif) repeat-x scroll left 10px; height: 35px; padding: 0; margin: -10px 0 0 0; * margin: -20px 0 0 0; }
 .h2class h2 { padding-top: 7px; margin-top: -2px; * margin-top: -2px; _margin-top: 0px; }
+
+
+.g_outerBox{background:#F5F5EA; padding:6px; margin-bottom:10px; margin-top:10px; }
+.g_box2{border:1px solid #D9D7C5; background:#FFF; padding:12px 9px 12px 11px; }
+.g_box{border:1px solid #B2B2B2; background:#FFF url(i/topgrad.gif) repeat-x; padding:12px 9px 12px 11px;}
+
+
 
 /* ********* Rounded Corners ************ */
 .ylwBGULFT { background:transparent url(/images/curves/rndylwCrnrUpperLft.gif) no-repeat scroll left top; width: 5px; height: 5px; float: left; margin:-6px 0 0 -6px; * display: inline-block; * position: relative; _top: 13px; _left: 6px; _float: left; }
