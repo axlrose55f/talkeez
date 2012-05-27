@@ -48,7 +48,9 @@ has_and_belongs_to_many :themes,
  named_scope :pending , :conditions => ["movies.active = 0"]
  named_scope :rated , lambda { |*rate| { :conditions => ["movies.rating > ?",(rate.first || 4)] } }
  
- named_scope :latest, lambda { {:conditions => ['year between ? and ?', Date.today.beginning_of_year(), Date.today]}}
+ #named_scope :latest, lambda { {:conditions => ['year between ? and ?', Date.today.beginning_of_year(), Date.today]}}
+ named_scope :latest, lambda { {:order => 'year DESC'}}
+ 
  named_scope :after, lambda { |*args| { :conditions => ['year > ?', (args.first || Date.today.beginning_of_year() )] }}
 
  named_scope :limit, lambda { |*num| { :limit => (num.first || 10) } }
