@@ -290,7 +290,7 @@ module Auditor
       # Returns `true` if Auditor is globally enabled and active for this class,
       # `false` otherwise.
       def switched_on?
-        Auditor.enabled? && self.class.auditor_active
+        false #Auditor.enabled? && self.class.auditor_active
       end
       
       # Returns `true` if the current user does not have moderator permission
