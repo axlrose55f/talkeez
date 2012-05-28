@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
   helper_method :current_user_session, :current_user
   before_filter :set_current_user
+  before_filter :set_p3p_header_for_third_party_cookies
 
   protected
    def set_current_user

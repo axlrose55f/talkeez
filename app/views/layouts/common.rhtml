@@ -37,13 +37,25 @@
 </ul>
 <!-- sub nav -->
 <ul class="subNav">																			
-<% if current_user %>
-<li><%= link_to '<em class="subText"><span>Profile</span></em>' , user_path(current_user.id) , :class => "subNav" %></li>														
-<li><%= link_to '<em class="subText"><span>Logout</span></em>' , logout_path , :class => "subNav" %></li>		
-<% else %>
-<li><%= link_to '<em class="subText"><span>Register</span></em>' , new_user_path , :class => "subNav" %></li>														
-<li><%= link_to '<em class="subText"><span>Login</span></em>' , login_path , :class => "subNav" %></li>		
-<% end %>
+<!-- facebook -->
+	<%= fb_connect_async_js %>
+	<% if current_user %>
+		 <%= "Hey " %><%= link_to "#{current_user.username}!" , user_path(current_user.id) %> |
+   		  <% if current_facebook_user %>
+		   <%= fb_logout_link("Logout", logout_path) %>
+		  <% else %>
+		    <%= link_to "local Logout" , logout_path %>
+		  <% end %>	
+		  &nbsp;	
+	<% else %>
+		<%= authlogic_facebook_login_button("login", {:controller => 'fblogin',
+											 :perms => 'user_about_me,email,user_birthday',
+											  })  %>&nbsp;
+											  
+	<% end %>
+<!-- end facebook -->
+
+
 </ul>
 <!-- end sub nav -->					
 <div class="TempNavLft"></div>					

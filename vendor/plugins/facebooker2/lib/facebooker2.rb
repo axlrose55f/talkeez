@@ -1,9 +1,13 @@
 # Facebooker2
 require "mogli"
 module Facebooker2
+
+  @oauth2 = true
+  @cookie_prefix = 'fbsr_'
+
   class NotConfigured < Exception; end
   class << self
-    attr_accessor :api_key, :secret, :app_id
+    attr_accessor :api_key, :secret, :app_id, :cookie_prefix, :oauth2
   end
     
   def self.secret
@@ -13,7 +17,7 @@ module Facebooker2
   def self.app_id
     @app_id || raise_unconfigured_exception
   end
-  
+
   def self.raise_unconfigured_exception
     raise NotConfigured.new("No configuration provided for Facebooker2. Either set the app_id and secret or call Facebooker2.load_facebooker_yaml in an initializer")
   end
@@ -25,7 +29,7 @@ module Facebooker2
   end
   
   def self.load_facebooker_yaml
-    config = YAML.load(ERB.new(File.read(File.join(::Rails.root,"config","facebooker.yml"))).result)[::Rails.env]
+    config = (YAML.load(ERB.new(File.read(File.join(::Rails.root,"config","facebooker.yml"))).result)[::Rails.env])
     raise NotConfigured.new("Unable to load configuration for #{::Rails.env} from facebooker.yml. Is it set up?") if config.nil?
     self.configuration = config.with_indifferent_access
   end

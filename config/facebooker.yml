@@ -1,8 +1,10 @@
+#api_key: 47613e2f9861c46bc6b5e3a8e0623abe
 development:
   app_id: 236870862595
   secret: 2d135ac60738d6c0bad28508083593e5
-  api_key: 47613e2f9861c46bc6b5e3a8e0623abe
+  api_key: 236870862595
+  
 production:
   app_id: 236870862595
   secret: 2d135ac60738d6c0bad28508083593e5
-  api_key: 47613e2f9861c46bc6b5e3a8e0623abe
+  api_key: 236870862595

@@ -4,7 +4,7 @@ Facebooker2
 Provides rails helpers for interfacing with [Facebook's OpenGraph Javascript
 API](http://developers.facebook.com/docs/reference/javascript/).
 
-Requires the mogli gem.
+Requires the mogli and ruby-hmac gems.
 
 
 Example
@@ -45,7 +45,7 @@ shared login partial.
        # here we instruct facebook to ask the user for permission for our website
        # to access the user's facebook email and birthday
        %>
-      <%= fb_login_and_redirect('<your URL here>', :perms => 'email,user_birthday') %>
+      <%= fb_login_and_redirect('<your URL here>', :scope => 'email,user_birthday') %>
     <% end %>
 
 Facebook canvas applications

@@ -116,7 +116,7 @@ module AuthlogicFacebookConnect
             # We assign it after the call to new in case the attribute is protected.
 
             new_user = klass.new
-
+		
             if klass == facebook_user_class
               # Set the facebook fields on the new record
               new_user.send(:"#{facebook_uid_field}=", facebook_session.id)
@@ -143,6 +143,7 @@ module AuthlogicFacebookConnect
               self.attempted_record = nil
             else
               self.attempted_record.save_with_validation(false)
+              self.attempted_record.after_connect if self.attempted_record.respond_to?(:after_connect)
             end
           rescue Exception => e
             debugger
