@@ -37,7 +37,20 @@
 </ul>
 <!-- sub nav -->
 <ul class="subNav">																			
+<div>
+   <% if current_user %>
+		   <%= link_to "Profile" , user_path(current_user.id) %> |
+		   <%= link_to "Logout" , logout_path %>
+	<% else %>
+		<!--  <%= link_to "Register" , new_user_path %> | -->
+		  <%= link_to "Login" , login_path %>
+	<% end %>
+</div>
+
 <!-- facebook -->
+<%
+=begin 
+%>
 	<%= fb_connect_async_js %>
 	<% if current_user %>
 		 <%= "Hey " %><%= link_to "#{current_user.username}!" , user_path(current_user.id) %> |
@@ -53,6 +66,9 @@
 											  })  %>&nbsp;
 											  
 	<% end %>
+<%
+=end 
+%>	
 <!-- end facebook -->
 
 
@@ -89,7 +105,7 @@
 	<div id="footerWrp" class="footerWrp ft-wrapper">
 		<div class="contner clearfix">
 				<ul class="lower">
-					<li><span>© 2007-2011 Talkeez.com</span></li>
+					<li><span>© 2007-2013 Talkeez.com</span></li>
 				
 					<li><a href="http://www.talkeez.com/">HELP</a></li>
 					<li><a href="http://www.talkeez.com/careers">FAQ</a></li>				
