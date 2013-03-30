@@ -9,7 +9,7 @@ class MoviesController < ApplicationController
    @movies = Movie.active.rated.limit(10).order
    @latest_movies = Movie.active.rated(3).latest.limit(6).order('rating DESC, year DESC')
    @recently_edited =  Movie.active.limit(4).order('updated_at DESC')
-   @top_this_year = Movie.active.after.limit(10).order
+   @top_this_year = Movie.active.latest.limit(10).order
    @top_decade = Movie.active.after(Date.today.years_ago(10)).limit(10).order
    
    #@movies = Movie.find(:all, :limit => 4, :conditions => 'rating > 4', :order => 'rating DESC')   
