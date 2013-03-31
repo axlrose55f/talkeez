@@ -1,4 +1,42 @@
-<div id="yui-main" style="">
+<div class="login ">
+<div class="contentBox" >
+<div class="column_right" style="float: none;" >
+
+     <% form_for @user_session do |f| %>
+		<%= f.error_messages :header_message => nil, :message => nil	 %>
+		  <fieldset>	   
+			   <div class="fieldPara clearfix">
+                  <%= f.label :username %>
+                  <%= f.text_field :username %>
+               </div>
+
+ 			   <div class="fieldPara clearfix">
+				  <%= f.label :password %>
+				  <%= f.password_field :password %>
+			   </div>
+			   
+			   <div class="fieldPara ">
+				  <%= f.check_box :remember_me %> 
+				  <%= f.label :remember_me %>
+			   </div>
+			   <div class="submitPara">
+				  <%= f.submit "Sign In", :class => "large signInbutton"%>
+			   </div>	  
+			</fieldset>  
+		<% end %>
+ </div>
+</div>
+</div>
+
+
+
+
+
+
+<% 
+=begin %>
+
+<!-- <div id="yui-main" style="">
 	<div style="margin:0px 0px 0px -180px;">
 	<div id="body_main" class="yui-b sectioncontainer_brown" >
 		<div class="sectionCntrULFT"> </div>
@@ -6,9 +44,8 @@
 		<div id="MovieList" class="contentdiv section negMarginIE" style="padding-bottom: 0px;">
 			<div class="rndSecULFT"> </div>
 			<div class="rndSecURt"> </div>
-			<div id="login" style="position:center;padding-bottom:10px;">
-				<h1>Login</h1>
-				<br>
+			<div id="login" style="position:center;padding-bottom:10px;" class="contentBox">
+			<br>
 				<% form_for @user_session do |f| %>
 				  <%= f.error_messages :header_message => nil, :message => nil	 %>
 				  <%= f.label :username %><br />
@@ -34,39 +71,7 @@
 </div> 	
  </div>	
 </div>
-
-
-
-
-
-
-
-
-<% 
-=begin %>
-
-<!-- <h1>Login</h1>
-
-<% form_for @user_session  do |f| %>
-  <%= f.error_messages %>
-  <div id="login_container"<% unless @user_session.openid_identifier.blank? %> style="display: none;"<% end %>>
-    <%= f.label :username %> (or <%= link_to_function "login using OpenID", "$('login_container').toggle(); $('openid_conta
-iner').toggle();" %>)<br />
-    <%= f.text_field :username %><br />
-    <br />
-    <%= f.label :password %><br />
-    <%= f.password_field :password %><br />
-  </div>
-  <div id="openid_container"<% if @user_session.openid_identifier.blank? %> style="display: none;"<% end %>>
-    <%= f.label :openid_identifier, "OpenID" %> (or <%= link_to_function "login using a standard username / password", "
-$('login_container').toggle(); $('openid_container').toggle();" %>)<br /><br />
-    <%= f.text_field :openid_identifier %><br />
-  </div>
-  <br />
-  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
-  <br />
-  <%= f.submit "Login" %>
-<% end %> -->
+ -->
 <%
 =end
 %>

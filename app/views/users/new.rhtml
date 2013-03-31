@@ -1,25 +1,36 @@
-<h1>Register User</h1>
-
+<div class="create login">
+<div class="contentBox" >
+<div class="column_right" style="float: none;" >
+<p class="intro">
+Sign up to join the largest movie community
+</p>
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
-  <p>
+ <fieldset>	
+ <div class="fieldPara clearfix">
     <%= f.label :username %><br />
     <%= f.text_field :username %>
-  </p>
-  <p>
+   </div>
+   
+  <div class="fieldPara clearfix">
     <%= f.label :email %><br />
     <%= f.text_field :email %>
-  </p>
-  <p>
+   </div>
+ <div class="fieldPara clearfix">
     <%= f.label :password %><br />
     <%= f.password_field :password %>
-  </p>
-  <p>
+   </div>
+ <div class="fieldPara clearfix">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>
-  </p>
-  <p>
-    <%= f.submit "Create" %>
-  </p>
+   </div>
+  <div class="submitPara">
+    <%= f.submit "Register", :class => "large signInbutton" %>
+    <%= link_to 'Cancel', users_path %>
+   </div>
+ 	</fieldset>   
 <% end %>
-<%= link_to 'Back', users_path %>
+ </div>
+</div>
+</div>
+
