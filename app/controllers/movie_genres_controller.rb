@@ -18,14 +18,14 @@ class MovieGenresController < ApplicationController
     genre_id = params[:id]
     @movie_genre = MovieGenre.find(:first, :conditions => [ "movie_id = ? and genre_id = ?",movie_id, genre_id ])
     @movie_genre.log_destroy_for_audit
-    flash[:notice] = "Your requests for deletion of genre was successfully submitted."
+    #flash[:notice] = "Your requests for deletion of genre was successfully submitted."
     redirect_to movie_path(:id => params[:movie_id])  
   end
   
   def create
      begin      
 		MovieGenre.create(params[:movie_genre])
-		flash[:notice] = "Your requests to add genre was successfully submitted."
+		#flash[:notice] = "Your requests to add genre was successfully submitted."
      rescue Exception => e
        if e.is_a? ActiveRecord::StatementInvalid
          flash[:notice] = "This genre is already added."

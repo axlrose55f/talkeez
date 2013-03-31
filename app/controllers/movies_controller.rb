@@ -6,11 +6,13 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.js
   def index
+   
    @movies = Movie.active.rated.limit(10).order
    @latest_movies = Movie.active.rated(3).latest.limit(6).order('rating DESC, year DESC')
    @recently_edited =  Movie.active.limit(4).order('updated_at DESC')
    @top_this_year = Movie.active.latest.limit(10).order
    @top_decade = Movie.active.after(Date.today.years_ago(10)).limit(10).order
+   @genres = Genre.find(:all)
    
    #@movies = Movie.find(:all, :limit => 4, :conditions => 'rating > 4', :order => 'rating DESC')   
    #@latest_movies = Movie.find(:all, :limit => 6, :conditions => ['rating > 3 and year between ? and ?', Date.today.beginning_of_year(), Date.today], :order => 'rating DESC, year DESC')

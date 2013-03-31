@@ -58,12 +58,12 @@
       <tr>
        <td>
 	   <div class="widgtContnt  colorWhite">
-		<h2 style="border-bottom: solid 1px #CBC5B1;">Latest Top rated movies</h2>
+		<h2 style="border-bottom: solid 1px #CBC5B1;">Latest movies</h2>
 		 <div id="divMiniCardCatalog"></div>
 		 <div id="divMiniCardCatalog">
 		 <ul class="ulHistRecs">
 		 <% for movie in @top_this_year -%>
-		  <li><%= link_to "#{movie.name}", movie_path(movie), :class => "collGroup"  %></li>
+		  <li><%= link_to "#{movie.name}", movie_path(movie), :class => "actionLinkLite"  %></li>
 		 <% end %> 
 		 </ul>
 		</div>			    			  
@@ -76,7 +76,7 @@
 		 <div id="divMiniCardCatalog">
 		 <ul class="ulHistRecs">
 		 <% for movie in @top_decade -%>
-		  <li><%= link_to "#{movie.name}", movie_path(movie), :class => "collGroup"  %></li>
+		  <li><%= link_to "#{movie.name}", movie_path(movie), :class => "actionLinkLite"  %></li>
 		 <% end %> 
 		 </ul>
 		</div>			    			  
@@ -89,7 +89,7 @@
 		 <div id="divMiniCardCatalog">
 		 <ul class="ulHistRecs">
 		 <% for movie in @movies -%>
-		  <li><%= link_to "#{movie.name}", movie_path(movie), :class => "collGroup"  %></li>
+		  <li><%= link_to "#{movie.name}", movie_path(movie), :class => "actionLinkLite"  %></li>
 		 <% end %> 
 		 </ul>
 		</div>			    			  
@@ -158,9 +158,36 @@
        </div> <!-- widgtContnt -->
        </div> <!-- exploreLoc -->
       </div> <!-- div map -->
-      
-      
-     </div> <!-- lefpan -->
+     
+      <!-- Browse Genre -->      
+      <div id="browseBox">
+		 <h2>Search and browse movies</h2>
+		 <div class="browseleft" style="width: 25%">
+		  <% for genre in @genres[0..10] -%>
+		   <%= link_to "#{genre.name}", genre_path(genre), :class=>"actionLinkLite"  %><br>
+		  <% end %> 
+		 </div>
+	     <div class="browseleft" style="width: 25%">
+	      <% for genre in @genres[10..20] -%>
+		   <%= link_to "#{genre.name}", genre_path(genre), :class=>"actionLinkLite"  %><br>
+		  <% end %> 
+		 </div>
+	     <div class="browseleft" style="width: 25%">
+	      <% for genre in @genres[20..30] -%>
+		   <%= link_to "#{genre.name}", genre_path(genre), :class => "actionLinkLite"  %><br>
+		  <% end %> 
+	     </div>
+	      <div class="browseleft" style="width: 25%">
+	      <% for genre in @genres[30..40] -%>
+		   <%= link_to "#{genre.name}", genre_path(genre), :class=>"actionLinkLite"  %><br>
+		  <% end %> 
+	     </div>
+	  </div>
+      <!-- end bwose genre -->
+     </div> 
+     
+     
+     <!-- lefpan -->
      
      <div class="ritPan">
 	  <div class="rightContent">                

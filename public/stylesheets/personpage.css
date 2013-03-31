@@ -1,5 +1,5 @@
 body { 
-background: url("/images/bodyGrdnt.png") repeat-x scroll 0 0 #E2DECD; 
+#background: url("/images/bodyGrdnt.png") repeat-x scroll 0 0 #E2DECD; 
 color: #333333; 
 font: 12px/1.2 Verdana, Arial, Helvetica, sans-serif; 
 text-align:left; 

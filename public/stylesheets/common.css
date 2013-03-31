@@ -431,7 +431,7 @@ margin:2px;
 .footerWrp{width:100%; height:auto; margin:25px auto !important;position:relative;z-index:2;}
 .footerWrp .topBG{background:url(/images/global_sprite.png) no-repeat 0 -143px; width:100%; height:5px;}
 .footerWrp .btmBG{background:url(/images/global_sprite.png) no-repeat 0 -148px; width:100%; height:5px;}
-.footerWrp .contner{background:#fff;height:auto; padding:20px 0px 20px 0px; font:10px Tahoma, Geneva, sans-serif; color:#232323;}
+.footerWrp .contner{background:#f3f0e7;height:auto; padding:10px 0px 10px 0px; font:10px Tahoma, Geneva, sans-serif; color:#232323; border-radius: 5px;}
 .footerWrp .contner a{text-decoration:none; color:#445708;}
 .footerWrp .contner ul.upper{margin-bottom:25px; list-style:none; display:block; font-size:11px;}
 .footerWrp .contner ul.upper li{float:left; list-style:none; border-right:1px solid #DCD8CD; padding:0px 12px; margin-left:0px;}
@@ -440,7 +440,7 @@ margin:2px;
 .footerWrp .contner ul.lower{margin:0px; list-style:none; display:block; #clear:left;}
 .footerWrp .contner ul.lower li{float:left; list-style:none; border-right:1px solid #DCD8CD; padding:0px 12px; margin-left:0px;line-height:2em;}
 .footerWrp .contner ul.lower li.privPol{text-transform:uppercase;}
-.footerWrp .contner ul.lower li span{color:#A4A39F;}
+.footerWrp .contner ul.lower li span{color:#676565;}
 .footerWrp .intPop{background:url(/images/global_sprite.png) no-repeat right -290px; border:solid 1px #DBD5C8; height:24px; min-width:122px; position:absolute; top:20px; *top:28px; right:28px; padding:0 20px 0 8px; cursor:pointer;}
 .footerWrp .intPop span{font:12px Tahoma, Geneva, sans-serif; color:#333; line-height:21px;}
 .footerWrp .contner ul.lower li.sarl {position:absolute;right:28px;padding-right:0;bottom:5px;}
@@ -458,13 +458,14 @@ z-index: 0;
 }
 
 .ft-wrapper {
-background: white; 
+background: #f3f0e7; 
 border-left: 1px solid #D9D7C5;
 border-right: 1px solid #D9D7C5;
 box-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
 -moz-box-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
 -webkit-box-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
 z-index: 0;
+border-radius: 5px;
 } 
 
 /* For noncompliant browsers (you know who you are) */
