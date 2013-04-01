@@ -527,3 +527,53 @@ border-radius: 5px;
   background: #fcf6d0 url(/images/warn.gif) 1em 50% no-repeat;
 }*/
 
+.leftContainer {
+ float: left;
+ width: 645px;
+ padding-right: 10px;
+ word-wrap: break-word;
+}
+
+.rightContainer {
+float: left;
+width: 280px;
+display: inline;
+margin-left: 14px;
+}
+
+.sectionHeader {
+clear: both;
+border-radius: 4px;
+padding: 5px 5px 5px 5px;
+background-color: rgb(226, 222, 202);
+
+}
+
+.sectionHeader h1{
+font-family: Georgia,Times,"Times New Roman",serif;
+font-size: 16px;
+color: #382110;
+}
+
+.leftAlignedImage {
+ float: left;
+}
+
+.coverWrapper {
+height: 180px;
+width: 125px
+overflow: hidden;
+position: relative;
+}
+
+.coverRow {
+clear: both;
+width: 100%;
+padding: 10px 0;
+margin-left: 0;
+padding-left: 0;
+}
+
+.elementList {
+border-bottom: 1px solid #d7d7d7;
+}

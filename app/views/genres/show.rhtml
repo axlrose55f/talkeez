@@ -1,16 +1,78 @@
 <% content_for :searchBar do %>
-   <%= render(:partial => "layouts/slimSearch")%>
+ <%= render(:partial => "layouts/awesomeSearch")%>
 <% end %>
-<h1><i>Genres</i> :&nbsp; <%=h @genre.name%></h1>
-<br/>
-<b>Description:</b><br/> <%=h @genre.description %>
 
-<br/><br/>
-<b>Movies belonging to this Genre:</b><br/>
-<% for movie in @genre.movies %>
-	  <li><a href="/movies/<%= movie.id%>" class="show-link"><%= movie.name %></a></li>
- <% end %>
+<div class="left bigText" style="padding-right: 5px">
+  <h2><a href="/genres">Genres</a> &gt;
+    <%=h @genre.name%></h2>
+   <span style="float:right;"><%= link_to 'Edit', edit_genre_path(@genre) %></span> 
+</div>
+<br>
+<div class="mediumText reviewText">
+      <span id="freeTextContainer14165079305999218353" style="">
+      <%=h @genre.description %><a href="#" onclick="updateMoreLink('14165079305999218353'); return false;">...more</a></span>
+      <span id="freeText14165079305999218353" style="display: none;">
+      <%=h @genre.description %>
+      <a href="#" onclick="$('freeText14165079305999218353').previous().show();Element.hide('freeText14165079305999218353'); Element.show('freeTextContainer14165079305999218353'); return false;">(less)</a></span>
+ </div>
 
-<br/><br/>
-<%= link_to 'Edit', edit_genre_path(@genre) %> |
-<%= link_to 'Back', genres_path %>
+<div class="leftContainer padtop10 ">
+   <div class="sectionHeader mar20Top">
+    <h1>Movies in Genre: <%=h @genre.name%> </h1>
+   </div>
+   <% @movies = @genre.movies.active.limit(10).order %>
+   
+   <% if @movies.size > 4 %>
+	  <div class="coverRow">
+	   <% for movie in @movies[0..4] %>
+		 <div class="padbot10 leftAlignedImage coverWrapper">
+		  <a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
+			<img width="120" height="150" id="genre_picture" src="<%=h movie.image.url(:medium) %>" >
+		  </a>
+		  <div class="list_rating">			
+		   <%= ratings_for movie , :static %>
+		  </div>
+		 </div>
+		<% end %>
+	   </div>
+   <% end %>
+
+   <% if @movies.size > 4 %>
+	   <div class="coverRow padtop10">
+	   <% for movie in @movies[5..9] %>
+		<div class="padbot10 leftAlignedImage coverWrapper">
+		 <a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
+			<img width="120" height="150" id="genre_picture" src="<%=h movie.image.url(:medium) %>" >
+		</a>
+		 <div class="list_rating">			
+		   <%= ratings_for movie , :static %>
+		</div>
+		</div>	 
+	   <% end %>
+      </div>
+  <% end %>  
+  
+</div>
+<div class="rightContainer padtop10 ">
+ <!-- Browse Genre -->      
+		 <div class="sectionHeader mar20Top">
+   		   <h1>Browse Other Movie Genres</h1>
+   		 </div>
+		 <div class="browseleft" style="width: 30%">
+		  <% for genre in @genres[0..10] -%>
+		   <%= link_to "#{genre.name}", genre_path(genre), :class=>"actionLinkLite"  %><br>
+		  <% end %> 
+		 </div>
+	     <div class="browseleft" style="width: 30%">
+	      <% for genre in @genres[10..20] -%>
+		   <%= link_to "#{genre.name}", genre_path(genre), :class=>"actionLinkLite"  %><br>
+		  <% end %> 
+		 </div>
+   	     <div class="browseleft" style="width: 30%">
+	      <% for genre in @genres[20..30] -%>
+		   <%= link_to "#{genre.name}", genre_path(genre), :class=>"actionLinkLite"  %><br>
+		  <% end %> 
+		 </div>	 
+ <!-- end bwose genre --> 
+</div>
+

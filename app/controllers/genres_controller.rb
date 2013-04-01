@@ -8,11 +8,15 @@ class GenresController < ApplicationController
   # GET /genres.xml
   def index
     @genres = Genre.find(:all)
+    @ActionGenere =  Genre.find(:first, :conditions => [ "name = ?", "action"])
+    @DramaGenere =  Genre.find(:first, :conditions => [ "name = ?", "drama"])
+    @ComedyGenere =  Genre.find(:first, :conditions => [ "name = ?", "comedy"])
   end
 
   # GET /genres/1
   # GET /genres/1.xml
   def show
+    @genres = Genre.find(:all)
     @genre = Genre.find(params[:id])
 
     respond_to do |format|
