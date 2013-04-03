@@ -29,14 +29,19 @@
   	
   		<!-- end dispay video -->
 	   <hr>
-		<table width="100%" cellpadding="0" cellspacing="0" class="commentblock" id="roInst0"><tbody>
+		<table width="100%" cellpadding="5" cellspacing="5" class="commentblock" id="roInst0"><tbody>
 		  <tr>
 			<!-- Loop Review  -->
+			<% i = 0 %>
 		    <% for video in @videos %>
-		   	 <td onmouseover="javascript:expandCollapse('commentTools<%=video.id %>');" onmouseout="javascript:expandCollapse('commentTools<%=video.id %>');">
-		   	  <% imglink = "http://img.youtube.com/vi/"+ video.url + "/1.jpg" %>
-		   	  <%= link_to_remote image_tag(imglink, :height => "90", :width => "120"), :update => "displayVideo", :url => video_url(:id => video.id), :method => :get %>
+		   	 <td class="padtop10" onmouseover="javascript:expandCollapse('commentTools<%=video.id %>');" onmouseout="javascript:expandCollapse('commentTools<%=video.id %>');">
+		   	  <% imglink = "http://img.youtube.com/vi/"+ video.url + "/0.jpg" %>
+		   	  <%= link_to_remote image_tag(imglink, :height => "135", :width => "180"), :update => "displayVideo", :url => video_url(:id => video.id), :method => :get %>
 		   	 </td>
+		   	 <% i = i+1 %>
+		   	 <% if (i % 3 == 0 ) %>
+		   	   </tr><tr>
+		   	  <% end %>  
 		   	<% end %>
 			<!-- End Loop Review  -->
 		   </tr>

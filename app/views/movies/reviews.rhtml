@@ -26,7 +26,20 @@
 		 <% if @revs.empty? %>		
 	     <h3> No reviews yet </h3><br>
 	     <% else %>	     
-       <!-- Start Review container -->
+   <!-- Start Review container -->
+
+
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- old review -->
     <div id="commentsDiv" class="commentsDiv">
      <div class="commentsDetCont">
       <div class="rptCommentRow">
@@ -36,20 +49,24 @@
 		   <% for review in @revs %>
 			<tr onmouseover="javascript:expandCollapse('commentTools<%=review.id %>');" onmouseout="javascript:expandCollapse('commentTools<%=review.id %>');"><td>
 			<a name="bc-193360222"></a>
-			<h3><%= review.title %></h3>
+			
 			<div class="comment">
 			  <div class="addedByCont">
-				<div class="profileItem"></div>
-				<div class="profileItem">
+				<div class="profileItem" style="float:left;">
 				   <a href="/users/<%= review.user.id%>/" class="uLink">
-				    <img src="<%= review.user.image.url %>" width="15" height="20">
-					<span id="ul_174408a5"><%= review.user.username %></span>
-				   </a>added this on <%= review.created_at.strftime("%a , %B %d %Y").to_s %>
-				   </div>
-				<div class="profileItem"></div>
+				    <img src="<%= review.user.image.url %>" width="45" height="60">
+				   </a>
+				 </div>
+				<div class="profileItem">
+				   <span id="ul_174408a5"><%= review.user.username %></span>
+				   <div> added this on <%= review.created_at.strftime("%a , %B %d %Y").to_s %></div>
+				 </div>  				
 				</div>
-			<span class="commentDetail"><%= review.text %></span>
-			 <div id="commentTools<%=review.id %>" class="commentTools" style="display: none; ">
+				<div class="profileItem" style="margin-left:55px;">
+			   		<h3><%= review.title %></h3><br>
+			  		<span class="commentDetail" style="float:left;"><%= review.text %></span>
+			  	</div>
+			  <div id="commentTools<%=review.id %>" class="commentTools" style="display: none; ">
 			  <% if current_user && current_user.id == review.user.id  %>
 			  <a id="" class="editLnk" href="/movies/<%= @movie.id%>/editreviews?rev=<%= review.id%>">Edit Review</a>			  
 			  <% end %>

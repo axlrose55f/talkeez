@@ -574,8 +574,8 @@ em.noItemAdded { text-align:center;padding-bottom: 7px; _padding-bottom: 0px; fo
  .commentsEmptyState{float:left;margin:0;padding:5px 12px 5px 12px;color:#695E49;text-align:center;font:italic 12px Tahoma,Georgia;}
  .commentsSection {margin:0;padding:0 0 0 7px;}
  .commentsSection  ul.cmtItem{border-top:1px solid #D7D1C2;}
- .commentsSection  ul.firstItem{border-top:none;}
- .commentsSection  ul li{float:none; }
+ .commentsSection  ul.firstItem{border-top:none;margin-top:10px;}
+ .commentsSection  ul li{float:none; padding-bottom:10px; }
  .commentsSection  ul li em{margin-right:5px;}
  .commentsSection  ul li.story em{background-position:0 -420px;}
  .commentsSectiont ul li.audio em{background-position:0 -1040px;}
@@ -709,7 +709,8 @@ a.gbtn.disabled.lrg-silv em{background-position:right -46px !important;color:#8D
 .cancelVideo {float:right;margin-right: 15px;margin-top: 10px;}
 .addVideo {border:1px solid #CBCCCE;padding:5px;}
 .inputVideoUrl {color:#aaa;height: 20px; width:50em; margin-top: 5px; margin-bottom: 5px; padding: .2em;border: 1px solid #CBCCCE;border-left: 1px solid #7B7B7B;border-top: 1px solid #7B7B7B;}
-.add_video_link a {float:right;margin-top: -7px; padding-bottom:5px;color: #695E49;}
+.add_video_link a {float:right;margin-top: 5px; padding-bottom:5px;color: #695E49;}
+.add_review_link a {float:right;margin-top: -7px; padding-bottom:5px;color: #695E49;}
 
 /* Reviews */
 .rating{

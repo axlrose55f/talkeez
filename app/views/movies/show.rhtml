@@ -136,34 +136,38 @@
 			   <% if @revs.empty? %> 
 			    <em class="noItemAdded">No Reviews has been added.</em>
 			    <br>
-                <div id="add_review_link" class="add_video_link" >
-				  <%= '<a href="' + editreviews_movie_path(@movie) + '">Add review</a>'  unless @cast_list.empty? %>
-    		    </div>
+
 			   <% else %> 
 			   <ul id="commentRow" class="firstItem">
 				 <% for review in @revs %>
-				 <li class="comment padtop10">
-				  <em class="flat_icon">&nbsp;</em>
-				  <a href="/movies/<%= @movie.id%>/reviews" id="viewCommentLink">				  
-				  <span><%=h review.title %></span></a>
-				  </li>
-				  <li class="addedBy">
+				  <li class="addedBy2">
 				  <div class="addedByCont">
-				    <div class="profileItem">
-					 <a href=" " class="uLink">
-					  <img src="<%=h review.user.image.url %>" width="15" height="20"> 
-					  <span id="ul_1c767fcd"><%=h review.user.username %></span>
-					  </a>added this on <%=h review.created_at.strftime("%a , %B %d %Y").to_s %>
+					  <img src="<%=h review.user.image.url %>" width="35" height="50">
+					  <div class="" style="margin-top:-50px;padding-left:40px;">
+					  <a href=" " class="uLink"><span id="ul_1c767fcd"><%=h review.user.username %></span> </a>
+					  added this on <%=h review.created_at.strftime("%a , %B %d %Y").to_s %>
 					 </div>
 				   </div>
 				  </li>
+				  <div class="comment" style="margin-bottom:10px;margin-left:40px;border-bottom:solid 1px #CCC;" > 
+				  <li >
+				   <a href="/movies/<%= @movie.id%>/reviews" id="viewCommentLink">				  
+				   <span class="commentDetail"><%=h review.title %></span></a>
+				  </li>
+				  <li> <%=h review.text %></li>
+				  </div>
 				  <% end %>
 				</ul>
                 <br>
-                <div id="see_all_reviews" class="add_video_link" >
-				  <%= '<a href="' + reviews_movie_path(@movie) + '">See all review</a>'  unless @cast_list.empty? %>
+                <div id="see_all_reviews" class="add_review_link" >
+				  <%= '<a href="' + reviews_movie_path(@movie) + '">See all review</a>' %>
     		    </div>
 			   <% end %> 
+			   <% if current_user && !@movie.reviewed_by?(current_user)%>
+			    <div id="add_review_link" class="add_review_link" >
+				  <%= '<a href="' + editreviews_movie_path(@movie) + '">Add review</a>'  %>
+    		    </div>
+    		   <% end %> 
     		   <br>
 			   </div>
 			</div>

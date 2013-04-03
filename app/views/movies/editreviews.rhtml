@@ -48,14 +48,17 @@
 			 </li>
    			 <li class="addButtonLi">
 				<div class="padding4ButtonDiv">
-					<a class="gbtn med-orange2">
+					
 					  <% if @review.title.blank? %>					  				  
-  					  <em> <%= f.submit "Add Review" , :class => "submit_button" %> </em>
+  					  <em> <%= f.submit "Add Review" , :class => "submit_button" %> </em>  					  
   					  <%else %>
   					  <%= f.hidden_field :review_id , :value => @review.id %>
   					  <em> <%= f.submit "Update Review" , :class => "submit_button" %> </em>  					  
   					  <% end %>
+					<a class="padleft10">
+					<em> <%= link_to 'Cancel', @movie %> </em>
 					</a>
+					
 				</div>
 			 </li>
 		    </ul>
