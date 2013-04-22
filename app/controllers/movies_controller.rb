@@ -13,6 +13,10 @@ class MoviesController < ApplicationController
    @top_this_year = Movie.active.latest.limit(10).order
    @top_decade = Movie.active.after(Date.today.years_ago(10)).limit(10).order
    @genres = Genre.find(:all)
+   # recent review
+   #@recent_reviews = Review.latest.limit
+   # recent rated
+   @recent_rated = Rate.latest
    
    #@movies = Movie.find(:all, :limit => 4, :conditions => 'rating > 4', :order => 'rating DESC')   
    #@latest_movies = Movie.find(:all, :limit => 6, :conditions => ['rating > 3 and year between ? and ?', Date.today.beginning_of_year(), Date.today], :order => 'rating DESC, year DESC')

@@ -99,7 +99,7 @@
       </table>
       </div>  
       <br>
-      <!-- End Top movies list -->
+   <!-- End Top movies list -->
       
  <!-- Top Movies divMap -->
 	 <div id="divMap" class="mapContent areaSection mar20Bot">
@@ -158,7 +158,50 @@
        </div> <!-- widgtContnt -->
        </div> <!-- exploreLoc -->
       </div> <!-- div map -->
+
+     <!-- Latest Rated -->
+      <div id="divMap" class="mapContent areaSection">
+		<div class="exploreLoc">
+	      <div class="ancSecHd">
+			<div class="ancSecHdL"></div>
+			<div class="ancSecHdM">
+			 <h1>Recently Rated Movies</h1>
+			</div>
+			<div class="ancSecHdR"></div>
+          </div>
+       <div class="widgtContnt">
+       <table>
+       <tr>
+       <% for movie in @recent_rated[0..5] -%>
+       <td>
+       <div class="padleft10">
+		 <div class="PictureBox padbot10">
+			<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
+			<img width="80" height="98" id="artist_picture" src="<%=h movie.image.url(:medium) %>" >
+			</a>
+		 </div>
+         <span id="movie_title">
+           <%=h movie.name[0..10] %>
+			<% if movie.name.size > 10 %>
+			 <%= ".." %>
+			<% end %>
+		</span>
+	   </div>
+       </td>
+	  <% end %>
+       </tr>
+       </table>
+
+       </div> <!-- widgtContnt -->
+       </div> <!-- exploreLoc -->
+      </div> <!-- div map -->
+  	 <br>
+
      
+     <!-- Latest Reviews -->
+
+
+
       <!-- Browse Genre -->      
       <div id="browseBox">
 		 <h2>Search and browse movies</h2>
