@@ -597,6 +597,34 @@ em.noItemAdded { text-align:center;padding-bottom: 7px; _padding-bottom: 0px; fo
 #ConfirmDeleteDlg.yui-panel .ft .button-group button:hover{background-position:0 -18px;}
 #ConfirmDeleteDlg.yui-panel .ft .button-group button:active{background-position:0 -36px;}
 
+/* movie details */
+div.movie_details {
+	clear:left;	
+	margin-left:-2px;
+	padding-left:0px;
+	padding-bottom:5px;	
+}
+
+span.movie_detail_value {
+    font-weight: normal;
+	padding-left:5px;	
+}
+
+a.m_detail_link {
+  text-decoration: none;	
+}
+
+movie_infobar {
+	margin-top: -10px;
+	padding-left: 10px;
+	color: #627D11;
+	font-size: 90%;
+}
+
+/* end movie details */
+
+
+
 /*--Buttons-
 ------------------------------------------------------------------------
 Once FF2 is no longer supported
