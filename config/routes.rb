@@ -93,6 +93,7 @@ ActionController::Routing::Routes.draw do |map|
                                       :addAward => :put,
                                       :deleteAward => :delete,                                      
                                       :deleteCastDetail => :delete,
+                                      :deleteVideo => :delete,
                                       :updateawards => :put,
                                       :updateartists => :put,
                                       :rate => :post} ,
@@ -101,7 +102,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :movie_roles
   
   map.resources :movie_genres
-  
+
   # Javascript based routes
   map.connect ':controller/:action.:format'
   

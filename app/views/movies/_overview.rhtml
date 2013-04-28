@@ -1,0 +1,124 @@
+<div id="person_header_container" class="yui-bb container_green">
+	<div class="ylwBGULFT"> </div>
+	<div class="ylwBGURt"> </div>
+	<div class="persHeaderULFT"> </div>
+	<div class="persHeaderURt"> </div>
+	<div id="person_header" class="">
+
+<!-- pic box -->
+
+  	    <div class="moviePictureBox boxPad">
+	  		<img width="150" height="200" id="movie_picture" src="<%=h @movie.image.url(:medium) %>" alt="<%=h @movie.image.url(:medium) %>"/>
+		</div>
+<!-- end pic box -->
+     <div class="movie_info_section">
+		<h1><%=h @movie.name%> <span class="movie_detail_value">(<%=h @movie.year.to_datetime.to_s(:year) %>)</span></h1>
+		<div class="movie_infobar"><%= @movie.run_time.to_s + " min -" unless @movie.run_time == 0 %> <%= @movie.year.to_formatted_s(:long) %></div> 
+        <div class="movie_content_area">
+        <% if   @movie.rate_average == 0 %>
+          <span class="subText liked_it">No Ratings</span>		
+  		<% else %>
+    	  <span class="meter  numeric"><%= @total_percentage_like %></span>
+  		  <span class="subText liked_it">liked it</span>
+		<% end %>
+<%
+=begin
+%>
+
+  		<% else %>
+  		  <span class="meter  numeric"><%= @total_percentage_hate%></span>
+  		  <span class="subText liked_it">hated it</span>  		
+<%
+=end
+%>
+
+		<p class="critic_stats">
+   		    <br>Average Rating: <%= @movie.rate_average %>/5
+		    <br>User Ratings: <%= @movie.total_rates %>
+		  </p>		   
+		 </div>
+		 <div class="rating">
+			 <%= ratings_for @movie %> 
+		 </div>	
+		<div id="movie_details" class="movie_details">
+  		   <h3>Director:<span class="movie_detail_value">
+			<% directors = @movie.artists.director %>
+			<% if directors.size == 0 %>
+			<%= link_to_remote " Add", 
+		 	                   :update => {:success => "editDirector", :failure => "ajax-error-div"}, 
+		 	                   :url => new_movie_role_path(:movie_id => @movie.id),
+							   :html => { :class  => "movieSmallEdit_link" }, 
+		 	                   :with => "'div_name=editDirector&role_id=68'", 
+		 	                   :loaded => "$('editDirector').show();" ,
+		 	                   :failure => "$('ajax-error-div').replaceWith(request.responseText)",
+		 	                   :method => :get %>
+	        
+	        <div id="editDirector" style="display:none;"></div>
+			<% end %>	
+			<% for director in directors %>
+			<a href="<%= artist_path(director)%>" class="m_detail_link"><%=  director.name unless director == nil %></a>
+			<% end %>
+			</span>
+		   </h3>			
+		</div>	 
+		<div id="movie_details" class="movie_details">			
+			<h3>Producer:<span class="movie_detail_value">
+			  <% producers = @movie.artists.producer %>
+			  <% if producers.size == 0 %>
+				<%= link_to_remote " Add", 
+			 	                   :update => {:success => "editProducer", :failure => "ajax-error-div"}, 
+			 	                   :url => new_movie_role_path(:movie_id => @movie.id),
+								   :html => { :class  => "movieSmallEdit_link" }, 
+			 	                   :with => "'div_name=editProducer&role_id=102'", 
+			 	                   :loaded => "$('editProducer').show();" ,
+			 	                   :failure => "$('ajax-error-div').replaceWith(request.responseText)",
+			 	                   :method => :get %>
+
+		        <div id="editProducer" style="display:none;"></div>
+			  <% end %>	
+			  <% for producer in producers %>
+			  <a href="<%= artist_path(producer)%>" class="m_detail_link"><%=  producer.name unless producer == nil %></a>
+		 	  <% end %>
+			</span>
+		  </h3>			
+		</div>	 
+		<div id="movie_details" class="movie_details">
+			<h3>Genres:<span class="movie_detail_value">
+				<% for genre in @genres %>
+				<a href="/genres/<%= genre.id%>" class="m_detail_link"><%= genre.name %></a>
+				<% end %>               
+				  <%= link_to_remote "Edit", :update => {:success => "movieGenreEdit", :failure => "ajax-error-div"}, 
+				  							 :url => new_movie_genre_path(:movie_id => @movie.id),
+											 :html => { :class  => "movieSmallEdit_link" }, 
+				  							 :loaded => "$('movieGenreEdit').show();" ,
+				 	 	                     :failure => "$('ajax-error-div').replaceWith(request.responseText)",
+				  							 :method => :get %>
+    			  
+				  </span>
+    			  <div id="movieGenreEdit" style="display:none;"></div>
+			</h3>
+		</div>	 
+	    <div id="movie_plot_summary" >	 
+		  <h3>Plot Summary</h3>
+		  <div id="movie_description" class="movie_description padbot30" >
+		    <%=h  @movie.description[0..480] unless (@movie.description == nil || @movie.description.length < 480)%> 
+		    <%=h  "..." unless (@movie.description == nil || @movie.description.length < 480)%> 
+		  </div>
+		  <div id="movie_description_full" class="movie_description" style="display:none;">
+		    <%=h  @movie.description %> 
+		  </div>
+
+	    </div>
+		 <div id="movie_desc_readMore"><% if (@movie.description != nil) && @movie.description.length > 480 %>
+	     <a href="" onclick="$('movie_description').hide();Effect.BlindDown('movie_description_full',{scaleFrom:40});$('movie_desc_readMore').hide();return false;">Read More</a> 
+		<% end  %>
+		</div>
+		<br/><br/>
+	  </div> <!-- end movie_info_section -->	
+	</div>
+	<div class="clearDiv"></div>
+	<div class="persHeaderLLFT"> </div>
+	<div class="persHeaderLRT"> </div>
+	<div class="ylwBGLLFT"> </div>
+	<div class="ylwBGLRT"> </div> 
+  </div>

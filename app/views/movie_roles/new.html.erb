@@ -27,7 +27,10 @@
 												  					  :method => :get,:param_name => 'search'} %>
      <% end %>
   </span>
-  <span style="float:left;padding-left:10px;margin-top:-5px;">
+  <% if(@role_id != nil) %>
+    <%= f.hidden_field :role_id , :value => @role_id  %>
+  <% else %>
+  <span style="float:left;">
 	<label for="role_type">Role Type:</label>
 	 <select id="role_type" name="role_type2" onchange="roleTypeChanged();">
 	  <option value="">Please select</option>
@@ -36,18 +39,22 @@
 	  <option value="crew">Technical Crew</option>
 	</select>
   </span>
-  <span id="select_role_menu" style="float:left;padding:0px 10px 0px 20px;margin-top:-5px;">
+  <span id="select_role_menu" style="float:left;">
 	<%= f.label :role_id %>:
 	<%=f.collection_select(:role_id,[], :id, :name) %>
-  </span>   
-  <span style="float:left;margin-top:-3px;">
+  </span> 
+  
+  <% end %>  
+ 
+  <span class="update_role_but">
     <%= f.submit "Update" %>
+	<h3>
+	  <span class="cancel_edit_role" >
+	  <%= link_to "Cancel", '#', :onclick => "$(#{@div_name}).hide();$('addCast').show();"  %>
+	  </span>
+	  </h3>
   </span>
-  <h3>
-  <span style="padding-left:10px;">
-  <%= link_to "Cancel", '#', :onclick => "$(#{@div_name}).hide();$('addCast').show();"  %>
-  </span>
-  </h3>
+  
 <% end %>
 <br>
   </div>

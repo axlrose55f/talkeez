@@ -52,7 +52,7 @@ html:first-child #Buttons a.addButtonPP span { padding: 6px 15px 6px 32px; margi
 .imageright { background: url(../../../trees/i/pt/arrow_image_r_drk.gif) no-repeat right top; width: 19px; height: 19px; }
 .imagerightdisabled { background: url(../../../trees/i/pt/arrow_image_r.gif) no-repeat right top; width: 19px; height: 19px; }
 #photoZone { float:left; border:1px solid #CFD88E; background-color: #FFF; width: 153px; height: 168px; text-align: center; padding-right: 15px; padding-bottom: 0px; }
-#profile_picture { vertical-align: middle; margin-right:6px; padding:4px; border:solid 1px #bdb4a6; background-color:#ffffff; z-index: 1; }
+#profile_picture { vertical-align: middle; margin-right:4px; margin-left:8px; padding:4px; border:solid 1px #bdb4a6; background-color:#ffffff; z-index: 1; }
 #addMainPhotoLnk img { z-index: 1; vertical-align: middle;}
 
 #vitals { margin: 5px 0px 10px 0px; font-size:11px; * font-size:11px; font-family: Verdana, Arial, sans-serif; }
@@ -599,7 +599,7 @@ em.noItemAdded { text-align:center;padding-bottom: 7px; _padding-bottom: 0px; fo
 
 /* movie details */
 div.movie_details {
-	clear:left;	
+	#clear:left;	
 	margin-left:-2px;
 	padding-left:0px;
 	padding-bottom:5px;	
@@ -614,10 +614,10 @@ a.m_detail_link {
   text-decoration: none;	
 }
 
-movie_infobar {
+.movie_infobar {
 	margin-top: -10px;
 	padding-left: 10px;
-	color: #627D11;
+	color: #695E49;
 	font-size: 90%;
 }
 
@@ -689,7 +689,7 @@ a.sml-silv, a.sml-silv em{ font-size:12px; height:18px; line-height:17px; color:
 a.med-silv, a.med-silv em{ font-size:12px; height:28px; line-height:27px; color:#676F14 !important;}
 a.lrg-silv, a.lrg-silv em{ font-size:15px; height:44px; line-height:42px; color:#676F14 !important;}
 
-.add_white_small{text-decoration:none;background-position:-87px -922px;margin-top:6px;}
+.add_white_small{text-decoration:none;background-position:-87px -922px;margin-top:3px;}
 /* -- "return button" -- */
 .flat_icon{background-image:url(/images/icon-sprite.png); background-repeat:no-repeat; display:inline-block; width:16px; height:16px; float:left;} 
 .flat_icon_inline{background-image:url(/images/icon-sprite.png); background-repeat:no-repeat; display:inline-block; width:16px; height:16px;} 
@@ -744,10 +744,10 @@ a.gbtn.disabled.lrg-silv em{background-position:right -46px !important;color:#8D
 /* Reviews */
 .rating{
  #float: left;
- padding:4px 4px 10px 0px;
+ padding:10px 4px 10px 0px;
  margin-left:10px;
  color:#566C11; 
- clear:left;
+ #clear:left;
  font-size:10px;
 }
 

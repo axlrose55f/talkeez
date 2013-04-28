@@ -46,9 +46,15 @@ body{text-align:center;}
 .yui-t2 .yui-b {
 	float:left;
     width:14.4456em;*width:14.212em;}
+
 .yui-t2 #yui-main .yui-b {
-    margin-left:14.8456em;*margin-left:14.512em;
+    margin-left:14.8456em;*margin-left:14.512em; 
 }
+
+.yui-t2 #yui-main .yui-bb {
+    /*margin-left:14.8456em;*margin-left:14.512em; */
+}
+
 
 .yui-t3 .yui-b {
 	float:left;

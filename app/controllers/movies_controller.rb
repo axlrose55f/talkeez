@@ -29,9 +29,9 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.js
   def search
-   search_param = params[:search]? params[:search]: nil  	 
-   search_param = ( params[:movie]? params[:movie][:name]: nil) unless (search_param != nil && !search_param.empty?) 
-   @movies = Movie.search(search_param, params[:page])
+   @search_param = params[:search]? params[:search]: nil  	 
+   @search_param = ( params[:movie]? params[:movie][:name]: nil) unless (@search_param != nil && !@search_param.empty?) 
+   @movies = Movie.search(@search_param, params[:page])
    respond_to do |format|
       format.html # show.html.erb
       format.js  { 
@@ -49,8 +49,10 @@ class MoviesController < ApplicationController
     @videos = @movie.active_videos(current_user)
     @cast_list = @movie.active_artists_leads(current_user)
     @awards = @movie.active_awards(current_user)
-    
+  
     @total_percentage_like = rate_percentage("like")
+    #logger.debug "FindMe Im in total percentage #{@total_percentage_like}"
+    
     # @total_percentage_hate = rate_percentage("hate")
     respond_to do |format|
       format.html # show.html.erb
@@ -65,7 +67,7 @@ class MoviesController < ApplicationController
     
     @casts = @movie.show_artists(current_user,['cast'])
     @crews = @movie.show_artists(current_user,['crew','ProductionCrew'])
-    
+    @total_percentage_like = rate_percentage("like")
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @movie }
@@ -76,6 +78,7 @@ class MoviesController < ApplicationController
   def reviews
     @movie = Movie.find(params[:id])
     @genres = @movie.active_genres(current_user)
+    @total_percentage_like = rate_percentage("like")
     respond_to do |format|
       format.html # reviews.html.erb
       format.xml  { render :xml => @movie }
@@ -86,6 +89,8 @@ class MoviesController < ApplicationController
   def awards
     @movie = Movie.find(params[:id])
     @genres = @movie.active_genres(current_user)
+    @total_percentage_like = rate_percentage("like")
+    
     m_awards = @movie.active_awards(current_user)
     @awards = {}
     if !m_awards.nil? 
@@ -103,7 +108,8 @@ class MoviesController < ApplicationController
   def videos
     @movie = Movie.find(params[:id])
     @genres = @movie.active_genres(current_user)
- 	@videos = @movie.active_videos(current_user)
+ 	  @videos = @movie.active_videos(current_user)
+ 	  @total_percentage_like = rate_percentage("like")
     respond_to do |format|
       format.html # videos.html.erb
       format.xml  { render :xml => @movie }
@@ -206,6 +212,15 @@ class MoviesController < ApplicationController
       end
     end  
     redirect_to(:action => :videos)
+  end
+  
+  #### Delete Video ###
+  def deleteVideo
+      movie_id = params[:id]
+      video_id = params[:video_id]
+      @movie_video = VideoAttachment.find(:first, :conditions => [ "videoable_id = ? and video_id = ?",movie_id,video_id])
+      @movie_video.destroy
+      redirect_to movie_path(:id => movie_id)
   end
   
   

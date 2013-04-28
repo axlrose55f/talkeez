@@ -5,7 +5,13 @@
 <%= render(:partial => "contentMenu" , :object => @movie, :locals => { :tab => "reviews"} )%>
 
 <div id="yui-main" style="">
- <div id="person_header_container" class="yui-b container_green">
+ <!-- Overview section -->
+
+ <%= render(:partial => "overview", :object => @movie )%>
+
+ <!-- end Overview Section --> 
+
+<div id="person_header_container" class="yui-bb container_green">
 
 	<div class="ylwBGULFT"> </div>
 	<div class="ylwBGURt"> </div>
@@ -95,7 +101,3 @@
 	<div class="ylwBGLRT"> </div> 
   </div> 
 </div>
-  
-
-<!-- Side Bar --> 
-<%= render(:partial => "sidebar", :object => @movie )%>

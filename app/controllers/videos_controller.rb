@@ -49,6 +49,7 @@ class VideosController < ApplicationController
 
 
 
+
   # GET /videos/1/edit
   def edit
     @video = Video.find(params[:id])

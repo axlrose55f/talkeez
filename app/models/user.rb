@@ -3,7 +3,12 @@ class User < ActiveRecord::Base
   ajaxful_rater
   has_many :roles, 
            :class_name => "UserRole"
-  
+
+### Scopes #########  
+named_scope :latest, lambda { {:order => 'current_login_at DESC'}}
+named_scope :limit, lambda { |*num| { :limit => (num.first || 10) } }
+
+   
   def name
     "#{self[:username]}"
   end

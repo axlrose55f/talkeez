@@ -14,7 +14,7 @@
 	      <div class="ancSecHd">
 			<div class="ancSecHdL"></div>
 			<div class="ancSecHdM">
-			 <h1>Search Results </h1>
+			 <h1>Search Results for "<%= @search_param%>"</h1>
 			</div>
 			<div class="ancSecHdR"></div>
           </div>
@@ -33,17 +33,29 @@
 				  		</a>
 					</div>
 					<div class="detail">
-						<h2><%=h movie.name %></h2>
+						<h2><a href="/movies/<%= movie.id%>" class="m_detail_link"><%=h movie.name %> (<%=h movie.year.year%>)</a></h2>
 						<div class="list_rating">			
-							<%= ratings_for movie , :static %>
+							<%= ratings_for movie %>
 						</div>
-						<h3><%=h movie.year.year%></h3> 
-						<h3>Directed By</h3>
-						<% a = movie.artists.director[0] %>
-						<p><%=  (a == nil)? "N/A" : a.name[0..19]%></p>
-						<h3>Produced By</h3>
-						<% a = movie.artists.producer[0] unless movie.artists.producer == nil %>
-						<p><%=  (a == nil)? "N/A" : a.name[0..19]%></p>
+						<h3>Director:<span class="movie_detail_value">
+							<% directors = movie.artists.director %>	
+							<% for director in directors %>
+							<a href="<%= artist_path(director)%>" class="m_detail_link"><%=  director.name unless director == nil %></a>
+							<% end %>
+							</span>
+						</h3>
+						<h3>Producer:<span class="movie_detail_value">
+							  <% for producer in movie.artists.producer %>
+							  <a href="<%= artist_path(producer)%>" class="m_detail_link"><%=  producer.name unless producer == nil %></a>
+						 	  <% end %>
+							</span>
+						 </h3>
+						 <h3>Genres:<span class="movie_detail_value">
+							<% for genre in movie.genres %>
+							<a href="/genres/<%= genre.id%>" class="m_detail_link"><%= genre.name %></a>
+							<% end %>
+			               </span>
+						</h3>
 					</div>
 				</div>
 				<div class="subConBL"></div>
@@ -105,7 +117,7 @@
 				<h2>Top Editors </h2>
 			    <div id="divMiniCardCatalog"></div>
 			    <!-- user list-->
-			   <% @user = User.find(:all, :limit => 3) %>
+			   <% @user = User.limit(4).latest %>
 			   <% for u in  @user %>
 			   <div class="subCon subConGray">
                             <div class="subConTL"></div>

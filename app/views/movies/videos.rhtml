@@ -5,7 +5,12 @@
 <%= render(:partial => "contentMenu" , :object => @movie, :locals => { :tab => "videos"} )%>
 
 <div id="yui-main" style="">
- <div id="person_header_container" class="yui-b container_green">
+ <!-- Overview section -->
+
+ <%= render(:partial => "overview", :object => @movie )%>
+
+ <!-- end Overview Section -->
+<div id="person_header_container" class="yui-bb container_green">
 
 	<div class="ylwBGULFT"> </div>
 	<div class="ylwBGURt"> </div>
@@ -28,16 +33,23 @@
   	    </center>
   	
   		<!-- end dispay video -->
-	   <hr>
+	   <hr style="border-top: 1px dotted #cdc7be;">
 		<table width="100%" cellpadding="5" cellspacing="5" class="commentblock" id="roInst0"><tbody>
 		  <tr>
 			<!-- Loop Review  -->
 			<% i = 0 %>
 		    <% for video in @videos %>
-		   	 <td class="padtop10" onmouseover="javascript:expandCollapse('commentTools<%=video.id %>');" onmouseout="javascript:expandCollapse('commentTools<%=video.id %>');">
+		   	 <td class="padtop20" onmouseover="javascript:expandCollapse('commentTools<%=video.id %>');" onmouseout="javascript:expandCollapse('commentTools<%=video.id %>');">
 		   	  <% imglink = "http://img.youtube.com/vi/"+ video.url + "/0.jpg" %>
 		   	  <%= link_to_remote image_tag(imglink, :height => "135", :width => "180"), :update => "displayVideo", :url => video_url(:id => video.id), :method => :get %>
-		   	 </td>
+		      <!-- delete option -->	  
+		       <span class="delete_video_link">
+			    <%= link_to "Delete", deleteVideo_movie_path(:id => @movie,
+															   :video_id => video.id ),  
+															   :confirm => 'Are you sure?', 			
+															   :method => :delete %></span>
+	   
+		      </td>
 		   	 <% i = i+1 %>
 		   	 <% if (i % 3 == 0 ) %>
 		   	   </tr><tr>
@@ -79,7 +91,3 @@
 	<div class="ylwBGLRT"> </div> 
   </div> 
 </div>
-  
-
-<!-- Side Bar --> 
-<%= render(:partial => "sidebar", :object => @movie )%>

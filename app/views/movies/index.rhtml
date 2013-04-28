@@ -304,7 +304,7 @@
 				<h2>Top Contributers </h2>
 			    <div id="divMiniCardCatalog"></div>
 			    <!-- user list-->
-			   <% @user = User.find(:all, :limit => 3) %>
+			   <% @user = User.limit(4).latest %>
 			   <% for u in  @user %>
 			   <div class="subCon subConGray">
                             <div class="subConTL"></div>

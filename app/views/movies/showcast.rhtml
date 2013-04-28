@@ -7,7 +7,13 @@
 <%= render(:partial => "contentMenu" , :object => @movie, :locals => { :tab => "cast"} )%>
 
 <div id="yui-main" style="">
- <div id="person_header_container" class="yui-b container_green">
+ <!-- Overview section -->
+
+ <%= render(:partial => "overview", :object => @movie )%>
+
+ <!-- end Overview Section -->
+
+<div id="person_header_container" class="yui-bb container_green">
 
 	
 	<!-- Cast details -->
@@ -28,12 +34,13 @@
 	 	                   :method => :get %>
         </div>
         <div id="editArtistRole"></div> 
+        <% count = 1 %>
 		 <% if @casts.empty? %>
 			<h3> No Cast details Yet </h3>
 		 <% else %> 
 		  <div id="artist_listing">
 		  <ul>
-		  <% count = 1 %>
+		  
 	      <% for artist in  @casts %>
  		  	 <li id="artist_item">
  		  	 <div id="filmography_<%= count += 1 %>">
@@ -112,7 +119,3 @@
 	<div class="ylwBGLRT"> </div> 
   </div> 
 </div>
-  
-
-<!-- Side Bar --> 
-<%= render(:partial => "sidebar", :object => @movie )%>

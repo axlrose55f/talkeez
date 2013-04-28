@@ -2,8 +2,8 @@ class MovieRolesController < ApplicationController
    before_filter :require_user, :only => [:edit, :update, :new, :create ,:destroy, :editArtistRole] 
   
   def edit
-  	  @mar = MovieRole.find(params[:id])
-  	  @movie = @mar.movie
+  	@mar = MovieRole.find(params[:id])
+  	@movie = @mar.movie
 	  @artist = @mar.artist
 	  role = @mar.role
 	  @roles = Role.find(:all, :conditions => ['role_type = ?', role.role_type], :order => "name")
@@ -15,6 +15,7 @@ class MovieRolesController < ApplicationController
 	  @mar = MovieRole.new
 	  @movie = Movie.find(params[:movie_id]) unless params[:movie_id] == nil
 	  @artist = Artist.find(params[:artist_id]) unless params[:artist_id] == nil
+	  @role_id = params["role_id"]
 	  @div_name = params["div_name"]
   end
 
