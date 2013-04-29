@@ -21,7 +21,7 @@
 		   <%= link_to "Profile" , user_path(current_user.id) %> |
 		   <%= link_to "Logout" , logout_path %>
 	<% else %>
-	<%= authlogic_facebook_login_button("login", {:controller => 'fblogin',:scope => 'email,user_birthday',})  %>&nbsp;
+	<%= authlogic_facebook_login_button("login", {:controller => 'fblogin',:scope => 'user_about_me,email,user_birthday',})  %>&nbsp;
 		<!--  <%= link_to "Register" , new_user_path %> | <%= link_to "Login" , login_path %> -->
 	<% end %>
 </div>

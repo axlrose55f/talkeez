@@ -8,10 +8,6 @@ class User < ActiveRecord::Base
 named_scope :latest, lambda { {:order => 'current_login_at DESC'}}
 named_scope :limit, lambda { |*num| { :limit => (num.first || 10) } }
 
-   
-  def name
-    "#{self[:username]}"
-  end
   
   def role_symbols
     roles.map do |r|
@@ -20,10 +16,13 @@ named_scope :limit, lambda { |*num| { :limit => (num.first || 10) } }
   end
   
   def before_connect(facebook_session)
-    #self.first_name = facebook_session.first_name
-    #self.last_name = facebook_session.last_name
     self.email = facebook_session.email
-    self.username = facebook_session.name         
+    self.username = facebook_session.username
+    self.first_name = facebook_session.first_name
+    self.last_name = facebook_session.last_name
+    self.name = facebook_session.name
+    self.gender = facebook_session.gender
+    self.birthday = facebook_session.birthday             
     self.password = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{self.username}--")[0,6]
     self.password_confirmation = self.password
     self.active = true

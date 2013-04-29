@@ -18,8 +18,12 @@
 				<div id="minitree">				  
 			      <div id="details_heading">User Name</div>
 			      <div id="details_value"><%=  @user.username %></div>
+				  <div id="details_heading">Name</div>
+			      <div id="details_value"><%=  @user.name %></div>
 			      <div id="details_heading">Date of birth</div>
-			      <div id="details_value">  DOB </div>			     
+			      <div id="details_value">  <%=  @user.birthday %> </div>
+				  <div id="details_heading">Gender</div>
+			      <div id="details_value">  <%=  @user.gender %> </div>			     
 			      <div id="details_heading">Email</div>
 			      <div id="details_value"><%=  @user.email %></div>
 			      <div id="details_heading">Roles</div>
