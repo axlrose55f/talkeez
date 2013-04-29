@@ -6,7 +6,7 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <meta http-equiv="Content-Script-Type" content="text/javascript">
   <title>Moviepedia: <%= controller_name %></title>
-    <link href="/stylesheets/signin.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/signin.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/common.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/reset.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/2_col.css" media="screen" rel="stylesheet" type="text/css" />
@@ -23,62 +23,8 @@
 
 <div id="doc2" class="yui-t2">
 <div id="hd">
-<div id="ctl00_ctl00_m_tabsPnl" class="sh_tabsPnl">					
-<div class="TempNavBg">
-<ul id="_HdrNav" class="Nav">
-<li class="Home " id="musicNav"><a href="/"><span><b>&nbsp;&nbsp;&nbsp;Moviepedia&nbsp;&nbsp;&nbsp;</b></span></a></li>
-<li class="Home " id="musicNav"><a href="/movies"><span>Movies</span></a></li>																																																																																													
-<li class="Home " id="artistsNav"><a href="/artists"><span>Artists</span></a></li>
-<li class="Home " id="genresNav"><a href="/genres"><span>Genres</span></a></li>		
-<li class="Home " id="awardsNav"><a href="/awards"><span>Awards</span></a></li>
-<% if permitted_to? :manage, :users %>
-<li class="Home " id="peopleNav"><a href="/users/<%= current_user.id%>"><span>People</span></a></li>		
-<% end %>
-
-</ul>
-<!-- sub nav -->
-<ul class="subNav">																			
-<div>
-   <% if current_user %>
-		   <%= link_to "Profile" , user_path(current_user.id) %> |
-		   <%= link_to "Logout" , logout_path %>
-	<% else %>
-		  <%= link_to "Register" , new_user_path %> | 
-		  <%= link_to "Login" , login_path %>
-	<% end %>
-</div>
-
-<!-- facebook -->
-<%
-=begin 
-%>
-	<%= fb_connect_async_js %>
-	<% if current_user %>
-		 <%= "Hey " %><%= link_to "#{current_user.username}!" , user_path(current_user.id) %> |
-   		  <% if current_facebook_user %>
-		   <%= fb_logout_link("Logout", logout_path) %>
-		  <% else %>
-		    <%= link_to "local Logout" , logout_path %>
-		  <% end %>	
-		  &nbsp;	
-	<% else %>
-		<%= authlogic_facebook_login_button("login", {:controller => 'fblogin',
-											 :perms => 'user_about_me,email,user_birthday',
-											  })  %>&nbsp;
-											  
-	<% end %>
-<%
-=end 
-%>	
-<!-- end facebook -->
-
-
-</ul>
-<!-- end sub nav -->					
-<div class="TempNavLft"></div>					
-<div class="TempNavRgt"></div>				
-</div>			
-</div>	
+<!-- Nav Bar-->
+<%= render(:partial => "/layouts/navBar" )%>
 
 <!-- Awesome Search Bar -->
  <%= yield :searchBar %>
@@ -95,6 +41,7 @@
  </center> 
 <% end %>
 <center><div id="ajax-error-div" style="width: 500px;"></div></center>
+
 <!--Main Body -->
 <div id="bd" class="bg-wrapper">
    <!-- main container -->
@@ -103,20 +50,7 @@
 
 <!-- Footer -->
 
-	<div id="footerWrp" class="footerWrp ft-wrapper">
-		<div class="contner clearfix">
-				<ul class="lower">
-					<li><span>© 2007-2013 Moviepedia.in</span></li>
-				
-					<li><a href="http://www.Moviepedia.in/">Help</a></li>
-					<li><a href="http://www.Moviepedia.in/faq">F.A.Q</a></li>				
-					<li class="privPo"><a href="http://www.Moviepedia.in/legal/privacy">Privacy Policy</a></li>
-					<li class="lastOne"><a href="http://www.Moviepedia.in/legal/terms">Terms and Conditions</a></li>
-				
-				</ul>
-	     </div>
-		</div>
-
+<%= render(:partial => "/layouts/footerBar" )%>
 	
 		
 <!-- end footer-->
