@@ -4,8 +4,9 @@
 		<div class="sidebarDivURt"> </div>
   	    <div class="artistPictureBox">
 
-  	    <% if current_facebook_user %>
-  	 	<%=  fb_profile_pic(current_facebook_user, :width => "150", :height => "150", :size => :normal) %>
+  	    <% if @user.facebook_uid != nil %>
+		  <img width="150" height="150" id="artist_picture" src="<%=h "http://graph.facebook.com/#{@user.facebook_uid}/picture?type=large" %>"/>
+           	 	
   	    <% else %>
 	  		<img width="150" height="150" id="artist_picture" src="<%=h @user.image.url %>"/>
 	    <% end %>

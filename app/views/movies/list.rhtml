@@ -1,0 +1,161 @@
+<% content_for :searchBar do %>
+ <%= render(:partial => "layouts/awesomeSearch")%>
+<% end %>
+<div id="yui-main" style="">
+
+<!-- simple secod main -->
+<div id="searchHomeWrapper" class="SearchHome collecWrp">
+ <div class="pan2-rL">
+    <div class="top"></div>
+	<div class="content clearfix">
+  	 <div class="lefPan">
+	  <div id="divMap" class="mapContent areaSection">
+		<div class="exploreLoc">
+	      <div class="ancSecHd">
+			<div class="ancSecHdL"></div>
+			<div class="ancSecHdM">
+			 <h1>List of Movies </h1>
+			</div>
+			<div class="ancSecHdR"></div>
+          </div>
+       <div class="widgtContnt">
+    
+       <% for movie in @movies -%>
+
+       <div class="subCon subConGray mar10Bot" >
+				<div class="subConTL"></div>
+				<div class="subConT"></div>
+				<div class="subConTR"></div>
+				<div class="subConBd MapBody">
+					<div class="moviePictureBox">
+				  		<a href="/movies/<%= movie.id%>" id="addMainPhotoLnk">
+				  		<img width="100" height="122" id="movie_picture" src="<%=h movie.image.url(:medium) %>" >
+				  		</a>
+					</div>
+					<div class="detail">
+						<h2><a href="/movies/<%= movie.id%>" class="m_detail_link"><%=h movie.name %> (<%=h movie.year.year%>)</a></h2>
+						<div class="list_rating">			
+							<%= ratings_for movie %>
+						</div>
+						<h3>Director:<span class="movie_detail_value">
+							<% directors = movie.artists.director %>	
+							<% for director in directors %>
+							<a href="<%= artist_path(director)%>" class="m_detail_link"><%=  director.name unless director == nil %></a>
+							<% end %>
+							</span>
+						</h3>
+						<h3>Producer:<span class="movie_detail_value">
+							  <% for producer in movie.artists.producer %>
+							  <a href="<%= artist_path(producer)%>" class="m_detail_link"><%=  producer.name unless producer == nil %></a>
+						 	  <% end %>
+							</span>
+						 </h3>
+						 <h3>Genres:<span class="movie_detail_value">
+							<% for genre in movie.genres %>
+							<a href="/genres/<%= genre.id%>" class="m_detail_link"><%= genre.name %></a>
+							<% end %>
+			               </span>
+						</h3>
+					</div>
+				</div>
+				<div class="subConBL"></div>
+				<div class="subConB"></div>
+				<div class="subConBR"></div>
+		</div>
+
+	  <% end %>
+       
+       <% if @movies.size < 2 %>
+       <br><br><br>
+       <% end %>
+       </div> <!-- widgtContnt -->
+       </div> <!-- exploreLoc -->
+       <!-- pagination -->
+       <div class="digg_pagination">
+		  <div clas="page_info">
+			<%= page_entries_info @movies %>
+		  </div>
+		  <br>
+		  <%= will_paginate @movies, :container => false %>
+		</div>
+       <!-- pagination end -->
+      </div> <!-- div map -->
+     </div> <!-- lefpan -->
+     
+     <div class="ritPan">
+	  <div class="rightContent">                
+		<div class="ancSecHd brown">
+			<div class="ancSecHdL"></div>
+ 			<div class="ancSecHdM">
+				<h1><span class="left">Site Statistics</span></h1>
+			</div>
+			<div class="ancSecHdR"></div>
+			</div>
+			<div class="widgtContnt colorWhite">
+				<h1><strong>22,345</strong></h1> 
+				<h2><center>movies added</center></h2> 
+			    <div id="divMiniCardCatalog"></div>
+			    <h1><strong>30,256</strong></h1> 
+				<h2><center>artists added</center></h2> 			   
+  			    <div id="divMiniCardCatalog"></div>
+			    <h1><strong>8,256</strong></h1> 
+				<h2><center>Edits to the content</center></h2> 
+			</div>
+		  </div>
+	 </div> <!-- ritPan -->
+	 <br>
+	 <div class="ritPan mar20Top">
+	  <div class="rightContent">                
+		<div class="ancSecHd brown">
+			<div class="ancSecHdL"></div>
+ 			<div class="ancSecHdM">
+				<h1><span class="left">Top Contributers</span></h1>
+			</div>
+			<div class="ancSecHdR"></div>
+			</div>
+			<div class="widgtContnt  colorWhite">
+				<h2>Top Editors </h2>
+			    <div id="divMiniCardCatalog"></div>
+			    <!-- user list-->
+			   <% @user = User.limit(4).latest %>
+			   <% for u in  @user %>
+			   <div class="subCon subConGray">
+                            <div class="subConTL"></div>
+                            <div class="subConT"></div>
+                            <div class="subConTR"></div>
+                            <div class="subConBd MapBody">
+								<ul>
+								<li class="pImg dfemale">
+								<div class="defaultImg mediumSmImg">
+								 <span><img width="42" height="42" id="" src="<%=h u.image.url(:thumb) %>" ></span>
+								</div>
+								</li>
+								</ul>
+							<div class="padleft30">
+							<h3><%= u.username %></h3>
+							<p>Active since <%= u.created_at.to_date.to_formatted_s(:long)%></p> </div>                              
+                            </div>
+                            <div class="subConBL"></div>
+                            <div class="subConB"></div>
+                            <div class="subConBR"></div>
+                        </div>
+			    
+			    <% end %>
+			    <!-- user list -->
+			</div>
+		  </div>
+	 </div> <!-- ritPan -->
+	 
+	</div>
+    <div class="bottom"></div>
+ </div> <!-- pan2-rl -->
+</div> <!-- searchHomeWrapper -->
+</div>
+<!-- end simple second main -->
+
+
+
+
+
+
+<br><br>

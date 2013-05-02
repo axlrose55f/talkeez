@@ -97,7 +97,7 @@ ActionController::Routing::Routes.draw do |map|
                                       :updateawards => :put,
                                       :updateartists => :put,
                                       :rate => :post} ,
-                         :collection => {:search => :get }         
+                         :collection => {:search => :get, :list => :get }         
 
   map.resources :movie_roles
   

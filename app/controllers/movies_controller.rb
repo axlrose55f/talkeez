@@ -8,16 +8,17 @@ class MoviesController < ApplicationController
   def index
    
    @movies = Movie.active.rated.limit(10).order
-   @latest_movies = Movie.active.latest.limit(6).order('rating DESC, year DESC')
-   @recently_edited =  Movie.active.limit(4).order('updated_at DESC')
+   @latest_movies = Movie.active.latest.limit(6).order('year DESC')
+   @recently_edited =  Movie.active.limit(5).order('updated_at DESC')
    @top_this_year = Movie.active.latest.limit(10).order
    @top_decade = Movie.active.after(Date.today.years_ago(10)).limit(10).order
+   @recently_added = Movie.added(6)
    @genres = Genre.find(:all)
+   @recent_rated = Rate.latest(8)
+   
    # recent review
    #@recent_reviews = Review.latest.limit
-   # recent rated
-   @recent_rated = Rate.latest
-   
+   # recent rated   
    #@movies = Movie.find(:all, :limit => 4, :conditions => 'rating > 4', :order => 'rating DESC')   
    #@latest_movies = Movie.find(:all, :limit => 6, :conditions => ['rating > 3 and year between ? and ?', Date.today.beginning_of_year(), Date.today], :order => 'rating DESC, year DESC')
    #@recently_edited =  Movie.find(:all, :limit => 4, :order => 'updated_at DESC')
@@ -41,6 +42,23 @@ class MoviesController < ApplicationController
    end
   end
   
+  def list
+  list_type = params[:type]
+  
+    if list_type == "rated"  
+      @movies = Movie.active.rated(3).order('rating DESC, year DESC').limit(100).paginate(:page => params[:page])  
+    elsif list_type == "latest"  
+      @movies = Movie.recent(50).paginate(:page => params[:page], :per_page => 10)
+    elsif list_type == "updated"  
+      @movies = Movie.updated(50).paginate(:page => params[:page], :per_page => 10)
+    elsif list_type == "r_rated"  
+      @movies = Rate.latest(50).paginate(:page => params[:page], :per_page => 10)
+    elsif list_type == "added"  
+      @movies = Movie.added(50).paginate(:page => params[:page], :per_page => 10)  
+    end
+    
+  end
+    
   # GET /movies/1
   # GET /movies/1.xml
   def show

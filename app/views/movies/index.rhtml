@@ -47,8 +47,9 @@
        </div> <!-- widgtContnt -->
        </div> <!-- exploreLoc -->
       </div> <!-- div map -->
-  	 <br>
-  	 
+  	  <span class="see_more_link"><%= link_to "See complete list", list_movies_path(:type => "latest") %></span>
+      <br>
+  	  <div class="clearDiv"></div>
 	
       
       <!-- Top movies list -->
@@ -157,7 +158,12 @@
        
        </div> <!-- widgtContnt -->
        </div> <!-- exploreLoc -->
-      </div> <!-- div map -->
+		
+      </div> 
+     <span class="see_more_link"><%= link_to "See complete list", list_movies_path(:type => "rated") %></span>
+     <div class="clearDiv"></div>
+     <!-- div map -->
+      
 
      <!-- Latest Rated -->
       <div id="divMap" class="mapContent areaSection">
@@ -195,8 +201,10 @@
        </div> <!-- widgtContnt -->
        </div> <!-- exploreLoc -->
       </div> <!-- div map -->
-  	 <br>
-
+      <span class="see_more_link"><%= link_to "See complete list", list_movies_path(:type => "r_rated") %></span>
+          <div class="clearDiv"></div>
+      <br>
+      
      
      <!-- Latest Reviews -->
 
@@ -297,14 +305,16 @@
                 </div>			    
 			 <% end %>
 			 <!-- user list -->
+			
 			</div>
+			<span class="see_more_link "><%= link_to "See complete list", list_movies_path(:type => "updated") %></span><br>
 			<!-- end movie edits -->
-						<!-- Movie edits -->
+			<!-- Movie edits -->
 			<div class="widgtContnt  colorWhite">
 				<h2>Top Contributers </h2>
 			    <div id="divMiniCardCatalog"></div>
 			    <!-- user list-->
-			   <% @user = User.limit(4).latest %>
+			   <% @user = User.limit(5).latest %>
 			   <% for u in  @user %>
 			   <div class="subCon subConGray">
                             <div class="subConTL"></div>
@@ -314,12 +324,16 @@
 								<ul>
 									<li class="pImg dfemale">
 									<div class="defaultImg mediumSmImg">
+									 <% if u.facebook_uid.nil? %>	
 									 <span><img width="42" height="42" id="" src="<%=h u.image.url(:thumb) %>" ></span>
+									 <% else %>
+									 <span><img width="42" height="42" id="" src="<%=h "http://graph.facebook.com/#{u.facebook_uid}/picture" %>" ></span>									
+									 <% end %> 
 									</div>
 									</li>
 								</ul>
 								<div class="padleft30">
-								  <h3><%= u.username %></h3>
+								  <a href="/users/<%= u.id%>" ><h3><%= u.username %></h3></a>
 								  <p>Active since <%= u.created_at.to_date.to_formatted_s(:long)%></p> 
 								 </div>                              
                             </div>

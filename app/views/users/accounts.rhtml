@@ -24,7 +24,13 @@
      <% for user in @users %>  
 	 <tr>
 	   <td><%=h  user.id %></td> 
-	   <td><a href="/users/<%= user.id%>" ><img width="50" height="50" id="artist_picture" src="<%=h user.image.url %>"/></a></td>
+	   <td><a href="/users/<%= user.id%>" >
+		<% if user.facebook_uid.nil? %>
+		<img width="50" height="50" id="artist_picture" src="<%=h user.image.url %>"/>
+		<% else %>
+		<img width="50" height="50" id="artist_picture" src="<%=h "http://graph.facebook.com/#{user.facebook_uid}/picture" %>"/>	
+		<% end %>
+		</a></td>
 	   <td><a href="/users/<%= user.id%>" ><%=h  user.username %></a></td>
 	   <td><%=h  user.email %></td>
 	   <td><%= link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete %></td>

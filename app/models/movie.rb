@@ -47,6 +47,7 @@ has_and_belongs_to_many :themes,
  named_scope :active , :conditions => ["movies.active = 1"]
  named_scope :pending , :conditions => ["movies.active = 0"]
  named_scope :rated , lambda { |*rate| { :conditions => ["movies.rating > ?",(rate.first || 4)] } }
+
  
  #named_scope :latest, lambda { {:conditions => ['year between ? and ?', Date.today.beginning_of_year(), Date.today]}}
  named_scope :latest, lambda { {:order => 'year DESC'}}
@@ -57,6 +58,18 @@ has_and_belongs_to_many :themes,
  named_scope :order, lambda { |*order| { :order => order.flatten.first || 'rating DESC' } }
 
 #### Methods #########
+
+def self.recent(num)
+  Movie.find_by_sql( [ "select distinct * from movies where active = 1 order by year DESC limit ? ", num])
+end  
+
+def self.updated(num)
+  Movie.find_by_sql( [ "select distinct * from movies where active = 1 order by updated_at DESC limit ? ", num])
+end  
+
+def self.added(num)
+  Movie.find_by_sql( [ "select distinct * from movies where active = 1 order by created_at DESC limit ? ", num])
+end
 
 def self.search(search_param, page)
   if search_param
